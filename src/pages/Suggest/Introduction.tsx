@@ -1,0 +1,67 @@
+import React from "react";
+import SuggestIcon from "../../assets/icons/suggestIcon.svg";
+import styled from "styled-components";
+import Nav from "../../components/Nav/Nav";
+import Button from "../../components/Button/Button";
+
+import StepInterface from "../../interface/Step";
+import Desc from "../../components/Desc/Desc";
+
+export default function Introduction({
+  navigate,
+  handleBack,
+  handleExit,
+}: StepInterface) {
+  return (
+    <IntroductionWrapper>
+      <Nav handleBack={handleBack} handleExit={handleExit} />
+      <Title>
+        <p className="bold">
+          새로운 약속을 BARO
+          <br />
+          만들어 공유해요!
+        </p>
+        <Desc>친구들에게 약속을 BARO 공유해봐요</Desc>
+      </Title>
+      <img src={SuggestIcon} alt="suggest icon" />
+      <div
+        style={{
+          position: "fixed",
+          bottom: 0,
+          width: "100%",
+          padding: "20px",
+          display: "flex",
+          flexDirection: "column",
+          gap: "8px",
+        }}
+      >
+        <Button onClick={() => navigate("step1")}>약속 생성하기</Button>
+        <Button onClick={() => navigate(-1)} color="Gray">
+          돌아가기
+        </Button>
+      </div>
+    </IntroductionWrapper>
+  );
+}
+const IntroductionWrapper = styled.div`
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  padding: 20px;
+  background-color: white;
+  box-sizing: border-box;
+`;
+const Title = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  box-sizing: border-box;
+  .bold {
+    color: black;
+    font-size: 33px;
+    font-weight: 600;
+  }
+`;

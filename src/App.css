@@ -1,0 +1,12 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+@font-face {
+  font-family: "Pretendard";
+  src: url("./assets/fonts/Pretendard.css") format("truetype");
+}
+body {
+  font-family: "Pretendard-Regular", sans-serif;
+}

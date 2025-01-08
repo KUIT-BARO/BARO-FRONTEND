@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Main from "./Main/Main";
-import { Suggest } from "./Suggest/Suggest";
+import Suggest from "./Suggest/Suggest";
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -9,7 +9,7 @@ const Router = () => {
       element: <Main />,
     },
     {
-      path: "/suggest",
+      path: "/suggest/*",
       element: <Suggest />,
     },
   ]);
