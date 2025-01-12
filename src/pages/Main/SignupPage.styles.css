@@ -1,0 +1,91 @@
+.signup-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 0 20px;
+    background: linear-gradient(180deg, #5175FF 0%, #CFDAE6 100%);
+    font-family: "Pretendard", sans-serif;
+  }
+  
+  .input-section {
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 24px;
+  }
+  
+  .input-label {
+    display: block;
+    color: white;
+    font-size: 19px;
+    margin-bottom: 8px;
+    font-weight: 700;
+  }
+  
+  .input-wrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+  
+  .signup-input {
+    width: 70%;
+    height: 50px;
+    border: none;
+    border-bottom: 1px solid white;
+    background: transparent;
+    padding: 0;
+    color: white;
+    font-family: "Pretendard", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+  }
+  
+  .signup-input::placeholder {
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 300;
+  }
+  
+  .signup-input:focus {
+    outline: none;
+  }
+  
+  .duplicate-check-button {
+    position: absolute;
+    right: 0;
+    height: 44px;
+    padding: 0 15px;
+    background: #5175FF;
+    border: none;
+    border-radius: 8.6px;
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: "Pretendard", sans-serif;
+  }
+  
+  .signup-button {
+    width: 100%;
+    max-width: 400px;
+    height: 50px;
+    background: #5175FF;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 24px;
+    transition: background-color 0.2s;
+  }
+  
+  /* 반응형 디자인 */
+  @media (max-width: 768px) {
+    .input-section,
+    .signup-button {
+      max-width: 100%;
+    }
+  }
