@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './LoginPage.styles.css';
-import '../../assets/fonts/pretandard.css';
+import '../../assets/fonts/pretendard.css';
 import userIcon from '../../assets/icons/login_user.svg';
 import lockIcon from '../../assets/icons/login_password.svg';
 import Logo from '../../assets/icons/logo.svg';
