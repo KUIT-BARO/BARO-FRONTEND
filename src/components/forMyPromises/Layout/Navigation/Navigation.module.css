@@ -1,0 +1,82 @@
+/* components/layout/Navigation/Navigation.module.css */
+.nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
+  border-top: 1px solid rgb(243, 244, 246);
+  z-index: 50;
+}
+
+.navContent {
+  max-width: 72rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  height: 4rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
+
+.navItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  color: rgb(107, 114, 128);
+  transition: color 0.2s;
+  border: none;
+  background-color: none;
+  background: none;
+  cursor: pointer;
+}
+
+.navItem:hover {
+  color: rgb(59, 130, 246);
+}
+
+.navItem span {
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+.plusButton {
+  width: 39px;
+  height: 39px;
+  background-color: #5175ff;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  /* margin-top: -4rem; */
+  transition: background-color 0.2s;
+  border: none;
+  cursor: pointer;
+}
+
+.plusButton:hover {
+  background-color: rgb(37, 99, 235);
+}
+
+@media (min-width: 768px) {
+  .navContent {
+    width: 768px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .navContent {
+    width: 1024px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .navContent {
+    width: 1280px;
+  }
+}

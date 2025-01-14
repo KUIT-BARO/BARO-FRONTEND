@@ -1,0 +1,43 @@
+.container {
+  position: fixed;
+  top: 88px;
+  /* left: 15px; */
+  /* right: 15px; */
+  z-index: 50;
+  background-color: #F4F8FB;
+  width: 100%;
+}
+
+.toggleContainer {
+  width: 354px;
+  height: 44px;
+  gap: 0px;
+  border-radius: 26px;
+  opacity: 0px;
+  background-color: #FFFFFFBF;
+  margin: 16px auto 12px auto;
+  padding: 4px;
+}
+  
+.toggleButton {
+  color: #8EA6FF;
+  width: 175px;
+  border: none;
+}
+
+.active {
+  background-color: #5175FF;
+  color: white;
+  width: 171px;
+  height: 36px;
+  top: 114px;
+  left: 28px;
+  gap: 0px;
+  border-radius: 26px;
+  opacity: 0px;
+}
+
+.inactive {
+  background: none;
+  cursor: pointer;
+}

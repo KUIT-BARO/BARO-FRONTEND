@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Main from "./Main/Main";
 import Suggest from "./Suggest/Suggest";
+import MyPromises from "./MyPromises/MyPromises";
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -11,6 +12,10 @@ const Router = () => {
     {
       path: "/suggest/*",
       element: <Suggest />,
+    },
+    {
+      path: "/mypromises",
+      element: <MyPromises />,
     },
   ]);
 
