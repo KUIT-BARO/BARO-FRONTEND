@@ -14,7 +14,7 @@ export default function Suggest() {
   // ✅ 모든 상태를 Suggest 컴포넌트에서 관리
   const [suggestTitle, setSuggestTitle] = useState("");
   const [suggestPurpose, setSuggestPurpose] = useState<string[]>([]);
-  const [suggestPeople, setSuggestPeople] = useState<number | null>(0);
+  const [suggestPeople, setSuggestPeople] = useState<number | null>(null);
   const [selectedLocation, setSelectedLocation] = useState<string | null>(null);
   const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([
     null,

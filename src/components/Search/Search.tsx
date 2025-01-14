@@ -13,7 +13,7 @@ const Input = styled.div`
   display: flex;
   justify-content: flex-start;
   border-radius: 24px;
-  padding: 4px 14px;
+  padding: 8px 14px;
   width: 100%;
   background-color: #eaeaea;
   gap: 10px;

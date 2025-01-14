@@ -3,7 +3,7 @@ import Main from "./Main/Main";
 import Suggest from "./Suggest/Suggest";
 import SignupPage from "./Main/SignupPage";
 import LoginPage from "./Main/LoginPage";
-
+import MyPromises from "./MyPromises/MyPromises";
 const Router = () => {
   const router = createBrowserRouter([
     {

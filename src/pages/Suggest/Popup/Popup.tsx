@@ -49,7 +49,7 @@ export default function Popup({
             </div>
             <div className="wrap">
               <img src={person} />
-              <p>user 외 {suggestPeople}명</p>
+              <p>user 외 {suggestPeople}</p>
             </div>
             <div className="wrap">
               <img src={location} />

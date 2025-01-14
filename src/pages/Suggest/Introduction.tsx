@@ -1,5 +1,5 @@
 import React from "react";
-import SuggestIcon from "../../assets/icons/suggestIcon.svg";
+import 약속제안 from "../../assets/icons/약속제안.svg";
 import styled from "styled-components";
 import Nav from "../../components/Nav/Nav";
 import Button from "../../components/Button/Button";
@@ -23,7 +23,7 @@ export default function Introduction({
         </p>
         <Desc>친구들에게 약속을 BARO 공유해봐요</Desc>
       </Title>
-      <img src={SuggestIcon} alt="suggest icon" />
+      <img src={약속제안} alt="suggest icon" />
       <div
         style={{
           position: "fixed",
