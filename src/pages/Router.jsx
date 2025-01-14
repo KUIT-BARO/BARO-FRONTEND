@@ -1,13 +1,19 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Main from "./Main/Main";
 import Suggest from "./Suggest/Suggest";
+import SignupPage from "./Main/SignupPage";
+import LoginPage from "./Main/LoginPage";
 import MyPromises from "./MyPromises/MyPromises";
 
 const Router = () => {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Main />,
+      element: <LoginPage />,
+    },
+    {
+      path: "/signup",
+      element: <SignupPage />,
     },
     {
       path: "/suggest/*",
