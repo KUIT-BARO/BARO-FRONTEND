@@ -18,6 +18,10 @@ const Router = () => {
       path: "/suggest/*",
       element: <Suggest />,
     },
+    {
+      path: "/mypromises",
+      element: <MyPromises />,
+    },
   ]);
 
   return <RouterProvider router={router} />;

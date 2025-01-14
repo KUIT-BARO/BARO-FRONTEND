@@ -49,6 +49,14 @@ export default function Step2({
             startDate={startDate}
             endDate={endDate}
             selectsRange
+            //==============================
+            dayClassName={(date) => {
+              if (startDate && endDate && date > startDate && date < endDate) {
+                return "middle-date";
+              }
+              return "";
+            }}
+            //==============================
             inline
             locale={ko}
             dateFormat="yyyy년 MM월"
