@@ -4,6 +4,7 @@ import Suggest from "./Suggest/Suggest";
 import SignupPage from "./Main/SignupPage";
 import LoginPage from "./Main/LoginPage";
 import MyPromises from "./MyPromises/MyPromises";
+import MyPage from "./MyPage/MyPage";
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -22,6 +23,10 @@ const Router = () => {
     {
       path: "/mypromises",
       element: <MyPromises />,
+    },
+    {
+      path: "/mypage",
+      element: <MyPage />,
     },
   ]);
 

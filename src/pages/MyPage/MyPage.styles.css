@@ -1,0 +1,117 @@
+.mypage-container {
+  padding-block: 20px;
+  padding-bottom: 80px;
+  background-color: #F4F8FB;
+}
+
+.mypage-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 24px;
+  position: relative;
+}
+
+.mypage-header h1 {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.settings-button {
+  position: absolute;
+  right: 0;
+  background: none;
+  border: none;
+  padding: 20px;
+  cursor: pointer;
+}
+
+.profile-section {
+  display: flex;
+  align-items: center;
+  margin-bottom: 32px;
+  padding-inline: 20px;
+}
+
+.profile-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 0.59px solid gray;
+  background-color: #E3EAF4;
+  margin-right: 16px;
+}
+
+.profile-info h2 {
+  font-size: 19px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.profile-info p {
+  color: #979797;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.mypage-nav {
+  display: flex;
+  border-block: 1px solid #E3EAF4;
+  margin-bottom: 24px;
+}
+
+.nav-button {
+  flex: 1;
+  background: none;
+  border: none;
+  padding: 18px 0;
+  font-size: 17px;
+  font-weight: 600;
+  color: #8EA6FF;
+  cursor: pointer;
+  position: relative;
+}
+
+.nav-button.active {
+  color: #5175FF;
+  font-weight: 600;
+}
+
+.nav-button.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: #5175FF;
+}
+
+.schedule-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-bottom: 24px;
+  padding-inline: 20px;
+}
+
+.schedule-button {
+  padding: 7px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  flex: none;
+}
+
+.schedule-button.filled {
+  background-color: #5175FF;
+  color: #F4F8FB;
+  border: none;
+}
+
+.schedule-button.outlined {
+  background-color: #F4F8FB;
+  color: #5175FF;
+  border: 1.5px solid #5175FF;
+}

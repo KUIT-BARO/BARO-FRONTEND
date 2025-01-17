@@ -90,7 +90,7 @@
   }
   
   .duplicate-message.error {
-    color: #FF6B6B;
+    color: #FF0000;
   }
   
   .duplicate-message.success {
