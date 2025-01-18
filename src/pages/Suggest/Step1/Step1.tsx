@@ -5,7 +5,11 @@ import Button from "../../../components/Button/Button";
 import { ProgressBar } from "../../../components/ProgressBar/ProgressBar";
 import Nav from "../../../components/Nav/Nav";
 
-import { Wrapper, FixedButton, Section } from "../Steps.styles";
+import {
+  Wrapper,
+  FixedButton,
+  Section,
+} from "../../../assets/styles/Steps.styles";
 import SubTitle from "../../../components/SubTitle/SubTitle";
 import { SectionTitle } from "./Step1.styles";
 import InputWithCounter from "../../../components/InputWithCounter/InputWithCounter";
