@@ -1,20 +1,28 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Navigation from '../../components/forMyPromises/Layout/Navigation/Navigation';
 import ScheduleGrid from '../../components/ScheduleGrid/ScheduleGrid';
 import settingsIcon from '../../assets/icons/settings.svg';
+import editIcon from '../../assets/icons/edit.svg';
+import manAvatar from '../../assets/icons/manavatar.svg';
 import './MyPage.styles.css';
 
 const MyPage = () => {
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('schedule');
   
   const dummyUser = {
     name: '이지환',
     username: '@ijhwan_lee',
-    profileImage: null
+    profileImage: manAvatar
   };
 
-  const handleTabChange = (tab) => {
+  const handleTabChange = (tab: string) => {
     setActiveTab(tab);
+  };
+
+  const handleEditProfile = () => {
+    navigate('/profile/edit');
   };
 
   return (
@@ -28,10 +36,15 @@ const MyPage = () => {
 
       <section className="profile-section">
         <div className="profile-image">
-          {/* 프로필 이미지가 없을 경우 빈 원으로 표시 */}
+          <img src={dummyUser.profileImage} alt="profile" />
         </div>
         <div className="profile-info">
-          <h2>{dummyUser.name}</h2>
+          <div className="profile-name-section">
+            <h2>{dummyUser.name}</h2>
+            <button className="edit-button" onClick={handleEditProfile}>
+              <img src={editIcon} alt="edit" />
+            </button>
+          </div>
           <p>{dummyUser.username}</p>
         </div>
       </section>
@@ -53,7 +66,7 @@ const MyPage = () => {
           className={`nav-button ${activeTab === 'placeReviews' ? 'active' : ''}`}
           onClick={() => handleTabChange('placeReviews')}
         >
-          장소 리뷰
+          내 장소 리뷰
         </button>
       </nav>
 

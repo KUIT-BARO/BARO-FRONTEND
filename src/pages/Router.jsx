@@ -5,6 +5,7 @@ import SignupPage from "./Main/SignupPage";
 import LoginPage from "./Main/LoginPage";
 import MyPromises from "./MyPromises/MyPromises";
 import MyPage from "./MyPage/MyPage";
+import ProfileEdit from "./MyPage/ProfileEdit";
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -27,6 +28,10 @@ const Router = () => {
     {
       path: "/mypage",
       element: <MyPage />,
+    },
+    {
+      path: "/profile/edit",
+      element: <ProfileEdit />,
     },
   ]);
 

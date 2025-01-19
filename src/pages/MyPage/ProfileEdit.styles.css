@@ -1,0 +1,144 @@
+.profile-edit-container {
+  padding-top: 20px;
+  padding-bottom: 80px;
+  background-color: #F4F8FB;
+  min-height: 100vh;
+}
+
+.profile-edit-header {
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  margin-bottom: 40px;
+  position: relative;
+}
+
+.back-button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  position: absolute;
+  left: 20px;
+}
+
+.back-button img {
+  width: 24px;
+  height: 24px;
+}
+
+.profile-edit-header h1 {
+  width: 100%;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.complete-button {
+  border: none;
+  padding: 8px 16px;
+  border-radius: 10px;
+  background-color: #5175FF;
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  position: absolute;
+  right: 20px;
+}
+
+.profile-edit-content {
+  padding: 0 20px;
+}
+
+.profile-image-section {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+  position: relative;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.profile-image-edit {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  border: 1px solid #94AAFF;
+  background-color: #F0F4FF;
+  overflow: hidden;
+  position: relative;
+}
+
+.profile-image-edit img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.edit-badge {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 24px;
+  height: 24px;
+  background-color: #5175FF;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.edit-badge img {
+  width: 14px;
+  height: 14px;
+}
+
+.input-group {
+  margin-bottom: 32px;
+}
+
+.input-row {
+  display: flex;
+  position: relative;
+  align-items: center;
+}
+
+.input-label {
+  width: 80px;
+  font-size: 16px;
+  color: black;
+  font-weight: 500;
+  margin-bottom: 0;
+}
+
+.input-field-wrapper {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-field {
+  flex: 1;
+  border: none;
+  border-bottom: 2px solid #C1C1C1;
+  font-size: 16px;
+  background: none;
+  padding: 8px 0;
+}
+
+.input-field:focus {
+  outline: none;
+  border-bottom: 2px solid #5175FF;
+}
+
+.char-count {
+  font-size: 16px;
+  color: #C1C1C1;
+  margin-left: 8px;
+  white-space: nowrap;
+}
