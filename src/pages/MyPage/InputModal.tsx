@@ -10,6 +10,7 @@ interface InputModalProps {
   placeholder: string;
   maxLength: number;
   onComplete: (value: string) => void;
+  type?: 'name' | 'username';
 }
 
 const InputModal = ({
@@ -19,17 +20,47 @@ const InputModal = ({
   initialValue,
   placeholder,
   maxLength,
-  onComplete
+  onComplete,
+  type = 'name'
 }: InputModalProps) => {
   const [value, setValue] = useState(initialValue);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (isOpen) {
       setValue(initialValue);
+      setError(null);
     }
   }, [isOpen, initialValue]);
 
-  const handleComplete = () => {
+  // 임시로 서버 체크를 시뮬레이션
+  const checkDuplicateUsername = async (username: string) => {
+    // 실제 구현에서는 서버 API를 호출합니다
+    const duplicateUsernames = ['jihwan_kim', 'test123', 'example_user'];
+    return duplicateUsernames.includes(username);
+  };
+
+  const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = e.target.value;
+    setValue(newValue);
+    
+    if (type === 'username') {
+      setError(null);
+      const isDuplicate = await checkDuplicateUsername(newValue);
+      if (isDuplicate) {
+        setError('중복된 아이디 입니다. 다른 아이디로 바꿔주세요.');
+      }
+    }
+  };
+
+  const handleComplete = async () => {
+    if (type === 'username') {
+      const isDuplicate = await checkDuplicateUsername(value);
+      if (isDuplicate) {
+        setError('중복된 아이디 입니다. 다른 아이디로 바꿔주세요.');
+        return;
+      }
+    }
     onComplete(value);
     onClose();
   };
@@ -45,7 +76,10 @@ const InputModal = ({
             <img src={backIcon} alt="back" />
           </button>
           <h1>{title}</h1>
-          <button className="input-modal-complete" onClick={handleComplete}>
+          <button 
+            className="input-modal-complete" 
+            onClick={handleComplete}
+          >
             완료
           </button>
         </header>
@@ -56,7 +90,7 @@ const InputModal = ({
               type="text"
               className="input-modal-field"
               value={value}
-              onChange={(e) => setValue(e.target.value)}
+              onChange={handleChange}
               maxLength={maxLength}
               placeholder={placeholder}
               autoFocus
@@ -64,6 +98,11 @@ const InputModal = ({
             <div className="input-modal-char-count">
               {value.length}/{maxLength}
             </div>
+            {error && (
+              <div className="input-modal-error">
+                {error}
+              </div>
+            )}
           </div>
         </div>
       </div>

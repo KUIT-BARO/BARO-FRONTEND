@@ -85,6 +85,7 @@
     padding: 8px 0;
     color: white;
     margin-bottom: 300px;
+    font-weight: 600;
   }
   
   .input-modal-field:focus {
@@ -96,12 +97,6 @@
     color: rgba(255, 255, 255, 0.6);
   }
   
-  .input-modal-placeholder {
-    font-size: 16px;
-    color: rgba(255, 255, 255, 0.6);
-    margin-bottom: 8px;
-  }
-  
   .input-modal-char-count {
     text-align: right;
     font-size: 16px;
@@ -111,4 +106,16 @@
     top: 18px;
     transform: translateY(-50%);
     margin-bottom: 300px;
+    font-weight: 600;
+  }
+  
+  .input-modal-error {
+    color: #FF4B4B;
+    font-size: 14px;
+    margin-top: 8px;
+    position: absolute;
+    left: 0;
+    top: 40px;
+    width: 100%;
+    font-weight: 600;
   }

@@ -112,6 +112,7 @@ const ProfileEdit = () => {
         placeholder="아이디를 설정해주세요"
         maxLength={15}
         onComplete={handleUsernameComplete}
+        type="username"
       />
 
       <Navigation />
