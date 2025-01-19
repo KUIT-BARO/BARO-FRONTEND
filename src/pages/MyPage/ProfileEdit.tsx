@@ -4,6 +4,7 @@ import backIcon from '../../assets/icons/backIcon.svg';
 import editIcon from '../../assets/icons/edit_white.svg';
 import manAvatar from '../../assets/icons/manavatar.svg';
 import Navigation from '../../components/forMyPromises/Layout/Navigation/Navigation';
+import InputModal from './InputModal';
 import './ProfileEdit.styles.css';
 
 const ProfileEdit = () => {
@@ -12,14 +13,8 @@ const ProfileEdit = () => {
     name: '이지환',
     username: 'jihwan_lee'
   });
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
+  const [nameModalOpen, setNameModalOpen] = useState(false);
+  const [usernameModalOpen, setUsernameModalOpen] = useState(false);
 
   const handleBack = () => {
     navigate(-1);
@@ -32,6 +27,14 @@ const ProfileEdit = () => {
 
   const handleImageChange = () => {
     // TODO: 이미지 업로드 구현
+  };
+
+  const handleNameComplete = (newName: string) => {
+    setFormData(prev => ({ ...prev, name: newName }));
+  };
+
+  const handleUsernameComplete = (newUsername: string) => {
+    setFormData(prev => ({ ...prev, username: newUsername }));
   };
 
   return (
@@ -65,8 +68,8 @@ const ProfileEdit = () => {
                 name="name"
                 className="input-field"
                 value={formData.name}
-                onChange={handleInputChange}
-                maxLength={12}
+                onFocus={() => setNameModalOpen(true)}
+                readOnly
               />
               <div className="char-count">{formData.name.length}/12</div>
             </div>
@@ -82,14 +85,34 @@ const ProfileEdit = () => {
                 name="username"
                 className="input-field"
                 value={formData.username}
-                onChange={handleInputChange}
-                maxLength={15}
+                onFocus={() => setUsernameModalOpen(true)}
+                readOnly
               />
               <div className="char-count">{formData.username.length}/15</div>
             </div>
           </div>
         </div>
       </div>
+
+      <InputModal
+        isOpen={nameModalOpen}
+        onClose={() => setNameModalOpen(false)}
+        title="이름"
+        initialValue={formData.name}
+        placeholder="이름을 설정해주세요"
+        maxLength={12}
+        onComplete={handleNameComplete}
+      />
+
+      <InputModal
+        isOpen={usernameModalOpen}
+        onClose={() => setUsernameModalOpen(false)}
+        title="아이디"
+        initialValue={formData.username}
+        placeholder="아이디를 설정해주세요"
+        maxLength={15}
+        onComplete={handleUsernameComplete}
+      />
 
       <Navigation />
     </div>
