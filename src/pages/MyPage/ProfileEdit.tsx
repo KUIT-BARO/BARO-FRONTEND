@@ -2,7 +2,10 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import backIcon from '../../assets/icons/backIcon.svg';
 import editIcon from '../../assets/icons/edit_white.svg';
-import manAvatar from '../../assets/icons/manavatar.svg';
+import profile1 from '../../assets/icons/manavatar.svg';
+import profile2 from '../../assets/icons/womanavatar.svg';
+import profile3 from '../../assets/icons/dogavatar.svg';
+import profile4 from '../../assets/icons/useravatar.svg';
 import Navigation from '../../components/forMyPromises/Layout/Navigation/Navigation';
 import InputModal from './InputModal';
 import './ProfileEdit.styles.css';
@@ -11,10 +14,19 @@ const ProfileEdit = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '이지환',
-    username: 'jihwan_lee'
+    username: 'jihwan_lee',
+    profileImage: 'profile1'
   });
   const [nameModalOpen, setNameModalOpen] = useState(false);
   const [usernameModalOpen, setUsernameModalOpen] = useState(false);
+  const [profileModalOpen, setProfileModalOpen] = useState(false);
+
+  const profileImages = {
+    profile1,
+    profile2,
+    profile3,
+    profile4
+  };
 
   const handleBack = () => {
     navigate(-1);
@@ -26,7 +38,7 @@ const ProfileEdit = () => {
   };
 
   const handleImageChange = () => {
-    // TODO: 이미지 업로드 구현
+    setProfileModalOpen(true);
   };
 
   const handleNameComplete = (newName: string) => {
@@ -35,6 +47,10 @@ const ProfileEdit = () => {
 
   const handleUsernameComplete = (newUsername: string) => {
     setFormData(prev => ({ ...prev, username: newUsername }));
+  };
+
+  const handleProfileComplete = (newProfile: string) => {
+    setFormData(prev => ({ ...prev, profileImage: newProfile }));
   };
 
   return (
@@ -52,7 +68,7 @@ const ProfileEdit = () => {
       <div className="profile-edit-content">
         <div className="profile-image-section">
           <div className="profile-image-edit">
-            <img src={manAvatar} alt="profile" />
+            <img src={profileImages[formData.profileImage]} alt="profile" />
           </div>
           <div className="edit-badge" onClick={handleImageChange}>
             <img src={editIcon} alt="edit" />
@@ -113,6 +129,15 @@ const ProfileEdit = () => {
         maxLength={15}
         onComplete={handleUsernameComplete}
         type="username"
+      />
+
+      <InputModal
+        isOpen={profileModalOpen}
+        onClose={() => setProfileModalOpen(false)}
+        title="사진 선택"
+        initialValue={formData.profileImage}
+        onComplete={handleProfileComplete}
+        type="profile"
       />
 
       <Navigation />
