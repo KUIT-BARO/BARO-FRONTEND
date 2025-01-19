@@ -8,6 +8,7 @@ import profile3 from '../../assets/icons/dogavatar.svg';
 import profile4 from '../../assets/icons/useravatar.svg';
 import Navigation from '../../components/forMyPromises/Layout/Navigation/Navigation';
 import InputModal from './InputModal';
+import Toast from './Toast';
 import './ProfileEdit.styles.css';
 
 const ProfileEdit = () => {
@@ -20,6 +21,7 @@ const ProfileEdit = () => {
   const [nameModalOpen, setNameModalOpen] = useState(false);
   const [usernameModalOpen, setUsernameModalOpen] = useState(false);
   const [profileModalOpen, setProfileModalOpen] = useState(false);
+  const [showToast, setShowToast] = useState(false);
 
   const profileImages = {
     profile1,
@@ -43,14 +45,17 @@ const ProfileEdit = () => {
 
   const handleNameComplete = (newName: string) => {
     setFormData(prev => ({ ...prev, name: newName }));
+    setShowToast(true);
   };
 
   const handleUsernameComplete = (newUsername: string) => {
     setFormData(prev => ({ ...prev, username: newUsername }));
+    setShowToast(true);
   };
 
   const handleProfileComplete = (newProfile: string) => {
     setFormData(prev => ({ ...prev, profileImage: newProfile }));
+    setShowToast(true);
   };
 
   return (
@@ -138,6 +143,12 @@ const ProfileEdit = () => {
         initialValue={formData.profileImage}
         onComplete={handleProfileComplete}
         type="profile"
+      />
+
+      <Toast 
+        message="업데이트 완료" 
+        isVisible={showToast}
+        onClose={() => setShowToast(false)}
       />
 
       <Navigation />
