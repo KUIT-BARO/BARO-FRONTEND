@@ -3,17 +3,22 @@ import ScheduleDetailModal from '../ScheduleDetailModal/ScheduleDetailModal';
 import './ScheduleGrid.styles.css';
 
 const ScheduleGrid = () => {
+  const colors = ['#6699FF', '#708AFF', '#7893FF', '#7BB2FF'];
+  
+  const getRandomColor = () => {
+    const randomIndex = Math.floor(Math.random() * colors.length);
+    return colors[randomIndex];
+  };
   const [schedules, setSchedules] = useState([
-    { id: 1, title: '수업1', startTime: 9, endTime: 11, day: '월', type: 'class' },
-    { id: 2, title: '수업2', startTime: 11, endTime: 13, day: '월', type: 'class', variant: 'dark' },
-    { id: 3, title: '수업3', startTime: 11, endTime: 12, day: '화', type: 'class', variant: 'light' },
-    { id: 4, title: '수업3', startTime: 11, endTime: 12, day: '목', type: 'class', variant: 'light' },
-    { id: 5, title: '수업4', startTime: 14, endTime: 15, day: '수', type: 'class' },
-    { id: 6, title: '수업4', startTime: 14, endTime: 15, day: '금', type: 'class' },
-    { id: 7, title: '밥약', startTime: 14, endTime: 17, day: '월', type: 'meal' },
-    { id: 8, title: '밥약', startTime: 9, endTime: 12, day: '금', type: 'meal' },
-    { id: 9, title: '밥약', startTime: 13, endTime: 17, day: '목', type: 'meal' },
-    { id: 10, title: '밥약', startTime: 16, endTime: 18, day: '수', type: 'meal' }
+    { id: 1, title: '표현과 재료', startTime: 9, endTime: 11, day: '월', type: 'class', color: getRandomColor() },
+    { id: 2, title: '회계원리', startTime: 10.5, endTime: 12, day: '화', type: 'class', color: getRandomColor() },
+    { id: 3, title: '국제물류', startTime: 14, endTime: 15.5, day: '수', type: 'class', color: getRandomColor() },
+    { id: 4, title: '회계원리', startTime: 10.5, endTime: 12, day: '목', type: 'class', color: getRandomColor() },
+    { id: 5, title: '글로벌지속경영', startTime: 9, endTime: 12, day: '금', type: 'class', color: getRandomColor() },
+    { id: 6, title: '과외', startTime: 14, endTime: 17, day: '월', type: 'class', color: getRandomColor() },
+    { id: 7, title: '매가커피 알바', startTime: 13, endTime: 17, day: '목', type: 'class', color: getRandomColor() },
+    { id: 8, title: '수학채점 알바', startTime: 16, endTime: 18, day: '수', type: 'class', color: getRandomColor() },
+    { id: 9, title: '국제통상론', startTime: 11, endTime: 13, day: '월', type: 'class', color: getRandomColor() },
   ]);
 
   const [selectedSchedule, setSelectedSchedule] = useState(null);
@@ -93,8 +98,11 @@ const ScheduleGrid = () => {
                     .map(schedule => (
                       <div 
                         key={schedule.id}
-                        className={`schedule-item ${schedule.type} ${schedule.variant || ''}`}
-                        style={getScheduleStyle(schedule)}
+                        className="schedule-item class"
+                        style={{
+                          ...getScheduleStyle(schedule),
+                          backgroundColor: schedule.color
+                        }}
                         onClick={() => handleScheduleClick(schedule)}
                       >
                         {schedule.title}

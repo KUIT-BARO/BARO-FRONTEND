@@ -5,12 +5,22 @@ import ScheduleGrid from '../../components/ScheduleGrid/ScheduleGrid';
 import settingsIcon from '../../assets/icons/settings.svg';
 import editIcon from '../../assets/icons/edit.svg';
 import manAvatar from '../../assets/icons/manavatar.svg';
+import plusIcon from '../../assets/icons/plus.svg';
+import shareIcon from '../../assets/icons/share.svg';
 import './MyPage.styles.css';
 
 const MyPage = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('schedule');
   
+  const getCurrentSemester = () => {
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth() + 1;
+    const semester = month >= 7 ? '2' : '1';
+    return `${year}년 ${semester}학기`;
+  };
+
   const dummyUser = {
     name: '이지환',
     username: '@ijhwan_lee',
@@ -72,9 +82,16 @@ const MyPage = () => {
 
       {activeTab === 'schedule' && (
         <div className="schedule-container">
-          <div className="schedule-actions">
-            <button className="schedule-button filled">시간표 편집</button>
-            <button className="schedule-button outlined">시간표 공유</button>
+          <div className="schedule-header">
+            <span className="semester-text">{getCurrentSemester()}</span>
+            <div className="schedule-actions">
+              <button className="action-button">
+                <img src={plusIcon} alt="add" />
+              </button>
+              <button className="action-button">
+                <img src={shareIcon} alt="share" />
+              </button>
+            </div>
           </div>
           
           <ScheduleGrid />

@@ -88,7 +88,7 @@
 .mypage-nav {
   display: flex;
   border-block: 1px solid #E3EAF4;
-  margin-bottom: 24px;
+  margin-bottom: 15px;
 }
 
 .nav-button {
@@ -118,31 +118,29 @@
   background-color: #5175FF;
 }
 
-.schedule-actions {
+.schedule-header {
   display: flex;
-  justify-content: flex-end;
-  gap: 8px;
-  margin-bottom: 24px;
+  justify-content: space-between;
+  align-items: center;
   padding-inline: 20px;
 }
 
-.schedule-button {
-  padding: 7px 12px;
-  border-radius: 20px;
-  font-size: 12px;
+.semester-text {
+  font-size: 19px;
   font-weight: 600;
-  cursor: pointer;
-  flex: none;
 }
 
-.schedule-button.filled {
-  background-color: #5175FF;
-  color: #F4F8FB;
+.schedule-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.action-button {
+  background: none;
   border: none;
-}
-
-.schedule-button.outlined {
-  background-color: #F4F8FB;
-  color: #5175FF;
-  border: 1.5px solid #5175FF;
+  padding: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

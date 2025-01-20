@@ -77,30 +77,14 @@
     left: 0;
     right: 0;
     z-index: 1;
-    font-size: 8.1px;
-    color: #F4F8FB;
+    font-size: 11px;
+    font-weight: 600;
+    color: #fff;
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;
+    white-space: pre-line;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
+    align-items: flex-start;
+    padding: 6px;
     height: 100%;
-}
-
-.schedule-item.class {
-    background-color: #94AAFF;
-}
-
-.schedule-item.class.light {
-    background-color: #C2CDF4;
-}
-
-.schedule-item.class.dark {
-    background-color: #5175FF;
-}
-
-.schedule-item.meal {
-    background-color: #AEB4C9;
 }
