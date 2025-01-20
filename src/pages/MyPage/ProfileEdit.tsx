@@ -31,12 +31,12 @@ const ProfileEdit = () => {
   };
 
   const handleBack = () => {
-    navigate(-1);
+    navigate(`/mypage`);
   };
 
   const handleComplete = () => {
     // TODO: 서버에 수정된 데이터 전송
-    navigate(-1);
+    navigate(`/mypage`);
   };
 
   const handleImageChange = () => {
