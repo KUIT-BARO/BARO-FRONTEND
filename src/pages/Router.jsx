@@ -4,7 +4,9 @@ import Suggest from "./Suggest/Suggest";
 import SignupPage from "./Main/SignupPage";
 import LoginPage from "./Main/LoginPage";
 import MyPromises from "./MyPromises/MyPromises";
+
 import Accept from "./Accept/Accept";
+
 const Router = () => {
   const router = createBrowserRouter([
     {
