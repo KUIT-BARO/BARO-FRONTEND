@@ -28,7 +28,7 @@ const SignupPage = () => {
   return (
     <div className="signup-container">
       <div className="input-section">
-        <label className="input-label">아이디</label>
+        <label className="input-label-signup">아이디</label>
         <div className="input-wrapper">
           <input 
             type="text" 
@@ -53,7 +53,7 @@ const SignupPage = () => {
       </div>
 
       <div className="input-section">
-        <label className="input-label">비밀번호</label>
+        <label className="input-label-signup">비밀번호</label>
         <div className="input-wrapper">
           <input 
             type="password" 
@@ -64,7 +64,7 @@ const SignupPage = () => {
       </div>
 
       <div className="input-section">
-        <label className="input-label">이름</label>
+        <label className="input-label-signup">이름</label>
         <div className="input-wrapper">
           <input 
             type="text" 

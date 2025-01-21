@@ -15,11 +15,11 @@
     margin-bottom: 24px;
   }
   
-  .input-label {
+  .input-label-signup {
     display: block;
-    color: white !important;
+    color: white;
     font-size: 19px;
-    margin-bottom: 8px;
+    margin-bottom: 3px;
     font-weight: 900;
   }
   
