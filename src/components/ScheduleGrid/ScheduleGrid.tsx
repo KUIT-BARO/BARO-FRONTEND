@@ -59,6 +59,22 @@ const ScheduleGrid = () => {
     ));
   };
 
+  const handleUpdateSchedule = (id: number, updatedSchedule: {
+    title: string;
+    location?: string;
+    day: string;
+    startTime: number;
+    endTime: number;
+  }) => {
+    setSchedules(prev => prev.map(schedule => 
+      schedule.id === id ? {
+        ...schedule,
+        ...updatedSchedule,
+        color: schedule.color // 기존 색상 유지
+      } : schedule
+    ));
+  };
+
   return (
     <div className="schedule-wrapper">
       <div className="days-header">
@@ -120,7 +136,7 @@ const ScheduleGrid = () => {
         onClose={handleCloseModal}
         schedule={selectedSchedule}
         onDelete={handleDeleteSchedule}
-        onUpdateLocation={handleUpdateLocation}
+        onUpdate={handleUpdateSchedule}
       />
     </div>
   );
