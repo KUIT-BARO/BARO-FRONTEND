@@ -10,10 +10,11 @@ export const ImgWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  align-items: center;
   gap: 3px;
   > .img {
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     background-color: black;
   }

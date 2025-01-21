@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Day,
   TimeTableWrapper,
@@ -15,9 +15,10 @@ const getDateRangeWithDay = (start: Date, end: Date): string[] => {
   const endDate = new Date(end);
 
   while (currentDate <= endDate) {
-    const formattedDate = `${
-      currentDate.getMonth() + 1
-    }/${currentDate.getDate()} (${daysOfWeek[currentDate.getDay()]})`;
+    const formattedDate = `
+      ${currentDate.getMonth() + 1}/${currentDate.getDate()} (${
+      daysOfWeek[currentDate.getDay()]
+    })`;
     dates.push(formattedDate);
     currentDate.setDate(currentDate.getDate() + 1);
   }
@@ -31,25 +32,7 @@ export default function SelectTimeTable({
   timeTable,
   setTimeTable,
 }) {
-  const [isDragging, setIsDragging] = useState(false);
-
   const dates = getDateRangeWithDay(startDate, endDate);
-
-  const handleBlockMouseDown = (block: string) => {
-    setIsDragging(true);
-    toggleBlockSelection(block);
-  };
-
-  const handleBlockMouseEnter = (block: string) => {
-    if (isDragging && !timeTable.includes(block)) {
-      toggleBlockSelection(block);
-    }
-  };
-
-  const handleMouseUp = () => {
-    setIsDragging(false);
-    console.log("in");
-  };
 
   const toggleBlockSelection = (block: string) => {
     setTimeTable((prev) => {
@@ -80,7 +63,7 @@ export default function SelectTimeTable({
             );
           })}
         </TimeLabel>
-        <TimeWrapper datesLength={dates.length} onMouseUp={handleMouseUp}>
+        <TimeWrapper datesLength={dates.length}>
           {dates.map((date) => (
             <div key={date} className="column">
               {[...Array(34)].map((_, index) => {
@@ -91,8 +74,7 @@ export default function SelectTimeTable({
                   <TimeBlock
                     key={time}
                     isSelected={timeTable.includes(time)}
-                    onMouseDown={() => handleBlockMouseDown(time)}
-                    onMouseEnter={() => handleBlockMouseEnter(time)}
+                    onClick={() => toggleBlockSelection(time)}
                   />
                 );
               })}

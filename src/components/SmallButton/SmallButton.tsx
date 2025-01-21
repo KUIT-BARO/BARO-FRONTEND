@@ -40,6 +40,7 @@ const StyledButton = styled.button<{
   padding: 4px 10px;
   border: none;
   box-sizing: border-box;
+  white-space: nowrap;
 
   ${(props) => {
     // 색상 설정
