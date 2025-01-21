@@ -24,7 +24,7 @@ const MyPage = () => {
 
   const dummyUser = {
     name: '이지환',
-    username: '@ijhwan_lee',
+    username: '@jihwan_lee',
     profileImage: manAvatar
   };
 
@@ -36,6 +36,10 @@ const MyPage = () => {
     navigate('/profile/edit');
   };
 
+  const handleSettingsClick = () => {
+    navigate('/settings');
+  };
+
   const handleAddScheduleClick = () => {
     scheduleGridRef.current?.openAddModal();
   };
@@ -44,7 +48,7 @@ const MyPage = () => {
     <div className="mypage-container">
       <header className="mypage-header">
         <h1>마이페이지</h1>
-        <button className="settings-button">
+        <button className="settings-button" onClick={handleSettingsClick}>
           <img src={settingsIcon} alt="settings" />
         </button>
       </header>
@@ -86,25 +90,25 @@ const MyPage = () => {
       </nav>
 
       {activeTab === 'schedule' && (
-      <div className="schedule-container">
-        <div className="schedule-header">
-          <span className="semester-text">{getCurrentSemester()}</span>
-          <div className="schedule-actions">
-            <button 
-              className="action-button" 
-              onClick={handleAddScheduleClick}
-            >
-              <img src={plusIcon} alt="add" />
-            </button>
-            <button className="action-button">
-              <img src={shareIcon} alt="share" />
-            </button>
+        <div className="schedule-container">
+          <div className="schedule-header">
+            <span className="semester-text">{getCurrentSemester()}</span>
+            <div className="schedule-actions">
+              <button 
+                className="action-button" 
+                onClick={handleAddScheduleClick}
+              >
+                <img src={plusIcon} alt="add" />
+              </button>
+              <button className="action-button">
+                <img src={shareIcon} alt="share" />
+              </button>
+            </div>
           </div>
+          
+          <ScheduleGrid ref={scheduleGridRef} />
         </div>
-        
-        <ScheduleGrid ref={scheduleGridRef} />
-      </div>
-    )}
+      )}
       
       <Navigation />
     </div>

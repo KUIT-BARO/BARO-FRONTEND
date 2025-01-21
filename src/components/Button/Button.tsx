@@ -29,6 +29,7 @@ const Color = {
   White: "white",
   Blue: "#5175FF",
   Gray: "#C0C0C0",
+  Red: "#ff6467",
 };
 
 const FontColor = {

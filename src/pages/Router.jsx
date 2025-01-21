@@ -6,6 +6,7 @@ import LoginPage from "./Main/LoginPage";
 import MyPromises from "./MyPromises/MyPromises";
 import MyPage from "./MyPage/MyPage";
 import ProfileEdit from "./MyPage/ProfileEdit";
+import Settings from "./MyPage/Settings";
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -32,6 +33,10 @@ const Router = () => {
     {
       path: "/profile/edit",
       element: <ProfileEdit />,
+    },
+    {
+      path: "/settings",
+      element: <Settings />,
     },
   ]);
 
