@@ -1,25 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Button from '../Button/Button';
 import xIcon from '../../assets/icons/x_gray.svg';
-import locationIcon from '../../assets/icons/location_gray.svg';
-import './ScheduleDetailModal.styles.css';
+import '../ScheduleDetailModal/ScheduleDetailModal.styles.css';
 
-interface ScheduleDetailModalProps {
+interface ScheduleAddModalProps {
   isOpen: boolean;
   onClose: () => void;
-  schedule: {
-    id: number;
-    title: string;
-    startTime: number;
-    endTime: number;
-    day: string;
-    type: string;
-    variant?: string;
-    location?: string;
-    color?: string;
-  } | null;
-  onDelete?: (id: number) => void;
-  onUpdate?: (id: number, updatedSchedule: {
+  onAdd: (schedule: {
     title: string;
     location?: string;
     day: string;
@@ -30,48 +17,33 @@ interface ScheduleDetailModalProps {
 
 const MAX_LENGTH = 20;
 
-const ScheduleDetailModal: React.FC<ScheduleDetailModalProps> = ({
+const ScheduleAddModal: React.FC<ScheduleAddModalProps> = ({
   isOpen,
   onClose,
-  schedule,
-  onDelete,
-  onUpdate
+  onAdd
 }) => {
   const [title, setTitle] = useState('');
   const [location, setLocation] = useState('');
-  const [day, setDay] = useState('');
-  const [startTime, setStartTime] = useState(0);
-  const [endTime, setEndTime] = useState(0);
+  const [day, setDay] = useState('월');
+  const [startTime, setStartTime] = useState(7);
+  const [endTime, setEndTime] = useState(8);
 
-  useEffect(() => {
-    if (schedule) {
-      setTitle(schedule.title || '');
-      setLocation(schedule.location || '');
-      setDay(schedule.day || '');
-      setStartTime(schedule.startTime || 0);
-      setEndTime(schedule.endTime || 0);
-    }
-  }, [schedule]);
-
-  const handleDelete = () => {
-    if (schedule && onDelete) {
-      onDelete(schedule.id);
-      onClose();
-    }
-  };
-
-  const handleUpdate = () => {
-    if (schedule && onUpdate) {
-      const updatedSchedule = {
-        title: title || schedule.title,
-        location,
+  const handleAdd = () => {
+    if (title.trim()) {
+      onAdd({
+        title: title.trim(),
+        location: location.trim(),
         day,
         startTime,
         endTime
-      };
-      
-      onUpdate(schedule.id, updatedSchedule);
+      });
       onClose();
+      // 입력 필드 초기화
+      setTitle('');
+      setLocation('');
+      setDay('월');
+      setStartTime(7);
+      setEndTime(8);
     }
   };
 
@@ -81,14 +53,14 @@ const ScheduleDetailModal: React.FC<ScheduleDetailModalProps> = ({
     return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
   };
 
-  if (!isOpen || !schedule) return null;
+  if (!isOpen) return null;
 
   return (
     <>
       {isOpen && <div className="modal-overlay" />}
       <div className={`modal-container ${isOpen ? 'open' : ''}`}>
         <div className="modal-header">
-          <h2 className="modal-title">일정 수정</h2>
+          <h2 className="modal-title">일정 추가</h2>
           <button className="modal-close" onClick={onClose}>
             <img src={xIcon} alt="close" />
           </button>
@@ -164,7 +136,10 @@ const ScheduleDetailModal: React.FC<ScheduleDetailModalProps> = ({
 
           <div className="location-wrapper input-wrapper">
             <div className="location-icon">
-              <img src={locationIcon} alt="location" />
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M12 13.5C13.6569 13.5 15 12.1569 15 10.5C15 8.84315 13.6569 7.5 12 7.5C10.3431 7.5 9 8.84315 9 10.5C9 12.1569 10.3431 13.5 12 13.5Z" stroke="#999999" strokeWidth="2"/>
+                <path d="M12 22C14 18 20 15.4183 20 10C20 5.58172 16.4183 2 12 2C7.58172 2 4 5.58172 4 10C4 15.4183 10 18 12 22Z" stroke="#999999" strokeWidth="2"/>
+              </svg>
             </div>
             <input
               type="text"
@@ -179,12 +154,12 @@ const ScheduleDetailModal: React.FC<ScheduleDetailModalProps> = ({
         </div>
 
         <div className="button-container">
-          <Button onClick={handleDelete} color="Gray">삭제하기</Button>
-          <Button onClick={handleUpdate} color="Blue">수정하기</Button>
+          <Button onClick={onClose} color="Gray">취소</Button>
+          <Button onClick={handleAdd} color="Blue">추가하기</Button>
         </div>
       </div>
     </>
   );
 };
 
-export default ScheduleDetailModal;
+export default ScheduleAddModal;

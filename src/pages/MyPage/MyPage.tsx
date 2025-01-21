@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navigation from '../../components/forMyPromises/Layout/Navigation/Navigation';
 import ScheduleGrid from '../../components/ScheduleGrid/ScheduleGrid';
@@ -12,6 +12,7 @@ import './MyPage.styles.css';
 const MyPage = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('schedule');
+  const scheduleGridRef = useRef<{ openAddModal: () => void }>(null);
   
   const getCurrentSemester = () => {
     const currentDate = new Date();
@@ -33,6 +34,10 @@ const MyPage = () => {
 
   const handleEditProfile = () => {
     navigate('/profile/edit');
+  };
+
+  const handleAddScheduleClick = () => {
+    scheduleGridRef.current?.openAddModal();
   };
 
   return (
@@ -81,22 +86,25 @@ const MyPage = () => {
       </nav>
 
       {activeTab === 'schedule' && (
-        <div className="schedule-container">
-          <div className="schedule-header">
-            <span className="semester-text">{getCurrentSemester()}</span>
-            <div className="schedule-actions">
-              <button className="action-button">
-                <img src={plusIcon} alt="add" />
-              </button>
-              <button className="action-button">
-                <img src={shareIcon} alt="share" />
-              </button>
-            </div>
+      <div className="schedule-container">
+        <div className="schedule-header">
+          <span className="semester-text">{getCurrentSemester()}</span>
+          <div className="schedule-actions">
+            <button 
+              className="action-button" 
+              onClick={handleAddScheduleClick}
+            >
+              <img src={plusIcon} alt="add" />
+            </button>
+            <button className="action-button">
+              <img src={shareIcon} alt="share" />
+            </button>
           </div>
-          
-          <ScheduleGrid />
         </div>
-      )}
+        
+        <ScheduleGrid ref={scheduleGridRef} />
+      </div>
+    )}
       
       <Navigation />
     </div>

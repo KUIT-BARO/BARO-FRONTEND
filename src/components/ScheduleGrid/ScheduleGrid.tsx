@@ -1,14 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, forwardRef, useImperativeHandle } from 'react';
 import ScheduleDetailModal from '../ScheduleDetailModal/ScheduleDetailModal';
+import ScheduleAddModal from '../ScheduleAddModal/ScheduleAddModal';
 import './ScheduleGrid.styles.css';
 
-const ScheduleGrid = () => {
+export interface ScheduleGridHandle {
+  openAddModal: () => void;
+}
+
+const ScheduleGrid = forwardRef<ScheduleGridHandle>((_, ref) => {
   const colors = ['#6699FF', '#708AFF', '#7893FF', '#7BB2FF'];
   
   const getRandomColor = () => {
     const randomIndex = Math.floor(Math.random() * colors.length);
     return colors[randomIndex];
   };
+
   const [schedules, setSchedules] = useState([
     { id: 1, title: '표현과 재료', startTime: 9, endTime: 11, day: '월', type: 'class', color: getRandomColor() },
     { id: 2, title: '회계원리', startTime: 10.5, endTime: 12, day: '화', type: 'class', color: getRandomColor() },
@@ -22,7 +28,12 @@ const ScheduleGrid = () => {
   ]);
 
   const [selectedSchedule, setSelectedSchedule] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+
+  useImperativeHandle(ref, () => ({
+    openAddModal: () => setIsAddModalOpen(true)
+  }));
 
   const timeSlots = Array.from({ length: 36 }, (_, i) => ({
     hour: Math.floor(i/2) + 7,
@@ -41,22 +52,16 @@ const ScheduleGrid = () => {
 
   const handleScheduleClick = (schedule) => {
     setSelectedSchedule(schedule);
-    setIsModalOpen(true);
+    setIsDetailModalOpen(true);
   };
 
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
+  const handleCloseDetailModal = () => {
+    setIsDetailModalOpen(false);
     setSelectedSchedule(null);
   };
 
   const handleDeleteSchedule = (id: number) => {
     setSchedules(prev => prev.filter(schedule => schedule.id !== id));
-  };
-
-  const handleUpdateLocation = (id: number, location: string) => {
-    setSchedules(prev => prev.map(schedule => 
-      schedule.id === id ? { ...schedule, location } : schedule
-    ));
   };
 
   const handleUpdateSchedule = (id: number, updatedSchedule: {
@@ -73,6 +78,23 @@ const ScheduleGrid = () => {
         color: schedule.color // 기존 색상 유지
       } : schedule
     ));
+  };
+
+  const handleAddSchedule = (newSchedule: {
+    title: string;
+    location?: string;
+    day: string;
+    startTime: number;
+    endTime: number;
+  }) => {
+    const newId = Math.max(...schedules.map(s => s.id), 0) + 1;
+    const scheduleToAdd = {
+      ...newSchedule,
+      id: newId,
+      type: 'class',
+      color: getRandomColor()
+    };
+    setSchedules(prev => [...prev, scheduleToAdd]);
   };
 
   return (
@@ -132,14 +154,22 @@ const ScheduleGrid = () => {
       </div>
 
       <ScheduleDetailModal 
-        isOpen={isModalOpen}
-        onClose={handleCloseModal}
+        isOpen={isDetailModalOpen}
+        onClose={handleCloseDetailModal}
         schedule={selectedSchedule}
         onDelete={handleDeleteSchedule}
         onUpdate={handleUpdateSchedule}
       />
+
+      <ScheduleAddModal
+        isOpen={isAddModalOpen}
+        onClose={() => setIsAddModalOpen(false)}
+        onAdd={handleAddSchedule}
+      />
     </div>
   );
-};
+});
+
+ScheduleGrid.displayName = 'ScheduleGrid';
 
 export default ScheduleGrid;
