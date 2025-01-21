@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Button from '../../components/Button/Button';
 import backIcon from '../../assets/icons/backIcon.svg';
 import moreIcon from '../../assets/icons/more.svg';
+import trashIcon from '../../assets/icons/trash.svg'
 
 const Contact = () => {
   const navigate = useNavigate();
@@ -48,6 +49,7 @@ const Contact = () => {
               {showDropdown && (
                 <Dropdown>
                   <DropdownButton onClick={handleDelete}>
+                    <img src={trashIcon} alt="delete" />
                     삭제하기
                   </DropdownButton>
                 </Dropdown>
@@ -66,7 +68,7 @@ const Contact = () => {
 
 const Container = styled.div`
   padding-top: 20px;
-  background-color: white;
+  background-color: #F4F8FB;
   min-height: 100vh;
 `;
 
@@ -99,29 +101,31 @@ const Content = styled.div`
 `;
 
 const ContentTitle = styled.h2`
-  font-size: 24px;
+  font-size: 25px;
   font-weight: 600;
   margin-bottom: 12px;
 `;
 
 const Description = styled.p`
   font-size: 17px;
-  color: #9FA1A6;
+  color: #979797;
   margin-bottom: 32px;
   font-weight: 600;
+  line-height: 1.3;
 `;
 
 const EmailContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: 12px;
-  border-bottom: 1px solid #F0F0F0;
+  padding-block: 12px;
+  border-block: 1px solid #F0F0F0;
 `;
 
 const Email = styled.span`
   font-size: 17px;
-  color: #000000;
+  font-weight: 600;
+  color: #919191;
   font-weight: 600;
 `;
 
@@ -139,21 +143,28 @@ const Dropdown = styled.div`
   right: 0;
   background: white;
   border-radius: 12px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 8px 0;
   z-index: 10;
 `;
 
 const DropdownButton = styled.button`
-  width: 100%;
-  padding: 12px 24px;
-  background: none;
-  border: none;
-  text-align: left;
-  font-size: 16px;
-  color: #FF5151;
-  cursor: pointer;
-  white-space: nowrap;
+      display: flex;
+    width: 100%;
+    padding: 12px 21px;
+    background: none;
+    border: none;
+    text-align: left;
+    font-size: 14px;
+    color: #919191;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    align-items: center;
+
+  img {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+  }
 `;
 
 export default Contact;
