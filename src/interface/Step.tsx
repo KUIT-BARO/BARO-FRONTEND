@@ -1,5 +1,7 @@
+import { NavigateFunction } from "react-router-dom";
+
 interface Step {
-  navigate: (path: string | number) => void;
+  navigate: NavigateFunction;
   handleBack: () => void;
   handleExit: () => void;
 }

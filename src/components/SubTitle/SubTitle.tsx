@@ -6,7 +6,7 @@ export default function SubTitle({ children }: { children: React.ReactNode }) {
       style={{
         width: "100%",
         fontSize: "25px",
-        fontWeight: 600,
+        fontWeight: 700,
         display: "flex",
         justifyContent: "flex-start",
       }}

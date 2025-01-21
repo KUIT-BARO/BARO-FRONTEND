@@ -5,41 +5,6 @@ export const SectionTitle = styled.p`
   font-weight: 600;
 `;
 
-export const InputWrapper = styled.div`
-  position: relative;
-  width: 100%;
-`;
-
-export const Input = styled.input`
-  width: 100%;
-  background-color: transparent;
-  outline: none;
-  border: none;
-  padding-bottom: 15px;
-  border-bottom: 1px solid #c1c1c1;
-
-  ::placeholder {
-    font-size: 16px;
-    font-weight: 500;
-    color: #c1c1c1;
-  }
-`;
-
-export const Counter = styled.span`
-  font-size: 16px;
-  font-weight: 500;
-  color: #c1c1c1;
-  position: absolute;
-  right: 0;
-  bottom: 15px;
-`;
-
-export const ErrorMessage = styled.div`
-  font-size: 12px;
-  color: red;
-  margin-top: 8px;
-`;
-
 export const DropdownWrapper = styled.div<{ isOpen: boolean }>`
   position: relative;
   width: 200px;

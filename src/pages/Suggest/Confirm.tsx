@@ -15,7 +15,7 @@ import date from "../../assets/icons/date.svg";
 import location from "../../assets/icons/location.svg";
 import crown from "../../assets/icons/crown.svg";
 
-import confirmIcon from "../../assets/icons/confirmIcon.svg";
+import 약속제안완료 from "../../assets/icons/약속제안완료.svg";
 
 interface ConfirmProps extends StepInterface, SuggestInterface {}
 
@@ -43,7 +43,7 @@ export default function Confirm({
           <Desc>친구들에게 약속을 BARO 공유해봐요</Desc>
         </Title>
         <Content>
-          <img src={confirmIcon} alt="confirm icon" />
+          <img src={약속제안완료} alt="confirm icon" />
           <div className="container">
             <div className="wrap">
               <img src={flag} />

@@ -5,6 +5,8 @@ import SignupPage from "./Main/SignupPage";
 import LoginPage from "./Main/LoginPage";
 import MyPromises from "./MyPromises/MyPromises";
 
+import Accept from "./Accept/Accept";
+
 const Router = () => {
   const router = createBrowserRouter([
     {
@@ -18,6 +20,10 @@ const Router = () => {
     {
       path: "/suggest/*",
       element: <Suggest />,
+    },
+    {
+      path: "/accept/*",
+      element: <Accept />,
     },
     {
       path: "/mypromises",

@@ -5,10 +5,16 @@ import Button from "../../../components/Button/Button";
 import { ProgressBar } from "../../../components/ProgressBar/ProgressBar";
 import Nav from "../../../components/Nav/Nav";
 
-import { Wrapper, FixedButton, Section } from "../Steps.styles";
+import {
+  Wrapper,
+  FixedButton,
+  Section,
+} from "../../../assets/styles/Steps.styles";
 import SubTitle from "../../../components/SubTitle/SubTitle";
 import { SectionTitle } from "./Step1.styles";
-import downIcon from "../../../assets/icons/downIcon.svg";
+import InputWithCounter from "../../../components/InputWithCounter/InputWithCounter";
+import Dropdown from "../../../components/DropDown/DropDown";
+
 export default function Step1({
   navigate,
   suggestTitle,
@@ -54,8 +60,10 @@ export default function Step1({
         <Section>
           <SectionTitle>약속 이름을 작성해주세요</SectionTitle>
           <InputWithCounter
-            suggestTitle={suggestTitle}
-            setSuggestTitle={setSuggestTitle}
+            placeholder={"마케팅 2조 회의"}
+            maxlength={12}
+            text={suggestTitle}
+            setText={setSuggestTitle}
           />
         </Section>
 
@@ -79,8 +87,9 @@ export default function Step1({
         <Section>
           <SectionTitle>약속 인원을 선택해주세요</SectionTitle>
           <Dropdown
-            suggestPeople={suggestPeople}
-            setSuggestPeople={setSuggestPeople}
+            people={suggestPeople}
+            setPeople={setSuggestPeople}
+            maxPeople={5}
           />
         </Section>
 
@@ -94,78 +103,5 @@ export default function Step1({
         </FixedButton>
       </Wrapper>
     </>
-  );
-}
-
-import { InputWrapper, Input, Counter, ErrorMessage } from "./Step1.styles";
-
-function InputWithCounter({ suggestTitle, setSuggestTitle }) {
-  const handleChange = (e) => {
-    const value = e.target.value;
-    if (value.length <= 12) {
-      setSuggestTitle(value);
-    }
-  };
-  return (
-    <>
-      <InputWrapper>
-        <Input
-          type="text"
-          placeholder="ex 마케팅 관리 2조"
-          value={suggestTitle}
-          maxLength={12}
-          onChange={handleChange}
-        />
-        <Counter>{suggestTitle.length}/12</Counter>
-      </InputWrapper>
-      {suggestTitle.length === 12 && (
-        <ErrorMessage>최대 12글자입니다</ErrorMessage>
-      )}
-    </>
-  );
-}
-import {
-  DropdownWrapper,
-  DropdownList,
-  DropdownItem,
-  DropdownHeader,
-  Arrow,
-} from "./Step1.styles";
-function Dropdown({ suggestPeople, setSuggestPeople }) {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const options = ["1명", "2명", "3명", "4명", "5명"];
-
-  const handleToggle = () => {
-    setIsOpen(!isOpen);
-  };
-
-  const handleSelect = (value: string) => {
-    setSuggestPeople(value);
-    setIsOpen(false);
-  };
-
-  return (
-    <DropdownWrapper isOpen={isOpen}>
-      <DropdownHeader onClick={handleToggle}>
-        {suggestPeople}
-        <Arrow isOpen={isOpen}>
-          <img src={downIcon} alt="button" />
-        </Arrow>
-      </DropdownHeader>
-      {isOpen && (
-        <DropdownList>
-          {options.map((option) => (
-            <DropdownItem
-              key={option}
-              onClick={() => handleSelect(option)}
-              isSelected={option === suggestPeople}
-            >
-              {option}
-            </DropdownItem>
-          ))}
-        </DropdownList>
-      )}
-    </DropdownWrapper>
   );
 }
