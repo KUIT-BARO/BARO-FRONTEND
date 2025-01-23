@@ -4,6 +4,9 @@ import Suggest from "./Suggest/Suggest";
 import SignupPage from "./Main/SignupPage";
 import LoginPage from "./Main/LoginPage";
 import MyPromises from "./MyPromises/MyPromises";
+
+import FinalVote from "./FinalVote/FinalVote";
+
 import MyPage from "./MyPage/MyPage";
 import ProfileEdit from "./MyPage/ProfileEdit";
 import Settings from "./MyPage/Settings";
@@ -28,6 +31,10 @@ const Router = () => {
     {
       path: "/accept/*",
       element: <Accept />,
+    },
+    {
+      path: "/finalvote/*",
+      element: <FinalVote />,
     },
     {
       path: "/mypromises",

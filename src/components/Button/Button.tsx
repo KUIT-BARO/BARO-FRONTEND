@@ -33,7 +33,7 @@ const Color = {
 };
 
 const FontColor = {
-  White: "black",
+  White: "#5175FF",
   Blue: "white",
   Gray: "white",
 };
@@ -48,7 +48,11 @@ const StyledButton = styled.button<{
   border: none;
   width: 100%;
   height: 50px;
-  border-radius: 24px;
+  border-radius: 10px;
+  border: ${(props) =>
+    props.color === "White"
+      ? `1.5px solid ${Color.Blue}`
+      : "1.5px solid ${Color[props.color]}"};
   color: ${(props) => FontColor[props.color]};
   background-color: ${(props) => Color[props.color]};
   box-sizing: border-box;

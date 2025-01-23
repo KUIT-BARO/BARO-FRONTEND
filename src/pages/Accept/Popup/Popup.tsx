@@ -10,33 +10,17 @@ const Popup = ({ stage, onClose }: PopupModalProps) => {
   return (
     <Overlay onClick={onClose}>
       <PopupContent stage={stage} onClick={(e) => e.stopPropagation()}>
-        {stage === 1 ? (
-          <>
-            <div className="bubble left-bubble">
-              <p>아래로 드래그하여 선택</p>
-              <div className="bubble-arow"></div>
-            </div>
-            <div className="drag drag-down">
-              <div className="gradientBar"></div>
-              <div className="circle">
-                <div className="bold"></div>
-              </div>
-            </div>
-          </>
-        ) : (
-          <>
-            <div className="bubble right-bubble">
-              <p>위로 드래그하여 취소</p>
-              <div className="bubble-arow"></div>
-            </div>
-            <div className="drag drag-up">
-              <div className="gradientBar"></div>
-              <div className="circle">
-                <div className="bold"></div>
-              </div>
-            </div>
-          </>
-        )}
+        <div className="bubble">
+          {stage === 1 ? <p>한 칸씩 선택</p> : <p>재선택하여 취소</p>}
+          <div className="bubble-arrow"></div>
+        </div>
+
+        <div className="click">
+          <div className="gradientBar"></div>
+          <div className="circle">
+            <div className="bold"></div>
+          </div>
+        </div>
       </PopupContent>
     </Overlay>
   );
@@ -59,9 +43,8 @@ const Overlay = styled.div`
 
 const PopupContent = styled.div<{ stage: number }>`
   position: fixed;
-  top: ${(props) => (props.stage === 1 ? "40%" : "30%")};
-  left: ${(props) => (props.stage === 1 ? "5%" : "auto")};
-  right: ${(props) => (props.stage === 2 ? "5%" : "auto")};
+  top: 40%;
+  left: 10%;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -69,25 +52,28 @@ const PopupContent = styled.div<{ stage: number }>`
   > .bubble {
     position: relative;
     background-color: white;
-    padding: 20px 22px;
-    border-radius: 100px;
-    font-size: 19px;
+    padding: 18px 20px;
+    border-radius: 10px;
 
-    > .bubble-arow {
+    font-size: 19px;
+    font-weight: 600;
+
+    > .bubble-arrow {
       position: absolute;
-      bottom: -5px;
+      bottom: -9px; /* 뾰족한 부분이 말풍선 아래로 나오게 */
       left: 50%;
       transform: translateX(-50%);
       width: 0;
       height: 0;
-      border-left: 15px solid transparent;
-      border-right: 15px solid transparent;
-      border-top: 10px solid white;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-top: 10px solid white; /* 말풍선 배경색과 동일하게 설정 */
       z-index: 0;
+      filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.1)); /* 그림자 추가 */
     }
   }
 
-  > .drag {
+  > .click {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -95,10 +81,10 @@ const PopupContent = styled.div<{ stage: number }>`
 
     > .gradientBar {
       position: relative;
-      width: 66px;
-      height: 205px;
-      background: linear-gradient(to top, #5175ff, rgba(0, 0, 0, 0));
+      width: 67px;
+      height: 25px;
       margin-top: 10px;
+      background: #5175ff;
     }
 
     > .circle {
@@ -106,6 +92,7 @@ const PopupContent = styled.div<{ stage: number }>`
       width: 36px;
       height: 36px;
       border-radius: 50%;
+      top: 15%;
       background-color: rgba(255, 255, 255, 0.4);
 
       > .bold {
@@ -119,24 +106,6 @@ const PopupContent = styled.div<{ stage: number }>`
         background-color: white;
         opacity: 1;
       }
-    }
-  }
-
-  > .drag-down {
-    > .gradientBar {
-      background: linear-gradient(to top, #5175ff, rgba(0, 0, 0, 0));
-    }
-    > .circle {
-      bottom: -18px;
-    }
-  }
-
-  > .drag-up {
-    > .gradientBar {
-      background: linear-gradient(to bottom, #5175ff, rgba(0, 0, 0, 0));
-    }
-    > .circle {
-      top: -8px;
     }
   }
 `;

@@ -7,6 +7,7 @@ import Step2 from "./Step2/Step2";
 import Step3 from "./Step3/Step3";
 import Popup from "./Popup/Popup";
 import Confirm from "./Confirm";
+import Step4 from "./Step4/Step4";
 
 export default function Suggest() {
   const navigate = useNavigate();
@@ -99,6 +100,7 @@ export default function Suggest() {
             />
           }
         />
+
         <Route
           path="confirm"
           element={
@@ -112,6 +114,16 @@ export default function Suggest() {
               selectedLocation={selectedLocation}
               startDate={startDate}
               endDate={endDate}
+            />
+          }
+        />
+        <Route
+          path="step4"
+          element={
+            <Step4
+              handleBack={handleBack}
+              handleExit={handleExit}
+              navigate={navigate}
             />
           }
         />
