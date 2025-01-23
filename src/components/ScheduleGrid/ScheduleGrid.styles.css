@@ -1,0 +1,90 @@
+.schedule-wrapper {
+    margin-top: 20px;
+    padding-inline: 20px;
+}
+
+.days-header {
+    display: flex;
+    padding-left: 40px;
+}
+
+.day-item {
+    flex: 1;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600;
+    color: #979797;
+    padding: 10px 0;
+}
+
+.main-grid-container {
+    display: flex;
+}
+
+.time-column {
+    width: 35px;
+    flex-shrink: 0;
+}
+
+.time-slot {
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 600;
+    color: #979797;
+}
+
+.time-slot.half-hour {
+    color: transparent;
+}
+
+.schedule-grid {
+    flex: 1;
+    border: 0.5px solid #C1CEE1;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #F4F8FB;
+    display: flex;
+}
+
+.day-column {
+    flex: 1;
+    position: relative;
+    border-right: 0.5px solid #C1CEE1;
+}
+
+.day-column:last-child {
+    border-right: none;
+}
+
+.grid-cell {
+    height: 20px;
+    border-bottom: 0.5px solid #C1CEE1;
+}
+
+.grid-cell.half-hour {
+    border-bottom: 0.5px solid #C1CEE1;
+}
+
+.grid-cell:last-child {
+    border-bottom: none;
+}
+
+.schedule-item {
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    font-size: 11px;
+    font-weight: 600;
+    color: #fff;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: pre-line;
+    display: flex;
+    align-items: flex-start;
+    padding: 6px;
+    height: 100%;
+}

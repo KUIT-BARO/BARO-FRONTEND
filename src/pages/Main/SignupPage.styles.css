@@ -15,12 +15,12 @@
     margin-bottom: 24px;
   }
   
-  .input-label {
+  .input-label-signup {
     display: block;
     color: white;
     font-size: 19px;
-    margin-bottom: 8px;
-    font-weight: 700;
+    margin-bottom: 3px;
+    font-weight: 900;
   }
   
   .input-wrapper {
@@ -62,7 +62,7 @@
     border-radius: 8.6px;
     color: white;
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 600;
     cursor: pointer;
     font-family: "Pretendard", sans-serif;
   }
@@ -80,6 +80,21 @@
     cursor: pointer;
     margin-bottom: 24px;
     transition: background-color 0.2s;
+  }
+
+  .duplicate-message {
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: white;
+  }
+  
+  .duplicate-message.error {
+    color: #FF0000;
+  }
+  
+  .duplicate-message.success {
+    color: #69DB7C;
   }
   
   /* 반응형 디자인 */

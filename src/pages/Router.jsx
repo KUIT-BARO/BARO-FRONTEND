@@ -4,7 +4,14 @@ import Suggest from "./Suggest/Suggest";
 import SignupPage from "./Main/SignupPage";
 import LoginPage from "./Main/LoginPage";
 import MyPromises from "./MyPromises/MyPromises";
+
 import FinalVote from "./FinalVote/FinalVote";
+
+import MyPage from "./MyPage/MyPage";
+import ProfileEdit from "./MyPage/ProfileEdit";
+import Settings from "./MyPage/Settings";
+import Contact from "./MyPage/Contact";
+
 import Accept from "./Accept/Accept";
 
 const Router = () => {
@@ -32,6 +39,22 @@ const Router = () => {
     {
       path: "/mypromises",
       element: <MyPromises />,
+    },
+    {
+      path: "/mypage",
+      element: <MyPage />,
+    },
+    {
+      path: "/profile/edit",
+      element: <ProfileEdit />,
+    },
+    {
+      path: "/settings",
+      element: <Settings />,
+    },
+    {
+      path: "/contact",
+      element: <Contact />,
     },
   ]);
 
