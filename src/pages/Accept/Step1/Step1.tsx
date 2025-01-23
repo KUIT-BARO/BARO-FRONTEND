@@ -6,6 +6,7 @@ import {
   Wrapper,
   FixedButton,
   Section,
+  ImgWrapper,
 } from "../../../assets/styles/Steps.styles";
 import SubTitle from "../../../components/SubTitle/SubTitle";
 
@@ -13,9 +14,11 @@ import Button from "../../../components/Button/Button";
 import { ProgressBar } from "../../../components/ProgressBar/ProgressBar";
 import Desc from "../../../components/Desc/Desc";
 import Popup from "../Popup/Popup";
-import { ButtomWrapper, ImgWrapper, SectionHeader } from "./Step1.styles";
+import { ButtonWrapper, SectionHeader } from "./Step1.styles";
 import SmallButton from "../../../components/SmallButton/SmallButton";
 import SelectTimeTable from "../../../components/SelectTimeTable/SelectTimeTable";
+
+import defaultImg from "../../../assets/icons/profileImg_default.svg";
 export default function Step1({
   navigate,
   handleBack,
@@ -51,12 +54,12 @@ export default function Step1({
         <Desc>가능한 시간을 선택해주세요</Desc>
         <SectionHeader>
           <ImgWrapper>
-            <div className="img"></div>
-            <div className="img"></div>
-            <div className="img"></div>
+            <img src={defaultImg} alt="other profile img" />
+            <img src={defaultImg} alt="other profile img" />
+            <img src={defaultImg} alt="other profile img" />
             <div className="plus">+1</div>
           </ImgWrapper>
-          <ButtomWrapper>
+          <ButtonWrapper>
             <SmallButton onClick={() => console.log()}>
               시간표 불러오기
             </SmallButton>
@@ -67,7 +70,7 @@ export default function Step1({
             >
               전체 취소
             </SmallButton>
-          </ButtomWrapper>
+          </ButtonWrapper>
         </SectionHeader>
         <Section>
           <SelectTimeTable
@@ -78,7 +81,7 @@ export default function Step1({
           />
         </Section>
         <FixedButton>
-          <Button onClick={() => navigate("/suggest/step2")}>다음</Button>
+          <Button onClick={() => navigate("/accept/step2")}>다음</Button>
         </FixedButton>
       </Wrapper>
     </>

@@ -15,39 +15,35 @@ import date from "../../assets/icons/date.svg";
 import location from "../../assets/icons/location.svg";
 import crown from "../../assets/icons/crown.svg";
 
-import 약속제안완료 from "../../assets/icons/약속제안완료.svg";
-
-interface ConfirmProps extends StepInterface, SuggestInterface {}
+import AcceptInterface from "../../interface/Accept";
+import 약속준비 from "../../assets/icons/약속준비.svg";
+interface ConfirmProps extends StepInterface, AcceptInterface {}
 
 export default function Confirm({
   navigate,
   handleBack,
   handleExit,
-  suggestTitle,
-  suggestPurpose,
-  suggestPeople,
-  selectedLocation,
-  startDate,
-  endDate,
+  data,
 }: ConfirmProps) {
+  console.log(data);
   return (
     <>
       <ConfirmWrapper>
         <Nav handleBack={handleBack} handleExit={handleExit} />
         <Title>
           <p className="bold">
-            {suggestTitle}
+            {data.suggestTitle}
             <br />
             모임 준비가 완료되었어요!
           </p>
           <Desc>친구들에게 약속을 BARO 공유해봐요</Desc>
         </Title>
         <Content>
-          <img src={약속제안완료} alt="confirm icon" />
+          <img src={약속준비} alt="confirm icon" />
           <div className="container">
             <div className="wrap">
               <img src={flag} />
-              <p>{suggestPurpose}</p>
+              <p>{data.suggestPurpose}</p>
             </div>
             <div className="wrap">
               <img src={crown} />
@@ -55,16 +51,17 @@ export default function Confirm({
             </div>
             <div className="wrap">
               <img src={person} />
-              <p>user 외 {suggestPeople}</p>
+              <p>user 외 {data.suggestPeople}</p>
             </div>
             <div className="wrap">
               <img src={location} />
-              <p>{selectedLocation}</p>
+              <p>{data.selectedLocation}</p>
             </div>
             <div className="wrap">
               <img src={date} />
               <p>
-                {formatDateToShort(startDate)} ~ {formatDateToShort(endDate)}
+                {formatDateToShort(data.startDate)} ~{" "}
+                {formatDateToShort(data.endDate)}
               </p>
             </div>
           </div>
@@ -82,9 +79,9 @@ export default function Confirm({
           background: "white",
         }}
       >
-        <Button onClick={() => navigate("/suggest/step4")}>공유하기</Button>
-        <Button onClick={() => navigate(-1)} color="Gray">
-          수정하기
+        <Button onClick={() => navigate("")}>링크 복사하기</Button>
+        <Button onClick={() => navigate(-1)} color="White">
+          나의 제안서 확인하기
         </Button>
       </div>
     </>
