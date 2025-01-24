@@ -1,5 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
 import Main from "./Main/Main";
+
 import Suggest from "./Suggest/Suggest";
 import SignupPage from "./Main/SignupPage";
 import LoginPage from "./Main/LoginPage";
@@ -13,6 +15,8 @@ import Settings from "./MyPage/Settings";
 import Contact from "./MyPage/Contact";
 
 import Accept from "./Accept/Accept";
+
+import SearchPage from "./SearchPage/SearchPage";
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -55,6 +59,10 @@ const Router = () => {
     {
       path: "/contact",
       element: <Contact />,
+    },
+    {
+      path: "/search/*",
+      element: <SearchPage />,
     },
   ]);
 

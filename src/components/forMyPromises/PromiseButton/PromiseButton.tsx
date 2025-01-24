@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './PromiseButton.module.css';
 
-const PromiseButton = (props) => {
+export default function PromiseButton(props) {
 
   const [active, setActive] = React.useState('promise');
   function updateActive(type) {
@@ -32,5 +32,3 @@ const PromiseButton = (props) => {
     </div>
   );
 };
-
-export default PromiseButton;

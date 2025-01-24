@@ -10,6 +10,7 @@ import { Category, CategoryWrapper, SubTitle } from "./Popup.styles";
 import Search from "../../../../components/Search/Search";
 import Button from "../../../../components/Button/Button";
 import Location from "../../../../components/Location/Location";
+import KakaoMap from "../../../../components/forSearchPage/KakaoMap/KakaoMap";
 
 type LocationType = {
   name: string;
@@ -108,6 +109,7 @@ export default function Popup({
             ))}
           </CategoryWrapper>
         </Section>
+        <KakaoMap />
         <Section>
           <SubTitle>검색 결과</SubTitle>
           {locations.map((location, idx) => (
