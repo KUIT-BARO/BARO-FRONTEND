@@ -15,6 +15,7 @@ import Desc from "../../../components/Desc/Desc";
 import Search from "../../../components/Search/Search";
 import Popup from "./Popup/Popup";
 import Location from "../../../components/Location/Location";
+import KakaoMap from "../../../components/forSearchPage/KakaoMap/KakaoMap";
 
 type LocationType = {
   name: string;
@@ -54,6 +55,7 @@ export default function Step2({
             <SubTitle>만나고 싶은 장소를 알려주세요!</SubTitle>
             <Desc>친구들과 함께 정할 장소를 제안해보세요</Desc>
             <Search placeholder={"건대입구"} onClick={openPopup} />
+            <KakaoMap />
             <Section>
               {selectedLocations.map((location, idx) => (
                 <Location

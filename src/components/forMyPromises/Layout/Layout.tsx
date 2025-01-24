@@ -24,8 +24,8 @@ const Layout: React.FC<LayoutProps> = ({
 }) => {
   
   const [active, setActive] = React.useState('promise');
-  function handleClick(type) {
-    setActive(type);
+  function handleClick(active: string) {
+    setActive(active);
   };
 
   return (
