@@ -81,7 +81,12 @@ export default function Step1({
           />
         </Section>
         <FixedButton>
-          <Button onClick={() => navigate("/accept/step2")}>다음</Button>
+          <Button
+            onClick={() => navigate("/accept/step2")}
+            disabled={timeTable.length === 0} // timeTable이 비어있으면 비활성화
+          >
+            다음
+          </Button>
         </FixedButton>
       </Wrapper>
     </>

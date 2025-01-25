@@ -5,7 +5,12 @@ import {
   Section,
 } from "../../../../assets/styles/Steps.styles";
 
-import { Category, CategoryWrapper, SubTitle } from "./Popup.styles";
+import {
+  Category,
+  CategoryWithNumber,
+  CategoryWrapper,
+  SubTitle,
+} from "./Popup.styles";
 
 import Search from "../../../../components/Search/Search";
 import Button from "../../../../components/Button/Button";
@@ -47,7 +52,7 @@ export default function Popup({
     {
       name: "스타벅스 건대입구점",
       address: "서울 광진구 화양동 5-47",
-      star: 5,
+      star: 2,
       comments: 12,
       categories: ["아기자기한", "아늑한", "귀여운"],
     },
@@ -68,14 +73,27 @@ export default function Popup({
   ];
 
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [categoryCount, setCategoryCount] = useState<Record<string, number>>(
+    {}
+  );
 
   const toggleCategory = (category: string) => {
     if (selectedCategories.includes(category)) {
+      // 키워드 선택 해제
       setSelectedCategories(
         selectedCategories.filter((item) => item !== category)
       );
+      setCategoryCount((prev) => ({
+        ...prev,
+        [category]: Math.max(0, (prev[category] || 1) - 1), // 카운트 감소
+      }));
     } else {
+      // 키워드 선택
       setSelectedCategories([...selectedCategories, category]);
+      setCategoryCount((prev) => ({
+        ...prev,
+        [category]: (prev[category] || 0) + 1, // 카운트 증가
+      }));
     }
   };
 
@@ -95,8 +113,28 @@ export default function Popup({
       <Wrapper style={{ marginBottom: "60px" }}>
         <Search placeholder={"건대입구, #아기자기한"} />
 
+        <Section
+          style={{
+            background: "#EDF1FF",
+            padding: "10px 0",
+            minHeight: "100px",
+          }}
+        >
+          <SubTitle style={{ color: "#5175FF" }}>함께 고른 키워드</SubTitle>
+          <CategoryWrapper>
+            {Object.entries(categoryCount).map(
+              ([category, count]) =>
+                count > 0 && (
+                  <CategoryWithNumber key={category}>
+                    <div className="number">{count}</div>
+                    {category}
+                  </CategoryWithNumber>
+                )
+            )}
+          </CategoryWrapper>
+        </Section>
         <Section>
-          <SubTitle>함께 고른 키워드</SubTitle>
+          <SubTitle>키워드</SubTitle>
           <CategoryWrapper>
             {categorys.map((category, idx) => (
               <Category
