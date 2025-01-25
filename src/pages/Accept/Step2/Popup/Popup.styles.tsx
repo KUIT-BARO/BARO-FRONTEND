@@ -40,6 +40,41 @@ export const Category = styled.div<{ isSelected: boolean }>`
     background-color: ${(props) => (props.isSelected ? "#5175ff" : "#e0e7ff")};
   }
 `;
+export const CategoryWithNumber = styled.div<{ isSelected: boolean }>`
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 80px;
+  height: 40px;
+  white-space: nowrap;
+  border-radius: 10px;
+  box-sizing: border-box;
+  font-size: 12px;
+  color: #fff;
+  font-weight: 600;
+  background-color: #5175ff;
+  cursor: pointer;
+  margin-bottom: 5px;
+
+  > .number {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    min-width: 16px;
+    max-width: 34px;
+    top: -5px;
+    left: -3px;
+    padding: 0px 4px;
+    background-color: white;
+    color: #5175ff;
+    border-radius: 100px;
+    border: 1px solid #5175ff;
+  }
+`;
 
 export const LocationWrapper = styled.div`
   width: 100%;
