@@ -4,21 +4,22 @@ export const HeaderWrapper = styled.div`
   width: 100%;
   padding-top: 43px;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   background-color: #f5f5f5;
 `;
 
 export const InputWrapper = styled.div`
   position: relative;
   width: 314px;
-  height: 24px;
+  // width: 100%;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: #EAEAEA;
   border-radius: 10px;
   padding: 17px;
-  margin: 24px 0px 24px 20px;
+  margin: 24px 20px 24px 20px;
 `;
 
 export const SearchIcon = styled.img`
@@ -31,6 +32,7 @@ export const SearchIcon = styled.img`
 export const Input = styled.input`
   background-color: #EAEAEA;
   margin-left: -55px;
+  margin-top: 2px;
   border: none;
   
   font-family: Pretendard;
@@ -67,4 +69,16 @@ export const Input = styled.input`
     color: black;
     outline: none;
   }
+`;
+
+export const ReviewButton = styled.button`
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: none;
+  margin: 24px 16px 24px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 `;

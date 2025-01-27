@@ -1,11 +1,9 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
-  //여기  수정해야합니당
-  margin: 200px auto 0; // 중앙 정렬
-  padding: 10px;
+  margin: 30px auto 0 auto;
+  padding: 20px 23px 0 16px;
   width: 90%;
-  //d여기까지 수정
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -61,7 +59,7 @@ export const Table = styled.table`
 export const DateCell = styled.td<{ isToday: boolean; isSelected: boolean }>`
   width: 44px;
   height: 44px;
-  padding: 4px;
+  padding: 11px;
   text-align: center;
   vertical-align: top;
   position: relative;
@@ -95,4 +93,15 @@ export const EventIndicators = styled.div`
   span:nth-child(3) {
     background-color: #74c0fc;
   }
+`;
+
+export const ScheduleWrapper = styled.div`
+  margin-top: 20px;
+  padding: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: white;
+  box-shadow: 0px 0px 4px 0px #C9D2F5;
 `;

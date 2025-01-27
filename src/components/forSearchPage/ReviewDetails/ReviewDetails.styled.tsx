@@ -11,9 +11,11 @@ export const PlaceSetting = styled.div`
 
   img {
     margin-right: 10px;
+    filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(221deg) brightness(100%) contrast(102%);
   }
 
   div {
+    margin-top: 1px;
     font-family: Pretendard;
     font-size: 17px;
     font-weight: 500;
@@ -64,7 +66,7 @@ export const TextArea = styled.textarea`
   text-decoration-skip-ink: none;
   color: #FFFFFF;
 
-  &::placeholder {
+  &::placeholder, &focus {
     font-family: Pretendard;
     font-size: 14px;
     font-weight: 400;
@@ -74,18 +76,6 @@ export const TextArea = styled.textarea`
     text-underline-position: from-font;
     text-decoration-skip-ink: none;
     color: #FFFFFF;
-  }
-
-  &:focus {
-    font-family: Pretendard;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 21px;
-    letter-spacing: -0.025em;
-    text-align: left;
-    text-underline-position: from-font;
-    text-decoration-skip-ink: none;
-    color: black;
   }
 `;
 
@@ -110,6 +100,12 @@ export const RatingStars = styled.div`
   display: flex;
   margin-top: 11px;
   margin-bottom: 32px;
+  gap: 5.34px;
+
+  img {
+    cursor: pointer;
+    width: 32px;
+  }
 `;
 
 export const Star = styled.div`
@@ -153,7 +149,7 @@ export const Categories = styled.div`
   gap: 4px;
 `;
 
-export const CategoryButton = styled.button`
+export const CategoryButton = styled.button<{ isSelected: boolean }>`
   margin-top: 11px;
   width: 83px;
   height: 40px;
@@ -171,6 +167,7 @@ export const CategoryButton = styled.button`
   text-align: center;
   text-underline-position: from-font;
   text-decoration-skip-ink: none;
-  color: #5175FF;
   cursor: pointer;
+  color: ${(props) => (props.isSelected ? "#FFF" : "#5175FF")};
+  background-color: ${(props) => (props.isSelected ? "#5175ff" : "transparent")};
 `;

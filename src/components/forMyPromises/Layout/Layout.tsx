@@ -29,28 +29,21 @@ const Layout: React.FC<LayoutProps> = ({
   };
 
   return (
-    <div className="min-h-screen" style={{backgroundColor: '#F4F8FB'}}>
-      {/* 반응형 컨테이너 */}
-      <div className="mx-auto w-full md:w-[768px] lg:w-[1024px] xl:w-[1280px] min-h-screen relative">
-        {/* 헤더 */}
-        {showHeader && <Header />}
-        
-        {/* 메인 컨텐츠 */}
-        <main className={`
-          ${showHeader ? 'pt-24' : ''} 
-          ${showNavigation ? 'pb-16' : ''}
-        `}>
-          {children && <PromiseButton updateActive={handleClick} />}
-          {children && (active === 'promise') && <ConfirmPromise />}
-          {children && (active === 'promise') && <UpcomingPromise />}
-          {children && (active === 'promise') && <SuggestPromise />}
-          {children && (active === 'schedule') && <ScheduleCalendar />}
-        </main>
-        
-        {/* 네비게이션 */}
-        {showNavigation && <Navigation />}
-      </div>
-    </div>
+    <>
+      {showHeader && <Header />}
+      {children && <main style={{ backgroundColor: '#F4F8FB', height: '100vh' }}>
+        <PromiseButton updateActive={handleClick} />
+        {(active === 'promise') && <>
+          <ConfirmPromise />
+          <UpcomingPromise />
+          <SuggestPromise />
+        </>}
+        {(active === 'schedule') && <>
+          <ScheduleCalendar />
+        </>}
+      </main>}
+      {showNavigation && <Navigation />}
+    </>
   );
 };
 

@@ -147,7 +147,7 @@ export default function Popup({
             ))}
           </CategoryWrapper>
         </Section>
-        <KakaoMap />
+        <KakaoMap mapHeight="400px" />
         <Section>
           <SubTitle>검색 결과</SubTitle>
           {locations.map((location, idx) => (
