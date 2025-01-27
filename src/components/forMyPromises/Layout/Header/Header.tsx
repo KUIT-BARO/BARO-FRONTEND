@@ -1,4 +1,3 @@
-// components/layout/Header/Header.tsx
 import React from 'react';
 import styles from './Header.module.css';
 import bellIcon from '../../../../assets/icons/forMyPromises/bell-black.svg';

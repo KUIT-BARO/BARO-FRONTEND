@@ -10,7 +10,7 @@ export default function SearchPage() {
   return (
     <>
       <Header />
-      <KakaoMap />
+      <KakaoMap mapHeight="350px"/>
       <Places />
       <Navigation />
     </>

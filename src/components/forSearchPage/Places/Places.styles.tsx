@@ -56,10 +56,8 @@ export const Subtitle = styled.div`
 export const PlaceImageWrapper = styled.div`
   margin-top: 20px;
   max-width: 100%;
-  height: 168px;
   overflow-x: auto;
   display: flex;
-  justify-content: center;
   align-items: center;
   gap: 1px;
 
@@ -68,13 +66,33 @@ export const PlaceImageWrapper = styled.div`
   }
   -ms-overflow-scrolling: touch;
   scrollbar-width: none;
+`;
+
+export const PlaceImage = styled.div`
+  position: relative;
 
   img {
-    width: 168px;
-    height: 168px;
-    // object-fit: cover;
     margin-right: 10px;
     background-color: #C4C4C4;
     border-radius: 8px;
+    cursor: pointer;
+    vertical-align: middle;
+    filter: brightness(50%);
+  }
+`;
+
+export const PlaceInfo = styled.div`
+  position: absolute;
+  top: 40%;
+  left: 22%;
+  z-index: 1;
+
+  div {
+    font-family: Pretendard;
+    font-size: 16px;
+    color: #FFFFFF;
+    align-items: center;
+    justify-content: center;
+    display: flex;
   }
 `;

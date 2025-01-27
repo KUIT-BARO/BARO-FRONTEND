@@ -6,6 +6,10 @@ export const HeaderWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
 
+  img {
+    filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(221deg) brightness(100%) contrast(102%);
+  }
+
   div {
     font-family: Pretendard;
     font-size: 19px;

@@ -8,6 +8,7 @@ import {
   Wrapper,
   DateCell,
   EventIndicators,
+  ScheduleWrapper,
 } from "./ScheduleCalendar.styles";
 
 export default function ScheduleCalendar() {
@@ -66,66 +67,76 @@ export default function ScheduleCalendar() {
   };
 
   return (
-    <Wrapper>
-      <Header>
-        <div className="date">
-          {currentYear}년 {currentMonth + 1}월
-        </div>
-        <div className="date-buttons">
-          <img
-            src={monthBack}
-            alt="month back icon"
-            onClick={handlePrevMonth}
-          />
-          <img
-            src={monthNext}
-            alt="month next icon"
-            onClick={handleNextMonth}
-          />
-        </div>
-      </Header>
-      <Table>
-        <thead>
-          <tr className="days">
-            <th>일</th>
-            <th>월</th>
-            <th>화</th>
-            <th>수</th>
-            <th>목</th>
-            <th>금</th>
-            <th>토</th>
-          </tr>
-        </thead>
-        <tbody>
-          {calendarData.map((week, weekIndex) => (
-            <tr key={weekIndex}>
-              {week.map((day, dayIndex) => (
-                <DateCell
-                  key={dayIndex}
-                  isToday={
-                    day &&
-                    today.getDate() === day &&
-                    today.getMonth() === currentMonth &&
-                    today.getFullYear() === currentYear
-                  }
-                  isSelected={day === selectedDate && day != null}
-                  onClick={() => handleDateClick(day)}
-                >
-                  {day}
-                  <EventIndicators>
-                    {Array.from(
-                      { length: day ? events[day] || 0 : 0 },
-                      (_, idx) => (
-                        <span key={idx} />
-                      )
-                    )}
-                  </EventIndicators>
-                </DateCell>
-              ))}
+    <>
+      <Wrapper>
+        <Header>
+          <div className="date">
+            {currentYear}년 {currentMonth + 1}월
+          </div>
+          <div className="date-buttons">
+            <img
+              src={monthBack}
+              alt="month back icon"
+              onClick={handlePrevMonth}
+            />
+            <img
+              src={monthNext}
+              alt="month next icon"
+              onClick={handleNextMonth}
+            />
+          </div>
+        </Header>
+        <Table>
+          <thead>
+            <tr className="days">
+              <th>일</th>
+              <th>월</th>
+              <th>화</th>
+              <th>수</th>
+              <th>목</th>
+              <th>금</th>
+              <th>토</th>
             </tr>
-          ))}
-        </tbody>
-      </Table>
-    </Wrapper>
+          </thead>
+          <tbody>
+            {calendarData.map((week, weekIndex) => (
+              <tr key={weekIndex}>
+                {week.map((day, dayIndex) => (
+                  <DateCell
+                    key={dayIndex}
+                    isToday={
+                      day &&
+                      today.getDate() === day &&
+                      today.getMonth() === currentMonth &&
+                      today.getFullYear() === currentYear
+                    }
+                    isSelected={day === selectedDate && day != null}
+                    onClick={() => handleDateClick(day)}
+                  >
+                    {day}
+                    <EventIndicators>
+                      {Array.from(
+                        { length: day ? events[day] || 0 : 0 },
+                        (_, idx) => (
+                          <span key={idx} />
+                        )
+                      )}
+                    </EventIndicators>
+                  </DateCell>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      </Wrapper>
+      
+      {selectedDate && events[selectedDate] && 
+        <ScheduleWrapper>
+          <div>
+            {selectedDate}.
+          </div>
+        </ScheduleWrapper>
+      }
+    </>
   );
 }

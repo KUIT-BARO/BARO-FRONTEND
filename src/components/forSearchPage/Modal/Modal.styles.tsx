@@ -14,6 +14,7 @@ export const ModalHeader = styled.div`
 `;
 
 export const ModalCloseButton = styled.div`
+  cursor: pointer;
 `;
 
 export const SetToCurrentLocation = styled.button`
@@ -27,8 +28,13 @@ export const SetToCurrentLocation = styled.button`
   display: flex;
   align-items: center;
 
+  img {
+    margin-left: 10px;
+  }
+
   div {
-    margin-left: 53px;
+    margin-left: 12px;
+    margin-top: 1px;
     font-family: Pretendard;
     font-size: 17px;
     font-weight: 500;
@@ -80,4 +86,58 @@ export const LocationAddress = styled.div`
   text-underline-position: from-font;
   text-decoration-skip-ink: none;
   color: #979797;
+`;
+
+export const SettingLocation = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  img {
+    cursor: pointer;
+  }
+
+  div {
+    font-family: Pretendard;
+    font-size: 19px;
+    color: #000000;
+    margin-right: 10px;
+  }
+`;
+
+export const SettingLocationContents = styled.div`
+  margin-top: 82px;
+`;
+
+export const SettingButtonWrapper = styled.div`
+  padding: 24px 20px;
+  margin-top: 0px;
+  background-color: #FFFFFF;
+  border-top: 1px solid #EEEEEE;
+`;
+
+export const LocationTitle = styled.div`
+  font-family: Pretendard;
+  font-size: 19px;
+  color: #000000;
+`;
+
+export const LocationDetail = styled.div`
+  font-family: Pretendard;
+  font-size: 14px;
+  color: #979797;
+  margin-top: 8px;
+`;
+
+export const SettingButton = styled.button`
+  margin-top: 24px;
+  width: 100%;
+  height: 50px;
+  border-radius: 10px;
+  border: none;
+  background-color: #5175FF;
+  color: #FFFFFF;
+  cursor: pointer;
+  font-family: Pretendard;
+  font-size: 16px;
 `;

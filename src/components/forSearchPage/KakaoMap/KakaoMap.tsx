@@ -3,7 +3,11 @@ import { Map, MapMarker } from "react-kakao-maps-sdk";
 
 import Location from '../../../assets/icons/location.svg';
 
-export default function KakaoMap() {
+interface KakaoMapProps {
+  mapHeight: string;
+};
+
+export default function KakaoMap({ mapHeight }: KakaoMapProps) { 
   
   const [position, setPosition] = useState<{ 
     lat: number; 
@@ -35,7 +39,7 @@ export default function KakaoMap() {
       <Map 
         id="map" 
         center={position || { lat: 33.450701, lng: 126.570667 }}
-        style={{ width: "100%", height: "350px" }}
+        style={{ width: "100%", height: mapHeight }}
         level={4}
       >
         {position && (
