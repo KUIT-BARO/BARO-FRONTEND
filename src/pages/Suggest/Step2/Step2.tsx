@@ -29,7 +29,27 @@ export default function Step2({
   startDate,
   endDate,
 }: StepInterface) {
-  const isDateSelected = startDate !== null && endDate !== null;
+  // 날짜 초기값 설정
+  const [internalStartDate, setInternalStartDate] = useState<Date | null>(
+    startDate || new Date()
+  );
+  const [internalEndDate, setInternalEndDate] = useState<Date | null>(
+    endDate || new Date()
+  );
+
+  const isDateSelected = internalStartDate !== null && internalEndDate !== null;
+
+  const handleDateChange = (update: [Date | null, Date | null] | Date) => {
+    if (Array.isArray(update)) {
+      setInternalStartDate(update[0]);
+      setInternalEndDate(update[1]);
+      setDateRange(update); // 외부 상태 업데이트
+    } else {
+      setInternalStartDate(update);
+      setInternalEndDate(update);
+      setDateRange([update, update]); // 단일 날짜로 범위 설정
+    }
+  };
 
   return (
     <>
@@ -42,25 +62,22 @@ export default function Step2({
 
         <Section>
           <DatePicker
-            selected={startDate}
-            onChange={(update: [Date | null, Date | null] | Date) => {
-              if (Array.isArray(update)) {
-                setDateRange(update);
-              } else {
-                setDateRange([update, update]);
-              }
-            }}
-            startDate={startDate}
-            endDate={endDate}
+            selected={internalStartDate}
+            onChange={handleDateChange}
+            startDate={internalStartDate}
+            endDate={internalEndDate}
             selectsRange
-            //==============================
             dayClassName={(date) => {
-              if (startDate && endDate && date > startDate && date < endDate) {
+              if (
+                internalStartDate &&
+                internalEndDate &&
+                date > internalStartDate &&
+                date < internalEndDate
+              ) {
                 return "middle-date";
               }
               return "";
             }}
-            //==============================
             inline
             locale={ko}
             dateFormat="yyyy년 MM월"
@@ -74,7 +91,7 @@ export default function Step2({
                     <img src={monthBack} alt="back" />
                   </div>
                   <div onClick={increaseMonth}>
-                    <img src={monthNext} alt="back" />
+                    <img src={monthNext} alt="next" />
                   </div>
                 </div>
               </div>

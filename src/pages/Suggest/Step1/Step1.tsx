@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import StepInterface from "../../../interface/Step";
 
 import Button from "../../../components/Button/Button";
@@ -17,32 +17,30 @@ import Dropdown from "../../../components/DropDown/DropDown";
 
 export default function Step1({
   navigate,
-  suggestTitle,
-  setSuggestTitle,
-  suggestPurpose,
-  setSuggestPurpose,
-  suggestPeople,
-  setSuggestPeople,
+  name,
+  setName,
+  purpose,
+  setPurpose,
+  peopleNum,
+  setPeopleNum,
   handleBack,
   handleExit,
 }: StepInterface & {
-  suggestTitle: string;
-  setSuggestTitle: React.Dispatch<React.SetStateAction<string>>;
-  suggestPurpose: string[];
-  setSuggestPurpose: React.Dispatch<React.SetStateAction<string[]>>;
-  suggestPeople: number | null;
-  setSuggestPeople: React.Dispatch<React.SetStateAction<number | null>>;
+  name: string;
+  setName: React.Dispatch<React.SetStateAction<string>>;
+  purpose: string[];
+  setPurpose: React.Dispatch<React.SetStateAction<string[]>>;
+  peopleNum: number | null;
+  setPeopleNum: React.Dispatch<React.SetStateAction<number | null>>;
 }) {
   const isFormComplete =
-    suggestTitle.trim().length > 0 &&
-    suggestPurpose.length > 0 &&
-    suggestPeople !== null;
+    name.trim().length > 0 && purpose.length > 0 && peopleNum !== null;
 
-  const handlePurpose = (purpose: string) => {
-    setSuggestPurpose((prev) =>
-      prev.includes(purpose)
-        ? prev.filter((item) => item !== purpose)
-        : [...prev, purpose]
+  const handlePurpose = (selectedPurpose: string) => {
+    setPurpose((prev) =>
+      prev.includes(selectedPurpose)
+        ? prev.filter((item) => item !== selectedPurpose)
+        : [...prev, selectedPurpose]
     );
   };
 
@@ -62,8 +60,8 @@ export default function Step1({
           <InputWithCounter
             placeholder={"마케팅 2조 회의"}
             maxlength={12}
-            text={suggestTitle}
-            setText={setSuggestTitle}
+            text={name}
+            setText={setName}
           />
         </Section>
 
@@ -71,13 +69,13 @@ export default function Step1({
         <Section>
           <SectionTitle>약속 목적을 선택해주세요</SectionTitle>
           <div className="btn-wrapper">
-            {purposes.map((purpose) => (
+            {purposes.map((option) => (
               <Button
-                key={purpose}
-                onClick={() => handlePurpose(purpose)}
-                color={suggestPurpose.includes(purpose) ? "Blue" : "White"}
+                key={option}
+                onClick={() => handlePurpose(option)}
+                color={purpose.includes(option) ? "Blue" : "White"}
               >
-                {purpose}
+                {option}
               </Button>
             ))}
           </div>
@@ -86,11 +84,7 @@ export default function Step1({
         {/* 인원 선택 */}
         <Section>
           <SectionTitle>약속 인원을 선택해주세요</SectionTitle>
-          <Dropdown
-            people={suggestPeople}
-            setPeople={setSuggestPeople}
-            maxPeople={5}
-          />
+          <Dropdown people={peopleNum} setPeople={setPeopleNum} maxPeople={5} />
         </Section>
 
         <FixedButton>

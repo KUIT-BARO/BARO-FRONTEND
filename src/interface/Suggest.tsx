@@ -1,8 +1,8 @@
 interface Suggest {
-  suggestTitle: string;
-  suggestPurpose: string;
-  suggestPeople: string;
-  selectedLocation: string;
-  startDate: Date;
-  endDate: Date;
+  name: string;
+  purpose: string;
+  peopleNum: number;
+  location: string;
+  dateStart: Date;
+  dateEnd: Date;
 }

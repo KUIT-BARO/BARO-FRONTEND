@@ -5,43 +5,56 @@ import Desc from "../../../components/Desc/Desc";
 import Button from "../../../components/Button/Button";
 
 import flag from "../../../assets/icons/flag.svg";
-
 import person from "../../../assets/icons/person.svg";
-
 import date from "../../../assets/icons/date.svg";
-
-import location from "../../../assets/icons/location.svg";
+import locationIcon from "../../../assets/icons/location.svg";
 import crown from "../../../assets/icons/crown.svg";
 import formatDateToShort from "../../../utils/formatDateToShort";
 import SuggestInterface from "../../../interface/Suggest";
+
+import PostPromise from "../../../apis/instance/promise/postPromise";
 interface PopupProps extends SuggestInterface {
   navigate: (path: string) => void;
   onClose: () => void;
 }
+
 export default function Popup({
   navigate,
   onClose,
-  suggestTitle,
-  suggestPurpose,
-  suggestPeople,
-  selectedLocation,
-  startDate,
-  endDate,
+  name,
+  dateStart,
+  dateEnd,
+  peopleNum,
+  purpose,
+  location,
 }: PopupProps) {
-  {
-    console.log(startDate);
-  }
+  const handlePostPromise = async () => {
+    try {
+      const response = await PostPromise(
+        name,
+        dateStart,
+        dateEnd,
+        peopleNum,
+        purpose,
+        location
+      );
+      console.log("Post 성공:", response);
+      navigate("/suggest/confirm");
+    } catch (error) {
+      console.error("Post 실패:", error);
+    }
+  };
   return (
     <Overlay>
       <PopupContent>
         <SubTitle>약속 정보를 확인해주세요</SubTitle>
         <Desc>입력하신 내용이 모두 정확한지 체크해주세요</Desc>
         <InfoBox>
-          <p className="title">{suggestTitle}</p>
+          <p className="title">{name}</p>
           <div className="container">
             <div className="wrap">
               <img src={flag} />
-              <p>{suggestPurpose}</p>
+              <p>{purpose}</p>
             </div>
             <div className="wrap">
               <img src={crown} />
@@ -49,16 +62,16 @@ export default function Popup({
             </div>
             <div className="wrap">
               <img src={person} />
-              <p>user 외 {suggestPeople}</p>
+              <p>user 외 {peopleNum}</p>
             </div>
             <div className="wrap">
-              <img src={location} />
-              <p>{selectedLocation}</p>
+              <img src={locationIcon} />
+              <p>{location}</p>
             </div>
             <div className="wrap">
               <img src={date} />
               <p>
-                {formatDateToShort(startDate)} ~ {formatDateToShort(endDate)}
+                {formatDateToShort(dateStart)} ~ {formatDateToShort(dateEnd)}
               </p>
             </div>
           </div>
@@ -75,8 +88,9 @@ export default function Popup({
         >
           <Button
             onClick={() => {
+              handlePostPromise();
               onClose();
-              navigate("/suggest/confirm");
+              navigate("/suggest");
             }}
           >
             약속제안생성

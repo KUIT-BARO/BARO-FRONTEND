@@ -12,16 +12,15 @@ import Step4 from "./Step4/Step4";
 export default function Suggest() {
   const navigate = useNavigate();
 
-  // ✅ 모든 상태를 Suggest 컴포넌트에서 관리
-  const [suggestTitle, setSuggestTitle] = useState("");
-  const [suggestPurpose, setSuggestPurpose] = useState<string[]>([]);
-  const [suggestPeople, setSuggestPeople] = useState<number | null>(null);
-  const [selectedLocation, setSelectedLocation] = useState<string | null>(null);
+  const [name, setName] = useState<string>("");
+  const [purpose, setPurpose] = useState<string[]>([]);
+  const [peopleNum, setPeopleNum] = useState<number | null>(null);
+  const [location, setLocation] = useState<string | null>(null);
   const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([
     null,
     null,
   ]);
-  const [startDate, endDate] = dateRange;
+  const [dateStart, dateEnd] = dateRange;
   const [showPopup, setShowPopup] = useState(false);
 
   // 뒤로 가기
@@ -64,12 +63,12 @@ export default function Suggest() {
               handleBack={handleBack}
               handleExit={handleExit}
               navigate={navigate}
-              suggestTitle={suggestTitle}
-              setSuggestTitle={setSuggestTitle}
-              suggestPurpose={suggestPurpose}
-              setSuggestPurpose={setSuggestPurpose}
-              suggestPeople={suggestPeople}
-              setSuggestPeople={setSuggestPeople}
+              name={name}
+              setName={setName}
+              purpose={purpose}
+              setPurpose={setPurpose}
+              peopleNum={peopleNum}
+              setPeopleNum={setPeopleNum}
             />
           }
         />
@@ -82,8 +81,8 @@ export default function Suggest() {
               navigate={navigate}
               dateRange={dateRange}
               setDateRange={setDateRange}
-              startDate={startDate}
-              endDate={endDate}
+              dateStart={dateStart}
+              dateEnd={dateEnd}
             />
           }
         />
@@ -93,8 +92,8 @@ export default function Suggest() {
             <Step3
               handleBack={handleBack}
               handleExit={handleExit}
-              selectedLocation={selectedLocation}
-              setSelectedLocation={setSelectedLocation}
+              location={location}
+              setLocation={setLocation}
               navigate={navigate}
               onOpenPopup={handleOpenPopup}
             />
@@ -108,12 +107,12 @@ export default function Suggest() {
               navigate={navigate}
               handleBack={handleBack}
               handleExit={handleExit}
-              suggestTitle={suggestTitle}
-              suggestPurpose={suggestPurpose}
-              suggestPeople={suggestPeople}
-              selectedLocation={selectedLocation}
-              startDate={startDate}
-              endDate={endDate}
+              name={name}
+              purpose={purpose}
+              peopleNum={peopleNum}
+              location={location}
+              dateStart={dateStart}
+              dateEnd={dateEnd}
             />
           }
         />
@@ -133,12 +132,12 @@ export default function Suggest() {
         <Popup
           navigate={navigate}
           onClose={handleClosePopup}
-          suggestTitle={suggestTitle}
-          suggestPurpose={suggestPurpose}
-          suggestPeople={suggestPeople}
-          selectedLocation={selectedLocation}
-          startDate={startDate}
-          endDate={endDate}
+          name={name}
+          purpose={purpose}
+          peopleNum={peopleNum}
+          location={location}
+          dateStart={dateStart}
+          dateEnd={dateEnd}
         />
       )}
     </>

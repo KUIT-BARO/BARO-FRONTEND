@@ -13,7 +13,7 @@ const InputWithCounter = ({ text, setText, placeholder, maxlength }) => {
           type="text"
           placeholder={`ex. ${placeholder}`}
           value={text}
-          maxLength={maxlength}
+          maxLength={maxlength - 1}
           onChange={handleChange}
         />
         <Counter>{text.length}/12</Counter>

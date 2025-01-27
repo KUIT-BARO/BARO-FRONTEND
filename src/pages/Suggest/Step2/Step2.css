@@ -114,14 +114,6 @@
   transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
 }
 
-/* 선택된 날짜 호버 스타일 */
-.react-datepicker__day--selected:hover,
-.react-datepicker__day--in-selecting-range:hover,
-.react-datepicker__day--in-range:hover {
-  background-color: #3578e5;
-  border-radius: 50%;
-}
-
 /* 드래그 중 배경 색상 */
 .react-datepicker__day--in-selecting-range {
   background-color: #e6f3ff;
@@ -133,9 +125,13 @@
 /* 선택된 중간 날짜들의 스타일 */
 .middle-date {
   background-color: #e6f3ff;
-  color: black;
-  border-radius: 0;
-  cursor: pointer;
-  width: 100%;
-  border-radius: 0;
+  color: #5175ff;
+  border-radius: 50%;
+  box-shadow: none;
+}
+
+.react-datepicker__day--range-end {
+  background-color: #5175ff;
+  color: white;
+  border-radius: 50%;
 }
