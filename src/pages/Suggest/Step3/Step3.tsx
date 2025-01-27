@@ -14,18 +14,20 @@ import SubTitle from "../../../components/SubTitle/SubTitle";
 import Desc from "../../../components/Desc/Desc";
 import styled from "styled-components";
 import Search from "../../../components/Search/Search";
+
 export default function Step3({
   navigate,
   onOpenPopup,
-  selectedLocation,
-  setSelectedLocation,
+  location,
+  setLocation,
   handleBack,
   handleExit,
 }: StepInterface & { onOpenPopup: () => void }) {
-  const handleLocationClick = (location: string) => {
-    setSelectedLocation(location);
+  const handleLocationClick = (selectedLocation: string) => {
+    setLocation(selectedLocation);
   };
-  const isLocationSelected = selectedLocation !== null;
+
+  const isLocationSelected = location !== null;
 
   return (
     <>
@@ -46,13 +48,13 @@ export default function Step3({
               "혜화역",
               "강남역",
               "잠실역",
-            ].map((location) => (
+            ].map((option) => (
               <Location
-                key={location}
-                className={selectedLocation === location ? "active" : ""}
-                onClick={() => handleLocationClick(location)}
+                key={option}
+                className={location === option ? "active" : ""}
+                onClick={() => handleLocationClick(option)}
               >
-                {location}
+                {option}
               </Location>
             ))}
           </ButtonWrapper>
@@ -72,6 +74,7 @@ const ButtonWrapper = styled.div`
   flex-wrap: wrap; /* ✅ 줄바꿈 적용 */
   gap: 16px; /* ✅ 버튼 간격 설정 */
 `;
+
 const Location = styled.button`
   flex: 1 1 calc(50% - 8px);
   padding: 16px;
