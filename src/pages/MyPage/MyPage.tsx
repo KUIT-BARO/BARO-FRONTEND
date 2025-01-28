@@ -8,6 +8,7 @@ import manAvatar from '../../assets/icons/manavatar.svg';
 import plusIcon from '../../assets/icons/plus.svg';
 import shareIcon from '../../assets/icons/share.svg';
 import './MyPage.styles.css';
+import SavedPlaces from './SavedPlaces';
 
 const MyPage = () => {
   const navigate = useNavigate();
@@ -109,6 +110,8 @@ const MyPage = () => {
           <ScheduleGrid ref={scheduleGridRef} />
         </div>
       )}
+
+      {activeTab === 'savedPlaces' && <SavedPlaces />} 
       
       <Navigation />
     </div>

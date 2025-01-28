@@ -8,6 +8,7 @@ import MyPage from "./MyPage/MyPage";
 import ProfileEdit from "./MyPage/ProfileEdit";
 import Settings from "./MyPage/Settings";
 import Contact from "./MyPage/Contact";
+import SavedPlacesDetail from "./MyPage/SavedPlacesDetail";
 
 import Accept from "./Accept/Accept";
 
@@ -36,6 +37,10 @@ const Router = () => {
     {
       path: "/mypage",
       element: <MyPage />,
+    },
+    {
+      path: "/places/:category",
+      element: <SavedPlacesDetail />,
     },
     {
       path: "/profile/edit",

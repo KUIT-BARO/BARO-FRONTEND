@@ -1,7 +1,7 @@
 .mypage-container {
   padding-block: 20px;
-  padding-bottom: 80px;
   background-color: #F4F8FB;
+  min-height: 100vh;
 }
 
 .mypage-header {
