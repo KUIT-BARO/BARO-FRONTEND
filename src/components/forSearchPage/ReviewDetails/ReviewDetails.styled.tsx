@@ -26,7 +26,8 @@ export const PlaceSetting = styled.div`
     text-decoration-skip-ink: none;
     color: #ADBEFF;
     cursor: pointer;
-  }`;
+  }
+`;
 
 export const ReviewWrite = styled.div`
   display: flex;
@@ -80,8 +81,9 @@ export const TextArea = styled.textarea`
 `;
 
 export const RatingWrapper = styled.div`
-  padding: 20px 20px 20% 20px;
+  padding: 20px 20px 0 20px;
   background-color: #EDF1FF;
+  height: 50vh;
 `;
 
 export const Rating = styled.div`
@@ -106,15 +108,6 @@ export const RatingStars = styled.div`
     cursor: pointer;
     width: 32px;
   }
-`;
-
-export const Star = styled.div`
-  width: 24px;
-  height: 24px;
-  background: #C0C0C0;
-  border-radius: 50%;
-  margin-right: 10px;
-  cursor: pointer;
 `;
 
 export const Category = styled.div`
