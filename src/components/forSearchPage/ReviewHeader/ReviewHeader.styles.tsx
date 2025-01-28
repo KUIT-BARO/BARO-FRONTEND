@@ -29,6 +29,10 @@ export const BackToPlaces = styled.div`
   cursor: pointer;
 `;
 
+export const HeaderTitle = styled.div`
+    margin-left: 16px;
+`;
+
 export const AddReview = styled.div`
   cursor: pointer;
 `;

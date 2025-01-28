@@ -1,7 +1,7 @@
 import React from "react";
 
 import { ReviewWrapper, PlaceSetting, ReviewWrite, TextArea,
-  RatingWrapper, Rating, RatingStars, Star, Category, Categories, CategoryButton
+  RatingWrapper, Rating, RatingStars, Category, Categories, CategoryButton
  } from "./ReviewDetails.styled";
 
 import { Roadview } from "react-kakao-maps-sdk";
