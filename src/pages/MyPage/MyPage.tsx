@@ -9,6 +9,7 @@ import plusIcon from '../../assets/icons/plus.svg';
 import shareIcon from '../../assets/icons/share.svg';
 import './MyPage.styles.css';
 import SavedPlaces from './SavedPlaces';
+import PlaceReviews from './PlaceReviews';
 
 const MyPage = () => {
   const navigate = useNavigate();
@@ -112,6 +113,8 @@ const MyPage = () => {
       )}
 
       {activeTab === 'savedPlaces' && <SavedPlaces />} 
+
+      {activeTab === 'placeReviews' && <PlaceReviews />}
       
       <Navigation />
     </div>
