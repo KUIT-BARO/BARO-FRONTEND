@@ -97,12 +97,12 @@ const MyPage = () => {
             <span className="semester-text">{getCurrentSemester()}</span>
             <div className="schedule-actions">
               <button 
-                className="action-button" 
+                className="action-button-schedule" 
                 onClick={handleAddScheduleClick}
               >
                 <img src={plusIcon} alt="add" />
               </button>
-              <button className="action-button">
+              <button className="action-button-schedule">
                 <img src={shareIcon} alt="share" />
               </button>
             </div>

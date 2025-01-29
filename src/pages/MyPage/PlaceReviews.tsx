@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import starFilled from '../../assets/icons/star_filled.svg';
 import starEmpty from '../../assets/icons/star_empty.svg';
 import moreIcon from '../../assets/icons/more.svg';
+import editIcon from '../../assets/icons/edit_darkgray.svg';
+import trashIcon from '../../assets/icons/trash.svg';
 import './PlaceReviews.styles.css';
 
 interface ReviewActionsProps {
@@ -14,8 +16,14 @@ const ReviewActions: React.FC<ReviewActionsProps> = ({ isOpen, onClose }) => {
 
   return (
     <div className="review-actions-dropdown">
-      <button className="action-button">수정하기</button>
-      <button className="action-button">삭제하기</button>
+      <button className="action-button">
+        <img src={editIcon} alt="edit" />
+        수정하기
+      </button>
+      <button className="action-button">
+        <img src={trashIcon} alt="delete" />
+        삭제하기
+      </button>
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import backIcon from '../../assets/icons/backIcon.svg';
 import starFilled from '../../assets/icons/star_filled.svg';
 import starEmpty from '../../assets/icons/star_empty.svg';
@@ -9,6 +9,10 @@ import './SavedPlacesDetail.styles.css';
 
 const SavedPlacesDetail = () => {
   const navigate = useNavigate();
+  const { category } = useParams();
+  
+  // URL 디코딩하여 원래 카테고리명 복원
+  const decodedCategory = decodeURIComponent(category || '');
 
   const dummyPlaces = Array(12).fill({
     id: 1,
@@ -39,7 +43,7 @@ const SavedPlacesDetail = () => {
         <button onClick={() => navigate(-1)} className="back-button">
           <img src={backIcon} alt="back" />
         </button>
-        <h1>비즈니스</h1>
+        <h1>{decodedCategory}</h1>
       </header>
 
       <div className="places-list">
