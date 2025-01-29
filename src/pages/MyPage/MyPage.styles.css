@@ -2,6 +2,23 @@
   padding-block: 20px;
   background-color: #F4F8FB;
   min-height: 100vh;
+  position: relative;
+}
+
+.mypage-header, 
+.profile-section, 
+.mypage-nav {
+  position: sticky;
+  top: 0;
+  background-color: #F4F8FB;
+  z-index: 10;
+}
+
+.schedule-container,
+.saved-places-grid,
+.reviews-list {
+  height: calc(100vh - 320px);
+  overflow-y: auto;
 }
 
 .mypage-header {
@@ -122,6 +139,7 @@
   justify-content: space-between;
   align-items: center;
   padding-inline: 20px;
+  margin-top: 18px;
 }
 
 .semester-text {
