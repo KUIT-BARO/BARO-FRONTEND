@@ -105,6 +105,7 @@
   box-sizing: border-box;
   color: #000;
   background-color: transparent;
+  font-weight: 600;
 }
 
 .form-input::placeholder {

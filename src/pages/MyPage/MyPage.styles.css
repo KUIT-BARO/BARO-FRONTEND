@@ -1,7 +1,24 @@
 .mypage-container {
   padding-block: 20px;
-  padding-bottom: 80px;
   background-color: #F4F8FB;
+  min-height: 100vh;
+  position: relative;
+}
+
+.mypage-header, 
+.profile-section, 
+.mypage-nav {
+  position: sticky;
+  top: 0;
+  background-color: #F4F8FB;
+  z-index: 10;
+}
+
+.schedule-container,
+.saved-places-grid,
+.reviews-list {
+  height: calc(100vh - 320px);
+  overflow-y: auto;
 }
 
 .mypage-header {
@@ -88,7 +105,6 @@
 .mypage-nav {
   display: flex;
   border-block: 1px solid #E3EAF4;
-  margin-bottom: 15px;
 }
 
 .nav-button {
@@ -123,6 +139,7 @@
   justify-content: space-between;
   align-items: center;
   padding-inline: 20px;
+  margin-top: 18px;
 }
 
 .semester-text {
@@ -135,7 +152,7 @@
   gap: 8px;
 }
 
-.action-button {
+.action-button-schedule {
   background: none;
   border: none;
   padding: 8px;

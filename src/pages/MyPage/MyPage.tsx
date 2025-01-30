@@ -8,6 +8,8 @@ import manAvatar from '../../assets/icons/manavatar.svg';
 import plusIcon from '../../assets/icons/plus.svg';
 import shareIcon from '../../assets/icons/share.svg';
 import './MyPage.styles.css';
+import SavedPlaces from './SavedPlaces';
+import PlaceReviews from './PlaceReviews';
 
 const MyPage = () => {
   const navigate = useNavigate();
@@ -95,12 +97,12 @@ const MyPage = () => {
             <span className="semester-text">{getCurrentSemester()}</span>
             <div className="schedule-actions">
               <button 
-                className="action-button" 
+                className="action-button-schedule" 
                 onClick={handleAddScheduleClick}
               >
                 <img src={plusIcon} alt="add" />
               </button>
-              <button className="action-button">
+              <button className="action-button-schedule">
                 <img src={shareIcon} alt="share" />
               </button>
             </div>
@@ -109,6 +111,10 @@ const MyPage = () => {
           <ScheduleGrid ref={scheduleGridRef} />
         </div>
       )}
+
+      {activeTab === 'savedPlaces' && <SavedPlaces />} 
+
+      {activeTab === 'placeReviews' && <PlaceReviews />}
       
       <Navigation />
     </div>

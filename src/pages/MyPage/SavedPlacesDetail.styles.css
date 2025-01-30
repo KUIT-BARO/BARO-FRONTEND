@@ -1,0 +1,100 @@
+.places-detail-container {
+    min-height: 100vh;
+    background-color: #FFFFFF;
+    padding-bottom: 80px; /* 하단 네비게이션 바 높이만큼 여백 */
+  }
+  
+  .places-detail-header {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    position: fixed; /* 헤더 고정 */
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    border-bottom: 1px solid #F2F2F2;
+    background-color: #F4F8FB;
+  }
+  
+  .back-button {
+    position: absolute;
+    left: 16px;
+    background: none;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+  }
+  
+  .places-detail-header h1 {
+    flex: 1;
+    text-align: center;
+    font-size: 19px;
+    font-weight: 600;
+  }
+  
+  .places-list {
+    padding: 20px;
+    margin-top: 64px; /* 고정된 헤더 높이만큼 상단 여백 */
+  }
+  
+  .place-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 16px 0;
+    border-bottom: 1px solid #F2F2F2;
+  }
+  
+  .place-info h2 {
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  
+  .rating-container {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 8px;
+  }
+  
+  .rating {
+    font-size: 14px;
+    font-weight: 600;
+    color: #979797;
+  }
+  
+  .stars {
+    display: flex;
+    gap: 2px;
+  }
+  
+  .star-icon {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .review-count {
+    color: #979797;
+    font-weight: 600;
+    font-size: 14px;
+  }
+  
+  .address {
+    color: #979797;
+    font-weight: 600;
+    font-size: 14px;
+  }
+  
+  .bookmark-button {
+    background: none;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+  }
+  
+  .bookmark-button img {
+    width: 24px;
+    height: 24px;
+  }
