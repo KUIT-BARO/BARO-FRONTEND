@@ -1,13 +1,16 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
-import LoginPage from "./LoginPage";
-import SignupPage from "./SignupPage";
-
-export default function Main() {
+import { Header, MainWrapper, Title } from "./Main.styles";
+import Navigation from "../../components/Navigation/Navigation";
+const Main = () => {
   return (
-    <Routes>
-      <Route path="/" element={<LoginPage />} />
-      <Route path="/signup" element={<SignupPage />} />
-    </Routes>
+    <MainWrapper>
+      <Header></Header>
+      <section>
+        <Title></Title>
+      </section>
+      <Navigation />
+    </MainWrapper>
   );
-}
+};
+
+export default Main;
