@@ -1,28 +1,28 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import backIcon from '../../assets/icons/backIcon.svg';
-import closeIcon from '../../assets/icons/x_gray.svg';
-import manAvatar from '../../assets/icons/manavatar.svg';
-import InputModal from './InputModal';
-import WithdrawModal from './WithdrawModal';
-import Navigation from '../../components/forMyPromises/Layout/Navigation/Navigation';
-import Toast from './Toast';
-import './Settings.styles.css';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import backIcon from "../../assets/icons/backIcon.svg";
+import closeIcon from "../../assets/icons/x_gray.svg";
+import manAvatar from "../../assets/icons/manavatar.svg";
+import InputModal from "./InputModal";
+import WithdrawModal from "./WithdrawModal";
+import Navigation from "../../components/Navigation/Navigation";
+import Toast from "./Toast";
+import "./Settings.styles.css";
 
 const Settings = () => {
   const navigate = useNavigate();
   const [passwordModalOpen, setPasswordModalOpen] = useState(false);
   const [withdrawModalOpen, setWithdrawModalOpen] = useState(false);
   const [showToast, setShowToast] = useState(false);
-  
+
   const userData = {
-    name: '이지환',
-    username: 'jihwan_lee',
-    profileImage: manAvatar
+    name: "이지환",
+    username: "jihwan_lee",
+    profileImage: manAvatar,
   };
 
   const handleBack = () => {
-    navigate('/mypage');
+    navigate("/mypage");
   };
 
   const handlePasswordComplete = (newPassword: string) => {
@@ -31,11 +31,11 @@ const Settings = () => {
 
   const handleWithdraw = () => {
     setWithdrawModalOpen(false);
-    navigate('/');
+    navigate("/");
   };
 
   const handleContactClick = () => {
-    navigate('/contact');
+    navigate("/contact");
   };
 
   return (
@@ -59,21 +59,18 @@ const Settings = () => {
         </div>
 
         <div className="settings-menu">
-          <button 
-            className="menu-item"
-            onClick={handleContactClick}
-          >
+          <button className="menu-item" onClick={handleContactClick}>
             <span>연락처</span>
           </button>
-          
-          <button 
+
+          <button
             className="menu-item"
             onClick={() => setPasswordModalOpen(true)}
           >
             <span>비밀번호 변경</span>
           </button>
 
-          <button 
+          <button
             className="menu-item withdraw"
             onClick={() => setWithdrawModalOpen(true)}
           >
@@ -99,8 +96,8 @@ const Settings = () => {
         onWithdraw={handleWithdraw}
       />
 
-      <Toast 
-        message="업데이트 완료" 
+      <Toast
+        message="업데이트 완료"
         isVisible={showToast}
         onClose={() => setShowToast(false)}
       />
@@ -110,4 +107,5 @@ const Settings = () => {
   );
 };
 
-export default Settings;0
+export default Settings;
+0;

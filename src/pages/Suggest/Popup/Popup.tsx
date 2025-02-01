@@ -12,7 +12,7 @@ import crown from "../../../assets/icons/crown.svg";
 import formatDateToShort from "../../../utils/formatDateToShort";
 import SuggestInterface from "../../../interface/Suggest";
 
-import PostPromise from "../../../apis/instance/promise/postPromise";
+// import PostPromise from "../../../apis/instance/promise/postPromise";
 interface PopupProps extends SuggestInterface {
   navigate: (path: string) => void;
   onClose: () => void;

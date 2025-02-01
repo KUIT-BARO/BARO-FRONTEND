@@ -1,12 +1,12 @@
 // components/layout/Navigation/Navigation.tsx
-import React from 'react';
-import styles from './Navigation.module.css';
+import React from "react";
+import styles from "./Navigation.module.css";
 
-import homeIcon from '../../../../assets/icons/forMyPromises/home.svg';
-import searchIcon from '../../../../assets/icons/searchIcon.svg';
-import plusIcon from '../../../../assets/icons/forMyPromises/plus.svg';
-import timeIcon from '../../../../assets/icons/forMyPromises/time-black.svg';
-import profileIcon from '../../../../assets/icons/forMyPromises/profile.svg';
+import homeIcon from "../../assets/icons/forMyPromises/home.svg";
+import searchIcon from "../../assets/icons/searchIcon.svg";
+import plusIcon from "../../assets/icons/forMyPromises/plus.svg";
+import timeIcon from "../../assets/icons/forMyPromises/time-black.svg";
+import profileIcon from "../../assets/icons/forMyPromises/profile.svg";
 
 const Navigation = () => {
   return (
