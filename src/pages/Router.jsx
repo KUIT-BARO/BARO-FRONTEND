@@ -3,8 +3,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Main from "./Main/Main";
 
 import Suggest from "./Suggest/Suggest";
-import SignupPage from "./Main/SignupPage";
-import LoginPage from "./Main/LoginPage";
+import SignupPage from "./Login/SignupPage";
+import LoginPage from "./Login/LoginPage";
 import MyPromises from "./MyPromises/MyPromises";
 
 import FinalVote from "./FinalVote/FinalVote";
@@ -23,6 +23,10 @@ const Router = () => {
   const router = createBrowserRouter([
     {
       path: "/",
+      element: <Main />,
+    },
+    {
+      path: "/login",
       element: <LoginPage />,
     },
     {

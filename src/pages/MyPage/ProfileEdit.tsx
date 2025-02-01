@@ -1,22 +1,22 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import backIcon from '../../assets/icons/backIcon.svg';
-import editIcon from '../../assets/icons/edit_white.svg';
-import profile1 from '../../assets/icons/manavatar.svg';
-import profile2 from '../../assets/icons/womanavatar.svg';
-import profile3 from '../../assets/icons/dogavatar.svg';
-import profile4 from '../../assets/icons/useravatar.svg';
-import Navigation from '../../components/forMyPromises/Layout/Navigation/Navigation';
-import InputModal from './InputModal';
-import Toast from './Toast';
-import './ProfileEdit.styles.css';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import backIcon from "../../assets/icons/backIcon.svg";
+import editIcon from "../../assets/icons/edit_white.svg";
+import profile1 from "../../assets/icons/manavatar.svg";
+import profile2 from "../../assets/icons/womanavatar.svg";
+import profile3 from "../../assets/icons/dogavatar.svg";
+import profile4 from "../../assets/icons/useravatar.svg";
+import Navigation from "../../components/Navigation/Navigation";
+import InputModal from "./InputModal";
+import Toast from "./Toast";
+import "./ProfileEdit.styles.css";
 
 const ProfileEdit = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    name: '이지환',
-    username: 'jihwan_lee',
-    profileImage: 'profile1'
+    name: "이지환",
+    username: "jihwan_lee",
+    profileImage: "profile1",
   });
   const [nameModalOpen, setNameModalOpen] = useState(false);
   const [usernameModalOpen, setUsernameModalOpen] = useState(false);
@@ -27,7 +27,7 @@ const ProfileEdit = () => {
     profile1,
     profile2,
     profile3,
-    profile4
+    profile4,
   };
 
   const handleBack = () => {
@@ -44,17 +44,17 @@ const ProfileEdit = () => {
   };
 
   const handleNameComplete = (newName: string) => {
-    setFormData(prev => ({ ...prev, name: newName }));
+    setFormData((prev) => ({ ...prev, name: newName }));
     setShowToast(true);
   };
 
   const handleUsernameComplete = (newUsername: string) => {
-    setFormData(prev => ({ ...prev, username: newUsername }));
+    setFormData((prev) => ({ ...prev, username: newUsername }));
     setShowToast(true);
   };
 
   const handleProfileComplete = (newProfile: string) => {
-    setFormData(prev => ({ ...prev, profileImage: newProfile }));
+    setFormData((prev) => ({ ...prev, profileImage: newProfile }));
     setShowToast(true);
   };
 
@@ -145,8 +145,8 @@ const ProfileEdit = () => {
         type="profile"
       />
 
-      <Toast 
-        message="업데이트 완료" 
+      <Toast
+        message="업데이트 완료"
         isVisible={showToast}
         onClose={() => setShowToast(false)}
       />
