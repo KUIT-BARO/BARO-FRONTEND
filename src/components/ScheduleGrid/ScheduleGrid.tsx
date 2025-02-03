@@ -7,7 +7,11 @@ export interface ScheduleGridHandle {
   openAddModal: () => void;
 }
 
-const ScheduleGrid = forwardRef<ScheduleGridHandle>((_, ref) => {
+interface ScheduleGridProps {
+  readOnly?: boolean;
+}
+
+const ScheduleGrid = forwardRef<ScheduleGridHandle, ScheduleGridProps>(({ readOnly = false }, ref) => {
   const colors = ['#6699FF', '#708AFF', '#7893FF', '#7BB2FF'];
   
   const getRandomColor = () => {
@@ -51,6 +55,7 @@ const ScheduleGrid = forwardRef<ScheduleGridHandle>((_, ref) => {
   };
 
   const handleScheduleClick = (schedule) => {
+    if (readOnly) return;
     setSelectedSchedule(schedule);
     setIsDetailModalOpen(true);
   };
@@ -153,19 +158,23 @@ const ScheduleGrid = forwardRef<ScheduleGridHandle>((_, ref) => {
         </div>
       </div>
 
-      <ScheduleDetailModal 
-        isOpen={isDetailModalOpen}
-        onClose={handleCloseDetailModal}
-        schedule={selectedSchedule}
-        onDelete={handleDeleteSchedule}
-        onUpdate={handleUpdateSchedule}
-      />
+      {!readOnly && (
+        <>
+          <ScheduleDetailModal 
+            isOpen={isDetailModalOpen}
+            onClose={handleCloseDetailModal}
+            schedule={selectedSchedule}
+            onDelete={handleDeleteSchedule}
+            onUpdate={handleUpdateSchedule}
+          />
 
-      <ScheduleAddModal
-        isOpen={isAddModalOpen}
-        onClose={() => setIsAddModalOpen(false)}
-        onAdd={handleAddSchedule}
-      />
+          <ScheduleAddModal
+            isOpen={isAddModalOpen}
+            onClose={() => setIsAddModalOpen(false)}
+            onAdd={handleAddSchedule}
+          />
+        </>
+      )}
     </div>
   );
 });

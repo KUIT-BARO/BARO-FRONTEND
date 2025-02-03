@@ -1,0 +1,67 @@
+.user-schedule-container {
+  padding-top: 20px;
+  background-color: #F4F8FB;
+  min-height: 100vh;
+}
+
+.user-schedule-header {
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    margin-top: 1px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.back-button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  position: absolute;
+  left: 20px;
+}
+
+.back-button img {
+  width: 24px;
+  height: 24px;
+}
+
+.user-profile-section {
+  display: flex;
+  align-items: center;
+  margin-bottom: 23px;
+  padding-inline: 20px;
+}
+
+.profile-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 1px solid #94AAFF;
+  background-color: #F0F4FF;
+  margin-right: 16px;
+  overflow: hidden;
+}
+
+.profile-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-info h2 {
+  font-size: 19px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.profile-info p {
+  color: #919191;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.schedule-wrapper {
+  margin-top: 20px;
+}

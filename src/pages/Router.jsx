@@ -14,6 +14,7 @@ import ProfileEdit from "./MyPage/ProfileEdit";
 import Settings from "./MyPage/Settings";
 import Contact from "./MyPage/Contact";
 import SavedPlacesDetail from "./MyPage/SavedPlacesDetail";
+import UserSchedulePage from "./MyPage/UserSchedulePage";
 
 import Accept from "./Accept/Accept";
 
@@ -72,6 +73,10 @@ const Router = () => {
     {
       path: "/search/*",
       element: <SearchPage />,
+    },
+    {
+      path: "/schedule/:username",
+      element: <UserSchedulePage />,
     },
   ]);
 
