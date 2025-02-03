@@ -75,7 +75,7 @@ const Router = () => {
       element: <SearchPage />,
     },
     {
-      path: "/schedule/:username",
+      path: "/schedule/:userId",
       element: <UserSchedulePage />,
     },
   ]);
