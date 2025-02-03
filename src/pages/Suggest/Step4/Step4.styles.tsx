@@ -5,6 +5,7 @@ export const UsersWrapper = styled.div`
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
+  margin-top: -20px;
 `;
 export const UserDesc = styled.div`
   display: flex;
@@ -12,7 +13,8 @@ export const UserDesc = styled.div`
   align-items: center;
   border: 1px solid #edf1ff;
   background-color: white;
-  padding: 3px;
+  padding: 10px;
+  border-radius: 10px;
   > .left {
     display: flex;
     gap: 16px;
@@ -42,7 +44,7 @@ export const UserDesc = styled.div`
 
   > .checkbox {
     cursor: pointer;
-    border: 2px solid #c0c0c0;
+
     border-radius: 50%;
     width: 22px;
     height: 22px;
@@ -68,13 +70,12 @@ export const PopupOverlay = styled.div`
 
 export const Popup = styled.div`
   position: fixed;
-  bottom: 15%;
+  bottom: 5%;
   background: #f5f5f5;
-
   display: flex;
   flex-direction: column;
-  gap: 40px;
-  padding: 30px;
+  gap: 35px;
+  padding: 20px 30px;
   border-radius: 8px;
   box-sizing: border-box;
   > .x {

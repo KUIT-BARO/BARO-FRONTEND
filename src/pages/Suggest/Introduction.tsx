@@ -6,12 +6,13 @@ import Button from "../../components/Button/Button";
 
 import StepInterface from "../../interface/Step";
 import Desc from "../../components/Desc/Desc";
+import { useNavigate } from "react-router-dom";
 
 export default function Introduction({
-  navigate,
   handleBack,
   handleExit,
 }: StepInterface) {
+  const navigate = useNavigate();
   return (
     <IntroductionWrapper>
       <Nav handleBack={handleBack} handleExit={handleExit} />

@@ -17,15 +17,15 @@ import crown from "../../assets/icons/crown.svg";
 
 import AcceptInterface from "../../interface/Accept";
 import 약속준비 from "../../assets/icons/약속준비.svg";
+import { useNavigate } from "react-router-dom";
 interface ConfirmProps extends StepInterface, AcceptInterface {}
 
 export default function Confirm({
-  navigate,
   handleBack,
   handleExit,
   data,
 }: ConfirmProps) {
-  console.log(data);
+  const navigate = useNavigate();
   return (
     <>
       <ConfirmWrapper>
@@ -79,9 +79,9 @@ export default function Confirm({
           background: "white",
         }}
       >
-        <Button onClick={() => navigate("")}>링크 복사하기</Button>
-        <Button onClick={() => navigate(-1)} color="White">
-          나의 제안서 확인하기
+        <Button onClick={() => navigate("")}>공유하기</Button>
+        <Button onClick={() => navigate(-1)} color="Gray">
+          수정하기
         </Button>
       </div>
     </>

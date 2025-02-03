@@ -19,9 +19,9 @@ import "react-datepicker/dist/react-datepicker.css";
 import { ko } from "date-fns/locale";
 
 import "./Step2.css";
+import { useNavigate } from "react-router-dom";
 
 export default function Step2({
-  navigate,
   handleBack,
   handleExit,
   dateRange,
@@ -29,6 +29,7 @@ export default function Step2({
   startDate,
   endDate,
 }: StepInterface) {
+  const navigate = useNavigate();
   // 날짜 초기값 설정
   const [internalStartDate, setInternalStartDate] = useState<Date | null>(
     startDate || new Date()

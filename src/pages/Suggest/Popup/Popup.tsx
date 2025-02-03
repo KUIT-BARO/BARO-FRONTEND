@@ -11,15 +11,14 @@ import locationIcon from "../../../assets/icons/location.svg";
 import crown from "../../../assets/icons/crown.svg";
 import formatDateToShort from "../../../utils/formatDateToShort";
 import SuggestInterface from "../../../interface/Suggest";
+import { useNavigate } from "react-router-dom";
 
 // import PostPromise from "../../../apis/instance/promise/postPromise";
 interface PopupProps extends SuggestInterface {
-  navigate: (path: string) => void;
   onClose: () => void;
 }
 
 export default function Popup({
-  navigate,
   onClose,
   name,
   dateStart,
@@ -28,6 +27,8 @@ export default function Popup({
   purpose,
   location,
 }: PopupProps) {
+  const navigate = useNavigate();
+
   const handlePostPromise = async () => {
     try {
       const response = await PostPromise(
@@ -90,7 +91,7 @@ export default function Popup({
             onClick={() => {
               handlePostPromise();
               onClose();
-              navigate("/suggest");
+              navigate("/suggest/step4");
             }}
           >
             약속제안생성
@@ -124,7 +125,7 @@ const PopupContent = styled.div`
   background-color: white;
 
   border-radius: 24px 24px 0px 0px;
-  padding: 20px;
+  padding: 25px 20px;
   gap: 10px;
   text-align: center;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
