@@ -1,4 +1,5 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import { postAuth } from '../../apis/auth/postAuth';
 import { useNavigate } from "react-router-dom";
 import Navigation from "../../components/Navigation/Navigation";
 import ScheduleGrid from "../../components/ScheduleGrid/ScheduleGrid";
@@ -14,6 +15,23 @@ import PlaceReviews from "./PlaceReviews";
 const MyPage = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("schedule");
+  const [schedules, setSchedules] = useState([]);
+
+  useEffect(() => {
+    const fetchSchedules = async () => {
+      try {
+        const response = await postAuth.getSchedule();
+        if (response.status === 201) {
+          setSchedules(response.data.mySchedules);
+        }
+      } catch (error) {
+        console.error('시간표 조회 실패:', error);
+      }
+    };
+ 
+    fetchSchedules();
+  }, []);
+
   const scheduleGridRef = useRef<{ openAddModal: () => void }>(null);
 
   const getCurrentSemester = () => {
@@ -96,25 +114,21 @@ const MyPage = () => {
       </nav>
 
       {activeTab === "schedule" && (
-        <div className="schedule-container">
-          <div className="schedule-header">
-            <span className="semester-text">{getCurrentSemester()}</span>
-            <div className="schedule-actions">
-              <button
-                className="action-button-schedule"
-                onClick={handleAddScheduleClick}
-              >
-                <img src={plusIcon} alt="add" />
-              </button>
-              <button className="action-button-schedule">
-                <img src={shareIcon} alt="share" />
-              </button>
-            </div>
-          </div>
-
-          <ScheduleGrid ref={scheduleGridRef} />
-        </div>
-      )}
+       <div className="schedule-container">
+         <div className="schedule-header">
+           <span className="semester-text">{getCurrentSemester()}</span>
+           <div className="schedule-actions">
+             <button className="action-button-schedule" onClick={handleAddScheduleClick}>
+               <img src={plusIcon} alt="add" />
+             </button>
+             <button className="action-button-schedule">
+               <img src={shareIcon} alt="share" />
+             </button>
+           </div>
+         </div>
+         <ScheduleGrid ref={scheduleGridRef} initialSchedules={schedules} />
+       </div>
+     )}
 
       {activeTab === "savedPlaces" && <SavedPlaces />}
 
