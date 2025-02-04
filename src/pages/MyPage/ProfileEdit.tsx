@@ -10,6 +10,7 @@ import Navigation from "../../components/Navigation/Navigation";
 import InputModal from "./InputModal";
 import Toast from "./Toast";
 import "./ProfileEdit.styles.css";
+import { postAuth } from '../../apis/auth/postAuth';
 
 const ProfileEdit = () => {
   const navigate = useNavigate();
@@ -28,6 +29,23 @@ const ProfileEdit = () => {
     profile2,
     profile3,
     profile4,
+  };
+
+  const profileIdToBackendFormat = {
+    'profile1': 'MAN',
+    'profile2': 'WOMAN', 
+    'profile3': 'DOG',
+    'profile4': 'NONE'
+  };
+
+  const handleProfileComplete = async (newProfile: string) => {
+    try {
+      await postAuth.updateProfileImage(profileIdToBackendFormat[newProfile]);
+      setFormData(prev => ({ ...prev, profileImage: newProfile }));
+      setShowToast(true);
+    } catch (error) {
+      console.error('프로필 이미지 변경 오류:', error);
+    }
   };
 
   const handleBack = () => {
@@ -50,11 +68,6 @@ const ProfileEdit = () => {
 
   const handleUsernameComplete = (newUsername: string) => {
     setFormData((prev) => ({ ...prev, username: newUsername }));
-    setShowToast(true);
-  };
-
-  const handleProfileComplete = (newProfile: string) => {
-    setFormData((prev) => ({ ...prev, profileImage: newProfile }));
     setShowToast(true);
   };
 
