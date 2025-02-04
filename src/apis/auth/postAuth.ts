@@ -6,14 +6,6 @@ interface SignupParams {
   nickname: string;
 }
 
-interface Schedule {
-  scheduleId: number;
-  name: string;
-  date: string;
-  timeStart: string;
-  timeEnd: string;
-}
-
 export const postAuth = {
   signup: async (params: SignupParams) => {
     try {
@@ -55,16 +47,6 @@ export const postAuth = {
       if (error.response?.status === 400) {
         alert("프로필 이미지 변경에 실패했습니다.");
       }
-      throw error;
-    }
-  },
-  
-  getSchedule: async () => {
-    try {
-      const response = await instance.get("/users/schedule");
-      return response.data;
-    } catch (error) {
-      console.error('시간표 조회 오류:', error);
       throw error;
     }
   }
