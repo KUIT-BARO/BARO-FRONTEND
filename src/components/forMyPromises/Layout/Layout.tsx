@@ -5,17 +5,51 @@ import Navigation from "../../Navigation/Navigation.tsx";
 
 import PromiseButton from "../PromiseButton/PromiseButton.tsx";
 
-import ConfirmPromise from "../ConfirmPromise/ConfirmPromise.tsx";
+import PendingPromise from "../PendingPromise/PendingPromise.tsx";
 import UpcomingPromise from "../UpcomingPromise/UpcomingPromise.tsx";
 import SuggestPromise from "../SuggestPromise/SuggestPromise.tsx";
 
 import ScheduleCalendar from "../ScheduleCalendar/ScheduleCalendar.tsx";
+
+import CheckPromise from "../../../apis/promise/checkPromise";
 
 interface LayoutProps {
   children: React.ReactNode;
   showHeader?: boolean;
   showNavigation?: boolean;
 }
+
+interface PendingParams {
+  promiseId: string;
+  name: string;
+  date: string;
+  timeStart: string;
+  timeEnd: string;
+  place: string;
+  status: string;
+};
+
+interface UpcomingParams {
+  promiseId: string;
+  name: string;
+  date: string;
+  timeStart: string;
+  timeEnd: string;
+  place: string;
+};
+
+const handleCheckingPromises = async () => {
+  console.log("나의 약속 정보를 조회합니다.");
+  
+  try {
+    const response = await CheckPromise.checkPromises();
+    if (response.status === 200) {
+      console.log("나의 약속 정보를 조회했습니다.");
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 const Layout: React.FC<LayoutProps> = ({
   children,
@@ -27,6 +61,10 @@ const Layout: React.FC<LayoutProps> = ({
     setActive(active);
   }
 
+  React.useEffect(() => {
+    handleCheckingPromises();
+  }, []);
+
   return (
     <>
       {showHeader && <Header />}
@@ -35,7 +73,7 @@ const Layout: React.FC<LayoutProps> = ({
           <PromiseButton updateActive={handleClick} />
           {active === "promise" && (
             <>
-              <ConfirmPromise />
+              <PendingPromise />
               <UpcomingPromise />
               <SuggestPromise />
             </>
