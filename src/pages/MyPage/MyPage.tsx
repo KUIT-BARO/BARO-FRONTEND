@@ -10,7 +10,7 @@ import shareIcon from "../../assets/icons/share.svg";
 import "./MyPage.styles.css";
 import SavedPlaces from "./SavedPlaces";
 import PlaceReviews from "./PlaceReviews";
-import { postAuth } from '../../apis/auth/postAuth';
+import { getMyPage } from '../../apis/user/getMyPage';
 
 const MyPage = () => {
   const navigate = useNavigate();
@@ -25,7 +25,7 @@ const MyPage = () => {
   useEffect(() => {
     const fetchMyPage = async () => {
       try {
-        const response = await postAuth.getMyPage();
+        const response = await getMyPage.getMyPage();
         if (response.status === 200 && response.data) {
           setUserInfo({
             nickname: response.data.user.nickname,

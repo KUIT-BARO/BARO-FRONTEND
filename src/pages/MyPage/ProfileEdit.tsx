@@ -10,7 +10,7 @@ import Navigation from "../../components/Navigation/Navigation";
 import InputModal from "./InputModal";
 import Toast from "./Toast";
 import "./ProfileEdit.styles.css";
-import { postAuth } from '../../apis/auth/postAuth';
+import { getMyPage } from '../../apis/user/getMyPage';
 
 const ProfileEdit = () => {
   const navigate = useNavigate();
@@ -40,7 +40,7 @@ const ProfileEdit = () => {
 
   const handleProfileComplete = async (newProfile: string) => {
     try {
-      await postAuth.updateProfileImage(profileIdToBackendFormat[newProfile]);
+      await getMyPage.updateProfileImage(profileIdToBackendFormat[newProfile]);
       setFormData(prev => ({ ...prev, profileImage: newProfile }));
       setShowToast(true);
     } catch (error) {
