@@ -1,4 +1,3 @@
-/* components/layout/Navigation/Navigation.module.css */
 .nav {
   position: fixed;
   bottom: 0;
@@ -28,20 +27,30 @@
   align-items: center;
   gap: 0.25rem;
   color: rgb(107, 114, 128);
-  transition: color 0.2s;
   border: none;
-  background-color: none;
   background: none;
   cursor: pointer;
+  padding: 0;
 }
 
-.navItem:hover {
-  color: rgb(59, 130, 246);
+.navItem img {
+  width: 24px;
+  height: 24px;
 }
 
 .navItem span {
-  font-size: 0.75rem;
+  font-size: 10px;
   line-height: 1rem;
+  font-weight: 600;
+}
+
+.navItem.active {
+  color: #000;
+}
+
+.navItem.active span {
+  color: #000;
+  font-weight: 600;
 }
 
 .plusButton {
@@ -53,14 +62,14 @@
   align-items: center;
   justify-content: center;
   color: white;
-  /* margin-top: -4rem; */
-  transition: background-color 0.2s;
   border: none;
   cursor: pointer;
+  padding: 0;
 }
 
-.plusButton:hover {
-  background-color: rgb(37, 99, 235);
+.plusButton img {
+  width: 20px;
+  height: 20px;
 }
 
 @media (min-width: 768px) {
