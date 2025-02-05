@@ -49,6 +49,18 @@ export const postAuth = {
       }
       throw error;
     }
+  },
+
+  getMyPage: async () => {
+    try {
+      const response = await instance.get("/users/my");
+      return response;
+    } catch (error) {
+      if (error.response?.status === 400) {
+        alert("마이페이지 조회에 실패했습니다.");
+      }
+      throw error;
+    }
   }
 };
 
