@@ -1,24 +1,8 @@
 import instance from "../instance";
 import { createErrorResponse } from "../../interface/api/Message";
-const PostPormise = async (
-  name: string,
-  dateStart: string,
-  dateEnd: string,
-  peopleNum: number,
-  purpose: string,
-  location: string
-) => {
-  const requestData = {
-    name,
-    dateStart,
-    dateEnd,
-    peopleNum,
-    purpose,
-    location,
-  };
-
+const GetPromise = async (promiseId: number) => {
   try {
-    return await instance.post("/promise/suggest", requestData);
+    return await instance.get(`"/promise/${promiseId}`);
   } catch (error) {
     if (error.response) {
       const errorData = createErrorResponse(error.response.status.toString());
@@ -30,4 +14,4 @@ const PostPormise = async (
   }
 };
 
-export default PostPormise;
+export default GetPromise;
