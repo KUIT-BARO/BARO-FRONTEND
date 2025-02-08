@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import StepInterface from "../../../interface/Step";
 
 import Button from "../../../components/Button/Button";
 import { ProgressBar } from "../../../components/ProgressBar/ProgressBar";
 import Nav from "../../../components/Nav/Nav";
-
+import Popup from "./Popup/Popup";
 import {
   Wrapper,
   FixedButton,
@@ -14,20 +14,57 @@ import SubTitle from "../../../components/SubTitle/SubTitle";
 import Desc from "../../../components/Desc/Desc";
 import styled from "styled-components";
 import Search from "../../../components/Search/Search";
+
 export default function Step3({
-  onOpenPopup,
   location,
   setLocation,
   handleBack,
   handleExit,
+  onOpenPopup,
 }: StepInterface & { onOpenPopup: () => void }) {
-  const handleLocationClick = (selectedLocation: string) => {
-    setLocation(selectedLocation);
-  };
+  const [popup, setPopup] = useState(false);
 
-  const isLocationSelected = location !== null;
+  const dummyLocation = [
+    {
+      placeId: 1,
+      placeName: "스타벅스 건대입구점",
+      address: "서울 광진구 화양동 5-47",
+      status: "ACTIVE",
+    },
+    {
+      placeId: 2,
+      placeName: "투썸플레이스 강남역점",
+      address: "서울 강남구 역삼동 123-45",
+      status: "ACTIVE",
+    },
+    {
+      placeId: 3,
+      placeName: "이디야 커피 홍대점",
+      address: "서울 마포구 서교동 789-10",
+      status: "SUSPENDED",
+    },
+    {
+      placeId: 4,
+      placeName: "메가커피 신촌점",
+      address: "서울 서대문구 창천동 11-22",
+      status: "ACTIVE",
+    },
+    {
+      placeId: 5,
+      placeName: "할리스커피 강남시티점",
+      address: "서울 강남구 테헤란로 456",
+      status: "SUSPENDED",
+    },
+  ];
 
-  return (
+  return popup ? (
+    <Popup
+      onOpenPopup={onOpenPopup}
+      setPopup={setPopup}
+      location={location}
+      setLocation={setLocation}
+    />
+  ) : (
     <>
       <Nav handleBack={handleBack} handleExit={handleExit} color={"Blue"} />
       <Wrapper>
@@ -38,59 +75,47 @@ export default function Step3({
         <Section>
           <Search placeholder={"건대입구"} />
 
-          <ButtonWrapper>
-            {[
-              "신촌역",
-              "건대입구역",
-              "홍대입구",
-              "혜화역",
-              "강남역",
-              "잠실역",
-            ].map((option) => (
+          <LocationWrapper>
+            {dummyLocation.map((location) => (
               <Location
-                key={option}
-                className={location === option ? "active" : ""}
-                onClick={() => handleLocationClick(option)}
+                key={location.placeId}
+                onClick={() => {
+                  setLocation(location);
+                  setPopup(true);
+                }}
               >
-                {option}
+                <div className="bold">{location.placeName}</div>
+                <div>{location.address}</div>
               </Location>
             ))}
-          </ButtonWrapper>
+          </LocationWrapper>
         </Section>
-        <FixedButton>
-          <Button disabled={!isLocationSelected} onClick={onOpenPopup}>
-            다음
-          </Button>
-        </FixedButton>
       </Wrapper>
     </>
   );
 }
-
-const ButtonWrapper = styled.div`
+const LocationWrapper = styled.div`
   display: flex;
-  flex-wrap: wrap; /* ✅ 줄바꿈 적용 */
-  gap: 16px; /* ✅ 버튼 간격 설정 */
+  flex-direction: column;
+  justify-content: flex-start;
 `;
 
-const Location = styled.button`
-  flex: 1 1 calc(50% - 8px);
-  padding: 16px;
-  border-radius: 30px;
-  border: none;
-  background-color: white;
-  color: black;
-  font-size: 16px;
-  font-weight: 500;
+const Location = styled.div`
+  width: 100%;
+  display: flex;
+  gap: 8px;
+  flex-direction: column;
   cursor: pointer;
-  outline: none;
-
-  :focus {
-    outline: none;
+  font-size: 14px;
+  color: #979797;
+  padding: 20px 0;
+  border: 1px solid #eeeeee;
+  border-left: 0;
+  border-right: 0;
+  .bold {
+    font-size: 17px;
+    font-weight: 600;
+    color: black;
   }
-
-  &.active {
-    background-color: #5175ff;
-    color: white;
-  }
+  box-sizing: border-box;
 `;

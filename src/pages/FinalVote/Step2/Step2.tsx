@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import formatDate from "../../../utils/formatDate";
 import Nav from "../../../components/Nav/Nav";
 import SubTitle from "../../../components/SubTitle/SubTitle";
-import { SectionTitle } from "./Step1.styles";
+import { SectionTitle } from "./Step2.styles";
 import {
   Wrapper,
   FixedButton,
@@ -12,23 +12,21 @@ import {
 import Button from "../../../components/Button/Button";
 import Desc from "../../../components/Desc/Desc";
 
-export default function Step1({
+export default function Step2({
   navigate,
   handleBack,
   handleExit,
   timeDummyDate,
   locationDummyDate,
   selectedTimeIndex,
-  setSelectedTimeIndex,
   selectedLocationIndex,
-  setSelectedLocationIndex,
 }) {
   return (
     <>
       <Nav handleBack={handleBack} handleExit={handleExit} color={"Blue"} />
       <Wrapper>
-        <SubTitle>최종 투표를 진행해주세요</SubTitle>
-        <Desc>최적의 약속 시간과 장소입니다</Desc>
+        <SubTitle>최종 투표가 완료되었습니다</SubTitle>
+        <Desc>곧 결과가 발표됩니다.</Desc>
 
         {/* 약속 시간 선택 */}
         <Section>
@@ -36,8 +34,9 @@ export default function Step1({
           {timeDummyDate.map((time, index) => (
             <Button
               key={time.promisePersonalTimeId} // ID를 key로 사용
-              color={selectedTimeIndex === index ? "Blue" : "White"}
-              onClick={() => setSelectedTimeIndex(index)}
+              color={selectedTimeIndex === index ? "Gray" : "White"}
+              onClick={() => {}}
+              disabled={true}
             >
               {`${formatDate(time.date)} ${time.timeStart} ~ ${time.timeEnd}`}
             </Button>
@@ -50,8 +49,9 @@ export default function Step1({
           {locationDummyDate.map((location, index) => (
             <Button
               key={location.placeId} // ID를 key로 사용
-              color={selectedLocationIndex === index ? "Blue" : "White"}
-              onClick={() => setSelectedLocationIndex(index)}
+              color={selectedLocationIndex === index ? "Gray" : "White"}
+              disabled={true}
+              onClick={() => {}}
             >
               {location.placeName}
             </Button>
@@ -60,7 +60,7 @@ export default function Step1({
 
         {/* 다음 버튼 */}
         <FixedButton>
-          <Button onClick={() => navigate("/finalvote/step2")}>투표하기</Button>
+          <Button onClick={() => navigate(-1)}>수정하기</Button>
         </FixedButton>
       </Wrapper>
     </>

@@ -46,7 +46,8 @@ const StyledButton = styled.button<{
   disabled?: boolean;
   borderColor?: string;
 }>`
-  cursor: pointer;
+  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
+
   font-size: 16px;
   font-weight: 600;
   border: none;
