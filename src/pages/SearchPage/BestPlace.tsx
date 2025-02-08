@@ -87,7 +87,7 @@ const Header = styled.div`
   flex-direction: column;
   justify-content: space-between;
   width: 100%;
-  padding: 63px 24px 0 24px;
+  padding: 24px 24px 0 24px;
 
   img {
     width: 24px;
@@ -105,7 +105,7 @@ const HeaderTitle = styled.div`
 
 const HeaderDesc = styled.div`
   margin-top: 12px;
-  margin-bottom: 33px;
+  margin-bottom: 23px;
   font-family: Pretendard;
   font-size: 17px;
   color: #979797;

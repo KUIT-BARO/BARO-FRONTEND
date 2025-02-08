@@ -1,5 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { postAuth } from '../../apis/auth/postAuth';
 import './LoginPage.styles.css';
 import '../../assets/fonts/pretendard.css';
 import userIcon from '../../assets/icons/login_user.svg';
@@ -7,6 +8,26 @@ import lockIcon from '../../assets/icons/login_password.svg';
 import Logo from '../../assets/icons/logo.svg';
 
 const LoginPage = () => {
+  const navigate = useNavigate();
+  const [id, setId] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleLogin = async () => {
+    try {
+      if (!id || !password) {
+        alert('아이디와 비밀번호를 입력해주세요');
+        return;
+      }
+
+      const response = await postAuth.login({ id, password });
+      if (response.status === 200) {
+        navigate('/mypage');
+      }
+    } catch (error) {
+      console.error('로그인 오류:', error);
+    }
+  };
+
   return (
     <div className="login-container">
       <div className="logo">
@@ -23,6 +44,8 @@ const LoginPage = () => {
             type="text"
             placeholder="이메일 혹은 아이디 입력"
             className="login-input"
+            value={id}
+            onChange={(e) => setId(e.target.value)}
           />
         </div>
         <div className="input-wrapper">
@@ -33,6 +56,8 @@ const LoginPage = () => {
             type="password"
             placeholder="비밀번호 입력"
             className="login-input"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </div>
       </div>
@@ -42,7 +67,7 @@ const LoginPage = () => {
         <label htmlFor="autoLogin">자동로그인 설정</label>
       </div>
 
-      <button className="login-button">로그인</button>
+      <button className="login-button" onClick={handleLogin}>로그인</button>
 
       <div className="signup-wrapper">
         <span className="line">────</span>

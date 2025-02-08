@@ -1,9 +1,9 @@
 import React from 'react';
-import styles from './ConfirmPromise.module.css';
+import styles from './PendingPromise.module.css';
 
 import clock from '../../../assets/icons/forMyPromises/clock.svg';
 
-const ConfirmPromise = () => {
+const PendingPromise = () => {
   return (
     <div className={styles.confirmContainer}>
       <div className={styles.confirmStateContainer}>
@@ -37,4 +37,4 @@ const ConfirmPromise = () => {
   );
 };
 
-export default ConfirmPromise;
+export default PendingPromise;

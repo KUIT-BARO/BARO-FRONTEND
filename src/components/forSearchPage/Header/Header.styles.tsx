@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const HeaderWrapper = styled.div`
   width: 100%;
-  padding-top: 43px;
+  // padding-top: 43px;
   display: flex;
   justify-content: center;
   background-color: #f5f5f5;

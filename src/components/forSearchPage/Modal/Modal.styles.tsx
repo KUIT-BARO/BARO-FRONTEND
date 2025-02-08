@@ -6,7 +6,7 @@ export const ModalWrapper = styled.div`
 
 export const ModalHeader = styled.div`
   background-color: #F4F8FB;
-  padding: 43px 20px 16px 20px;
+  padding: 24px 20px 16px 20px;
   align-items: center;
   position: fixed;
   top: 0;
@@ -18,7 +18,7 @@ export const ModalCloseButton = styled.div`
 `;
 
 export const SetToCurrentLocation = styled.button`
-  margin-top: 20px;
+  margin-top: 45px;
   width: 100%;
   height: 40px;
   background-color: #EAEAEA;
