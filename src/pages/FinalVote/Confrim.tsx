@@ -78,7 +78,7 @@ export default function Introduction({
           background: "white",
         }}
       >
-        <Button onClick={() => navigate("step1")}>링크 복사하기</Button>
+        <Button onClick={() => navigate("step1")}>공유하기</Button>
         <Button onClick={() => navigate(-1)} color="Gray">
           완료하기
         </Button>

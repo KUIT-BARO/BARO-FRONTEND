@@ -2,12 +2,15 @@ import React, { useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 
 import Step1 from "./Step1/Step1";
+import Step2 from "./Step2/Step2";
 
 import Confirm from "./Confrim";
 // import Popup from "./Popup/Popup";
 
 export default function Accept() {
   const navigate = useNavigate();
+  const [selectedTimeIndex, setSelectedTimeIndex] = useState(null);
+  const [selectedLocationIndex, setSelectedLocationIndex] = useState(null);
 
   const dummyData = {
     suggestTitle: "마케팅 전략 회의",
@@ -18,15 +21,33 @@ export default function Accept() {
     endDate: new Date(), // ISO 8601 형식
   };
   const timeDummyDate = [
-    "1월 2일 14:00 ~ 16:00",
-    "1월 2일 14:00 ~ 16:00",
-    "1월 2일 14:00 ~ 16:00",
+    {
+      promisePersonalTimeId: 1,
+      date: "2025-02-06",
+      timeStart: "14:00",
+      timeEnd: "16:00",
+      status: "SUSPENDED",
+    },
+    {
+      promisePersonalTimeId: 2,
+      date: "2025-02-07",
+      timeStart: "13:00",
+      timeEnd: "15:00",
+      status: "SUSPENDED",
+    },
   ];
 
   const locationDummyDate = [
-    "1월 2일 14:00 ~ 16:00",
-    "1월 2일 14:00 ~ 16:00",
-    "1월 2일 14:00 ~ 16:00",
+    {
+      placeId: 1,
+      placeName: "스타벅스 강남점",
+      status: "SUSPENDED",
+    },
+    {
+      placeId: 2,
+      placeName: "투썸플레이스 서초점",
+      status: "SUSPENDED",
+    },
   ];
 
   // 뒤로 가기
@@ -51,6 +72,24 @@ export default function Accept() {
               handleExit={handleExit}
               timeDummyDate={timeDummyDate}
               locationDummyDate={locationDummyDate}
+              selectedTimeIndex={selectedTimeIndex}
+              setSelectedTimeIndex={setSelectedTimeIndex}
+              selectedLocationIndex={selectedLocationIndex}
+              setSelectedLocationIndex={setSelectedLocationIndex}
+            />
+          }
+        />
+        <Route
+          path="/step2"
+          element={
+            <Step2
+              navigate={navigate}
+              handleBack={handleBack}
+              handleExit={handleExit}
+              timeDummyDate={timeDummyDate}
+              locationDummyDate={locationDummyDate}
+              selectedTimeIndex={selectedTimeIndex}
+              selectedLocationIndex={selectedLocationIndex}
             />
           }
         />
