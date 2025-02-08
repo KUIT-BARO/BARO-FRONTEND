@@ -29,22 +29,7 @@ export default function Popup({
 }: PopupProps) {
   const navigate = useNavigate();
 
-  const handlePostPromise = async () => {
-    try {
-      const response = await PostPromise(
-        name,
-        dateStart,
-        dateEnd,
-        peopleNum,
-        purpose,
-        location
-      );
-      console.log("Post 성공:", response);
-      navigate("/suggest/confirm");
-    } catch (error) {
-      console.error("Post 실패:", error);
-    }
-  };
+  const handlePostPromise = async () => {};
   return (
     <Overlay>
       <PopupContent>
@@ -67,7 +52,7 @@ export default function Popup({
             </div>
             <div className="wrap">
               <img src={locationIcon} />
-              <p>{location}</p>
+              <p>{location.placeName}</p>
             </div>
             <div className="wrap">
               <img src={date} />

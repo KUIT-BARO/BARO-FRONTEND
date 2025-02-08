@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import styled from "styled-components";
 
@@ -12,7 +12,7 @@ import Desc from "../../components/Desc/Desc";
 import flag from "../../assets/icons/flag.svg";
 import person from "../../assets/icons/person.svg";
 import date from "../../assets/icons/date.svg";
-import location from "../../assets/icons/location.svg";
+import locationIcon from "../../assets/icons/location.svg";
 import crown from "../../assets/icons/crown.svg";
 
 import 약속제안완료 from "../../assets/icons/약속제안완료.svg";
@@ -25,23 +25,30 @@ interface ConfirmProps extends StepInterface, SuggestInterface {
 export default function Confirm({
   handleBack,
   handleExit,
-  suggestTitle,
-  suggestPurpose,
-  suggestPeople,
-  selectedLocation,
-  startDate,
-  endDate,
-  selectFriends,
+  name,
+  purpose,
+  peopleNum,
+  location,
+  dateStart,
+  dateEnd,
 }: ConfirmProps) {
   const navigate = useNavigate();
+  const [linkPopup, setLinkPopup] = useState(false);
+  const showPopup = () => {
+    setLinkPopup(true);
 
+    setTimeout(() => {
+      setLinkPopup(false);
+    }, 1000);
+  };
   return (
     <>
+      {linkPopup && <LinkPopupWrapper>링크가 복사되었습니다.</LinkPopupWrapper>}
       <ConfirmWrapper>
         <Nav handleBack={handleBack} handleExit={handleExit} />
         <Title>
           <p className="bold">
-            {suggestTitle}
+            {name}
             <br />
             모임 준비가 완료되었어요!
           </p>
@@ -52,7 +59,7 @@ export default function Confirm({
           <div className="container">
             <div className="wrap">
               <img src={flag} />
-              <p>{suggestPurpose}</p>
+              <p>{purpose}</p>
             </div>
             <div className="wrap">
               <img src={crown} />
@@ -60,16 +67,16 @@ export default function Confirm({
             </div>
             <div className="wrap">
               <img src={person} />
-              <p>user 외 {suggestPeople}</p>
+              <p>user 외 {peopleNum}</p>
             </div>
             <div className="wrap">
-              <img src={location} />
-              <p>{selectedLocation}</p>
+              <img src={locationIcon} />
+              <p>{location.placeName}</p>
             </div>
             <div className="wrap">
               <img src={date} />
               <p>
-                {formatDateToShort(startDate)} ~ {formatDateToShort(endDate)}
+                {formatDateToShort(dateStart)} ~ {formatDateToShort(dateEnd)}
               </p>
             </div>
           </div>
@@ -87,11 +94,7 @@ export default function Confirm({
           background: "white",
         }}
       >
-        {selectFriends ? (
-          <Button onClick={() => navigate("/suggest/step4")}>공유하기</Button>
-        ) : (
-          <Button onClick={() => navigate("/")}>링크 복사하기</Button>
-        )}
+        <Button onClick={() => showPopup()}>링크 복사하기</Button>
         <Button onClick={() => navigate(-1)} color="Gray">
           수정하기
         </Button>
@@ -145,6 +148,45 @@ const Content = styled.div`
         font-size: 16px;
         font-weight: 400;
       }
+    }
+  }
+`;
+const LinkPopupWrapper = styled.div`
+  position: fixed;
+  bottom: 20%;
+  left: 50%;
+
+  transform: translate(-50%, 50%);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70px;
+  padding: 0 20px;
+  border-radius: 16px;
+  background-color: #f5f5f5;
+  font-size: 17px;
+  font-weight: 600;
+  z-index: 1000;
+  opacity: 0.8;
+  animation: fadeInOut 3s ease-in-out forwards;
+
+  @keyframes fadeInOut {
+    0% {
+      opacity: 0;
+      transform: translate(-50%, 55%);
+    }
+    10% {
+      opacity: 1;
+      transform: translate(-50%, 50%);
+    }
+    90% {
+      opacity: 1;
+      transform: translate(-50%, 50%);
+    }
+    100% {
+      opacity: 0;
+      transform: translate(-50%, 45%);
     }
   }
 `;

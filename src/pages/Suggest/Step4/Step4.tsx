@@ -34,7 +34,7 @@ export default function Step4({
 
   const closePopup = () => {
     setIsPopupVisible(false);
-    navigate("/suggest/comfirm");
+    navigate("/suggest/confirm");
   };
 
   return (
