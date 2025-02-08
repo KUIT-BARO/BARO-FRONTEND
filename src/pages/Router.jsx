@@ -12,11 +12,9 @@ import ProfileEdit from "./MyPage/ProfileEdit";
 import Settings from "./MyPage/Settings";
 import Contact from "./MyPage/Contact";
 import SavedPlacesDetail from "./MyPage/SavedPlacesDetail";
-<<<<<<< HEAD
-=======
+
 import UserSchedulePage from "./MyPage/UserSchedulePage";
 
->>>>>>> 2c8de9caba195a37ee8d0e3fac9ae6bd62c7656b
 import Accept from "./Accept/Accept";
 import SearchPage from "./SearchPage/SearchPage";
 
