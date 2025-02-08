@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Header, MainWrapper, PromiseBtn, Title } from "./Main.styles";
 import { Container, Promises, Dots, Dot } from "./Main.styles";
 import Navigation from "../../components/Navigation/Navigation";
+import { useNavigate } from "react-router-dom";
 
 import bigLogo from "../../assets/icons/bigLogo.svg";
 import locationWhite from "../../assets/icons/locationWhite.svg";
@@ -43,10 +44,16 @@ const Main = () => {
   //     location: "학교 세미나실",
   //   },
   // ];
+  const navigate = useNavigate();
   const dummyData = [];
 
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const handleLogout = () => {
+    // 여기에 로그아웃 로직 추가 (예: 토큰 제거)
+    localStorage.removeItem('token'); // 또는 다른 인증 정보 제거
+    navigate('/'); // 랜딩 페이지로 이동
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -69,13 +76,18 @@ const Main = () => {
         <img src={bigLogo} alt="big logo" className="big-logo" />
       )}
 
-      <Header>
-        <img src={logo} alt="logo icon" className="logo" />
+    <Header>
+      <img src={logo} alt="logo icon" className="logo" />
+      <div className="header-controls">
+        <button onClick={handleLogout} className="logout-btn">
+          로그아웃
+        </button>
         <div className="alarm-wrapper">
           <img src={alarm} alt="alarm icon" />
           <span></span>
         </div>
-      </Header>
+      </div>
+    </Header>
 
       <section style={{ width: "100%" }}>
         {dummyData.length > 0 ? (
