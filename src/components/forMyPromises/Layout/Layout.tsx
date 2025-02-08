@@ -11,7 +11,7 @@ import SuggestPromise from "../SuggestPromise/SuggestPromise.tsx";
 
 import ScheduleCalendar from "../ScheduleCalendar/ScheduleCalendar.tsx";
 
-import CheckPromise from "../../../apis/promise/checkPromise";
+import CheckPromise from "../../../apis/Promise/GetPromise.tsx";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -27,7 +27,7 @@ interface PendingParams {
   timeEnd: string;
   place: string;
   status: string;
-};
+}
 
 interface UpcomingParams {
   promiseId: string;
@@ -36,11 +36,11 @@ interface UpcomingParams {
   timeStart: string;
   timeEnd: string;
   place: string;
-};
+}
 
 const handleCheckingPromises = async () => {
   console.log("나의 약속 정보를 조회합니다.");
-  
+
   try {
     const response = await CheckPromise.checkPromises();
     if (response.status === 200) {

@@ -1,78 +1,115 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import ProtectedRoute from "./ProtectedRoute"; // 보호된 라우트 추가
 
 import Main from "./Main/Main";
-
 import Suggest from "./Suggest/Suggest";
 import SignupPage from "./Login/SignupPage";
 import LoginPage from "./Login/LoginPage";
 import MyPromises from "./MyPromises/MyPromises";
-
 import FinalVote from "./FinalVote/FinalVote";
-
 import MyPage from "./MyPage/MyPage";
 import ProfileEdit from "./MyPage/ProfileEdit";
 import Settings from "./MyPage/Settings";
 import Contact from "./MyPage/Contact";
 import SavedPlacesDetail from "./MyPage/SavedPlacesDetail";
+
 import UserSchedulePage from "./MyPage/UserSchedulePage";
 
 import Accept from "./Accept/Accept";
-
 import SearchPage from "./SearchPage/SearchPage";
+
+// 로그인 여부 확인 (예: localStorage 사용)
+const isAuthenticated = () => {
+  // return localStorage.getItem("token") !== null;
+  return true;
+};
 
 const Router = () => {
   const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <Main />,
-    },
-    {
-      path: "/login",
-      element: <LoginPage />,
-    },
-    {
-      path: "/signup",
-      element: <SignupPage />,
-    },
+    { path: "/", element: <Main /> },
+    { path: "/login", element: <LoginPage /> },
+    { path: "/signup", element: <SignupPage /> },
+
+    // 보호된 라우트
     {
       path: "/suggest/*",
-      element: <Suggest />,
+      element: (
+        <ProtectedRoute isAuthenticated={isAuthenticated()}>
+          <Suggest />
+        </ProtectedRoute>
+      ),
     },
     {
       path: "/accept/*",
-      element: <Accept />,
+      element: (
+        <ProtectedRoute isAuthenticated={isAuthenticated()}>
+          <Accept />
+        </ProtectedRoute>
+      ),
     },
     {
       path: "/finalvote/*",
-      element: <FinalVote />,
+      element: (
+        <ProtectedRoute isAuthenticated={isAuthenticated()}>
+          <FinalVote />
+        </ProtectedRoute>
+      ),
     },
     {
       path: "/mypromises",
-      element: <MyPromises />,
+      element: (
+        <ProtectedRoute isAuthenticated={isAuthenticated()}>
+          <MyPromises />
+        </ProtectedRoute>
+      ),
     },
     {
       path: "/mypage",
-      element: <MyPage />,
+      element: (
+        <ProtectedRoute isAuthenticated={isAuthenticated()}>
+          <MyPage />
+        </ProtectedRoute>
+      ),
     },
     {
       path: "/places/:category",
-      element: <SavedPlacesDetail />,
+      element: (
+        <ProtectedRoute isAuthenticated={isAuthenticated()}>
+          <SavedPlacesDetail />
+        </ProtectedRoute>
+      ),
     },
     {
       path: "/profile/edit",
-      element: <ProfileEdit />,
+      element: (
+        <ProtectedRoute isAuthenticated={isAuthenticated()}>
+          <ProfileEdit />
+        </ProtectedRoute>
+      ),
     },
     {
       path: "/settings",
-      element: <Settings />,
+      element: (
+        <ProtectedRoute isAuthenticated={isAuthenticated()}>
+          <Settings />
+        </ProtectedRoute>
+      ),
     },
     {
       path: "/contact",
-      element: <Contact />,
+      element: (
+        <ProtectedRoute isAuthenticated={isAuthenticated()}>
+          <Contact />
+        </ProtectedRoute>
+      ),
     },
     {
       path: "/search/*",
-      element: <SearchPage />,
+      element: (
+        <ProtectedRoute isAuthenticated={isAuthenticated()}>
+          <SearchPage />
+        </ProtectedRoute>
+      ),
     },
     {
       path: "/schedule/:userId",

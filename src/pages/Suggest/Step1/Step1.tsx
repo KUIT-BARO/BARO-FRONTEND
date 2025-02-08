@@ -14,9 +14,9 @@ import SubTitle from "../../../components/SubTitle/SubTitle";
 import { SectionTitle } from "./Step1.styles";
 import InputWithCounter from "../../../components/InputWithCounter/InputWithCounter";
 import Dropdown from "../../../components/DropDown/DropDown";
+import { useNavigate } from "react-router-dom";
 
 export default function Step1({
-  navigate,
   name,
   setName,
   purpose,
@@ -33,6 +33,8 @@ export default function Step1({
   peopleNum: number | null;
   setPeopleNum: React.Dispatch<React.SetStateAction<number | null>>;
 }) {
+  const navigate = useNavigate();
+
   const isFormComplete =
     name.trim().length > 0 && purpose.length > 0 && peopleNum !== null;
 

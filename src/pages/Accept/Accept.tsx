@@ -40,7 +40,6 @@ export default function Accept() {
           path="/"
           element={
             <Introduction
-              navigate={navigate}
               data={dummyData}
               handleBack={handleBack}
               handleExit={handleExit}
@@ -52,7 +51,6 @@ export default function Accept() {
           element={
             <Step1
               data={dummyData}
-              navigate={navigate}
               handleBack={handleBack}
               handleExit={handleExit}
               startDate={new Date("2025-01-02")}
@@ -67,7 +65,6 @@ export default function Accept() {
           element={
             <Step2
               data={dummyData}
-              navigate={navigate}
               handleBack={handleBack}
               handleExit={handleExit}
             />

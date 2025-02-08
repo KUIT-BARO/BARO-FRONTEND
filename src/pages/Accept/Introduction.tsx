@@ -16,15 +16,16 @@ import location from "../../assets/icons/location.svg";
 import crown from "../../assets/icons/crown.svg";
 
 import 제안수락 from "../../assets/icons/제안수락.svg";
+import { useNavigate } from "react-router-dom";
 
 interface ConfirmProps extends StepInterface, SuggestInterface {}
 
 export default function Introduction({
-  navigate,
   handleBack,
   handleExit,
   data,
 }: ConfirmProps) {
+  const navigate = useNavigate();
   return (
     <>
       <ConfirmWrapper>

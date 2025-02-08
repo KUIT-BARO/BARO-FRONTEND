@@ -19,8 +19,8 @@ import SmallButton from "../../../components/SmallButton/SmallButton";
 import SelectTimeTable from "../../../components/SelectTimeTable/SelectTimeTable";
 
 import defaultImg from "../../../assets/icons/profileImg_default.svg";
+import { useNavigate } from "react-router-dom";
 export default function Step1({
-  navigate,
   handleBack,
   handleExit,
   data,
@@ -36,6 +36,8 @@ export default function Step1({
   suggestPeople: number | null;
   setSuggestPeople: React.Dispatch<React.SetStateAction<number | null>>;
 }) {
+  const navigate = useNavigate();
+
   const [popupStage, setPopupStage] = useState<number | null>(1);
 
   const handlePopupClick = () => {

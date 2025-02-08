@@ -6,6 +6,7 @@ interface ButtonProps {
   children: React.ReactNode;
   disabled?: boolean;
   color?: keyof typeof Color;
+  borderColor?: string;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -13,12 +14,14 @@ const Button: React.FC<ButtonProps> = ({
   children,
   disabled = false,
   color = "Blue",
+  borderColor,
 }) => {
   return (
     <StyledButton
       onClick={!disabled ? onClick : undefined} // disabled 상태일 때 클릭 이벤트 무시
       color={color}
       disabled={disabled}
+      borderColor={borderColor}
     >
       {children}
     </StyledButton>
@@ -41,6 +44,7 @@ const FontColor = {
 const StyledButton = styled.button<{
   color: keyof typeof Color;
   disabled?: boolean;
+  borderColor?: string;
 }>`
   cursor: pointer;
   font-size: 16px;
@@ -53,6 +57,8 @@ const StyledButton = styled.button<{
   color: ${(props) => FontColor[props.color]};
   background-color: ${(props) => Color[props.color]};
   box-sizing: border-box;
+  border: ${(props) =>
+    props.borderColor ? `1px solid ${props.borderColor}` : "none"}; // 추가
 
   opacity: ${(props) => (props.disabled ? 0.6 : 1)};
   transition: background-color 0.2s ease, opacity 0.2s ease;

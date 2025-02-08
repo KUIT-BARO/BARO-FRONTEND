@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import StepInterface from "../../../interface/Step";
 
 import Button from "../../../components/Button/Button";
-import { ProgressBar } from "../../../components/ProgressBar/ProgressBar";
 import Nav from "../../../components/Nav/Nav";
 
 import {
@@ -14,21 +13,28 @@ import {
 import Search from "../../../components/Search/Search";
 import PopupOverlay, { UsersWrapper, UserDesc, Popup } from "./Step4.styles";
 import checkIcon from "../../../assets/icons/checkIcon.svg";
+import checkWhite from "../../../assets/icons/checkWhite.svg";
+import x from "../../../assets/icons/x.svg";
 
 import profileImg from "../../../assets/icons/profileImg_1.svg";
+import { useNavigate } from "react-router-dom";
 export default function Step4({
-  navigate,
   handleBack,
   handleExit,
+  setSelectFriends,
 }: StepInterface) {
+  const navigate = useNavigate();
+
   const [isPopupVisible, setIsPopupVisible] = useState(false);
 
   const handleShareClick = () => {
+    setSelectFriends(true);
     setIsPopupVisible(true);
   };
 
   const closePopup = () => {
     setIsPopupVisible(false);
+    navigate("/suggest/comfirm");
   };
 
   return (
@@ -49,7 +55,9 @@ export default function Step4({
         {isPopupVisible && (
           <PopupOverlay>
             <Popup>
-              <div className="x">x</div>
+              <div className="x">
+                <img src={x} alt="x icon" />
+              </div>
               <p>
                 <p className="bold">hiheyssup</p>님을 친구 추가 하시겠습니까?
               </p>
@@ -86,10 +94,19 @@ const User = () => {
           </div>
           <div
             className="checkbox"
-            style={{ backgroundColor: checked[index] ? "blue" : "white" }}
+            style={{
+              backgroundColor: checked[index] ? "#5175FF" : "white",
+              border: checked[index]
+                ? "1.5px solid #5175FF"
+                : "1.5px solid #c0c0c0",
+            }}
             onClick={() => toggleCheckbox(index)}
           >
-            {checked[index] && <img src={checkIcon} alt="check-icon" />}
+            {checked[index] ? (
+              <img src={checkWhite} alt="check-icon" />
+            ) : (
+              <img src={checkIcon} alt="check-icon" />
+            )}
           </div>
         </UserDesc>
       ))}

@@ -16,11 +16,13 @@ import location from "../../assets/icons/location.svg";
 import crown from "../../assets/icons/crown.svg";
 
 import 약속제안완료 from "../../assets/icons/약속제안완료.svg";
+import { useNavigate } from "react-router-dom";
 
-interface ConfirmProps extends StepInterface, SuggestInterface {}
+interface ConfirmProps extends StepInterface, SuggestInterface {
+  selectFriends: boolean;
+}
 
 export default function Confirm({
-  navigate,
   handleBack,
   handleExit,
   suggestTitle,
@@ -29,7 +31,10 @@ export default function Confirm({
   selectedLocation,
   startDate,
   endDate,
+  selectFriends,
 }: ConfirmProps) {
+  const navigate = useNavigate();
+
   return (
     <>
       <ConfirmWrapper>
@@ -82,7 +87,11 @@ export default function Confirm({
           background: "white",
         }}
       >
-        <Button onClick={() => navigate("/suggest/step4")}>공유하기</Button>
+        {selectFriends ? (
+          <Button onClick={() => navigate("/suggest/step4")}>공유하기</Button>
+        ) : (
+          <Button onClick={() => navigate("/")}>링크 복사하기</Button>
+        )}
         <Button onClick={() => navigate(-1)} color="Gray">
           수정하기
         </Button>

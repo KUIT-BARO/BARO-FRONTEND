@@ -22,7 +22,7 @@ export default function Suggest() {
   ]);
   const [dateStart, dateEnd] = dateRange;
   const [showPopup, setShowPopup] = useState(false);
-
+  const [selectFriends, setSelectFriends] = useState(false);
   // 뒤로 가기
   const handleBack = () => {
     navigate(-1);
@@ -49,11 +49,7 @@ export default function Suggest() {
         <Route
           path="/"
           element={
-            <Introduction
-              navigate={navigate}
-              handleBack={handleBack}
-              handleExit={handleExit}
-            />
+            <Introduction handleBack={handleBack} handleExit={handleExit} />
           }
         />
         <Route
@@ -62,7 +58,6 @@ export default function Suggest() {
             <Step1
               handleBack={handleBack}
               handleExit={handleExit}
-              navigate={navigate}
               name={name}
               setName={setName}
               purpose={purpose}
@@ -78,7 +73,6 @@ export default function Suggest() {
             <Step2
               handleBack={handleBack}
               handleExit={handleExit}
-              navigate={navigate}
               dateRange={dateRange}
               setDateRange={setDateRange}
               dateStart={dateStart}
@@ -94,7 +88,6 @@ export default function Suggest() {
               handleExit={handleExit}
               location={location}
               setLocation={setLocation}
-              navigate={navigate}
               onOpenPopup={handleOpenPopup}
             />
           }
@@ -104,7 +97,7 @@ export default function Suggest() {
           path="confirm"
           element={
             <Confirm
-              navigate={navigate}
+              selectFriends={selectFriends}
               handleBack={handleBack}
               handleExit={handleExit}
               name={name}
@@ -120,9 +113,9 @@ export default function Suggest() {
           path="step4"
           element={
             <Step4
+              setSelectFriends={setSelectFriends}
               handleBack={handleBack}
               handleExit={handleExit}
-              navigate={navigate}
             />
           }
         />
@@ -130,7 +123,6 @@ export default function Suggest() {
 
       {showPopup && (
         <Popup
-          navigate={navigate}
           onClose={handleClosePopup}
           name={name}
           purpose={purpose}

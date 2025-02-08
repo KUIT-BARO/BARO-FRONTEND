@@ -14,9 +14,7 @@ import SubTitle from "../../../components/SubTitle/SubTitle";
 import Desc from "../../../components/Desc/Desc";
 import styled from "styled-components";
 import Search from "../../../components/Search/Search";
-
 export default function Step3({
-  navigate,
   onOpenPopup,
   location,
   setLocation,
