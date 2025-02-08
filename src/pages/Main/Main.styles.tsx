@@ -18,16 +18,39 @@ export const MainWrapper = styled.div`
     z-index: 0;
   }
 `;
+
 export const Header = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 15px;
+  
   .logo {
     height: 20px;
     margin: 0;
   }
+
+  .header-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .logout-btn {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  
   .alarm-wrapper {
     position: relative;
     cursor: pointer;
