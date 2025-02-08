@@ -3,6 +3,7 @@ import { Header, MainWrapper, PromiseBtn, Title } from "./Main.styles";
 import { Container, Promises, Dots, Dot } from "./Main.styles";
 import Navigation from "../../components/Navigation/Navigation";
 import { useNavigate } from "react-router-dom";
+import { postAuth } from '../../apis/auth/postAuth';
 
 import bigLogo from "../../assets/icons/bigLogo.svg";
 import locationWhite from "../../assets/icons/locationWhite.svg";
@@ -49,10 +50,14 @@ const Main = () => {
 
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
-  const handleLogout = () => {
-    // 여기에 로그아웃 로직 추가 (예: 토큰 제거)
-    localStorage.removeItem('token'); // 또는 다른 인증 정보 제거
-    navigate('/'); // 랜딩 페이지로 이동
+  const handleLogout = async () => {
+    try {
+      await postAuth.logout();
+      localStorage.removeItem('token'); // 토큰 제거
+      navigate('/'); // 랜딩 페이지로 이동
+    } catch (error) {
+      console.error('로그아웃 실패:', error);
+    }
   };
 
   useEffect(() => {

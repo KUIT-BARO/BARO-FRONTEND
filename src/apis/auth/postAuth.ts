@@ -36,6 +36,20 @@ export const postAuth = {
       throw error;
     }
   },
+
+  logout: async () => {
+    try {
+      const response = await instance.post("/auth/logout");
+      return response.data;
+    } catch (error) {
+      if (error.response?.status === 400) {
+        alert("로그아웃에 실패했습니다.");
+      } else {
+        alert("잠시 후 다시 시도해주세요.");
+      }
+      throw error;
+    }
+  },
 };
 
 export default postAuth;
