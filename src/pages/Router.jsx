@@ -115,6 +115,10 @@ const Router = () => {
       path: "/schedule/:userId",
       element: <UserSchedulePage />,
     },
+    {
+      path: "/users/schedule/:userId",
+      element: <UserSchedulePage />,
+    },
   ]);
 
   return <RouterProvider router={router} />;

@@ -15,15 +15,16 @@ interface Schedule {
   endTime: number;
   day: string;
   type: string;
-  color: string;
+  color?: string;
   location?: string;
 }
 
 interface ScheduleGridProps {
   readOnly?: boolean;
+  schedules?: Schedule[];
 }
 
-const ScheduleGrid = forwardRef<ScheduleGridHandle, ScheduleGridProps>(({ readOnly = false }, ref) => {
+const ScheduleGrid = forwardRef<ScheduleGridHandle, ScheduleGridProps>(({ readOnly = false, schedules: initialSchedules }, ref) => {
   const colors = ['#6699FF', '#708AFF', '#7893FF', '#7BB2FF'];
   
   const getRandomColor = () => {
@@ -32,6 +33,7 @@ const ScheduleGrid = forwardRef<ScheduleGridHandle, ScheduleGridProps>(({ readOn
   };
 
   const [schedules, setSchedules] = useState<Schedule[]>([]);
+  
   const convertDayOfWeek = (day: string) => {
     const dayMap = {
       'MONDAY': '월',
@@ -44,28 +46,38 @@ const ScheduleGrid = forwardRef<ScheduleGridHandle, ScheduleGridProps>(({ readOn
   };
 
   useEffect(() => {
-    const fetchSchedules = async () => {
-      try {
-        const response = await getSchedule.getMySchedule();
-        if (response.data?.schedules) {
-          const formattedSchedules = response.data.schedules.map(schedule => ({
-            id: schedule.scheduleId,
-            title: schedule.name,
-            startTime: parseInt(schedule.timeStart.split(':')[0]),  // "18:00" -> 18
-            endTime: parseInt(schedule.timeEnd.split(':')[0]),      // "20:00" -> 20
-            day: convertDayOfWeek(schedule.dayOfWeek),             // "MONDAY" -> "월"
-            type: 'class',
-            color: getRandomColor()
-          }));
-          setSchedules(formattedSchedules);
+    if (initialSchedules) {
+      // 외부에서 schedules가 제공된 경우
+      const formattedSchedules = initialSchedules.map(schedule => ({
+        ...schedule,
+        color: schedule.color || getRandomColor()
+      }));
+      setSchedules(formattedSchedules);
+    } else {
+      // 외부에서 schedules가 제공되지 않은 경우 API 호출
+      const fetchSchedules = async () => {
+        try {
+          const response = await getSchedule.getMySchedule();
+          if (response.data?.schedules) {
+            const formattedSchedules = response.data.schedules.map(schedule => ({
+              id: schedule.scheduleId,
+              title: schedule.name,
+              startTime: parseInt(schedule.timeStart.split(':')[0]),
+              endTime: parseInt(schedule.timeEnd.split(':')[0]),
+              day: convertDayOfWeek(schedule.dayOfWeek),
+              type: 'class',
+              color: getRandomColor()
+            }));
+            setSchedules(formattedSchedules);
+          }
+        } catch (error) {
+          console.error('시간표 조회 실패:', error);
         }
-      } catch (error) {
-        console.error('시간표 조회 실패:', error);
-      }
-    };
+      };
 
-    fetchSchedules();
-  }, []);
+      fetchSchedules();
+    }
+  }, [initialSchedules]);
 
   const [selectedSchedule, setSelectedSchedule] = useState<Schedule | null>(null);
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
