@@ -8,9 +8,13 @@ import Location from '../../../assets/icons/location.svg';
 
 interface KakaoMapProps {
   mapHeight: string;
+  currentLoaction: {
+    lat: number;
+    lng: number;
+  }
 };
 
-export default function KakaoMap({ mapHeight }: KakaoMapProps) { 
+export default function KakaoMap({ mapHeight, currentLoaction }: KakaoMapProps) { 
   
   const [center, setCenter] = useState<{ 
     lat: number; 

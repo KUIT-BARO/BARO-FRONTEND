@@ -9,6 +9,8 @@ import {
   Section,
 } from "../../../../assets/styles/Steps.styles";
 
+import KakaoMap from "../../../../components/forSearchPage/KakaoMap/KakaoMap";
+
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 export default function Popup({ setPopup, location, onOpenPopup }) {
@@ -25,7 +27,9 @@ export default function Popup({ setPopup, location, onOpenPopup }) {
         />
       </Nav>
       <Wrapper>
-        <Section></Section>
+        <Section>
+          <KakaoMap mapHeight="73vh" />
+        </Section>
         <FixedBottom>
           <div className="desc">
             <div className="bold">{location.placeName}</div>
@@ -47,6 +51,7 @@ export default function Popup({ setPopup, location, onOpenPopup }) {
 const Nav = styled.div`
   position: fixed;
   top: 0;
+  width: 100%;
   background-color: #f4f8fb;
   display: flex;
   justify-content: space-between;
@@ -69,6 +74,7 @@ const FixedBottom = styled.div`
   gap: 30px;
   background-color: #f4f8fb;
   padding: 20px;
+  padding-top: 30px;
   .desc {
     width: 100%;
     display: flex;
@@ -84,3 +90,8 @@ const FixedBottom = styled.div`
     box-sizing: border-box;
   }
 `;
+const Wrapper = styled.div`
+  margin-top: 54px;
+  background-color: #f4f8fb;
+
+  `;
