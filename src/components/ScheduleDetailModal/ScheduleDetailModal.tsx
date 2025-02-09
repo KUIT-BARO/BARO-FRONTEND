@@ -4,6 +4,7 @@ import xIcon from '../../assets/icons/x_gray.svg';
 import locationIcon from '../../assets/icons/location_gray.svg';
 import './ScheduleDetailModal.styles.css';
 import { putSchedule } from '../../apis/schedule/putSchedule';
+import { deleteSchedule } from '../../apis/schedule/deleteSchedule';
 
 interface ScheduleDetailModalProps {
   isOpen: boolean;
@@ -67,10 +68,21 @@ const ScheduleDetailModal: React.FC<ScheduleDetailModalProps> = ({
     return dayMap[koreanDay] || koreanDay;
   };
 
-  const handleDelete = () => {
-    if (schedule && onDelete) {
+  const handleDelete = async () => {
+    if (!schedule || !onDelete) return;
+    
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      await deleteSchedule.removeSchedule(schedule.id);
       onDelete(schedule.id);
       onClose();
+    } catch (err) {
+      setError('일정 삭제 중 오류가 발생했습니다. 다시 시도해주세요.');
+      console.error('Schedule deletion error:', err);
+    } finally {
+      setIsLoading(false);
     }
   };
 
