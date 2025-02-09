@@ -152,3 +152,10 @@
 .button-container > button {
   border-radius: 10px !important;
 }
+
+.schedule-error-message {
+  color: #FF5151;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}

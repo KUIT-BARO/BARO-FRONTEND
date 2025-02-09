@@ -1,10 +1,22 @@
-import React, { useState, forwardRef, useImperativeHandle } from 'react';
+import React, { useState, forwardRef, useImperativeHandle, useEffect } from 'react';
 import ScheduleDetailModal from '../ScheduleDetailModal/ScheduleDetailModal';
 import ScheduleAddModal from '../ScheduleAddModal/ScheduleAddModal';
 import './ScheduleGrid.styles.css';
+import { getSchedule } from '../../apis/schedule/getSchedule';
 
 export interface ScheduleGridHandle {
   openAddModal: () => void;
+}
+
+interface Schedule {
+  id: number;
+  title: string;
+  startTime: number;
+  endTime: number;
+  day: string;
+  type: string;
+  color: string;
+  location?: string;
 }
 
 interface ScheduleGridProps {
@@ -19,19 +31,43 @@ const ScheduleGrid = forwardRef<ScheduleGridHandle, ScheduleGridProps>(({ readOn
     return colors[randomIndex];
   };
 
-  const [schedules, setSchedules] = useState([
-    { id: 1, title: '표현과 재료', startTime: 9, endTime: 11, day: '월', type: 'class', color: getRandomColor() },
-    { id: 2, title: '회계원리', startTime: 10.5, endTime: 12, day: '화', type: 'class', color: getRandomColor() },
-    { id: 3, title: '국제물류', startTime: 14, endTime: 15.5, day: '수', type: 'class', color: getRandomColor() },
-    { id: 4, title: '회계원리', startTime: 10.5, endTime: 12, day: '목', type: 'class', color: getRandomColor() },
-    { id: 5, title: '글로벌지속경영', startTime: 9, endTime: 12, day: '금', type: 'class', color: getRandomColor() },
-    { id: 6, title: '과외', startTime: 14, endTime: 17, day: '월', type: 'class', color: getRandomColor() },
-    { id: 7, title: '매가커피 알바', startTime: 13, endTime: 17, day: '목', type: 'class', color: getRandomColor() },
-    { id: 8, title: '수학채점 알바', startTime: 16, endTime: 18, day: '수', type: 'class', color: getRandomColor() },
-    { id: 9, title: '국제통상론', startTime: 11, endTime: 13, day: '월', type: 'class', color: getRandomColor() },
-  ]);
+  const [schedules, setSchedules] = useState<Schedule[]>([]);
+  const convertDayOfWeek = (day: string) => {
+    const dayMap = {
+      'MONDAY': '월',
+      'TUESDAY': '화',
+      'WEDNESDAY': '수',
+      'THURSDAY': '목',
+      'FRIDAY': '금',
+    };
+    return dayMap[day] || day;
+  };
 
-  const [selectedSchedule, setSelectedSchedule] = useState(null);
+  useEffect(() => {
+    const fetchSchedules = async () => {
+      try {
+        const response = await getSchedule.getMySchedule();
+        if (response.data?.schedules) {
+          const formattedSchedules = response.data.schedules.map(schedule => ({
+            id: schedule.scheduleId,
+            title: schedule.name,
+            startTime: parseInt(schedule.timeStart.split(':')[0]),  // "18:00" -> 18
+            endTime: parseInt(schedule.timeEnd.split(':')[0]),      // "20:00" -> 20
+            day: convertDayOfWeek(schedule.dayOfWeek),             // "MONDAY" -> "월"
+            type: 'class',
+            color: getRandomColor()
+          }));
+          setSchedules(formattedSchedules);
+        }
+      } catch (error) {
+        console.error('시간표 조회 실패:', error);
+      }
+    };
+
+    fetchSchedules();
+  }, []);
+
+  const [selectedSchedule, setSelectedSchedule] = useState<Schedule | null>(null);
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
@@ -54,7 +90,7 @@ const ScheduleGrid = forwardRef<ScheduleGridHandle, ScheduleGridProps>(({ readOn
     return { top: `${top}px`, height: `${height}px` };
   };
 
-  const handleScheduleClick = (schedule) => {
+  const handleScheduleClick = (schedule: Schedule) => {
     if (readOnly) return;
     setSelectedSchedule(schedule);
     setIsDetailModalOpen(true);
@@ -69,31 +105,19 @@ const ScheduleGrid = forwardRef<ScheduleGridHandle, ScheduleGridProps>(({ readOn
     setSchedules(prev => prev.filter(schedule => schedule.id !== id));
   };
 
-  const handleUpdateSchedule = (id: number, updatedSchedule: {
-    title: string;
-    location?: string;
-    day: string;
-    startTime: number;
-    endTime: number;
-  }) => {
+  const handleUpdateSchedule = (id: number, updatedSchedule: Partial<Schedule>) => {
     setSchedules(prev => prev.map(schedule => 
       schedule.id === id ? {
         ...schedule,
         ...updatedSchedule,
-        color: schedule.color // 기존 색상 유지
+        color: schedule.color
       } : schedule
     ));
   };
 
-  const handleAddSchedule = (newSchedule: {
-    title: string;
-    location?: string;
-    day: string;
-    startTime: number;
-    endTime: number;
-  }) => {
+  const handleAddSchedule = (newSchedule: Omit<Schedule, 'id' | 'color' | 'type'>) => {
     const newId = Math.max(...schedules.map(s => s.id), 0) + 1;
-    const scheduleToAdd = {
+    const scheduleToAdd: Schedule = {
       ...newSchedule,
       id: newId,
       type: 'class',
