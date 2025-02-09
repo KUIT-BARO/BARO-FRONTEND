@@ -3,6 +3,7 @@ import Button from '../Button/Button';
 import xIcon from '../../assets/icons/x_gray.svg';
 import locationIcon from '../../assets/icons/location_gray.svg';
 import './ScheduleDetailModal.styles.css';
+import { putSchedule } from '../../apis/schedule/putSchedule';
 
 interface ScheduleDetailModalProps {
   isOpen: boolean;
@@ -42,6 +43,8 @@ const ScheduleDetailModal: React.FC<ScheduleDetailModalProps> = ({
   const [day, setDay] = useState('');
   const [startTime, setStartTime] = useState(0);
   const [endTime, setEndTime] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (schedule) {
@@ -53,6 +56,17 @@ const ScheduleDetailModal: React.FC<ScheduleDetailModalProps> = ({
     }
   }, [schedule]);
 
+  const convertDayToEng = (koreanDay: string) => {
+    const dayMap = {
+      '월': 'MONDAY',
+      '화': 'TUESDAY',
+      '수': 'WEDNESDAY',
+      '목': 'THURSDAY',
+      '금': 'FRIDAY',
+    };
+    return dayMap[koreanDay] || koreanDay;
+  };
+
   const handleDelete = () => {
     if (schedule && onDelete) {
       onDelete(schedule.id);
@@ -60,18 +74,40 @@ const ScheduleDetailModal: React.FC<ScheduleDetailModalProps> = ({
     }
   };
 
-  const handleUpdate = () => {
-    if (schedule && onUpdate) {
-      const updatedSchedule = {
-        title: title || schedule.title,
+  const handleUpdate = async () => {
+    if (!schedule || !onUpdate) return;
+    if (!title.trim()) {
+      setError('약속명을 입력해주세요.');
+      return;
+    }
+
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      const scheduleData = {
+        name: title.trim(),
+        dayOfWeek: convertDayToEng(day),
+        timeStart: formatTime(startTime),
+        timeEnd: formatTime(endTime)
+      };
+
+      await putSchedule.updateSchedule(schedule.id, scheduleData);
+      
+      onUpdate(schedule.id, {
+        title: title.trim(),
         location,
         day,
         startTime,
         endTime
-      };
+      });
       
-      onUpdate(schedule.id, updatedSchedule);
       onClose();
+    } catch (err) {
+      setError('일정 수정 중 오류가 발생했습니다. 다시 시도해주세요.');
+      console.error('Schedule update error:', err);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -94,6 +130,12 @@ const ScheduleDetailModal: React.FC<ScheduleDetailModalProps> = ({
           </button>
         </div>
 
+        {error && (
+          <div className="schedule-error-message">
+            {error}
+          </div>
+        )}
+
         <div className="form-section">
           <label className="form-label">요일</label>
           <select 
@@ -103,6 +145,7 @@ const ScheduleDetailModal: React.FC<ScheduleDetailModalProps> = ({
               const newDay = e.target.value.replace('요일', '');
               setDay(newDay);
             }}
+            disabled={isLoading}
           >
             {['월요일', '화요일', '수요일', '목요일', '금요일'].map((d) => (
               <option key={d} value={d}>{d}</option>
@@ -119,6 +162,7 @@ const ScheduleDetailModal: React.FC<ScheduleDetailModalProps> = ({
                   const [hours, minutes] = e.target.value.split(':').map(Number);
                   setStartTime(hours + minutes / 60);
                 }}
+                disabled={isLoading}
               >
                 {Array.from({ length: 29 }, (_, i) => {
                   const hour = Math.floor(i / 2) + 7;
@@ -138,6 +182,7 @@ const ScheduleDetailModal: React.FC<ScheduleDetailModalProps> = ({
                   const [hours, minutes] = e.target.value.split(':').map(Number);
                   setEndTime(hours + minutes / 60);
                 }}
+                disabled={isLoading}
               >
                 {Array.from({ length: 29 }, (_, i) => {
                   const hour = Math.floor(i / 2) + 7;
@@ -158,6 +203,7 @@ const ScheduleDetailModal: React.FC<ScheduleDetailModalProps> = ({
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               maxLength={MAX_LENGTH}
+              disabled={isLoading}
             />
             <div className="input-char-count">{title.length}/{MAX_LENGTH}</div>
           </div>
@@ -173,14 +219,17 @@ const ScheduleDetailModal: React.FC<ScheduleDetailModalProps> = ({
               value={location}
               onChange={(e) => setLocation(e.target.value)}
               maxLength={MAX_LENGTH}
+              disabled={isLoading}
             />
             <div className="input-char-count">{location.length}/{MAX_LENGTH}</div>
           </div>
         </div>
 
         <div className="button-container">
-          <Button onClick={handleDelete} color="Gray">삭제하기</Button>
-          <Button onClick={handleUpdate} color="Blue">수정하기</Button>
+          <Button onClick={handleDelete} color="Gray" disabled={isLoading}>삭제하기</Button>
+          <Button onClick={handleUpdate} color="Blue" disabled={isLoading}>
+            {isLoading ? '수정 중...' : '수정하기'}
+          </Button>
         </div>
       </div>
     </>
