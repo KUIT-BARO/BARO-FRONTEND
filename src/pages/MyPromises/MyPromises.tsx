@@ -1,8 +1,8 @@
 import React from 'react';
 
-import Header from "../../components/forMyPromises/Layout/Header/Header.tsx";
 import Navigation from "../../components/Navigation/Navigation.tsx";
 
+import Header from "../../components/forMyPromises/Header/Header.tsx";
 import PromiseButton from "../../components/forMyPromises/PromiseButton/PromiseButton.tsx";
 
 import PendingPromise from "../../components/forMyPromises/PendingPromise/PendingPromise.tsx";
@@ -85,7 +85,7 @@ export default function MyPromises () {
         {active === "promise" && (
           <>
             <PendingPromise />
-            <UpcomingPromise />
+            {upcomingDday && <UpcomingPromise upcomingDday={upcomingDday} />}
             <SuggestPromise />
           </>
         )}
