@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Button from '../Button/Button';
 import xIcon from '../../assets/icons/x_gray.svg';
 import '../ScheduleDetailModal/ScheduleDetailModal.styles.css';
+import { postSchedule } from '../../apis/schedule/postSchedule';
 
 interface ScheduleAddModalProps {
   isOpen: boolean;
@@ -27,23 +28,57 @@ const ScheduleAddModal: React.FC<ScheduleAddModalProps> = ({
   const [day, setDay] = useState('월');
   const [startTime, setStartTime] = useState(7);
   const [endTime, setEndTime] = useState(8);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleAdd = () => {
-    if (title.trim()) {
-      onAdd({
-        title: title.trim(),
-        location: location.trim(),
-        day,
-        startTime,
-        endTime
-      });
-      onClose();
-      // 입력 필드 초기화
-      setTitle('');
-      setLocation('');
-      setDay('월');
-      setStartTime(7);
-      setEndTime(8);
+  const convertDayToEng = (koreanDay: string) => {
+    const dayMap = {
+      '월': 'MONDAY',
+      '화': 'TUESDAY',
+      '수': 'WEDNESDAY',
+      '목': 'THURSDAY',
+      '금': 'FRIDAY',
+    };
+    return dayMap[koreanDay] || koreanDay;
+  };
+
+  const handleAdd = async () => {
+    if (!title.trim()) return;
+    
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      const scheduleData = {
+        name: title.trim(),
+        dayOfWeek: convertDayToEng(day),
+        timeStart: formatTime(startTime),
+        timeEnd: formatTime(endTime)
+      };
+
+      const response = await postSchedule.createSchedule(scheduleData);
+      
+      if (response.data) {
+        onAdd({
+          title: title.trim(),
+          location: location.trim(),
+          day,
+          startTime,
+          endTime
+        });
+        onClose();
+        // 입력 필드 초기화
+        setTitle('');
+        setLocation('');
+        setDay('월');
+        setStartTime(7);
+        setEndTime(8);
+      }
+    } catch (err) {
+      setError('시간표 등록 중 오류가 발생했습니다. 다시 시도해주세요.');
+      console.error('Schedule creation error:', err);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -65,6 +100,12 @@ const ScheduleAddModal: React.FC<ScheduleAddModalProps> = ({
             <img src={xIcon} alt="close" />
           </button>
         </div>
+
+        {error && (
+          <div className="schedule-error-message">
+            {error}
+          </div>
+        )}
 
         <div className="form-section">
           <label className="form-label">요일</label>
@@ -154,8 +195,10 @@ const ScheduleAddModal: React.FC<ScheduleAddModalProps> = ({
         </div>
 
         <div className="button-container">
-          <Button onClick={onClose} color="Gray">취소</Button>
-          <Button onClick={handleAdd} color="Blue">추가하기</Button>
+          <Button onClick={onClose} color="Gray" disabled={isLoading}>취소</Button>
+          <Button onClick={handleAdd} color="Blue" disabled={isLoading}>
+            {isLoading ? '추가 중...' : '추가하기'}
+          </Button>
         </div>
       </div>
     </>
