@@ -26,9 +26,10 @@
   top: 100px;
   left: 0;
   width: 100%;
-  height: 110vh;
+  height: 60vh;
   background-image: url(/src/assets/icons/landingback.svg);
   background-repeat: no-repeat;
+  background-position: center;
 }
 
 /* .landing-container::after {
