@@ -1,21 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 import plusIcon from '../../../assets/icons/forMyPromises/plus.svg';
 
 const SuggestPromise = () => {
+  const navigate = useNavigate();
   return (
     <>
       <SuggestContainer>
         <PlusButton><img src={plusIcon} alt="add" /></PlusButton>
-        <Suggest>모임 제안하기</Suggest>
+        <Suggest onClick={() => navigate("/suggest")}>새로운 모임 제안하기</Suggest>
       </SuggestContainer>
     </>
   );
 };
 
 export const SuggestContainer = styled.div`
-  margin: 24px 8% 0 8%;
+  margin: 20px 6% 0 6%;
   height: 96px;
   gap: 0px;
   border-radius: 10px;

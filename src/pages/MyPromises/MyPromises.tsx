@@ -92,6 +92,7 @@ export default function MyPromises () {
         {active === "schedule" && (
           <>
             <ScheduleCalendar />
+            <UpcomingPromise />
           </>
         )}
       </main>

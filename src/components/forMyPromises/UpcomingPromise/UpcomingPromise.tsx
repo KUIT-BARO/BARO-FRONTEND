@@ -62,7 +62,7 @@ const UpcomingPromise = ({ // upcomingDday
 };
 
 export const UpcomingContainer = styled.div`
-  margin: 24px 8% 0 8%;
+  margin: 20px 6% 0 6%;
   height: 193px;
   gap: 0px;
   border-radius: 10px;

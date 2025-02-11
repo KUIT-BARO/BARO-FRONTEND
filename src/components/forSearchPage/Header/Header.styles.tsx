@@ -31,7 +31,7 @@ export const SearchIcon = styled.img`
 
 export const Input = styled.input`
   background-color: #EAEAEA;
-  margin-left: -55px;
+  margin-left: -20%;
   margin-top: 2px;
   border: none;
   
