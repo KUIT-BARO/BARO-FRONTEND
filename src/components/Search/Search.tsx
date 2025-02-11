@@ -2,11 +2,16 @@ import React from "react";
 import styled from "styled-components";
 import SearchIcon from "../../assets/icons/searchIcon.svg";
 
-export default function Search({ placeholder, ...props }) {
+export default function Search({ placeholder, value, onChange, ...props }) {
   return (
     <SearchWrapper {...props}>
       <img src={SearchIcon} alt="Search Icon" />
-      <input type="text" placeholder={placeholder} />
+      <input
+        type="text"
+        placeholder={placeholder}
+        value={value}
+        onChange={onChange}
+      />
     </SearchWrapper>
   );
 }

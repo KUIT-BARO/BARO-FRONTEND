@@ -25,19 +25,44 @@ const getDateRangeWithDay = (start: Date, end: Date): string[] => {
 
   return dates;
 };
-
 export default function SelectTimeTable({
-  startDate = new Date("2025-01-02"),
-  endDate = new Date("2025-01-12"),
+  dateStart,
+  dateEnd,
   timeTable,
   setTimeTable,
 }) {
-  const dates = getDateRangeWithDay(startDate, endDate);
+  const dates = getDateRangeWithDay(dateStart, dateEnd);
 
-  const toggleBlockSelection = (block: string) => {
+  const toggleBlockSelection = (
+    date: string,
+    hour: number,
+    minutes: string
+  ) => {
     setTimeTable((prev) => {
-      const isSelected = prev.includes(block);
-      return isSelected ? prev.filter((b) => b !== block) : [...prev, block];
+      const time_start = `${hour.toString().padStart(2, "0")}:${minutes}:00`;
+      const time_end =
+        `${minutes === "00" ? hour : hour + 1}`.padStart(2, "0") +
+        `:${minutes === "00" ? "30" : "00"}:00`;
+
+      const newEntry = { date, time_start, time_end };
+
+      const isSelected = prev.some(
+        (slot) =>
+          slot.date === newEntry.date &&
+          slot.time_start === newEntry.time_start &&
+          slot.time_end === newEntry.time_end
+      );
+
+      return isSelected
+        ? prev.filter(
+            (slot) =>
+              !(
+                slot.date === newEntry.date &&
+                slot.time_start === newEntry.time_start &&
+                slot.time_end === newEntry.time_end
+              )
+          )
+        : [...prev, newEntry];
     });
   };
 
@@ -69,12 +94,17 @@ export default function SelectTimeTable({
               {[...Array(34)].map((_, index) => {
                 const hour = Math.floor(index / 2) + 7;
                 const minutes = index % 2 === 0 ? "00" : "30";
-                const time = `${date}-${hour}:${minutes}`;
+
                 return (
                   <TimeBlock
-                    key={time}
-                    isSelected={timeTable.includes(time)}
-                    onClick={() => toggleBlockSelection(time)}
+                    key={`${date}-${hour}:${minutes}`}
+                    isSelected={timeTable.some(
+                      (slot) =>
+                        slot.date === date &&
+                        slot.time_start ===
+                          `${hour.toString().padStart(2, "0")}:${minutes}:00`
+                    )}
+                    onClick={() => toggleBlockSelection(date, hour, minutes)}
                   />
                 );
               })}

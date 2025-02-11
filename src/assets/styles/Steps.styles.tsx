@@ -44,7 +44,6 @@ export const ImgWrapper = styled.div`
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    background-color: black;
   }
   > .plus {
     display: flex;

@@ -69,6 +69,7 @@ export const PopupOverlay = styled.div`
 `;
 
 export const Popup = styled.div`
+  cursor: pointer;
   position: fixed;
   bottom: 5%;
   background: #f5f5f5;

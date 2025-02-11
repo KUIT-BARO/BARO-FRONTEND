@@ -18,14 +18,17 @@ import { ButtonWrapper, SectionHeader } from "./Step1.styles";
 import SmallButton from "../../../components/SmallButton/SmallButton";
 import SelectTimeTable from "../../../components/SelectTimeTable/SelectTimeTable";
 
+import profileImg_1 from "../../../assets/icons/profileImg_1.svg";
+import profileImg_2 from "../../../assets/icons/profileImg_2.svg";
+import profileImg_3 from "../../../assets/icons/profileImg_3.svg";
 import defaultImg from "../../../assets/icons/profileImg_default.svg";
 import { useNavigate } from "react-router-dom";
 export default function Step1({
+  peopleNumber,
   handleBack,
   handleExit,
-  data,
-  startDate,
-  endDate,
+  dateStart,
+  dateEnd,
   timeTable,
   setTimeTable,
 }: StepInterface & {
@@ -55,12 +58,7 @@ export default function Step1({
         <SubTitle>만날 수 있는 시간을 알려주세요</SubTitle>
         <Desc>가능한 시간을 선택해주세요</Desc>
         <SectionHeader>
-          <ImgWrapper>
-            <img src={defaultImg} alt="other profile img" />
-            <img src={defaultImg} alt="other profile img" />
-            <img src={defaultImg} alt="other profile img" />
-            <div className="plus">+1</div>
-          </ImgWrapper>
+          <ImgWrapper>{renderProfileImages(peopleNumber)}</ImgWrapper>
           <ButtonWrapper>
             <SmallButton onClick={() => console.log()}>
               시간표 불러오기
@@ -76,8 +74,8 @@ export default function Step1({
         </SectionHeader>
         <Section>
           <SelectTimeTable
-            startDate={startDate}
-            endDate={endDate}
+            dateStart={dateStart}
+            dateEnd={dateEnd}
             timeTable={timeTable}
             setTimeTable={setTimeTable}
           />
@@ -94,3 +92,20 @@ export default function Step1({
     </>
   );
 }
+const renderProfileImages = (peopleNumber: number | undefined) => {
+  const profileImages = [profileImg_1, profileImg_2, profileImg_3];
+  if (peopleNumber <= 3) {
+    return profileImages
+      .slice(0, peopleNumber)
+      .map((img, index) => <img key={index} src={img} alt="profile img" />);
+  } else {
+    return (
+      <ImgWrapper>
+        {profileImages.map((img, index) => (
+          <img key={index} src={img} alt="profile img" />
+        ))}
+        <div className="plus">+{peopleNumber - 3}</div>
+      </ImgWrapper>
+    );
+  }
+};

@@ -12,13 +12,15 @@ import crown from "../../../assets/icons/crown.svg";
 import formatDateToShort from "../../../utils/formatDateToShort";
 import SuggestInterface from "../../../interface/Suggest";
 import { useNavigate } from "react-router-dom";
+import PostPromise from "../../../apis/Promise/PostPromise";
 
-// import PostPromise from "../../../apis/instance/promise/postPromise";
 interface PopupProps extends SuggestInterface {
+  setPromiseId: () => void;
   onClose: () => void;
 }
 
 export default function Popup({
+  setPromiseId,
   onClose,
   name,
   dateStart,
@@ -29,7 +31,24 @@ export default function Popup({
 }: PopupProps) {
   const navigate = useNavigate();
 
-  const handlePostPromise = async () => {};
+  const handlePostPromise = async () => {
+    try {
+      const response = await PostPromise(
+        name,
+        dateStart,
+        dateEnd,
+        peopleNum,
+        purpose,
+        location
+      );
+      if (response?.data?.promiseId) {
+        setPromiseId(response.data.promiseId);
+      }
+    } catch (error) {
+      console.error("약속 생성 중 오류 발생:", error);
+    }
+  };
+
   return (
     <Overlay>
       <PopupContent>

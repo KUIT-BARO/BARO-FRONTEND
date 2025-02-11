@@ -42,6 +42,36 @@ export default function Step2({ handleBack, handleExit }: StepInterface) {
     setPopup(false);
     setSelectedLocations(locations);
   };
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResults, setSearchResults] = useState<LocationType[]>([]);
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const handleSearchSubmit = async () => {
+    if (searchTerm.trim() === "") return;
+
+    try {
+      const response = await instance.get(
+        `/locations/search?query=${searchTerm}`
+      );
+      if (response?.data?.locations) {
+        setSearchResults(response.data.locations);
+      } else {
+        setSearchResults([]);
+      }
+    } catch (error) {
+      console.error("장소 검색 중 오류 발생:", error);
+      setSearchResults([]);
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleSearchSubmit();
+    }
+  };
 
   return (
     <>
@@ -52,8 +82,19 @@ export default function Step2({ handleBack, handleExit }: StepInterface) {
             <ProgressBar percent={66} />
             <SubTitle>만나고 싶은 장소를 알려주세요!</SubTitle>
             <Desc>친구들과 함께 정할 장소를 제안해보세요</Desc>
-            <Search placeholder={"건대입구"} onClick={openPopup} />
-            <KakaoMap mapHeight="360px" />
+            <Search
+              placeholder={"건대입구"}
+              value={searchTerm}
+              onChange={handleSearchChange}
+              onKeyDown={handleKeyDown}
+            />
+            <KakaoMap
+              mapHeight="360px"
+              currentLoaction={{
+                lat: 0,
+                lng: 0,
+              }}
+            />
             <Section>
               {selectedLocations.map((location, idx) => (
                 <Location

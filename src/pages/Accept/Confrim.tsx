@@ -32,7 +32,7 @@ export default function Confirm({
         <Nav handleBack={handleBack} handleExit={handleExit} />
         <Title>
           <p className="bold">
-            {data.suggestTitle}
+            {data.title}
             <br />
             모임 준비가 완료되었어요!
           </p>
@@ -43,7 +43,7 @@ export default function Confirm({
           <div className="container">
             <div className="wrap">
               <img src={flag} />
-              <p>{data.suggestPurpose}</p>
+              <p>{data.purpose}</p>
             </div>
             <div className="wrap">
               <img src={crown} />
@@ -51,17 +51,17 @@ export default function Confirm({
             </div>
             <div className="wrap">
               <img src={person} />
-              <p>user 외 {data.suggestPeople}</p>
+              <p>user 외 {data.peopleNumber}</p>
             </div>
             <div className="wrap">
               <img src={location} />
-              <p>{data.selectedLocation}</p>
+              <p>{data.place}</p>
             </div>
             <div className="wrap">
               <img src={date} />
               <p>
-                {formatDateToShort(data.startDate)} ~{" "}
-                {formatDateToShort(data.endDate)}
+                {formatDateToShort(data.dateStart)} ~{" "}
+                {formatDateToShort(data.dateEnd)}
               </p>
             </div>
           </div>
@@ -105,6 +105,7 @@ const Title = styled.div`
   gap: 12px;
   width: 100%;
   box-sizing: border-box;
+  margin-top: -30px;
   .bold {
     color: black;
     font-size: 33px;
