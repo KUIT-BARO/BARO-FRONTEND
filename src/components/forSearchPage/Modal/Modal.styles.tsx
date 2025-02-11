@@ -4,9 +4,9 @@ export const ModalWrapper = styled.div`
   background-color: #F4F8FB;
 `;
 
-export const ModalHeader = styled.div`
+export const ModalHeader = styled.div<{ isSettingLocation?: boolean }>`
   background-color: #F4F8FB;
-  padding: 24px 20px 16px 20px;
+  padding: ${props => props.isSettingLocation ? '24px 20px 100px 20px' : '24px 20px 0 20px'};
   align-items: center;
   position: fixed;
   top: 0;
@@ -18,7 +18,8 @@ export const ModalCloseButton = styled.div`
 `;
 
 export const SetToCurrentLocation = styled.button`
-  margin-top: 45px;
+  margin-top: 30px;
+  margin-bottom: 15px;
   width: 100%;
   height: 40px;
   background-color: #EAEAEA;
@@ -48,7 +49,7 @@ export const SetToCurrentLocation = styled.button`
 `;
 
 export const ModalContents = styled.div`
-  padding-top: 144px;
+  padding-top: 134px;
   width: 100%;
 `;
 
@@ -106,14 +107,16 @@ export const SettingLocation = styled.div`
 `;
 
 export const SettingLocationContents = styled.div`
-  margin-top: 82px;
+  margin-top: 68px;
 `;
 
 export const SettingButtonWrapper = styled.div`
-  padding: 24px 20px;
+  padding: 30px 20px 0 20px;
   margin-top: 0px;
   background-color: #FFFFFF;
   border-top: 1px solid #EEEEEE;
+  position: fixed;
+  width: 100%;
 `;
 
 export const LocationTitle = styled.div`

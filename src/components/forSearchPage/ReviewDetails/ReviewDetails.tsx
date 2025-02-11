@@ -10,25 +10,31 @@ import Location from '../../../assets/icons/location.svg';
 import BlueStar from '../../../assets/icons/blueStar.svg';
 import GrayStar from '../../../assets/icons/grayStar.svg';
 
-const KakaoRoadView = () => {
-  return (
-    <Roadview
-      position={{
-        lat: 33.450701,
-        lng: 126.570667,
-        radius: 50,
-      }}
-      style={{
-        width: "100%",
-        height: "228px",
-        marginTop: "20px",
-        borderRadius: "10px",
-      }}
-    />
-  );
-};
-
 export default function ReviewDetails(props) {
+
+  const [position, setPosition] = React.useState<{ 
+    lat: number; 
+    lng: number 
+    radius: number;
+  }>(props.selectedPosition);
+
+  React.useEffect(() => {
+    setPosition(props.selectedPosition);
+  }, [props.selectedPosition]);
+
+  const KakaoRoadView = () => {
+    return (
+      <Roadview
+        position={position}
+        style={{
+          width: "100%",
+          height: "27vh",
+          marginTop: "20px",
+          borderRadius: "10px",
+        }}
+      />
+    );
+  };
 
   const [inputCount, setInputCount] = React.useState(0);
   const handleInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -46,8 +52,7 @@ export default function ReviewDetails(props) {
     } else {
       if (selectedCategories.length < 5) {
         setSelectedCategories([...selectedCategories, category]);
-        console.log(selectedCategories);
-        
+        // console.log(selectedCategories);
       }
     }
   };
@@ -91,7 +96,11 @@ export default function ReviewDetails(props) {
       <ReviewWrapper>
         <PlaceSetting>
           <img src={Location} alt="location icon" />
-          <div onClick={updateisModalOpen}>장소의 위치를 설정해주세요</div>
+          <div onClick={updateisModalOpen}>
+            <span style={{ color: props.selectedLocation ? 'white' : 'inherit' }}>
+              {props.selectedLocation || "장소의 위치를 설정해주세요"}
+            </span>
+          </div>
         </PlaceSetting>
         <KakaoRoadView />
         <ReviewWrite>
