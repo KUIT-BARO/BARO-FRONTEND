@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Wrapper = styled.div`
   margin: 30px auto 0 auto;
-  padding: 20px 23px 0 16px;
+  padding: 20px 16px 13px 16px;
   width: 90%;
   display: flex;
   flex-direction: column;
@@ -37,29 +37,25 @@ export const Table = styled.table`
   width: 100%;
   table-layout: fixed;
   border-collapse: collapse;
+
   thead {
     .days {
       font-size: 13px;
       font-weight: 600;
       color: #c0c0c0;
-      padding-bottom: 8px;
     }
   }
 
-  th,
-  td {
+  th {
     width: 44px;
     text-align: center;
-  }
-  td {
-    height: 44px;
+    padding-bottom: 2px;
   }
 `;
 
 export const DateCell = styled.td<{ isToday: boolean; isSelected: boolean }>`
   width: 44px;
   height: 44px;
-  padding: 11px;
   text-align: center;
   vertical-align: top;
   position: relative;
@@ -68,9 +64,12 @@ export const DateCell = styled.td<{ isToday: boolean; isSelected: boolean }>`
     props.isSelected ? "#5175FF" : "transparent"};
   font-size: 20px;
   font-weight: 400;
-  border-radius: ${(props) => (props.isSelected ? "50%" : "none")};
+  border-radius: ${(props) => (props.isSelected ? "60%" : "none")};
   cursor: pointer;
   box-sizing: border-box;
+  // background-color: blue;
+  // border: 1px solid #e0e0e0;
+  padding-top: 11px;
 `;
 
 export const EventIndicators = styled.div`

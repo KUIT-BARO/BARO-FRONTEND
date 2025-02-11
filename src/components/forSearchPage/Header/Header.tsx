@@ -6,11 +6,23 @@ import { HeaderWrapper, InputWrapper, SearchIcon, Input, ReviewButton } from './
 import Search from '../../../assets/icons/searchIcon.svg';
 import Pencil from '../../../assets/icons/연필.svg'
 
-export default function Header() {
+interface HeaderProps {
+  placeholder: string;
+  onSearch: (address: string) => void;
+}
 
-  const [isInputFocused, setIsInputFocused] = React.useState(false);
+export default function Header({ placeholder, onSearch }: HeaderProps) {
+  const [isInputFocused, setIsInputFocused] = React.useState<boolean>(false);
+  const [inputValue, setInputValue] = React.useState<string>("");
 
   const navigate = useNavigate();
+
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      onSearch(inputValue);
+      e.currentTarget.blur();
+    }
+  };
 
   return (
     <>
@@ -19,9 +31,12 @@ export default function Header() {
           <SearchIcon src={Search} alt="Search Icon" />
           <Input 
             type="text" 
-            placeholder={!isInputFocused ? "건대입구" : ""}
+            placeholder={!isInputFocused ? placeholder : ""}
             onFocus={() => setIsInputFocused(true)}
-            onBlur={() => setIsInputFocused(false)}  
+            onBlur={() => setIsInputFocused(false)}
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+            onKeyPress={handleKeyPress}
           />
         </InputWrapper>
         <ReviewButton>

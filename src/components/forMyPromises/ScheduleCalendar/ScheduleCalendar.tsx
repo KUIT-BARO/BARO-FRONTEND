@@ -1,28 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+
+import { Header, Table, Wrapper, DateCell, EventIndicators, ScheduleWrapper } from "./ScheduleCalendar.styles";
+
 import monthBack from "../../../assets/icons/monthBack.svg";
 import monthNext from "../../../assets/icons/monthNext.svg";
-import styled from "styled-components";
-import {
-  Header,
-  Table,
-  Wrapper,
-  DateCell,
-  EventIndicators,
-  ScheduleWrapper,
-} from "./ScheduleCalendar.styles";
 
 export default function ScheduleCalendar() {
+
   const [currentDate, setCurrentDate] = useState(new Date()); // 현재 날짜
+  const currentYear = currentDate.getFullYear();
+  const currentMonth = currentDate.getMonth();
+  const today = new Date();
+
   const [selectedDate, setSelectedDate] = useState<number | null>(null); // 선택된 날짜
+  useEffect(() => {
+    setSelectedDate(today.getDate());
+  });
+
   const [events, setEvents] = useState({
     5: 3, // 예: 5일에 3개의 일정
     12: 2, // 예: 12일에 2개의 일정
     20: 1, // 예: 20일에 1개의 일정
   });
-
-  const currentYear = currentDate.getFullYear();
-  const currentMonth = currentDate.getMonth();
-  const today = new Date();
 
   const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
   const firstDay = new Date(currentYear, currentMonth, 1).getDay();
@@ -38,11 +37,11 @@ export default function ScheduleCalendar() {
   };
 
   const generateCalendar = () => {
-    const calendar = [];
+    const calendar: (number | null)[][] = [];
     let day = 1;
 
     for (let i = 0; i < 6; i++) {
-      const week = [];
+      const week: (number | null)[] = [];
       for (let j = 0; j < 7; j++) {
         if (i === 0 && j < firstDay) {
           week.push(null); // 첫 번째 주의 공백
@@ -71,7 +70,7 @@ export default function ScheduleCalendar() {
       <Wrapper>
         <Header>
           <div className="date">
-            {currentYear}년 {currentMonth + 1}월
+            {currentYear}년 {currentMonth+1}월
           </div>
           <div className="date-buttons">
             <img
@@ -105,7 +104,7 @@ export default function ScheduleCalendar() {
                   <DateCell
                     key={dayIndex}
                     isToday={
-                      day &&
+                      !!day &&
                       today.getDate() === day &&
                       today.getMonth() === currentMonth &&
                       today.getFullYear() === currentYear
@@ -130,13 +129,13 @@ export default function ScheduleCalendar() {
         </Table>
       </Wrapper>
       
-      {selectedDate && events[selectedDate] && 
+      {/* {selectedDate && events[selectedDate] && 
         <ScheduleWrapper>
           <div>
             {selectedDate}.
           </div>
         </ScheduleWrapper>
-      }
+      } */}
     </>
   );
 }

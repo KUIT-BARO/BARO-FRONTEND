@@ -8,24 +8,30 @@ import Location from '../../../assets/icons/location.svg';
 
 interface KakaoMapProps {
   mapHeight: string;
-  currentLoaction: {
-    lat: number;
-    lng: number;
-  }
+  currentLocation: { lat: number; lng: number; };
+  setCurrentLocationName: (name: string) => void;
+  searchKeyword: string;
 };
 
-export default function KakaoMap({ mapHeight, currentLoaction }: KakaoMapProps) { 
-  
+export default function KakaoMap({ mapHeight, currentLocation, setCurrentLocationName, searchKeyword }: KakaoMapProps) { 
+
+  // 지도 중심
   const [center, setCenter] = useState<{ 
     lat: number; 
     lng: number 
   }>({ lat: 33.450701, lng: 126.570667 });
   
+  // 내 현재 위치
   const [position, setPosition] = useState<{ 
     lat: number; 
     lng: number 
     isPanto: boolean;
   }>({ lat: 33.450701, lng: 126.570667, isPanto: false });
+
+  const [searchPosition, setSearchPosition] = useState<{
+    lat: number;
+    lng: number;
+  }>({ lat: 33.450701, lng: 126.570667 });
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -35,27 +41,29 @@ export default function KakaoMap({ mapHeight, currentLoaction }: KakaoMapProps) 
         const lng = pos.coords.longitude;
         setCenter({ lat, lng });
 
+        // 현재 위치의 주소명 가져오기
         const geocoder = new window.kakao.maps.services.Geocoder();
         geocoder.coord2Address(lng, lat, (result, status) => {
           if (status === window.kakao.maps.services.Status.OK) {
             if (result[0].road_address) {
-              console.log(result[0].road_address.building_name);
-              console.log(result);
-              
+              console.log(result[0].road_address.building_name, result);
+              setCurrentLocationName(result[0].road_address.building_name);
             }
             else {
               console.log(result[0].address.address_name);
+              // console.log(result[0].address.place_name);
+              setCurrentLocationName(result[0].address.address_name);
             }              
           }
         });
       }, (error) => { console.error('위치 정보를 가져오는데 실패했습니다:', error); });
 
+      // 현재 위치 실시간 추적
       navigator.geolocation.watchPosition((pos) => {
-        setPosition({
-          lat: pos.coords.latitude,
-          lng: pos.coords.longitude,
-          isPanto: true
-        });
+        const lat = pos.coords.latitude;
+        const lng = pos.coords.longitude;
+        setPosition({ lat, lng, isPanto: true });
+        setSearchPosition({ lat, lng });
       });
     } 
     else {
@@ -63,12 +71,40 @@ export default function KakaoMap({ mapHeight, currentLoaction }: KakaoMapProps) 
     }
   }, []);
 
+  // 검색 키워드로 지도 중심 이동
+  useEffect(() => {
+    if (searchKeyword) {
+      console.log('Search Keyword:', searchKeyword);
+      
+      const ps = new window.kakao.maps.services.Places();
+      ps.keywordSearch(searchKeyword, (data, status) => {
+        if (status === window.kakao.maps.services.Status.OK) {
+          const firstResult = data[0];
+          console.log("검색 위치 : ", position, data);
+          
+          const newCenter = {
+            lat: Number(firstResult.y),
+            lng: Number(firstResult.x)
+          };
+          setCenter(newCenter);
+          setSearchPosition({ ...newCenter });
+        } else {
+          console.error('검색 결과가 없습니다.');
+        }
+      });
+    }
+  }, [searchKeyword]);
+
+  // 내 현재 위치로 지도 중심 이동
   const setCenterToMyPosition = () => {
     setCenter(position);
+    setSearchPosition(position);
   };
+
+  // 지도 이동 시 중심 위치 업데이트
   const updateCenterWhenMapMoved = useMemo(() => 
     debounce((map: kakao.maps.Map) => {
-      console.log('Map Center :', map.getCenter());
+      // console.log('Map Center :', map.getCenter());
       setCenter({
         lat: map.getCenter().getLat(),
         lng: map.getCenter().getLng()
@@ -86,7 +122,7 @@ export default function KakaoMap({ mapHeight, currentLoaction }: KakaoMapProps) 
         onCenterChanged={updateCenterWhenMapMoved}
       >
         <MapMarker 
-          position={position}
+          position={searchPosition}
           image={{
             src: Location,
             size: { width: 24, height: 35 },

@@ -68,7 +68,7 @@ const PendingPromise = ({ // promise
 };
 
 export const ConfirmContainer = styled.div`
-  margin: 28px 8% 0 8%;
+  margin: 28px 6% 0 6%;
   height: 300px;
   gap: 0px;
   border-radius: 10px;
