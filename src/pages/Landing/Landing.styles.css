@@ -1,9 +1,10 @@
 .landing-container {
+  padding-top: 158px;
+  padding-bottom: 200px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
   background: linear-gradient(
     180deg,
     #5175ff 0%,
@@ -15,9 +16,22 @@
   color: white;
   text-align: center;
   position: relative;
+  min-height: 100vh;
+  overflow-y: auto;
 }
 
-.landing-container::after {
+.content::after {
+  content: "";
+  position: absolute;
+  top: 100px;
+  left: 0;
+  width: 100%;
+  height: 110vh;
+  background-image: url(/src/assets/icons/landingback.svg);
+  background-repeat: no-repeat;
+}
+
+/* .landing-container::after {
   content: "";
   position: absolute;
   bottom: 0;
@@ -27,7 +41,7 @@
   background-image: url("../../assets/icons/landingback.svg");
   background-repeat: no-repeat;
   background-position: center;
-}
+} */
 
 .title {
   font-size: 3rem;
@@ -72,8 +86,333 @@
   font-weight: 600;
   border-radius: 10px;
   cursor: pointer;
+  z-index: 1000;
 }
 
 .start-button:hover {
   background-color: #062b5d;
+}
+
+.chat-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+  margin-top: 270px; /* 첫 화면과의 간격 조정 */
+}
+
+.chat-container {
+  width: 100%;
+  max-width: 1200px;
+  text-align: center;
+}
+
+.chat-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.chat-title {
+  color: white;
+  font-size: 22px;
+  font-weight: 600;
+  margin: 5px 0;
+  text-align: center;
+}
+
+.chat-frame {
+  margin-top: 40px;
+  padding: 20px;
+  max-width: 400px;
+  width: 100%;
+}
+
+.chat-image {
+  width: 100%;
+  height: auto;
+  border-radius: 40px;
+}
+
+.three-section {
+  height: auto;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+  margin-top: 100px;
+  flex-direction: column;
+}
+
+.three-container {
+  width: 100%;
+  max-width: 1200px;
+  text-align: center;
+}
+
+.three-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.three-section-title {
+  color: white;
+  font-size: 36px;
+  font-weight: 600;
+  margin: 5px 0;
+  text-align: center;
+}
+
+.four-section {
+  height: auto;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+  margin-top: 100px;
+  flex-direction: column;
+}
+
+.four-container {
+  width: 100%;
+  max-width: 1200px;
+  text-align: center;
+}
+
+.four-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.four-section-title-1 {
+  color: #6a7bff;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.four-section-title-2 {
+  color: #1a1a1a;
+  font-size: 24px;
+  font-weight: 600;
+  margin: 5px 0;
+  text-align: center;
+}
+
+.mockup1 {
+  margin-top: 32px;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+}
+
+.five-section {
+  height: auto;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+  margin-top: 100px;
+  flex-direction: column;
+}
+
+.five-container {
+  width: 100%;
+  max-width: 1200px;
+  text-align: center;
+}
+
+.five-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.five-section-title-1 {
+  color: #6a7bff;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.five-section-title-2 {
+  color: #1a1a1a;
+  font-size: 24px;
+  font-weight: 600;
+  margin: 5px 0;
+  text-align: center;
+}
+
+.six-section {
+  height: auto;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+  margin-top: 100px;
+  flex-direction: column;
+}
+
+.six-container {
+  width: 100%;
+  max-width: 1200px;
+  text-align: center;
+}
+
+.six-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.six-section-title-1 {
+  color: #6a7bff;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.six-section-title-2 {
+  color: #1a1a1a;
+  font-size: 24px;
+  font-weight: 600;
+  margin: 5px 0;
+  text-align: center;
+}
+
+.seven-section {
+  height: auto;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+  margin-top: 100px;
+  flex-direction: column;
+}
+
+.seven-container {
+  width: 100%;
+  max-width: 1200px;
+  text-align: center;
+}
+
+.seven-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.seven-section-title-1 {
+  color: #6a7bff;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.seven-section-title-2 {
+  color: #1a1a1a;
+  font-size: 24px;
+  font-weight: 600;
+  margin: 5px 0;
+  text-align: center;
+}
+
+.eight-section {
+  height: auto;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+  margin-top: 100px;
+  flex-direction: column;
+}
+
+.eight-container {
+  width: 100%;
+  max-width: 1200px;
+  text-align: center;
+}
+
+.eight-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.eight-section-title-1 {
+  color: #6a7bff;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.eight-section-title-2 {
+  color: #1a1a1a;
+  font-size: 24px;
+  font-weight: 600;
+  margin: 5px 0;
+  text-align: center;
+}
+
+.last-section {
+  height: auto;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+  margin-top: 100px;
+  flex-direction: column;
+}
+
+.last-container {
+  width: 100%;
+  max-width: 1200px;
+  text-align: center;
+}
+
+.last-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.last-section-title-3 {
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  text-align: center;
 }
