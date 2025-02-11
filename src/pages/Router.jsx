@@ -1,6 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoute"; // 보호된 라우트 추가
-
 import Main from "./Main/Main";
 import Suggest from "./Suggest/Suggest";
 import SignupPage from "./Login/SignupPage";
@@ -12,11 +11,10 @@ import ProfileEdit from "./MyPage/ProfileEdit";
 import Settings from "./MyPage/Settings";
 import Contact from "./MyPage/Contact";
 import SavedPlacesDetail from "./MyPage/SavedPlacesDetail";
-
 import UserSchedulePage from "./MyPage/UserSchedulePage";
-
 import Accept from "./Accept/Accept";
 import SearchPage from "./SearchPage/SearchPage";
+import Landing from "./Landing/Landing";
 
 // 로그인 여부 확인 (예: localStorage 사용)
 const isAuthenticated = () => {
@@ -26,7 +24,8 @@ const isAuthenticated = () => {
 
 const Router = () => {
   const router = createBrowserRouter([
-    { path: "/", element: <Main /> },
+    { path: "/", element: <Landing /> }, // 랜딩 페이지 추가
+    { path: "/main", element: <Main /> }, // 기존 "/" -> "/main"으로 변경
     { path: "/login", element: <LoginPage /> },
     { path: "/signup", element: <SignupPage /> },
 
