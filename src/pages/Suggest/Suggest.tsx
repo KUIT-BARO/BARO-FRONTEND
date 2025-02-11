@@ -11,7 +11,7 @@ import Step4 from "./Step4/Step4";
 
 export default function Suggest() {
   const navigate = useNavigate();
-
+  const [promiseId, setPromiseId] = useState<number | null>(null);
   const [name, setName] = useState<string>("");
   const [purpose, setPurpose] = useState<string[]>([]);
   const [peopleNum, setPeopleNum] = useState<number | null>(null);
@@ -97,6 +97,7 @@ export default function Suggest() {
           path="confirm"
           element={
             <Confirm
+              promiseId={promiseId}
               selectFriends={selectFriends}
               handleBack={handleBack}
               handleExit={handleExit}
@@ -123,6 +124,7 @@ export default function Suggest() {
 
       {showPopup && (
         <Popup
+          setPromiseId={setPromiseId}
           onClose={handleClosePopup}
           name={name}
           purpose={purpose}

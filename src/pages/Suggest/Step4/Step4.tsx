@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import StepInterface from "../../../interface/Step";
 
 import Button from "../../../components/Button/Button";
@@ -18,6 +18,8 @@ import x from "../../../assets/icons/x.svg";
 
 import profileImg from "../../../assets/icons/profileImg_1.svg";
 import { useNavigate } from "react-router-dom";
+import GetFriends from "../../../apis/user/GetFriends";
+import GetSearchCode from "../../../apis/user/GetSearchCode";
 export default function Step4({
   handleBack,
   handleExit,
@@ -26,14 +28,39 @@ export default function Step4({
   const navigate = useNavigate();
 
   const [isPopupVisible, setIsPopupVisible] = useState(false);
-
-  const handleShareClick = () => {
-    setSelectFriends(true);
-    setIsPopupVisible(true);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchedFriend, setSearchedFriend] = useState(null);
+  const [selectedFriend, setSelectedFriend] = useState(null);
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+  const handleSearchSubmit = async () => {
+    try {
+      const response = await GetSearchCode(searchTerm);
+      if (response?.data?.users) {
+        setSearchedFriend(response.data.users[0]);
+      } else {
+        setSearchedFriend(null);
+      }
+    } catch (error) {
+      console.error("검색 중 오류 발생:", error);
+      setSearchedFriend(null);
+    }
   };
 
+  const handleSelectSearchedFriend = () => {
+    if (searchedFriend) {
+      setSelectedFriend(searchedFriend);
+      setIsPopupVisible(true);
+    }
+  };
   const closePopup = () => {
     setIsPopupVisible(false);
+    navigate("/suggest/confirm");
+  };
+
+  //공유하기 bTn
+  const handleShareClick = () => {
     navigate("/suggest/confirm");
   };
 
@@ -42,24 +69,57 @@ export default function Step4({
       <Nav handleBack={handleBack} handleExit={handleExit} color={"Blue"} />
       <Wrapper>
         <Section>
-          <Search placeholder={"홍길동"} />
+          <Search
+            placeholder={"홍길동"}
+            value={searchTerm}
+            onChange={handleSearchChange}
+            onKeyDown={(e) => e.key === "Enter" && handleSearchSubmit()}
+          />
         </Section>
         <Section>
-          <User />
+          {searchedFriend ? (
+            <UsersWrapper>
+              <UserDesc
+                key={searchedFriend.userId}
+                onClick={handleSelectSearchedFriend}
+              >
+                <div className="left">
+                  <div className="user-icon">
+                    <img
+                      alt="user icon"
+                      src={searchedFriend.profileImage || profileImg}
+                    />
+                  </div>
+                  <div className="user-desc">
+                    <div className="name">{searchedFriend.nickname}</div>
+                    <div className="id">{searchedFriend.code}</div>
+                  </div>
+                </div>
+              </UserDesc>
+            </UsersWrapper>
+          ) : (
+            <User />
+          )}
         </Section>
 
         <FixedButton>
           <Button onClick={handleShareClick}>공유하기</Button>
         </FixedButton>
 
-        {isPopupVisible && (
+        {isPopupVisible && selectedFriend && (
           <PopupOverlay>
             <Popup>
-              <div className="x">
+              <div
+                className="x"
+                onClick={() => {
+                  setIsPopupVisible(false);
+                }}
+              >
                 <img src={x} alt="x icon" />
               </div>
               <p>
-                <p className="bold">hiheyssup</p>님을 친구 추가 하시겠습니까?
+                <p className="bold">{selectedFriend.nickname}</p>님을 친구 추가
+                하시겠습니까?
               </p>
               <Button onClick={closePopup}>친구 추가하기</Button>
             </Popup>
@@ -71,25 +131,44 @@ export default function Step4({
 }
 
 const User = () => {
-  const [checked, setChecked] = useState([false, false, false]);
+  const [friends, setFriends] = useState([]);
+  const [checked, setChecked] = useState([]);
+
+  useEffect(() => {
+    const fetchFriends = async () => {
+      try {
+        const response = await GetFriends();
+        if (response?.data?.friends) {
+          setFriends(response.data.friends);
+          setChecked(new Array(response.data.friends.length).fill(false));
+        }
+      } catch (error) {
+        console.error("친구 목록을 불러오는 중 오류 발생:", error);
+      }
+    };
+
+    fetchFriends();
+  }, []);
 
   const toggleCheckbox = (index) => {
-    const newChecked = [...checked];
-    newChecked[index] = !newChecked[index];
-    setChecked(newChecked);
+    setChecked((prevChecked) => {
+      const newChecked = [...prevChecked];
+      newChecked[index] = !newChecked[index];
+      return newChecked;
+    });
   };
 
   return (
     <UsersWrapper>
-      {[0, 1, 2].map((_, index) => (
-        <UserDesc key={index}>
+      {friends.map((friend, index) => (
+        <UserDesc key={friend.friendId}>
           <div className="left">
             <div className="user-icon">
-              <img alt="user icon" src={profileImg} />
+              <img alt="user icon" src={friend.profileImage || profileImg} />
             </div>
             <div className="user-desc">
-              <div className="name">이지환</div>
-              <div className="id">@jihwan_lee</div>
+              <div className="name">{friend.nickname}</div>
+              <div className="id">{friend.code}</div>
             </div>
           </div>
           <div

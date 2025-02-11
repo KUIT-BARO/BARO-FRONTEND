@@ -17,9 +17,11 @@ import crown from "../../assets/icons/crown.svg";
 
 import 약속제안완료 from "../../assets/icons/약속제안완료.svg";
 import { useNavigate } from "react-router-dom";
+import GetSharePromise from "../../apis/user/GetSharePromise";
 
 interface ConfirmProps extends StepInterface, SuggestInterface {
   selectFriends: boolean;
+  promiseId: number;
 }
 
 export default function Confirm({
@@ -31,19 +33,33 @@ export default function Confirm({
   location,
   dateStart,
   dateEnd,
+  promiseId,
 }: ConfirmProps) {
   const navigate = useNavigate();
   const [linkPopup, setLinkPopup] = useState(false);
-  const showPopup = () => {
-    setLinkPopup(true);
+  const [link, setLink] = useState<string | null>(null);
+  const showPopup = async () => {
+    try {
+      setLinkPopup(true);
 
-    setTimeout(() => {
-      setLinkPopup(false);
-    }, 1000);
+      const response = await GetSharePromise(promiseId);
+      setLink(response.data.url);
+      setTimeout(() => {
+        setLinkPopup(false);
+      }, 1000);
+    } catch (error) {
+      console.error("공유 링크 가져오는 중 오류 발생:", error);
+    }
   };
+
   return (
     <>
-      {linkPopup && <LinkPopupWrapper>링크가 복사되었습니다.</LinkPopupWrapper>}
+      {linkPopup && (
+        <LinkPopupWrapper>
+          <div>링크가 복사되었습니다.</div>
+          <div>{link}</div>
+        </LinkPopupWrapper>
+      )}
       <ConfirmWrapper>
         <Nav handleBack={handleBack} handleExit={handleExit} />
         <Title>
@@ -159,6 +175,7 @@ const LinkPopupWrapper = styled.div`
   transform: translate(-50%, 50%);
   width: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 70px;

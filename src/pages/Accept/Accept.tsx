@@ -9,22 +9,49 @@ import Confirm from "./Confrim";
 
 export default function Accept() {
   const navigate = useNavigate();
-  //서버로부터 받아온 시작, 끝 날짜, timeTable
-  const [startDate, setStartDate] = useState<Date | null>(new Date());
-  const [endDate, setEndDate] = useState<Date | null>(new Date());
+  const [name, setName] = useState("");
+  const [purpose, setPurpose] = useState("");
+  const [startDate, setStartDate] = useState<Date | null>(null);
+  const [endDate, setEndDate] = useState<Date | null>(null);
+  const [location, setLocation] = useState("");
+  const [peopleNum, setPeopleNum] = useState<number>(0);
+
   const [timeTable, setTimeTable] = useState<[]>([]);
 
-  const dummyData = {
-    suggestTitle: "마케팅 전략 회의",
-    suggestPurpose: "새로운 제품 런칭 논의",
-    suggestPeople: "3명",
-    selectedLocation: "서울 강남구 삼성동",
-    startDate: new Date(),
-    endDate: new Date(), // ISO 8601 형식
+  // useEffect(() => {
+  //   const fetchPromiseData = async () => {
+  //     try {
+  //       const response = await GetPromise(promiseId);
+  //       if (response?.data?.promise) {
+  //         const { promiseId, name, purpose, dateStart, dateEnd, place, peopleNumber } = response.data.promise;
+
+  //         setPromiseName(name);
+  //         setPromisePurpose(purpose);
+  //         setPromiseStartDate(new Date(dateStart));
+  //         setPromiseEndDate(new Date(dateEnd));
+  //         setPromiseLocation(place);
+  //         setPromisePeopleNum(peopleNumber);
+  //       }
+  //     } catch (error) {
+  //       console.error("약속 데이터를 불러오는 중 오류 발생:", error);
+  //     }
+  //   };
+
+  //   fetchPromiseData();
+  // }, [promiseId]);
+  const data = {
+    promiseId: 123,
+    name: "친구 모임",
+    purpose: "팀 프로젝트/회의",
+    dateStart: new Date("2025-01-15"),
+    dateEnd: new Date("2025-01-25"),
+    place: "강남역 카페",
+    peopleNumber: 5,
   };
 
   // 뒤로 가기
   const handleBack = () => {
+    console.log("in");
     navigate(-1);
   };
 
@@ -40,7 +67,7 @@ export default function Accept() {
           path="/"
           element={
             <Introduction
-              data={dummyData}
+              data={data}
               handleBack={handleBack}
               handleExit={handleExit}
             />
@@ -50,11 +77,11 @@ export default function Accept() {
           path="step1"
           element={
             <Step1
-              data={dummyData}
+              peopleNumber={data.peopleNumber}
               handleBack={handleBack}
               handleExit={handleExit}
-              startDate={new Date("2025-01-02")}
-              endDate={new Date("2025-01-12")}
+              dateStart={data.dateStart}
+              dateEnd={data.dateEnd}
               timeTable={timeTable}
               setTimeTable={setTimeTable}
             />
@@ -64,13 +91,22 @@ export default function Accept() {
           path="step2"
           element={
             <Step2
-              data={dummyData}
+              data={data}
               handleBack={handleBack}
               handleExit={handleExit}
             />
           }
         />
-        <Route path="confirm" element={<Confirm data={dummyData} />} />
+        <Route
+          path="confirm"
+          element={
+            <Confirm
+              data={data}
+              handleBack={handleBack}
+              handleExit={handleExit}
+            />
+          }
+        />
       </Routes>
     </>
   );

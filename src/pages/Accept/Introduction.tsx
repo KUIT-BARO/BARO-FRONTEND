@@ -32,7 +32,7 @@ export default function Introduction({
         <Nav handleBack={handleBack} handleExit={handleExit} />
         <Title>
           <p className="bold">
-            {data.suggestTitle}
+            {data.title}
             <br />
             모임 제안을 받았어요!
           </p>
@@ -43,7 +43,7 @@ export default function Introduction({
           <div className="container">
             <div className="wrap">
               <img src={flag} />
-              <p>{data.suggestPurpose}</p>
+              <p>{data.purpose}</p>
             </div>
             <div className="wrap">
               <img src={crown} />
@@ -51,17 +51,17 @@ export default function Introduction({
             </div>
             <div className="wrap">
               <img src={person} />
-              <p>user 외 {data.suggestPeople}</p>
+              <p>user 외 {data.peopleNumber}</p>
             </div>
             <div className="wrap">
               <img src={location} />
-              <p>{data.selectedLocation}</p>
+              <p>{data.place}</p>
             </div>
             <div className="wrap">
               <img src={date} />
               <p>
-                {formatDateToShort(data.startDate)} ~{" "}
-                {formatDateToShort(data.endDate)}
+                {formatDateToShort(data.dateStart)} ~{" "}
+                {formatDateToShort(data.dateEnd)}
               </p>
             </div>
           </div>
@@ -89,15 +89,14 @@ export default function Introduction({
 }
 
 const ConfirmWrapper = styled.div`
+  height: 100vh;
   display: flex;
   flex-direction: column;
   gap: 10px;
   align-items: center;
-  justify-content: flex-start;
   padding: 20px;
   background-color: white;
   box-sizing: border-box;
-  margin-bottom: 150px;
 `;
 const Title = styled.div`
   display: flex;
@@ -105,6 +104,7 @@ const Title = styled.div`
   gap: 12px;
   width: 100%;
   box-sizing: border-box;
+  margin-top: -30px;
   .bold {
     color: black;
     font-size: 33px;

@@ -3,18 +3,13 @@ import React from "react";
 import Button from "../../../../components/Button/Button";
 
 import BackIcon from "../../../../assets/icons/backIcon.svg";
-import {
-  Wrapper,
-  FixedButton,
-  Section,
-} from "../../../../assets/styles/Steps.styles";
+import { Wrapper, Section } from "../../../../assets/styles/Steps.styles";
 
 import KakaoMap from "../../../../components/forSearchPage/KakaoMap/KakaoMap";
 
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 export default function Popup({ setPopup, location, onOpenPopup }) {
-  const navigate = useNavigate();
   return (
     <>
       <Nav>
@@ -27,8 +22,8 @@ export default function Popup({ setPopup, location, onOpenPopup }) {
         />
       </Nav>
       <Wrapper>
-        <Section>
-          <KakaoMap mapHeight="73vh" />
+        <Section style={{ marginTop: "54px", backgroundColor: " #f4f8fb" }}>
+          <KakaoMap mapHeight="63vh" />
         </Section>
         <FixedBottom>
           <div className="desc">
@@ -90,8 +85,3 @@ const FixedBottom = styled.div`
     box-sizing: border-box;
   }
 `;
-const Wrapper = styled.div`
-  margin-top: 54px;
-  background-color: #f4f8fb;
-
-  `;

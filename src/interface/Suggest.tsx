@@ -5,4 +5,5 @@ interface Suggest {
   location: string;
   dateStart: Date;
   dateEnd: Date;
+  promiseId: number;
 }

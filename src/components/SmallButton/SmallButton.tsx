@@ -47,13 +47,13 @@ const StyledButton = styled.button<{
     const colors = {
       white: "#FFFFFF",
       blue: "#5175FF",
-      gray: "#9A9A9A",
+      gray: "#C0C0C0",
     };
 
     const fontColors = {
       white: "#000000",
       blue: "#FFFFFF",
-      gray: "#9A9A9A",
+      gray: "#C0C0C0",
     };
 
     // 스타일별 설정
