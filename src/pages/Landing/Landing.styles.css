@@ -1,0 +1,79 @@
+.landing-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: linear-gradient(
+    180deg,
+    #5175ff 0%,
+    #b1c2ff 27%,
+    #f7f9ff 40%,
+    #cfdae6 74%,
+    #5175ff 100%
+  );
+  color: white;
+  text-align: center;
+  position: relative;
+}
+
+.landing-container::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 110vh;
+  background-image: url("../../assets/icons/landingback.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.subtitle {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 34px;
+}
+
+.icon img {
+  width: 80px;
+  height: 80px;
+  margin-top: 79px;
+}
+
+.scroll {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+  margin-top: 193.8px;
+}
+
+.scroll-text {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.start-button {
+  position: fixed;
+  bottom: 20px;
+  background-color: #5175ff;
+  color: white;
+  border: none;
+  padding: 14px 153.5px;
+  width: auto;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.start-button:hover {
+  background-color: #062b5d;
+}
