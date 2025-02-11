@@ -3,17 +3,13 @@ import { useNavigate } from "react-router-dom";
 import backIcon from "../../assets/icons/backIcon.svg";
 import closeIcon from "../../assets/icons/x_gray.svg";
 import manAvatar from "../../assets/icons/manavatar.svg";
-import InputModal from "./InputModal";
 import WithdrawModal from "./WithdrawModal";
 import Navigation from "../../components/Navigation/Navigation";
-import Toast from "./Toast";
 import "./Settings.styles.css";
 
 const Settings = () => {
   const navigate = useNavigate();
-  const [passwordModalOpen, setPasswordModalOpen] = useState(false);
   const [withdrawModalOpen, setWithdrawModalOpen] = useState(false);
-  const [showToast, setShowToast] = useState(false);
 
   const userData = {
     name: "이지환",
@@ -25,17 +21,9 @@ const Settings = () => {
     navigate("/mypage");
   };
 
-  const handlePasswordComplete = (newPassword: string) => {
-    setShowToast(true);
-  };
-
   const handleWithdraw = () => {
     setWithdrawModalOpen(false);
     navigate("/");
-  };
-
-  const handleContactClick = () => {
-    navigate("/contact");
   };
 
   return (
@@ -59,17 +47,6 @@ const Settings = () => {
         </div>
 
         <div className="settings-menu">
-          <button className="menu-item" onClick={handleContactClick}>
-            <span>연락처</span>
-          </button>
-
-          <button
-            className="menu-item"
-            onClick={() => setPasswordModalOpen(true)}
-          >
-            <span>비밀번호 변경</span>
-          </button>
-
           <button
             className="menu-item withdraw"
             onClick={() => setWithdrawModalOpen(true)}
@@ -79,27 +56,10 @@ const Settings = () => {
         </div>
       </div>
 
-      <InputModal
-        isOpen={passwordModalOpen}
-        onClose={() => setPasswordModalOpen(false)}
-        title="비밀번호 변경"
-        initialValue=""
-        placeholder="새 비밀번호를 입력해주세요"
-        maxLength={20}
-        onComplete={handlePasswordComplete}
-        type="password"
-      />
-
       <WithdrawModal
         isOpen={withdrawModalOpen}
         onClose={() => setWithdrawModalOpen(false)}
         onWithdraw={handleWithdraw}
-      />
-
-      <Toast
-        message="업데이트 완료"
-        isVisible={showToast}
-        onClose={() => setShowToast(false)}
       />
 
       <Navigation />
@@ -108,4 +68,3 @@ const Settings = () => {
 };
 
 export default Settings;
-0;
