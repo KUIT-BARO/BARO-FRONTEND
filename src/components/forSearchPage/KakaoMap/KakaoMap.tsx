@@ -5,6 +5,7 @@ import { debounce } from 'lodash';
 import styled from "styled-components";
 
 import Location from '../../../assets/icons/location.svg';
+import Scope from '../../../assets/icons/스코프.svg';
 
 interface KakaoMapProps {
   mapHeight: string;
@@ -89,7 +90,7 @@ export default function KakaoMap({ mapHeight, currentLocation, setCurrentLocatio
           setCenter(newCenter);
           setSearchPosition({ ...newCenter });
         } else {
-          console.error('검색 결과가 없습니다.');
+          alert('검색 결과가 없습니다.');
         }
       });
     }
@@ -129,7 +130,9 @@ export default function KakaoMap({ mapHeight, currentLocation, setCurrentLocatio
           }}
         />
       </Map>
-      <SetCenterButton onClick={setCenterToMyPosition} />
+      <SetCenterButton onClick={setCenterToMyPosition}>
+        <img src={Scope} alt="scope icon" />
+      </SetCenterButton>
     </MapWrapper>
   );
 };
@@ -140,15 +143,21 @@ const MapWrapper = styled.div`
 
 const SetCenterButton = styled.button`
   position: absolute;
+  padding: 0;
+  align-items: center;
   width: 30px;
   height: 30px;
   background-color: gray;
-  // background-color: #FFFFFF;
+  background-color: #FFFFFF;
   border: none;
   cursor: pointer;
   z-index: 10;
   top: 21px;
   left: 20px;
   border-radius: 5px;
-  opacity: 0.5;
+  opacity: 0.7;
+
+  img {
+    margin-top: 3px;
+  }
 `;

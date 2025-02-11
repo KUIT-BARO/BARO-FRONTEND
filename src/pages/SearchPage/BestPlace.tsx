@@ -83,11 +83,15 @@ const Wrapper = styled.div`
 `;
 
 const Header = styled.div`
+  position: fixed;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   width: 100%;
   padding: 24px 24px 0 24px;
+  z-index: 10;
+  background-color: #f4f8fb;
+
 
   img {
     width: 24px;
@@ -112,5 +116,6 @@ const HeaderDesc = styled.div`
 `;
 
 const Contents = styled.div`
+  padding-top: 150px;
   padding-bottom: 10vh;
 `;
