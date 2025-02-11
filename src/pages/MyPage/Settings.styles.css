@@ -1,7 +1,7 @@
 .settings-container {
   padding-top: 20px;
   padding-bottom: 80px;
-  background-color: #F4F8FB;
+  background-color: #f4f8fb;
   min-height: 100vh;
 }
 
@@ -42,7 +42,7 @@
   display: flex;
   align-items: center;
   padding-bottom: 32px;
-  border-bottom: 1px solid #F0F0F0;
+  border-bottom: 1px solid #f0f0f0;
   padding-inline: 0;
 }
 
@@ -50,7 +50,7 @@
   width: 84px;
   height: 84px;
   border-radius: 50%;
-  background-color: #F0F4FF;
+  background-color: #f0f4ff;
   margin-right: 16px;
   overflow: hidden;
 }
@@ -86,7 +86,7 @@
   padding: 15px 0;
   background: none;
   border: none;
-  border-bottom: 1px solid #F0F0F0;
+  border-bottom: 1px solid #f0f0f0;
   font-size: 17px;
   font-weight: 600;
   cursor: pointer;
@@ -95,11 +95,11 @@
 }
 
 .menu-value {
-  color: #9FA1A6;
+  color: #9fa1a6;
 }
 
 .menu-item.withdraw {
-  color: #FF5151;
+  color: #ff5151;
   border-bottom: none;
 }
 
@@ -117,18 +117,17 @@
 .modal-input {
   width: 100%;
   padding: 12px;
-  border: 1px solid #F0F0F0;
+  border: 1px solid #f0f0f0;
   border-radius: 8px;
   font-size: 16px;
 }
 
 .modal-input::placeholder {
-  color: #9FA1A6;
+  color: #9fa1a6;
 }
 
 .error-message {
-  color: #FF5151;
+  color: #ff5151;
   font-size: 14px;
   margin-top: 8px;
 }
-
