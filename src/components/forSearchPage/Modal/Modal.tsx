@@ -9,7 +9,6 @@ import KakaoMap from '../KakaoMap/KakaoMap';
 
 import BackIcon from '../../../assets/icons/backIcon.svg';
 import Scope from '../../../assets/icons/스코프.svg';
-import { set } from "lodash";
 
 export default function Modal(props) {
 
@@ -19,6 +18,11 @@ export default function Modal(props) {
 
   const handleLocationSet = () => {
     props.setSelectedLocation(currentLocationName);
+    props.setSelectedPosition({
+      lat: currentLocation.lat,
+      lng: currentLocation.lng,
+      radius: 50
+    });
     updateisModalOpen();
   };
   const handleListLocationSet = (place: any) => {
@@ -38,6 +42,7 @@ export default function Modal(props) {
 
   const [currentLocationName, setCurrentLocationName] = React.useState<string>("");
   const [currentLocationDetail, setCurrentLocationDetail] = React.useState<string>("");
+  const [currentLocation, setCurrentLocation] = React.useState<{ lat: number; lng: number; }>({ lat: 33.450701, lng: 126.570667 });
 
   const [locationList, setLocationList] = React.useState<any[]>([]);
 
@@ -56,6 +61,7 @@ export default function Modal(props) {
               console.log(result[0].road_address.building_name, result);
               setCurrentLocationName(result[0].road_address.building_name);
               setCurrentLocationDetail(result[0].address.address_name);
+              setCurrentLocation({ lat, lng });
 
               const places = new window.kakao.maps.services.Places();
               const searchCallback = (result, status) => {
