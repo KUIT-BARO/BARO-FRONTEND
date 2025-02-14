@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 
 import Navigation from "../../components/Navigation/Navigation.tsx";
 
@@ -12,6 +13,7 @@ import SuggestPromise from "../../components/forMyPromises/SuggestPromise/Sugges
 import ScheduleCalendar from "../../components/forMyPromises/ScheduleCalendar/ScheduleCalendar.tsx";
 
 import { getPromises } from "../../apis/user/getPromises.tsx";
+import getPromiseConfirm from "../../apis/promise/Confirm/GetPromiseConfirm.tsx";
 
 export default function MyPromises () {
   const [active, setActive] = React.useState("promise");
@@ -46,6 +48,8 @@ export default function MyPromises () {
       try {
         const response = await getPromises.checkPromises();
         if (response.status === 200 && response.data) {
+          console.log(response.data);
+          
           setUpcomingDday({
             promiseId: response.data.upcomingDday.promiseId,
             name: response.data.upcomingDday.name,
@@ -75,6 +79,19 @@ export default function MyPromises () {
       }
     };
     fetchPromises();
+
+    const fetchPromiseConfirm = async () => {
+      try {
+        const response = await getPromiseConfirm(upcomingDday.promiseId);
+        if (response.status === 200 && response.data) {
+          console.log(response.data);
+          console.log("나의 약속 확인 정보를 조회했습니다.");
+        }
+      } catch (error) {
+        console.error("나의 약속 확인 정보 조회 실패", error);
+      }
+    };
+    fetchPromiseConfirm();
   }, []);
 
   return (
@@ -83,17 +100,23 @@ export default function MyPromises () {
       <main style={{ backgroundColor: "#F4F8FB", height: "100vh" }}>
         <PromiseButton updateActive={handleClick} />
         {active === "promise" && (
-          <>
+          <PromiseWrapper>
             <PendingPromise />
-            {upcomingDday && <UpcomingPromise upcomingDday={upcomingDday} />}
+            {/* {upcomingDday && <UpcomingPromise upcomingDday={upcomingDday} />} */}
+            {upcomingPromise.map((promise) => (
+              <UpcomingPromise key={promise.promiseId} upcomingDday={promise} />
+            ))}
             <SuggestPromise />
-          </>
+          </PromiseWrapper>
         )}
         {active === "schedule" && (
-          <>
+          <PromiseWrapper>
             <ScheduleCalendar />
-            <UpcomingPromise />
-          </>
+            {/* <UpcomingPromise /> */}
+            {upcomingPromise.map((promise) => (
+              <UpcomingPromise key={promise.promiseId} upcomingDday={promise} />
+            ))}
+          </PromiseWrapper>
         )}
       </main>
       <Navigation />
@@ -101,3 +124,8 @@ export default function MyPromises () {
   );
 };
 
+export const PromiseWrapper = styled.div`
+  padding-top: 7.5rem;
+  padding-bottom: 5rem;
+  background-color: #F4F8FB;
+`;

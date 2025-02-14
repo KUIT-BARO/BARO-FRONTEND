@@ -16,18 +16,38 @@ export default function ReviewPlace() {
   });
 
   function handleClick(isModalOpen: boolean) {
-    setIsModalOpen(isModalOpen);
+    setIsModalOpen(isModalOpen);    
+  };
+
+  const [starCount, setStarCount] = React.useState<number>(0);
+  const handleStarChange = (starCount: number) => {
+    setStarCount(starCount);
+  };
+  const [textValue, setTextValue] = React.useState<string>('');
+  const handleTextChange = (textValue: string) => {
+    setTextValue(textValue);
+  };
+  const [category, setCategory] = React.useState<number[]>([]);
+  const handleCategoryChange = (category: number[]) => {
+    setCategory(category);
   };
 
   return (
     <>
       {!isModalOpen && <>
         <ReviewWrapper>
-          <ReviewHeader />
+          <ReviewHeader 
+            starCount={starCount} 
+            textValue={textValue}
+            categories={category}
+          />
           <ReviewDetails 
             updateisModalOpen={handleClick} 
             selectedLocation={selectedLocation}
             selectedPosition={selectedPosition}
+            onStarChange={handleStarChange}
+            onTextChange={handleTextChange}
+            onCategoryChange={handleCategoryChange}
           />
         </ReviewWrapper>
       </>}

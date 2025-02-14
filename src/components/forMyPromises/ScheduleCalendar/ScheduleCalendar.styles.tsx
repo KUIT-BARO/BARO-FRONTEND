@@ -13,6 +13,7 @@ export const Wrapper = styled.div`
   border-radius: 10px;
   overflow: hidden;
   box-sizing: border-box;
+  box-shadow: 0px 0px 4px 0px #D7DEF7;
 `;
 export const Header = styled.div`
   width: 100%;
@@ -56,16 +57,17 @@ export const Table = styled.table`
 export const DateCell = styled.td<{ isToday: boolean; isSelected: boolean }>`
   width: 44px;
   height: 44px;
+  padding-left: auto;
+  padding-right: auto;
   text-align: center;
   vertical-align: top;
   position: relative;
-  color: ${(props) => (props.isSelected ? "#fff" : "#000000")};
-  background-color: ${(props) =>
-    props.isSelected ? "#5175FF" : "transparent"};
+  color: ${(props) => (props.isToday ? "#fff" : "#000000")};
+  background-color: ${(props) => props.isToday ? "#5175FF" : "transparent"};
   font-size: 20px;
   font-weight: 400;
-  border-radius: ${(props) => (props.isSelected ? "60%" : "none")};
-  cursor: pointer;
+  border-radius: ${(props) => (props.isToday ? "100%" : "none")};
+  // cursor: pointer;
   box-sizing: border-box;
   // background-color: blue;
   // border: 1px solid #e0e0e0;

@@ -18,9 +18,9 @@ export default function ScheduleCalendar() {
   });
 
   const [events, setEvents] = useState({
-    5: 3, // 예: 5일에 3개의 일정
-    12: 2, // 예: 12일에 2개의 일정
-    20: 1, // 예: 20일에 1개의 일정
+    '2025-2-5': 3,  // 2024년 1월 5일에 3개의 일정
+    '2025-2-12': 2, // 2024년 1월 12일에 2개의 일정
+    '2025-3-20': 1, // 2024년 1월 20일에 1개의 일정
   });
 
   const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
@@ -109,13 +109,13 @@ export default function ScheduleCalendar() {
                       today.getMonth() === currentMonth &&
                       today.getFullYear() === currentYear
                     }
-                    isSelected={day === selectedDate && day != null}
-                    onClick={() => handleDateClick(day)}
+                    // isSelected={day === selectedDate && day != null}
+                    // onClick={() => handleDateClick(day)}
                   >
                     {day}
                     <EventIndicators>
-                      {Array.from(
-                        { length: day ? events[day] || 0 : 0 },
+                        {Array.from(
+                        { length: day ? events[`${currentYear}-${currentMonth + 1}-${day}`] || 0 : 0 },
                         (_, idx) => (
                           <span key={idx} />
                         )
