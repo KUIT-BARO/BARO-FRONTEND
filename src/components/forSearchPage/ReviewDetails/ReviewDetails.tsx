@@ -10,7 +10,30 @@ import Location from '../../../assets/icons/location.svg';
 import BlueStar from '../../../assets/icons/blueStar.svg';
 import GrayStar from '../../../assets/icons/grayStar.svg';
 
-export default function ReviewDetails(props) {
+interface ReviewDetailsProps {
+  selectedPosition: { lat: number; lng: number; radius: number; };
+  selectedLocation: string;
+  updateisModalOpen: (isModalOpen: boolean) => void;
+  onStarChange: (starCount: number) => void;
+  onTextChange: (textValue: string) => void;
+  onCategoryChange: (category: number[]) => void;
+}
+
+const KakaoRoadView = ({ position }: { position: { lat: number; lng: number; radius: number } }) => {
+  return (
+    <Roadview
+      position={position}
+      style={{
+        width: "100%",
+        height: "27vh",
+        marginTop: "20px",
+        borderRadius: "10px",
+      }}
+    />
+  );
+};
+
+export default function ReviewDetails(props: ReviewDetailsProps) {
 
   const [position, setPosition] = React.useState<{ 
     lat: number; 
@@ -20,25 +43,14 @@ export default function ReviewDetails(props) {
 
   React.useEffect(() => {
     setPosition(props.selectedPosition);
+    console.log('position:', position);
+    
   }, [props.selectedPosition]);
-
-  const KakaoRoadView = () => {
-    return (
-      <Roadview
-        position={position}
-        style={{
-          width: "100%",
-          height: "27vh",
-          marginTop: "20px",
-          borderRadius: "10px",
-        }}
-      />
-    );
-  };
 
   const [inputCount, setInputCount] = React.useState(0);
   const handleInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setInputCount(e.target.value.length);
+    props.onTextChange(e.target.value);
   };
 
   function updateisModalOpen() {
@@ -48,11 +60,15 @@ export default function ReviewDetails(props) {
   const [selectedCategories, setSelectedCategories] = React.useState<string[]>([]);
   const handleCategory = (category: string) => {
     if (selectedCategories.includes(category)) {
-      setSelectedCategories(selectedCategories.filter((c) => c !== category));
+      const newCategories = selectedCategories.filter((c) => c !== category);
+      setSelectedCategories(newCategories);
+      props.onCategoryChange(newCategories.map(c => categories.indexOf(c)));
     } else {
       if (selectedCategories.length < 5) {
-        setSelectedCategories([...selectedCategories, category]);
-        // console.log(selectedCategories);
+        const newCategories = [...selectedCategories, category];
+        setSelectedCategories(newCategories);
+        const sortedIndices = newCategories.map(c => categories.indexOf(c)).sort((a, b) => a - b);
+        props.onCategoryChange(sortedIndices);
       }
     }
   };
@@ -65,6 +81,7 @@ export default function ReviewDetails(props) {
   const [starCount, setStarCount] = React.useState(0);
   const handleStar = (count: number) => {
     setStarCount(count);
+    props.onStarChange(count);
   };
   const renderStars = (starCount: number) => {
     const stars: JSX.Element[] = [];
@@ -102,7 +119,7 @@ export default function ReviewDetails(props) {
             </span>
           </div>
         </PlaceSetting>
-        <KakaoRoadView />
+        <KakaoRoadView position={position} />
         <ReviewWrite>
           <TextArea
             placeholder="장소에 관한 리뷰를 작성해주세요..." 

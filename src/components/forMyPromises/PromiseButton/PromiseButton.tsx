@@ -34,10 +34,11 @@ export default function PromiseButton(props) {
 };
 
 export const Container = styled.div`
-  padding-top: 64px;
+  top: 64px;
   z-index: 50;
   background-color: #F4F8FB;
   width: 100%;
+  position: fixed;
 `;
 export const ToggleContainer = styled.div`
   width: 354px;

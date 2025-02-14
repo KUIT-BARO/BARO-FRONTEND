@@ -35,41 +35,51 @@ export default function KakaoMap({ mapHeight, currentLocation, setCurrentLocatio
   }>({ lat: 33.450701, lng: 126.570667 });
 
   useEffect(() => {
-    if (navigator.geolocation) {
-      // 현재 위치 가져오기
-      navigator.geolocation.getCurrentPosition((pos) => {
-        const lat = pos.coords.latitude;
-        const lng = pos.coords.longitude;
-        setCenter({ lat, lng });
-
-        // 현재 위치의 주소명 가져오기
-        const geocoder = new window.kakao.maps.services.Geocoder();
-        geocoder.coord2Address(lng, lat, (result, status) => {
-          if (status === window.kakao.maps.services.Status.OK) {
-            if (result[0].road_address) {
-              console.log(result[0].road_address.building_name, result);
-              setCurrentLocationName(result[0].road_address.building_name);
+    const fetchLocation = () => {
+      if (navigator.geolocation) {
+        // 현재 위치 가져오기
+        navigator.geolocation.getCurrentPosition((pos) => {
+          const lat = pos.coords.latitude;
+          const lng = pos.coords.longitude;
+          setCenter({ lat, lng });
+          setPosition({ lat, lng, isPanto: true });
+          setSearchPosition({ lat, lng });
+          console.log('Current Position:', lat, lng);
+          // 현재 위치의 주소명 가져오기
+          const geocoder = new window.kakao.maps.services.Geocoder();
+          geocoder.coord2Address(lng, lat, (result, status) => {
+            if (status === window.kakao.maps.services.Status.OK) {
+              if (result[0].road_address) {
+                console.log(result[0].road_address.building_name, result);
+                setCurrentLocationName(result[0].road_address.building_name);
+              }
+              else {
+                console.log(result[0].address.address_name);
+                // console.log(result[0].address.place_name);
+                setCurrentLocationName(result[0].address.address_name);
+              }              
             }
-            else {
-              console.log(result[0].address.address_name);
-              // console.log(result[0].address.place_name);
-              setCurrentLocationName(result[0].address.address_name);
-            }              
-          }
-        });
-      }, (error) => { console.error('위치 정보를 가져오는데 실패했습니다:', error); });
+          });
+        }, (error) => { console.error('위치 정보를 가져오는데 실패했습니다:', error); },
+        {
+          enableHighAccuracy: true,
+          // timeout: 5000,
+          maximumAge: 60000
+        }
+      );
 
-      // 현재 위치 실시간 추적
-      navigator.geolocation.watchPosition((pos) => {
-        const lat = pos.coords.latitude;
-        const lng = pos.coords.longitude;
-        setPosition({ lat, lng, isPanto: true });
-        setSearchPosition({ lat, lng });
-      });
-    } 
-    else {
-      console.error('이 브라우저에서는 Geolocation이 지원되지 않습니다.');
-    }
+        // 현재 위치 실시간 추적
+        navigator.geolocation.watchPosition((pos) => {
+          const lat = pos.coords.latitude;
+          const lng = pos.coords.longitude;
+          setPosition({ lat, lng, isPanto: true });
+          setSearchPosition({ lat, lng });
+        });
+     } else {
+        console.error('이 브라우저에서는 Geolocation이 지원되지 않습니다.');
+      }
+    };
+    fetchLocation();
   }, []);
 
   // 검색 키워드로 지도 중심 이동
