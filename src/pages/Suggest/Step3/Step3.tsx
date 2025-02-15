@@ -16,15 +16,15 @@ import styled from "styled-components";
 import Search from "../../../components/Search/Search";
 
 export default function Step3({
-  location,
-  setLocation,
+  address,
+  setAddress,
   handleBack,
   handleExit,
   onOpenPopup,
 }: StepInterface & { onOpenPopup: () => void }) {
   const [popup, setPopup] = useState(false);
 
-  const dummyLocation = [
+  const dummyaddress = [
     {
       placeId: 1,
       placeName: "스타벅스 건대입구점",
@@ -61,8 +61,8 @@ export default function Step3({
     <Popup
       onOpenPopup={onOpenPopup}
       setPopup={setPopup}
-      location={location}
-      setLocation={setLocation}
+      address={address}
+      setAddress={setAddress}
     />
   ) : (
     <>
@@ -76,16 +76,16 @@ export default function Step3({
           <Search placeholder={"건대입구"} />
 
           <LocationWrapper>
-            {dummyLocation.map((location) => (
+            {dummyaddress.map((address) => (
               <Location
-                key={location.placeId}
+                key={address.placeId}
                 onClick={() => {
-                  setLocation(location);
+                  setAddress(address.placeName);
                   setPopup(true);
                 }}
               >
-                <div className="bold">{location.placeName}</div>
-                <div>{location.address}</div>
+                <div className="bold">{address.placeName}</div>
+                <div>{address.address}</div>
               </Location>
             ))}
           </LocationWrapper>
