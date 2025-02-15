@@ -25,7 +25,7 @@ const Navigation = () => {
 
   const navItems: NavItem[] = [
     {
-      path: "/",
+      path: "/main",
       label: "홈",
       icon: homeIcon,
       activeIcon: homeActiveIcon,
@@ -62,7 +62,9 @@ const Navigation = () => {
         {navItems.slice(0, 2).map((item) => (
           <button
             key={item.path}
-            className={`${styles.navItem} ${isActive(item.path) ? styles.active : ""}`}
+            className={`${styles.navItem} ${
+              isActive(item.path) ? styles.active : ""
+            }`}
             onClick={() => navigate(item.path)}
           >
             <img
@@ -81,7 +83,9 @@ const Navigation = () => {
         {navItems.slice(2).map((item) => (
           <button
             key={item.path}
-            className={`${styles.navItem} ${isActive(item.path) ? styles.active : ""}`}
+            className={`${styles.navItem} ${
+              isActive(item.path) ? styles.active : ""
+            }`}
             onClick={() => navigate(item.path)}
           >
             <img
