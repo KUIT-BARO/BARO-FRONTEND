@@ -17,6 +17,12 @@ import PostPromise from "../../../apis/Promise/PostPromise";
 interface PopupProps extends SuggestInterface {
   setPromiseId: () => void;
   onClose: () => void;
+  name: string;
+  dateStart: string;
+  dateEnd: string;
+  peopleNum: number;
+  purpose: string;
+  address: string;
 }
 
 export default function Popup({
@@ -27,7 +33,7 @@ export default function Popup({
   dateEnd,
   peopleNum,
   purpose,
-  location,
+  address,
 }: PopupProps) {
   const navigate = useNavigate();
 
@@ -39,7 +45,7 @@ export default function Popup({
         dateEnd,
         peopleNum,
         purpose,
-        location
+        address
       );
       if (response?.data?.promiseId) {
         setPromiseId(response.data.promiseId);
@@ -71,7 +77,7 @@ export default function Popup({
             </div>
             <div className="wrap">
               <img src={locationIcon} />
-              <p>{location.placeName}</p>
+              <p>{address.placeName}</p>
             </div>
             <div className="wrap">
               <img src={date} />

@@ -9,7 +9,7 @@ import KakaoMap from "../../../../components/forSearchPage/KakaoMap/KakaoMap";
 
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-export default function Popup({ setPopup, location, onOpenPopup }) {
+export default function Popup({ setPopup, address, onOpenPopup }) {
   return (
     <>
       <Nav>
@@ -27,8 +27,8 @@ export default function Popup({ setPopup, location, onOpenPopup }) {
         </Section>
         <FixedBottom>
           <div className="desc">
-            <div className="bold">{location.placeName}</div>
-            <div>{location.address}</div>
+            <div className="bold">{address.placeName}</div>
+            <div>{address.address}</div>
           </div>
           <Button
             onClick={() => {

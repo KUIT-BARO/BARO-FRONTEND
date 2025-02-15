@@ -13,9 +13,9 @@ export default function Suggest() {
   const navigate = useNavigate();
   const [promiseId, setPromiseId] = useState<number | null>(null);
   const [name, setName] = useState<string>("");
-  const [purpose, setPurpose] = useState<string[]>([]);
-  const [peopleNum, setPeopleNum] = useState<number | null>(null);
-  const [location, setLocation] = useState<string | null>(null);
+  const [purpose, setPurpose] = useState<string | null>(null);
+  const [peopleNum, setPeopleNum] = useState<number>(0);
+  const [address, setAddress] = useState<string | null>(null);
   const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([
     null,
     null,
@@ -86,8 +86,8 @@ export default function Suggest() {
             <Step3
               handleBack={handleBack}
               handleExit={handleExit}
-              location={location}
-              setLocation={setLocation}
+              address={address}
+              setAddress={setAddress}
               onOpenPopup={handleOpenPopup}
             />
           }
@@ -104,7 +104,7 @@ export default function Suggest() {
               name={name}
               purpose={purpose}
               peopleNum={peopleNum}
-              location={location}
+              address={address}
               dateStart={dateStart}
               dateEnd={dateEnd}
             />
@@ -129,7 +129,7 @@ export default function Suggest() {
           name={name}
           purpose={purpose}
           peopleNum={peopleNum}
-          location={location}
+          address={address}
           dateStart={dateStart}
           dateEnd={dateEnd}
         />

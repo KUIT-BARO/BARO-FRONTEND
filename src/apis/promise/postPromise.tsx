@@ -1,20 +1,28 @@
 import instance from "../instance";
 import { createErrorResponse } from "../../interface/api/Message";
-const PostPormise = async (
+const PostPromise = async (
   name: string,
   dateStart: string,
   dateEnd: string,
-  peopleNum: number,
+  peopleNum: number | string,
   purpose: string,
-  location: string
+  address: string
 ) => {
+  let validPeopleNum =
+    typeof peopleNum === "string" ? parseInt(peopleNum, 10) : peopleNum;
+
+  // ✅ 변환 후 숫자가 아닐 경우 예외 처리
+  if (isNaN(validPeopleNum)) {
+    throw new Error("peopleNum 값이 올바르지 않습니다. 숫자로 입력해주세요.");
+  }
+
   const requestData = {
     name,
     dateStart,
     dateEnd,
-    peopleNum,
+    peopleNum: validPeopleNum,
     purpose,
-    location,
+    address,
   };
 
   try {
@@ -30,4 +38,4 @@ const PostPormise = async (
   }
 };
 
-export default PostPormise;
+export default PostPromise;

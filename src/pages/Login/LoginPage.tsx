@@ -1,30 +1,34 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { postAuth } from '../../apis/auth/postAuth';
-import './LoginPage.styles.css';
-import '../../assets/fonts/pretendard.css';
-import userIcon from '../../assets/icons/login_user.svg';
-import lockIcon from '../../assets/icons/login_password.svg';
-import Logo from '../../assets/icons/logo.svg';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { postAuth } from "../../apis/auth/postAuth";
+import "./LoginPage.styles.css";
+import "../../assets/fonts/pretendard.css";
+import userIcon from "../../assets/icons/login_user.svg";
+import lockIcon from "../../assets/icons/login_password.svg";
+import Logo from "../../assets/icons/logo.svg";
 
 const LoginPage = () => {
   const navigate = useNavigate();
-  const [id, setId] = useState('');
-  const [password, setPassword] = useState('');
+  const [id, setId] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleLogin = async () => {
     try {
       if (!id || !password) {
-        alert('아이디와 비밀번호를 입력해주세요');
+        alert("아이디와 비밀번호를 입력해주세요");
         return;
       }
 
       const response = await postAuth.login({ id, password });
       if (response.status === 200) {
-        navigate('/mypage');
+        console.log(response);
+        sessionStorage.setItem("login", "true");
+
+        window.dispatchEvent(new Event("storage"));
+        navigate("/mypage");
       }
     } catch (error) {
-      console.error('로그인 오류:', error);
+      console.error("로그인 오류:", error);
     }
   };
 
@@ -67,7 +71,9 @@ const LoginPage = () => {
         <label htmlFor="autoLogin">자동로그인 설정</label>
       </div>
 
-      <button className="login-button" onClick={handleLogin}>로그인</button>
+      <button className="login-button" onClick={handleLogin}>
+        로그인
+      </button>
 
       <div className="signup-wrapper">
         <span className="line">────</span>

@@ -17,9 +17,9 @@ import Dropdown from "../../../components/DropDown/DropDown";
 import { useNavigate } from "react-router-dom";
 
 export default function Step1({
-  name,
+  name = "",
   setName,
-  purpose,
+  purpose = "",
   setPurpose,
   peopleNum,
   setPeopleNum,
@@ -28,22 +28,20 @@ export default function Step1({
 }: StepInterface & {
   name: string;
   setName: React.Dispatch<React.SetStateAction<string>>;
-  purpose: string[];
-  setPurpose: React.Dispatch<React.SetStateAction<string[]>>;
+  purpose: string;
+  setPurpose: React.Dispatch<React.SetStateAction<string>>;
   peopleNum: number | null;
   setPeopleNum: React.Dispatch<React.SetStateAction<number | null>>;
 }) {
   const navigate = useNavigate();
 
   const isFormComplete =
-    name.trim().length > 0 && purpose.length > 0 && peopleNum !== null;
+    (name ?? "").trim().length > 0 &&
+    (purpose ?? "").trim().length > 0 &&
+    peopleNum !== null;
 
   const handlePurpose = (selectedPurpose: string) => {
-    setPurpose((prev) =>
-      prev.includes(selectedPurpose)
-        ? prev.filter((item) => item !== selectedPurpose)
-        : [...prev, selectedPurpose]
-    );
+    setPurpose(selectedPurpose);
   };
 
   const purposes = ["팀 프로젝트/회의", "공부", "밥 먹기", "카페 가기"];
@@ -75,7 +73,7 @@ export default function Step1({
               <Button
                 key={option}
                 onClick={() => handlePurpose(option)}
-                color={purpose.includes(option) ? "Blue" : "White"}
+                color={(purpose ?? "").includes(option) ? "Blue" : "White"}
               >
                 {option}
               </Button>
@@ -84,7 +82,7 @@ export default function Step1({
         </Section>
 
         {/* 인원 선택 */}
-        <Section>
+        <Section style={{ marginBottom: "20px" }}>
           <SectionTitle>약속 인원을 선택해주세요</SectionTitle>
           <Dropdown people={peopleNum} setPeople={setPeopleNum} maxPeople={5} />
         </Section>

@@ -10,10 +10,11 @@ export const postAuth = {
   signup: async (params: SignupParams) => {
     try {
       const response = await instance.post("/auth/signup", params);
-      console.log('서버 응답:', response); // 디버깅용
+      console.log("서버 응답:", response); // 디버깅용
+
       return response.data;
     } catch (error) {
-      console.error('상세 에러:', error.response || error); // 더 자세한 에러 정보 출력
+      console.error("상세 에러:", error.response || error); // 더 자세한 에러 정보 출력
       if (error.response) {
         if (error.response.status === 400) {
           alert("회원가입에 실패했습니다.");
@@ -26,12 +27,14 @@ export const postAuth = {
       throw error;
     }
   },
-  
+
   login: async (params: { id: string; password: string }) => {
     try {
       const response = await instance.post("/auth/login", params);
+      console.log("로그인 성공:", response.data);
       return response.data;
     } catch (error) {
+      console.error("로그인 에러:", error.response || error);
       if (error.response?.status === 400) {
         alert("로그인에 실패했습니다.");
       } else {

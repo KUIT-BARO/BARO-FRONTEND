@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoute"; // 보호된 라우트 추가
 import Main from "./Main/Main";
@@ -16,24 +17,35 @@ import Accept from "./Accept/Accept";
 import SearchPage from "./SearchPage/SearchPage";
 import Landing from "./Landing/Landing";
 
-// 로그인 여부 확인 (예: localStorage 사용)
-const isAuthenticated = () => {
-  // return localStorage.getItem("token") !== null;
-  return true;
+// 로그인 여부 확인
+const getAuthStatus = () => {
+  return sessionStorage.getItem("login") === "true";
 };
 
 const Router = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(getAuthStatus());
+
+  // 로그인 상태 변경 감지
+  useEffect(() => {
+    const handleStorageChange = () => {
+      setIsAuthenticated(getAuthStatus());
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
+  }, []);
+
   const router = createBrowserRouter([
-    { path: "/", element: <Landing /> }, // 랜딩 페이지 추가
-    { path: "/main", element: <Main /> }, // 기존 "/" -> "/main"으로 변경
+    { path: "/", element: <Landing /> },
+    { path: "/main", element: <Main /> },
     { path: "/login", element: <LoginPage /> },
     { path: "/signup", element: <SignupPage /> },
 
-    // 보호된 라우트
+    // 보호된 라우트 적용
     {
       path: "/suggest/*",
       element: (
-        <ProtectedRoute isAuthenticated={isAuthenticated()}>
+        <ProtectedRoute isAuthenticated={isAuthenticated}>
           <Suggest />
         </ProtectedRoute>
       ),
@@ -41,7 +53,7 @@ const Router = () => {
     {
       path: "/accept/*",
       element: (
-        <ProtectedRoute isAuthenticated={isAuthenticated()}>
+        <ProtectedRoute isAuthenticated={isAuthenticated}>
           <Accept />
         </ProtectedRoute>
       ),
@@ -49,7 +61,7 @@ const Router = () => {
     {
       path: "/finalvote/*",
       element: (
-        <ProtectedRoute isAuthenticated={isAuthenticated()}>
+        <ProtectedRoute isAuthenticated={isAuthenticated}>
           <FinalVote />
         </ProtectedRoute>
       ),
@@ -57,7 +69,7 @@ const Router = () => {
     {
       path: "/mypromises",
       element: (
-        <ProtectedRoute isAuthenticated={isAuthenticated()}>
+        <ProtectedRoute isAuthenticated={isAuthenticated}>
           <MyPromises />
         </ProtectedRoute>
       ),
@@ -65,7 +77,7 @@ const Router = () => {
     {
       path: "/mypage",
       element: (
-        <ProtectedRoute isAuthenticated={isAuthenticated()}>
+        <ProtectedRoute isAuthenticated={isAuthenticated}>
           <MyPage />
         </ProtectedRoute>
       ),
@@ -73,7 +85,7 @@ const Router = () => {
     {
       path: "/places/:category",
       element: (
-        <ProtectedRoute isAuthenticated={isAuthenticated()}>
+        <ProtectedRoute isAuthenticated={isAuthenticated}>
           <SavedPlacesDetail />
         </ProtectedRoute>
       ),
@@ -81,7 +93,7 @@ const Router = () => {
     {
       path: "/profile/edit",
       element: (
-        <ProtectedRoute isAuthenticated={isAuthenticated()}>
+        <ProtectedRoute isAuthenticated={isAuthenticated}>
           <ProfileEdit />
         </ProtectedRoute>
       ),
@@ -89,7 +101,7 @@ const Router = () => {
     {
       path: "/settings",
       element: (
-        <ProtectedRoute isAuthenticated={isAuthenticated()}>
+        <ProtectedRoute isAuthenticated={isAuthenticated}>
           <Settings />
         </ProtectedRoute>
       ),
@@ -97,7 +109,7 @@ const Router = () => {
     {
       path: "/contact",
       element: (
-        <ProtectedRoute isAuthenticated={isAuthenticated()}>
+        <ProtectedRoute isAuthenticated={isAuthenticated}>
           <Contact />
         </ProtectedRoute>
       ),
@@ -105,7 +117,7 @@ const Router = () => {
     {
       path: "/search/*",
       element: (
-        <ProtectedRoute isAuthenticated={isAuthenticated()}>
+        <ProtectedRoute isAuthenticated={isAuthenticated}>
           <SearchPage />
         </ProtectedRoute>
       ),

@@ -6,7 +6,7 @@ function Dropdown({ people, setPeople, maxPeople }) {
   const [isOpen, setIsOpen] = useState(false);
 
   // maxPeople에 따라 옵션 제한
-  const options = Array.from({ length: maxPeople }, (_, i) => `${i + 1}명`);
+  const options = Array.from({ length: maxPeople }, (_, i) => `${i + 1}`);
 
   // 드롭다운 열기/닫기 토글
   const handleToggle = () => {
@@ -14,7 +14,7 @@ function Dropdown({ people, setPeople, maxPeople }) {
   };
 
   // 옵션 선택 처리
-  const handleSelect = (value) => {
+  const handleSelect = (value: number) => {
     setPeople(value);
     setIsOpen(false);
   };
@@ -35,7 +35,7 @@ function Dropdown({ people, setPeople, maxPeople }) {
               onClick={() => handleSelect(option)}
               isSelected={option === people}
             >
-              {option}
+              {option}명
             </DropdownItem>
           ))}
         </DropdownList>
