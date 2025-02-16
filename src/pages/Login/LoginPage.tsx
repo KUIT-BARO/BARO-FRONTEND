@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { postAuth } from "../../apis/auth/postAuth";
 import "./LoginPage.styles.css";
-import "../../assets/fonts/pretendard.css";
+import "../../assets/fonts/Pretendard.css";
 import userIcon from "../../assets/icons/login_user.svg";
 import lockIcon from "../../assets/icons/login_password.svg";
 import Logo from "../../assets/icons/logo.svg";
