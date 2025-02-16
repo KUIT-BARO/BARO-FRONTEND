@@ -12,7 +12,7 @@ import crown from "../../../assets/icons/crown.svg";
 import formatDateToShort from "../../../utils/formatDateToShort";
 import SuggestInterface from "../../../interface/Suggest";
 import { useNavigate } from "react-router-dom";
-import PostPromise from "../../../apis/Promise/PostPromise";
+import PostPromise from "../../../apis/Promise/postPromise";
 
 interface PopupProps extends SuggestInterface {
   setPromiseId: () => void;
