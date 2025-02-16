@@ -2,8 +2,8 @@ import React from "react";
 
 import { ReviewWrapper, PlaceTitle, DetailsWrapper, PlaceDetails, Rating, Location, BookmarkButton, CommentsWrapper, CategoriesWrapper } from "./PlaceReview.styles";
 
-import BlueStar from "../../../assets/icons/BlueStar.svg";
-import GrayStar from "../../../assets/icons/GrayStar.svg";
+import BlueStar from "../../../assets/icons/blueStar.svg";
+import GrayStar from "../../../assets/icons/grayStar.svg";
 import BlueBookmark from "../../../assets/icons/세이브_blue.svg";
 import GrayBookmark from "../../../assets/icons/세이브_gray.svg";
 
