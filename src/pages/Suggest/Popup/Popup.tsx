@@ -12,10 +12,10 @@ import crown from "../../../assets/icons/crown.svg";
 import formatDateToShort from "../../../utils/formatDateToShort";
 import SuggestInterface from "../../../interface/Suggest";
 import { useNavigate } from "react-router-dom";
-import PostPromise from "../../../apis/Promise/postPromise";
+import PostPromise from "../../../apis/promise/postPromise";
 
 interface PopupProps extends SuggestInterface {
-  setPromiseId: () => void;
+  setPromiseId: (promiseId) => void;
   onClose: () => void;
   name: string;
   dateStart: string;
@@ -49,6 +49,7 @@ export default function Popup({
       );
       if (response?.data?.promiseId) {
         setPromiseId(response.data.promiseId);
+        // setPromiseId();
       }
     } catch (error) {
       console.error("약속 생성 중 오류 발생:", error);
