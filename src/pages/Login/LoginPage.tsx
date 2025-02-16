@@ -7,6 +7,8 @@ import userIcon from "../../assets/icons/login_user.svg";
 import lockIcon from "../../assets/icons/login_password.svg";
 import Logo from "../../assets/icons/logo.svg";
 
+import { getHome } from "../../apis/user/getHome";
+
 const LoginPage = () => {
   const navigate = useNavigate();
   const [id, setId] = useState("");
@@ -21,11 +23,17 @@ const LoginPage = () => {
 
       const response = await postAuth.login({ id, password });
       if (response.status === 200) {
-        console.log(response);
-        sessionStorage.setItem("login", "true");
+        console.log('로그인 성공 응답 데이터 :', response);
 
+        sessionStorage.setItem("login", "true");
+        sessionStorage.setItem("isAuthenticated", "true");
+        console.log("sessionStorage:", sessionStorage);
+
+        // const response2 = await getHome.getHome();
+        // console.log('getHome 응답 데이터 :', response2);
+        
         window.dispatchEvent(new Event("storage"));
-        navigate("/mypage");
+        navigate("/main");
       }
     } catch (error) {
       console.error("로그인 오류:", error);

@@ -32,6 +32,8 @@ const MyPage = () => {
             userId: response.data.user.userId,
             userProfile: response.data.user.userProfile
           });
+          alert(userInfo);
+          
         }
       } catch (error) {
         console.error('마이페이지 조회 실패:', error);

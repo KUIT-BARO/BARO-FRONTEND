@@ -8,8 +8,10 @@ export default defineConfig({
     proxy: {
       "/api": {
         // target: "http://localhost:8080",
-        target: "http://localhost:5173",
+        // target: "http://localhost:5173",
+        target: "http://3.34.221.7",
         changeOrigin: true,
+        secure: false,
         rewrite: (path) => path.replace(/^\/api/, ""), // "/api" 제거
       },
     },

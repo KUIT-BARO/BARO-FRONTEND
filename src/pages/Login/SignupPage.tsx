@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./SignupPage.styles.css";
-import "../../assets/fonts/pretendard.css";
+import "../../assets/fonts/Pretendard.css";
 import { postAuth } from "../../apis/auth/postAuth";
 
 const SignupPage = () => {

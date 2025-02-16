@@ -3,7 +3,7 @@ import instance from "../instance";
 export const getSchedule = {
   getMySchedule: async () => {
     try {
-      const response = await instance.get("/users/my-schedule");
+      const response = await instance.get("/users/schedule/my-schedule");
       return response.data;
     } catch (error) {
       if (error.response?.status === 400) {
