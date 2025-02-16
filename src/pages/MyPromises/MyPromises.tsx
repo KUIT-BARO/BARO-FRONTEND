@@ -47,6 +47,8 @@ export default function MyPromises () {
     const fetchPromises = async () => {
       try {
         const response = await getPromises.checkPromises();
+        console.log(response);
+        
         if (response.status === 200 && response.data) {
           console.log(response.data);
           
@@ -82,7 +84,8 @@ export default function MyPromises () {
 
     const fetchPromiseConfirm = async () => {
       try {
-        const response = await getPromiseConfirm(upcomingDday.promiseId);
+        // const response = await getPromiseConfirm(upcomingDday.promiseId);
+        const response = await getPromiseConfirm(6);
         if (response.status === 200 && response.data) {
           console.log(response.data);
           console.log("나의 약속 확인 정보를 조회했습니다.");

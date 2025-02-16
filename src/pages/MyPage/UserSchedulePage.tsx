@@ -44,7 +44,7 @@ const UserSchedulePage = () => {
       try {
         setIsLoading(true);
         setError(null);
-        const response = await getUserSchedule.getScheduleById(Number(userId));
+        const response = await getUserSchedule.ById(Number(userId));
         
         if (response.data?.data) {
           setUserSchedule(response.data.data);

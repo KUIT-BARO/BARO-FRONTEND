@@ -58,6 +58,8 @@ const ScheduleGrid = forwardRef<ScheduleGridHandle, ScheduleGridProps>(({ readOn
       const fetchSchedules = async () => {
         try {
           const response = await getSchedule.getMySchedule();
+          console.log('시간표 조회 결과:', response);
+          
           if (response.data?.schedules) {
             const formattedSchedules = response.data.schedules.map(schedule => ({
               id: schedule.scheduleId,

@@ -3,7 +3,7 @@ import { createErrorResponse } from "../../../interface/api/Message";
 
 const GetPromiseConfirm = async (promiseId: number) => {
   try {
-    return await instance.get(`"/promise/confirm/${promiseId}`);
+    return await instance.get(`/promise/confirm/${promiseId}`);
   } catch (error) {
     if (error.response) {
       const errorData = createErrorResponse(error.response.status.toString());
