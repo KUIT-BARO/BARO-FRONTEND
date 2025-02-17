@@ -2,7 +2,8 @@ import axios from "axios";
 
 const instance = axios.create({
   // baseURL: "http://3.34.221.7:8080",
-  baseURL: "https://3.34.221.7:443",
+  // baseURL: "https://3.34.221.7:443",
+  baseURL: 'https://baro-api.shop/',
   timeout: 3000,
   withCredentials: true,  // CORS 요청에 쿠키 포함
   headers: {
