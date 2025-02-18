@@ -62,6 +62,8 @@ export default function Confirm({
     return null; // 실패 시 null 반환
   };
 
+  const user = sessionStorage.getItem("name");
+
   return (
     <>
       {linkPopup && (
@@ -88,11 +90,13 @@ export default function Confirm({
             </div>
             <div className="wrap">
               <img src={crown} />
-              <p>user</p>
+              <p>{user}</p>
             </div>
             <div className="wrap">
               <img src={person} />
-              <p>user 외 {peopleNum}</p>
+              <p>
+                {user} 외 {peopleNum}
+              </p>
             </div>
             <div className="wrap">
               <img src={locationIcon} />

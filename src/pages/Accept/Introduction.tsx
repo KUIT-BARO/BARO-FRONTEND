@@ -27,6 +27,7 @@ export default function Introduction({
 }: ConfirmProps) {
   const navigate = useNavigate();
 
+  const user = sessionStorage.getItem("name");
   return (
     <>
       <ConfirmWrapper>
@@ -48,11 +49,13 @@ export default function Introduction({
             </div>
             <div className="wrap">
               <img src={crown} />
-              <p>user</p>
+              <p>{user}</p>
             </div>
             <div className="wrap">
               <img src={person} />
-              <p>user 외 {data.peopleNumber}</p>
+              <p>
+                {user} 외 {data.peopleNumber}
+              </p>
             </div>
             <div className="wrap">
               <img src={location} />

@@ -23,6 +23,7 @@ import profileImg_2 from "../../../assets/icons/profileImg_2.svg";
 import profileImg_3 from "../../../assets/icons/profileImg_3.svg";
 import defaultImg from "../../../assets/icons/profileImg_default.svg";
 import { useNavigate } from "react-router-dom";
+import GetSchedule from "../../../apis/user/GetSchedule";
 export default function Step1({
   peopleNumber,
   handleBack,
@@ -47,6 +48,21 @@ export default function Step1({
     if (popupStage === 1) setPopupStage(2);
     else setPopupStage(null);
   };
+  const handleTimeTable = async () => {
+    try {
+      const response = await GetSchedule();
+      if (response?.data?.data?.schedules) {
+        const scheduleData = response.data.data.schedules.map((schedule) => ({
+          dayOfWeek: schedule.dayOfWeek, // 요일 정보 (ex: "MONDAY")
+          time_start: schedule.timeStart, // 시작 시간 (ex: "18:00")
+          time_end: schedule.timeEnd, // 종료 시간 (ex: "20:00")
+        }));
+        setTimeTable(scheduleData); // timeTable 상태에 저장
+      }
+    } catch (error) {
+      console.error("시간표 불러오기 실패:", error);
+    }
+  };
 
   return (
     <>
@@ -60,9 +76,7 @@ export default function Step1({
         <SectionHeader>
           <ImgWrapper>{renderProfileImages(peopleNumber)}</ImgWrapper>
           <ButtonWrapper>
-            <SmallButton onClick={() => console.log()}>
-              시간표 불러오기
-            </SmallButton>
+            <SmallButton onClick={handleTimeTable}>시간표 불러오기</SmallButton>
             <SmallButton
               variant="outlined"
               color="gray"
@@ -82,7 +96,7 @@ export default function Step1({
         </Section>
         <FixedButton>
           <Button
-            onClick={() => navigate("/accept/step2")}
+            onClick={() => navigate("../step2")}
             disabled={timeTable.length === 0} // timeTable이 비어있으면 비활성화
           >
             다음

@@ -26,7 +26,6 @@ const LoginPage = () => {
         sessionStorage.setItem("login", "true");
         sessionStorage.setItem("name", response.data.name);
         sessionStorage.setItem("isAuthenticated", "true");
-        console.log("sessionStorage:", sessionStorage);
 
         window.dispatchEvent(new Event("storage"));
         navigate("/main");
