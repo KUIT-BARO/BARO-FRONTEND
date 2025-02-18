@@ -21,12 +21,13 @@ const LoginPage = () => {
 
       const response = await postAuth.login({ id, password });
       if (response.status === 200) {
-        console.log('로그인 성공 응답 데이터 :', response);
+        console.log("로그인 성공 응답 데이터 :", response);
 
         sessionStorage.setItem("login", "true");
+        sessionStorage.setItem("name", response.data.name);
         sessionStorage.setItem("isAuthenticated", "true");
         console.log("sessionStorage:", sessionStorage);
-        
+
         window.dispatchEvent(new Event("storage"));
         navigate("/main");
       }
