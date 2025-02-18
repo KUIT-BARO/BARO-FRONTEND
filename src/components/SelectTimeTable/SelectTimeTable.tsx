@@ -32,7 +32,15 @@ export default function SelectTimeTable({
   setTimeTable,
 }) {
   const dates = getDateRangeWithDay(dateStart, dateEnd);
-
+  const daysOfWeekMap = {
+    일: "SUNDAY",
+    월: "MONDAY",
+    화: "TUESDAY",
+    수: "WEDNESDAY",
+    목: "THURSDAY",
+    금: "FRIDAY",
+    토: "SATURDAY",
+  };
   const toggleBlockSelection = (
     date: string,
     hour: number,
@@ -80,7 +88,7 @@ export default function SelectTimeTable({
       <div className="main-content">
         <TimeLabel>
           {[...Array(18)].map((_, index) => {
-            const hour = index + 7; // 7시부터 24시까지
+            const hour = index + 7;
             return (
               <div key={hour} className="label">
                 {hour}:00
@@ -89,27 +97,44 @@ export default function SelectTimeTable({
           })}
         </TimeLabel>
         <TimeWrapper datesLength={dates.length}>
-          {dates.map((date) => (
-            <div key={date} className="column">
-              {[...Array(34)].map((_, index) => {
-                const hour = Math.floor(index / 2) + 7;
-                const minutes = index % 2 === 0 ? "00" : "30";
+          {dates.map((date) => {
+            const dayOfWeek = daysOfWeekMap[date.split("(")[1][0]]; // 날짜에서 요일 추출 후 변환
+            return (
+              <div key={date} className="column">
+                {[...Array(34)].map((_, index) => {
+                  const hour = Math.floor(index / 2) + 7;
+                  const minutes = index % 2 === 0 ? "00" : "30";
+                  const time_start = `${hour
+                    .toString()
+                    .padStart(2, "0")}:${minutes}:00`;
 
-                return (
-                  <TimeBlock
-                    key={`${date}-${hour}:${minutes}`}
-                    isSelected={timeTable.some(
-                      (slot) =>
-                        slot.date === date &&
-                        slot.time_start ===
-                          `${hour.toString().padStart(2, "0")}:${minutes}:00`
-                    )}
-                    onClick={() => toggleBlockSelection(date, hour, minutes)}
-                  />
-                );
-              })}
-            </div>
-          ))}
+                  // 🔹 API에서 불러온 일정과 겹치는 시간인지 확인
+                  const isDisabled = timeTable.some(
+                    (slot) =>
+                      slot.dayOfWeek === dayOfWeek &&
+                      slot.time_start <= time_start &&
+                      slot.time_end > time_start
+                  );
+
+                  return (
+                    <TimeBlock
+                      key={`${date}-${hour}:${minutes}`}
+                      isSelected={timeTable.some(
+                        (slot) =>
+                          slot.date === date && slot.time_start === time_start
+                      )}
+                      className={isDisabled ? "disabled" : ""}
+                      onClick={
+                        !isDisabled
+                          ? () => toggleBlockSelection(date, hour, minutes)
+                          : undefined
+                      }
+                    />
+                  );
+                })}
+              </div>
+            );
+          })}
         </TimeWrapper>
       </div>
     </TimeTableWrapper>

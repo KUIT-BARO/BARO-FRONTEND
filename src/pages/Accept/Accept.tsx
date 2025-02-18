@@ -70,35 +70,47 @@ export default function Accept() {
         <Route
           path="step1"
           element={
-            <Step1
-              peopleNumber={data.peopleNumber}
-              handleBack={handleBack}
-              handleExit={handleExit}
-              dateStart={data.dateStart}
-              dateEnd={data.dateEnd}
-              timeTable={timeTable}
-              setTimeTable={setTimeTable}
-            />
+            data ? (
+              <Step1
+                peopleNumber={data.peopleNumber}
+                handleBack={handleBack}
+                handleExit={handleExit}
+                dateStart={data.dateStart}
+                dateEnd={data.dateEnd}
+                timeTable={timeTable}
+                setTimeTable={setTimeTable}
+              />
+            ) : (
+              <div>로딩중</div>
+            )
           }
         />
         <Route
           path="step2"
           element={
-            <Step2
-              data={data}
-              handleBack={handleBack}
-              handleExit={handleExit}
-            />
+            data ? (
+              <Step2
+                data={data}
+                handleBack={handleBack}
+                handleExit={handleExit}
+              />
+            ) : (
+              <div>로딩중</div>
+            )
           }
         />
         <Route
           path="confirm"
           element={
-            <Confirm
-              data={data}
-              handleBack={handleBack}
-              handleExit={handleExit}
-            />
+            data ? (
+              <Confirm
+                data={data}
+                handleBack={handleBack}
+                handleExit={handleExit}
+              />
+            ) : (
+              <div>로딩중</div>
+            )
           }
         />
       </Routes>

@@ -60,7 +60,7 @@ export default function Popup({
       console.error("약속 생성 중 오류 발생:", error);
     }
   };
-
+  const user = sessionStorage.getItem("name");
   return (
     <Overlay>
       <PopupContent>
@@ -75,11 +75,13 @@ export default function Popup({
             </div>
             <div className="wrap">
               <img src={crown} />
-              <p>user</p>
+              <p>{user}</p>
             </div>
             <div className="wrap">
               <img src={person} />
-              <p>user 외 {peopleNum}</p>
+              <p>
+                {user} 외 {peopleNum}
+              </p>
             </div>
             <div className="wrap">
               <img src={locationIcon} />
