@@ -8,7 +8,15 @@ export const MainWrapper = styled.div`
   min-height: 100vh;
   padding: 20px;
   gap: 25px;
-  background: linear-gradient(180deg, #5175ff 0%, #cfdae6 100%);
+  // background: linear-gradient(180deg, #5175ff 0%, #cfdae6 100%);
+  background: linear-gradient(
+    to bottom, 
+  #5175FF 22%, 
+  #A1B3F8 36%, 
+  #F0F0F0 80%, 
+  #747474 110%
+  );
+
   font-family: "Pretendard", sans-serif;
   .big-logo {
     position: absolute;
@@ -24,7 +32,7 @@ export const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 15px;
+  // margin-bottom: 15px;
   
   .logo {
     height: 20px;
@@ -96,9 +104,16 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 25px;
+  // gap: 25px;
   box-sizing: border-box;
-  margin-top: 40px;
+  margin-top: 68px;
+`;
+
+export const Ddays = styled.div`
+  font-size: 128px;
+  color: white;
+  font-weight: 700;
+  margin-bottom: 72px;
 `;
 
 export const Promises = styled.div`
