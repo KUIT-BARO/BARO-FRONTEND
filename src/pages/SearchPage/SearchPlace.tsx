@@ -20,6 +20,7 @@ export default function SearchPage() {
         mapHeight="350px" 
         setCurrentLocationName={setCurrentLocationName}
         searchKeyword={searchAddress}
+        buttonOn={true}
       />
       <Places />
       <Navigation />

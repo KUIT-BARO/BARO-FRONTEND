@@ -10,6 +10,7 @@ import KakaoMap from "../../../../components/forSearchPage/KakaoMap/KakaoMap";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 export default function Popup({ setPopup, address, onOpenPopup }) {
+  console.log(address);
   return (
     <>
       <Nav>
@@ -23,7 +24,12 @@ export default function Popup({ setPopup, address, onOpenPopup }) {
       </Nav>
       <Wrapper>
         <Section style={{ marginTop: "54px", backgroundColor: " #f4f8fb" }}>
-          <KakaoMap mapHeight="63vh" />
+          
+          <KakaoMap 
+            mapHeight="63vh" 
+            searchKeyword={address}
+            buttonOn={false}
+          />
         </Section>
         <FixedBottom>
           <div className="desc">
