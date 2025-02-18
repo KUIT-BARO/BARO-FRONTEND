@@ -1,41 +1,66 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import Button from '../../components/Button/Button.tsx';
+import Button from '../../components/Button/Button';
+import { getMyPage } from '../../apis/user/getMyPage';
+import { useNavigate } from 'react-router-dom';
 
 interface WithdrawModalProps {
-    isOpen: boolean;
-    onClose: () => void;
-    onWithdraw: () => void;
-  }
-  
-  const WithdrawModal: React.FC<WithdrawModalProps> = ({
-    isOpen,
-    onClose,
-    onWithdraw,
-  }) => {
-    if (!isOpen) return null;
-  
-    return (
-      <ModalOverlay>
-        <ModalContainer>
-          <Title>정말로 탈퇴하시겠습니까?</Title>
-          <Description>
-            탈퇴 시 계정 및 이용 기록은 모두 삭제되며,
-            <br />
-            삭제된 데이터는 복구되지 않습니다.
-          </Description>
-          <ButtonContainer>
-            <Button onClick={onClose} color="Gray">
-              취소
-            </Button>
-            <Button onClick={onWithdraw} color="Red">
-              탈퇴하기
-            </Button>
-          </ButtonContainer>
-        </ModalContainer>
-      </ModalOverlay>
-    );
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+const WithdrawModal: React.FC<WithdrawModalProps> = ({
+  isOpen,
+  onClose,
+}) => {
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleWithdraw = async () => {
+    try {
+      setIsLoading(true);
+      await getMyPage.withdraw();
+      alert("회원 탈퇴가 완료되었습니다.");
+      navigate('/login');
+    } catch (error) {
+      alert(error instanceof Error ? error.message : "회원 탈퇴에 실패했습니다.");
+    } finally {
+      setIsLoading(false);
+      onClose();
+    }
   };
+
+  if (!isOpen) return null;
+
+  return (
+    <ModalOverlay>
+      <ModalContainer>
+        <Title>정말로 탈퇴하시겠습니까?</Title>
+        <Description>
+          탈퇴 시 계정 및 이용 기록은 모두 삭제되며,
+          <br />
+          삭제된 데이터는 복구되지 않습니다.
+        </Description>
+        <ButtonContainer>
+          <Button 
+            onClick={onClose} 
+            color="Gray"
+            disabled={isLoading}
+          >
+            취소
+          </Button>
+          <Button 
+            onClick={handleWithdraw} 
+            color="Red"
+            disabled={isLoading}
+          >
+            {isLoading ? "처리중..." : "탈퇴하기"}
+          </Button>
+        </ButtonContainer>
+      </ModalContainer>
+    </ModalOverlay>
+  );
+};
   
   const ModalOverlay = styled.div`
     position: fixed;
