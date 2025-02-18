@@ -27,12 +27,18 @@ const MyPage = () => {
       try {
         const response = await getMyPage.getMyPage();
         if (response.status === 200 && response.data) {
+          console.log('마이페이지 조회 결과1 :', response.data);
+          console.log('마이페이지 조회 결과2 :', response.data.data.user);
+          console.log('마이페이지 조회 결과3 :', response.data.data.user.nickname);
+          
+          
           setUserInfo({
-            nickname: response.data.user.nickname,
-            userId: response.data.user.userId,
-            userProfile: response.data.user.userProfile
+            nickname: response.data.data.user.nickname,
+            userId: response.data.data.user.userId,
+            userProfile: response.data.data.user.userProfile
           });
-          alert(userInfo);
+          // alert(userInfo);
+          console.log('마이페이지 조회 결과4 :', userInfo);
           
         }
       } catch (error) {
