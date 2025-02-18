@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Header, MainWrapper, PromiseBtn, Title } from "./Main.styles";
-import { Container, Promises, Dots, Dot } from "./Main.styles";
+import { Container, Ddays, Promises, Dots, Dot } from "./Main.styles";
 import Navigation from "../../components/Navigation/Navigation";
 import { useNavigate } from "react-router-dom";
 import { postAuth } from "../../apis/auth/postAuth";
@@ -13,6 +13,8 @@ import personWhite from "../../assets/icons/personWhite.svg";
 
 import plus from "../../assets/icons/forMyPromises/plus.svg";
 import PromiseContainer from "../../components/PromiseContainer/PromiseContainer";
+
+import { getHome } from "../../apis/user/getHome";
 
 const Main = () => {
   const dummyData = [
@@ -40,7 +42,49 @@ const Main = () => {
     }
   };
 
+  interface upcomingDday {
+    date: string;
+    name: string;
+    peopleNumber: number;
+    place: string;
+    promiseId: number;
+    purpose: string;
+    timeEnd: string;
+    timeStart: string;
+  };
+  interface upcomingPromises {
+    promises: upcomingDday[];
+  }
+  const [homeDataName, setHomeDataName] = useState<string>('');
+  const [upcomingDday, setUpcomingDday] = useState<upcomingDday>({
+    date: "",
+    name: "",
+    peopleNumber: 0,
+    place: "",
+    promiseId: 0,
+    purpose: "",
+    timeEnd: "",
+    timeStart: "",
+  });
+  const [upcomingPromises, setUpcomingPromises] = useState<upcomingPromises>({ promises: [] });
+
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await getHome.getHome();
+        console.log("홈 데이터:", response.data.data);
+        setHomeDataName(response.data.data.name);
+        setUpcomingDday(response.data.data.upcomingDday);
+        // setUpcomingPromises({ promises: [...response.data.data.upcomingPromises] });
+        for (let i=0 ; i<response.data.data.upcomingPromises.length ; i++) {          
+          upcomingPromises.promises.push(response.data.data.upcomingPromises[i]);
+        }
+      } catch (error) {
+        console.error("홈 데이터 불러오기 실패:", error);
+      }
+    };
+    fetchData();    
+
     const handleScroll = () => {
       if (scrollRef.current) {
         const scrollLeft = scrollRef.current.scrollLeft;
@@ -57,9 +101,9 @@ const Main = () => {
   return (
     <MainWrapper>
       {/* 데이터가 없을 경우 bigLogo 표시 */}
-      {dummyData.length === 0 && (
+      {/* {Object.keys(upcomingPromises).length === 0 && (
         <img src={bigLogo} alt="big logo" className="big-logo" />
-      )}
+      )} */}
 
       <Header>
         <img src={logo} alt="logo icon" className="logo" />
@@ -67,66 +111,77 @@ const Main = () => {
           <button onClick={handleLogout} className="logout-btn">
             로그아웃
           </button>
-          <div className="alarm-wrapper">
+          {/* <div className="alarm-wrapper">
             <img src={alarm} alt="alarm icon" />
             <span></span>
-          </div>
+          </div> */}
         </div>
       </Header>
 
       <section style={{ width: "100%" }}>
-        {dummyData.length > 0 ? (
+        {(upcomingDday != null) ? (
           <>
-            <Title>
-              <div>지환님의 다가올 약속</div>
+            {/* <Title>
+              <div>{homeDataName}님의 다가올 약속</div>
               <div className="bold">마케팅 관리 팀플</div>
               <div className="desc">
                 <img src={personWhite} alt="person icon" />
                 <span>김지환 외 2명</span>
               </div>
-            </Title>
+            </Title> */}
             <Container>
-              <Promises ref={scrollRef}>
-                {dummyData.map((item, index) => (
+              <Ddays>
+                D-{Math.ceil((new Date(upcomingDday.date).getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24))}
+              </Ddays>
+              <PromiseContainer
+                left={Math.ceil((new Date(upcomingDday.date).getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24))}
+                date={upcomingDday.date}
+                people={`${homeDataName} 외 ${upcomingDday.peopleNumber - 1}명`}
+                location={upcomingDday.place}
+                title={upcomingDday.name}
+              />
+              {/* <Promises ref={scrollRef}> */}
+                {upcomingPromises.promises.map((item, index) => (
                   <PromiseContainer
-                    key={index} // key 추가
-                    left={item.left}
+                    key={index}
+                    left={Math.ceil((new Date(item.date).getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24))}
                     date={item.date}
-                    people={item.people}
-                    location={item.location}
-                    title={item.title}
-                    onClick={() => navigate(`/accept/${item.promiseId}`)}
+
+                    people={`${homeDataName} 외 ${item.peopleNumber - 1}명`}
+                    location={item.place}
+                    title={item.name}
+
                   />
                 ))}
-              </Promises>
-              <Dots>
-                {dummyData.map((_, index) => (
+              {/* </Promises> */}
+              {/* <Dots>
+                {upcomingPromises.promises.map((_, index) => (
                   <Dot key={index} active={index === activeIndex} />
                 ))}
-              </Dots>
+              </Dots> */}
             </Container>
           </>
         ) : (
           <>
             <Title style={{ marginBottom: "280px" }}>
-              <div>지환님의 다가올 약속</div>
-              <div className="bold">없습니다.</div>
+              <div>{homeDataName}님</div>
+              <div className="bold">지금은 예정된 약속이 없어요</div>
             </Title>
             <Title>
-              <div className="bold">우리 다 같이 BARO 하자</div>
+              {/* <div className="bold">우리 다 같이 BARO 하자</div> */}
             </Title>
-            <PromiseBtn>
+            <PromiseBtn onClick={() => navigate("/suggest")}>
               <div className="plus">
                 <img src={plus} />
               </div>
-              <div>새로운 모임 제안하기</div>
+              <div>새로운 약속 만들기</div>
             </PromiseBtn>
           </>
         )}
       </section>
 
       {/* 위치 정보 섹션 */}
-      <section style={{ width: "100%", marginBottom: "70px" }}>
+      {/* <section style={{ width: "100%", marginBottom: "70px" }}>
         <Title>
           <div className="bold">BARO 이곳에서</div>
           <div className="desc">
@@ -134,7 +189,8 @@ const Main = () => {
             <span>건대입구역 주변</span>
           </div>
         </Title>
-      </section>
+      </section> */}
+
       <Navigation />
     </MainWrapper>
   );

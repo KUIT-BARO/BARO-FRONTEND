@@ -20,22 +20,26 @@ const PromiseContainer = ({
   onClick,
 }: PromiseContainerProps) => {
   return (
-    <Container onClick={onClick}>
-      <div className="d-day">D-{left}</div>
+
+    <Container>
+      {/* <div className="d-day">D-{left}</div> */}
+
       <PromiseWrapper>
-        <div className="header">
-          <div className="d-day">D-{left}</div>
-          <div className="bold">{date}</div>
-        </div>
         <div className="main">
-          <div className="title">{title}</div>
-          <div className="desc">
-            <img alt="people-icon" src={person} />
-            <span>{people}</span>
-          </div>
-          <div className="desc">
+          <div className="location">
             <img alt="location-icon" src={locationIcon} />
             <span>{location}</span>
+          </div>
+          <div className="title">{title}</div>
+          <div className="bold">
+            {parseInt(date.slice(5,7))}/{date.slice(8,10)} ({new Date(date).toLocaleString('ko-KR', {weekday: 'short'})})
+          </div>
+          <div className="desc-wrapper">
+            <div className="desc">
+              <img alt="people-icon" src={person} />
+              <span>{people}</span>
+            </div>
+            <div className="d-day">D-{left}</div>
           </div>
         </div>
       </PromiseWrapper>

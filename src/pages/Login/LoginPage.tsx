@@ -7,8 +7,6 @@ import userIcon from "../../assets/icons/login_user.svg";
 import lockIcon from "../../assets/icons/login_password.svg";
 import Logo from "../../assets/icons/logo.svg";
 
-import { getHome } from "../../apis/user/getHome";
-
 const LoginPage = () => {
   const navigate = useNavigate();
   const [id, setId] = useState("");
@@ -28,9 +26,6 @@ const LoginPage = () => {
         sessionStorage.setItem("login", "true");
         sessionStorage.setItem("isAuthenticated", "true");
         console.log("sessionStorage:", sessionStorage);
-
-        // const response2 = await getHome.getHome();
-        // console.log('getHome 응답 데이터 :', response2);
         
         window.dispatchEvent(new Event("storage"));
         navigate("/main");
