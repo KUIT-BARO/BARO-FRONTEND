@@ -14,7 +14,7 @@ export const UserDesc = styled.div`
   border: 1px solid #edf1ff;
   background-color: white;
   padding: 10px;
-  border-radius: 10px;
+  margin: 0 -20px;
   > .left {
     display: flex;
     gap: 16px;

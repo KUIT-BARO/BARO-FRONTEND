@@ -86,7 +86,6 @@ export default function Suggest() {
             <Step3
               handleBack={handleBack}
               handleExit={handleExit}
-              placeName={placeName}
               setPlaceName={setPlaceName}
               onOpenPopup={handleOpenPopup}
             />
