@@ -12,9 +12,10 @@ interface KakaoMapProps {
   currentLocation: { lat: number; lng: number; };
   setCurrentLocationName: (name: string) => void;
   searchKeyword: string;
+  buttonOn: boolean;
 };
 
-export default function KakaoMap({ mapHeight, currentLocation, setCurrentLocationName, searchKeyword }: KakaoMapProps) { 
+export default function KakaoMap({ mapHeight, currentLocation, setCurrentLocationName, searchKeyword, buttonOn }: KakaoMapProps) { 
 
   // 지도 중심
   const [center, setCenter] = useState<{ 
@@ -140,9 +141,11 @@ export default function KakaoMap({ mapHeight, currentLocation, setCurrentLocatio
           }}
         />
       </Map>
-      <SetCenterButton onClick={setCenterToMyPosition}>
-        <img src={Scope} alt="scope icon" />
-      </SetCenterButton>
+      {buttonOn &&
+        <SetCenterButton onClick={setCenterToMyPosition}>
+          <img src={Scope} alt="scope icon" />
+        </SetCenterButton>
+      }
     </MapWrapper>
   );
 };
