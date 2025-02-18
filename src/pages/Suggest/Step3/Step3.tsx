@@ -16,13 +16,18 @@ import styled from "styled-components";
 import Search from "../../../components/Search/Search";
 
 export default function Step3({
-  placeName,
-  setPlaceNames,
+  setPlaceName,
   handleBack,
   handleExit,
   onOpenPopup,
 }: StepInterface & { onOpenPopup: () => void }) {
   const [popup, setPopup] = useState(false);
+  const [address, setAddress] = useState<{
+    placeId: number;
+    placeName: string;
+    address: string;
+    status: string;
+  } | null>(null);
 
   const dummyaddress = [
     {
@@ -62,7 +67,7 @@ export default function Step3({
       onOpenPopup={onOpenPopup}
       setPopup={setPopup}
       address={address}
-      setAddress={setAddress}
+      setPlaceName={setPlaceName}
     />
   ) : (
     <>
@@ -73,14 +78,12 @@ export default function Step3({
         <SubTitle>어디서 만나실건가요?</SubTitle>
         <Desc>약속 장소의 대략적인 위치를 설정해주세요</Desc>
         <Section>
-          <Search placeholder={"건대입구"} />
-
           <LocationWrapper>
             {dummyaddress.map((address) => (
               <Location
                 key={address.placeId}
                 onClick={() => {
-                  setPlaceName(address.placeName);
+                  setAddress(address);
                   setPopup(true);
                 }}
               >

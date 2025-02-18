@@ -22,7 +22,7 @@ interface PopupProps extends SuggestInterface {
   dateEnd: string;
   peopleNum: number;
   purpose: string;
-  address: string;
+  placeName: string;
 }
 
 export default function Popup({
@@ -33,7 +33,7 @@ export default function Popup({
   dateEnd,
   peopleNum,
   purpose,
-  address,
+  placeName,
 }: PopupProps) {
   const navigate = useNavigate();
 
@@ -45,11 +45,16 @@ export default function Popup({
         dateEnd,
         peopleNum,
         purpose,
-        address
+        placeName
       );
-      if (response?.data?.promiseId) {
-        setPromiseId(response.data.promiseId);
-        // setPromiseId();
+      if (response) {
+        console.log(response.data.data);
+        setPromiseId(response.data.data.promiseId);
+
+        // 상태 업데이트 후 네비게이션 실행
+        setTimeout(() => {
+          navigate("/suggest/step4");
+        }, 100);
       }
     } catch (error) {
       console.error("약속 생성 중 오류 발생:", error);
@@ -78,7 +83,7 @@ export default function Popup({
             </div>
             <div className="wrap">
               <img src={locationIcon} />
-              <p>{address.placeName}</p>
+              <p>{placeName}</p>
             </div>
             <div className="wrap">
               <img src={date} />
@@ -99,8 +104,8 @@ export default function Popup({
           }}
         >
           <Button
-            onClick={() => {
-              handlePostPromise();
+            onClick={async () => {
+              await handlePostPromise();
               onClose();
               navigate("/suggest/step4");
             }}

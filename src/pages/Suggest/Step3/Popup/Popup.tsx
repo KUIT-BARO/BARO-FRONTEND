@@ -8,9 +8,13 @@ import { Wrapper, Section } from "../../../../assets/styles/Steps.styles";
 import KakaoMap from "../../../../components/forSearchPage/KakaoMap/KakaoMap";
 
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
-export default function Popup({ setPopup, address, onOpenPopup }) {
-  console.log(address);
+
+export default function Popup({
+  setPopup,
+  address,
+  onOpenPopup,
+  setPlaceName,
+}) {
   return (
     <>
       <Nav>
@@ -24,10 +28,9 @@ export default function Popup({ setPopup, address, onOpenPopup }) {
       </Nav>
       <Wrapper>
         <Section style={{ marginTop: "54px", backgroundColor: " #f4f8fb" }}>
-          
-          <KakaoMap 
-            mapHeight="63vh" 
-            searchKeyword={address}
+          <KakaoMap
+            mapHeight="63vh"
+            searchKeyword={address.placeName}
             buttonOn={false}
           />
         </Section>
@@ -38,6 +41,7 @@ export default function Popup({ setPopup, address, onOpenPopup }) {
           </div>
           <Button
             onClick={() => {
+              setPlaceName(address.placeName);
               setPopup(false);
               onOpenPopup(true);
             }}

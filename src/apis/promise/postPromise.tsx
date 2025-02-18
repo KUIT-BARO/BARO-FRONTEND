@@ -28,7 +28,7 @@ const PostPromise = async (
         : new Date(dateEnd).toISOString().split("T")[0],
     peopleNum: validPeopleNum,
     purpose,
-    placeName,
+    placeName: "스타벅스 강남점",
   };
 
   try {

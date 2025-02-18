@@ -40,16 +40,26 @@ export default function Confirm({
   const [link, setLink] = useState<string | null>(null);
   const showPopup = async () => {
     try {
-      setLinkPopup(true);
+      if (!promiseId) {
+        console.error("promiseId가 설정되지 않았습니다.");
+        return null;
+      }
 
+      setLinkPopup(true);
       const response = await GetSharePromise(promiseId);
-      setLink(response.data.url);
-      setTimeout(() => {
-        setLinkPopup(false);
-      }, 1000);
+
+      if (response?.data?.data.url) {
+        setLink(response.data.data.url);
+        setTimeout(() => {
+          setLinkPopup(false);
+        }, 1000);
+
+        return response.data.data.url; // ✅ 공유 링크 반환
+      }
     } catch (error) {
       console.error("공유 링크 가져오는 중 오류 발생:", error);
     }
+    return null; // 실패 시 null 반환
   };
 
   return (
@@ -57,7 +67,6 @@ export default function Confirm({
       {linkPopup && (
         <LinkPopupWrapper>
           <div>링크가 복사되었습니다.</div>
-          <div>{link}</div>
         </LinkPopupWrapper>
       )}
       <ConfirmWrapper>
@@ -110,7 +119,24 @@ export default function Confirm({
           background: "white",
         }}
       >
-        <Button onClick={() => showPopup()}>링크 복사하기</Button>
+        <Button
+          onClick={async () => {
+            const copiedLink = await showPopup(); // 공유 링크를 가져온 후
+            if (copiedLink) {
+              try {
+                await navigator.clipboard.writeText(copiedLink);
+                console.log("링크 복사 완료:", copiedLink);
+              } catch (error) {
+                console.error("클립보드 복사 실패:", error);
+              }
+            } else {
+              console.warn("복사할 링크가 없습니다.");
+            }
+          }}
+        >
+          링크 복사하기
+        </Button>
+
         <Button onClick={() => navigate(-1)} color="Gray">
           수정하기
         </Button>
@@ -173,7 +199,7 @@ const LinkPopupWrapper = styled.div`
   left: 50%;
 
   transform: translate(-50%, 50%);
-  width: 100%;
+  width: 90%;
   display: flex;
   flex-direction: column;
   justify-content: center;
