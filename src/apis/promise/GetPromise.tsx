@@ -2,7 +2,7 @@ import instance from "../instance";
 import { createErrorResponse } from "../../interface/api/Message";
 const GetPromise = async (promiseId: number) => {
   try {
-    return await instance.get(`"/promise/${promiseId}`);
+    return await instance.get(`/promise/${promiseId}`);
   } catch (error) {
     if (error.response) {
       const errorData = createErrorResponse(error.response.status.toString());

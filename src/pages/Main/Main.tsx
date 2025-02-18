@@ -24,32 +24,11 @@ const Main = () => {
       title: "웹 개발 프로젝트 회의",
       people: "김민수 외 3명",
       location: "스타벅스 강남점",
-    },
-    {
-      left: 5,
-      date: "11월 24일 10시 00분",
-      title: "데이터 분석 스터디",
-      people: "박지연 외 4명",
-      location: "건대 도서관",
-    },
-    {
-      left: 1,
-      date: "11월 20일 19시 00분",
-      title: "친구 생일 파티",
-      people: "최영훈 외 6명",
-      location: "홍대 술집",
-    },
-    {
-      left: 7,
-      date: "11월 26일 16시 30분",
-      title: "졸업작품 발표 준비",
-      people: "정다은 외 5명",
-      location: "학교 세미나실",
+      promiseId: 37,
     },
   ];
 
   const navigate = useNavigate();
-  // const dummyData = [];
 
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -167,9 +146,11 @@ const Main = () => {
                     key={index}
                     left={Math.ceil((new Date(item.date).getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24))}
                     date={item.date}
+
                     people={`${homeDataName} 외 ${item.peopleNumber - 1}명`}
                     location={item.place}
                     title={item.name}
+
                   />
                 ))}
               {/* </Promises> */}

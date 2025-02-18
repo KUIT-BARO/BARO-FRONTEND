@@ -94,6 +94,9 @@ export default function Step1({
 }
 const renderProfileImages = (peopleNumber: number | undefined) => {
   const profileImages = [profileImg_1, profileImg_2, profileImg_3];
+  if (peopleNumber == 0) {
+    peopleNumber = 1;
+  }
   if (peopleNumber <= 3) {
     return profileImages
       .slice(0, peopleNumber)

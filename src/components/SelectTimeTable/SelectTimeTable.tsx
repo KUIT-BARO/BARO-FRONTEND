@@ -77,7 +77,7 @@ export default function SelectTimeTable({
           ))}
         </Day>
       </div>
-      <div className="content">
+      <div className="main-content">
         <TimeLabel>
           {[...Array(18)].map((_, index) => {
             const hour = index + 7; // 7시부터 24시까지
