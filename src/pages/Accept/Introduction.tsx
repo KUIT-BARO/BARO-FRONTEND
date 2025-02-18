@@ -2,7 +2,6 @@ import React from "react";
 
 import styled from "styled-components";
 
-import formatDateToShort from "../../utils/formatDateToShort";
 import StepInterface from "../../interface/Step";
 import SuggestInterface from "../../interface/Suggest";
 
@@ -17,6 +16,7 @@ import crown from "../../assets/icons/crown.svg";
 
 import 제안수락 from "../../assets/icons/제안수락.svg";
 import { useNavigate } from "react-router-dom";
+import formatDateWithDay from "../../utils/formateDateWithDay";
 
 interface ConfirmProps extends StepInterface, SuggestInterface {}
 
@@ -26,13 +26,14 @@ export default function Introduction({
   data,
 }: ConfirmProps) {
   const navigate = useNavigate();
+
   return (
     <>
       <ConfirmWrapper>
         <Nav handleBack={handleBack} handleExit={handleExit} />
         <Title>
           <p className="bold">
-            {data.title}
+            {data.name}
             <br />
             모임 제안을 받았어요!
           </p>
@@ -60,8 +61,8 @@ export default function Introduction({
             <div className="wrap">
               <img src={date} />
               <p>
-                {formatDateToShort(data.dateStart)} ~{" "}
-                {formatDateToShort(data.dateEnd)}
+                {formatDateWithDay(data.dateStart)} ~{" "}
+                {formatDateWithDay(data.dateEnd)}
               </p>
             </div>
           </div>
@@ -97,6 +98,7 @@ const ConfirmWrapper = styled.div`
   padding: 20px;
   background-color: white;
   box-sizing: border-box;
+  margin-top: 20px;
 `;
 const Title = styled.div`
   display: flex;

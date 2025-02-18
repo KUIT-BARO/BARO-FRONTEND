@@ -1,13 +1,16 @@
-import React, { useState } from "react";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Route, Routes, useNavigate, useParams } from "react-router-dom";
 
 import Introduction from "./Introduction";
 import Step1 from "./Step1/Step1";
 import Step2 from "./Step2/Step2";
 import Confirm from "./Confrim";
+import GetPromise from "../../apis/Promise/GetPromise";
 // import Popup from "./Popup/Popup";
 
 export default function Accept() {
+  const { promiseId } = useParams();
+
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [purpose, setPurpose] = useState("");
@@ -17,36 +20,22 @@ export default function Accept() {
   const [peopleNum, setPeopleNum] = useState<number>(0);
 
   const [timeTable, setTimeTable] = useState<[]>([]);
+  const [data, setData] = useState(null);
 
-  // useEffect(() => {
-  //   const fetchPromiseData = async () => {
-  //     try {
-  //       const response = await GetPromise(promiseId);
-  //       if (response?.data?.promise) {
-  //         const { promiseId, name, purpose, dateStart, dateEnd, place, peopleNumber } = response.data.promise;
+  useEffect(() => {
+    if (promiseId) {
+      fetchPromiseData(Number(promiseId));
+    }
+  }, [promiseId]);
 
-  //         setPromiseName(name);
-  //         setPromisePurpose(purpose);
-  //         setPromiseStartDate(new Date(dateStart));
-  //         setPromiseEndDate(new Date(dateEnd));
-  //         setPromiseLocation(place);
-  //         setPromisePeopleNum(peopleNumber);
-  //       }
-  //     } catch (error) {
-  //       console.error("약속 데이터를 불러오는 중 오류 발생:", error);
-  //     }
-  //   };
-
-  //   fetchPromiseData();
-  // }, [promiseId]);
-  const data = {
-    promiseId: 123,
-    name: "친구 모임",
-    purpose: "팀 프로젝트/회의",
-    dateStart: new Date("2025-01-15"),
-    dateEnd: new Date("2025-01-25"),
-    place: "강남역 카페",
-    peopleNumber: 5,
+  const fetchPromiseData = async (id: number) => {
+    try {
+      const response = await GetPromise(id);
+      console.log(response.data.data);
+      setData(response.data.data);
+    } catch (error) {
+      console.error("약속 데이터를 불러오는 중 오류 발생:", error);
+    }
   };
 
   // 뒤로 가기
@@ -66,13 +55,18 @@ export default function Accept() {
         <Route
           path="/"
           element={
-            <Introduction
-              data={data}
-              handleBack={handleBack}
-              handleExit={handleExit}
-            />
+            data ? (
+              <Introduction
+                data={data}
+                handleBack={handleBack}
+                handleExit={handleExit}
+              />
+            ) : (
+              <div>로딩 중...</div> // ✅ 이제 항상 <Route> 내부에서 반환됨
+            )
           }
         />
+
         <Route
           path="step1"
           element={

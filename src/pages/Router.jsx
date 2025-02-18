@@ -51,7 +51,7 @@ const Router = () => {
       ),
     },
     {
-      path: "/accept/*",
+      path: "/accept/:promiseId/*",
       element: (
         <ProtectedRoute isAuthenticated={isAuthenticated}>
           <Accept />

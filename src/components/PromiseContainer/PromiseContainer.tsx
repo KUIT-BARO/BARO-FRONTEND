@@ -9,6 +9,7 @@ interface PromiseContainerProps {
   people: string;
   location: string;
   title: string;
+  onClick: () => void;
 }
 const PromiseContainer = ({
   left,
@@ -16,9 +17,10 @@ const PromiseContainer = ({
   people,
   location,
   title,
+  onClick,
 }: PromiseContainerProps) => {
   return (
-    <Container>
+    <Container onClick={onClick}>
       <div className="d-day">D-{left}</div>
       <PromiseWrapper>
         <div className="header">

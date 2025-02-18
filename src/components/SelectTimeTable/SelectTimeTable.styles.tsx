@@ -12,7 +12,7 @@ export const TimeTableWrapper = styled.div`
     align-items: center;
   }
 
-  .content {
+  .main-content {
     display: grid;
     grid-template-columns: auto 1fr;
     gap: 5px;

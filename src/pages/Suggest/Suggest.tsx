@@ -30,7 +30,7 @@ export default function Suggest() {
 
   // 홈 화면으로 이동
   const handleExit = () => {
-    navigate("/");
+    navigate("/main");
   };
 
   // 팝업 열기
