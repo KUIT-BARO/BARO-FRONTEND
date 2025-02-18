@@ -35,13 +35,28 @@ const MyPage = () => {
       try {
         setIsLoading(true);
         const response = await getMyPage.getMyPage();
+<<<<<<< HEAD
         
         if (response.status === 200) {
+=======
+        if (response.status === 200 && response.data) {
+          console.log('마이페이지 조회 결과1 :', response.data);
+          console.log('마이페이지 조회 결과2 :', response.data.data.user);
+          console.log('마이페이지 조회 결과3 :', response.data.data.user.nickname);
+          
+          
+>>>>>>> 1f93d6f1c93313e0c249e7747562ba3dd46feff3
           setUserInfo({
-            nickname: response.data.user.nickname,
-            userId: response.data.user.userId,
-            userProfile: response.data.user.userProfile
+            nickname: response.data.data.user.nickname,
+            userId: response.data.data.user.userId,
+            userProfile: response.data.data.user.userProfile
           });
+<<<<<<< HEAD
+=======
+          // alert(userInfo);
+          console.log('마이페이지 조회 결과4 :', userInfo);
+          
+>>>>>>> 1f93d6f1c93313e0c249e7747562ba3dd46feff3
         }
       } catch (error) {
         setError('마이페이지 정보를 불러오는데 실패했습니다.');
