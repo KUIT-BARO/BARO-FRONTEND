@@ -15,7 +15,6 @@ import { SectionTitle } from "./Step1.styles";
 import InputWithCounter from "../../../components/InputWithCounter/InputWithCounter";
 import Dropdown from "../../../components/DropDown/DropDown";
 import { useNavigate } from "react-router-dom";
-
 export default function Step1({
   name = "",
   setName,
@@ -35,16 +34,26 @@ export default function Step1({
 }) {
   const navigate = useNavigate();
 
+  // ✅ 목적 선택 값을 ENUM으로 매핑
+  const purposeMap: { [key: string]: string } = {
+    "팀 프로젝트/회의": "MEETING",
+    "스터디/ 공부": "STUDY",
+    "밥 같이 먹기/ 식사": "MEAL",
+    "방문/ 투어": "CAFE",
+  };
+
   const isFormComplete =
     (name ?? "").trim().length > 0 &&
     (purpose ?? "").trim().length > 0 &&
     peopleNum !== null;
 
+  // ✅ 선택한 목적을 ENUM 값으로 변환하여 저장
   const handlePurpose = (selectedPurpose: string) => {
-    setPurpose(selectedPurpose);
+    const mappedValue = purposeMap[selectedPurpose] || "";
+    setPurpose(mappedValue); // ENUM 값 저장
   };
 
-  const purposes = ["팀 프로젝트/회의", "공부", "밥 먹기", "카페 가기"];
+  const purposes = Object.keys(purposeMap);
 
   return (
     <>
@@ -73,7 +82,7 @@ export default function Step1({
               <Button
                 key={option}
                 onClick={() => handlePurpose(option)}
-                color={(purpose ?? "").includes(option) ? "Blue" : "White"}
+                color={purpose === purposeMap[option] ? "Blue" : "White"} // 선택 여부 확인
               >
                 {option}
               </Button>

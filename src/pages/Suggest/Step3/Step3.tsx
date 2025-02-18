@@ -16,8 +16,8 @@ import styled from "styled-components";
 import Search from "../../../components/Search/Search";
 
 export default function Step3({
-  address,
-  setAddress,
+  placeName,
+  setPlaceNames,
   handleBack,
   handleExit,
   onOpenPopup,
@@ -80,7 +80,7 @@ export default function Step3({
               <Location
                 key={address.placeId}
                 onClick={() => {
-                  setAddress(address.placeName);
+                  setPlaceName(address.placeName);
                   setPopup(true);
                 }}
               >
