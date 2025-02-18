@@ -30,7 +30,7 @@ export default function Confirm({
   name,
   purpose,
   peopleNum,
-  location,
+  placeName,
   dateStart,
   dateEnd,
   promiseId,
@@ -87,7 +87,7 @@ export default function Confirm({
             </div>
             <div className="wrap">
               <img src={locationIcon} />
-              <p>{location.placeName}</p>
+              <p>{placeName}</p>
             </div>
             <div className="wrap">
               <img src={date} />

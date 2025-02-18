@@ -6,7 +6,7 @@ const PostPromise = async (
   dateEnd: string,
   peopleNum: number | string,
   purpose: string,
-  address: string
+  placeName: string
 ) => {
   let validPeopleNum =
     typeof peopleNum === "string" ? parseInt(peopleNum, 10) : peopleNum;
@@ -18,15 +18,23 @@ const PostPromise = async (
 
   const requestData = {
     name,
-    dateStart,
-    dateEnd,
+    dateStart:
+      typeof dateStart === "string"
+        ? dateStart.split("T")[0]
+        : new Date(dateStart).toISOString().split("T")[0],
+    dateEnd:
+      typeof dateEnd === "string"
+        ? dateEnd.split("T")[0]
+        : new Date(dateEnd).toISOString().split("T")[0],
     peopleNum: validPeopleNum,
     purpose,
-    address,
+    placeName,
   };
 
   try {
-    return await instance.post("/promise/suggest", requestData);
+    return await instance.post("/promise/suggest", requestData, {
+      withCredentials: true,
+    });
   } catch (error) {
     if (error.response) {
       const errorData = createErrorResponse(error.response.status.toString());
