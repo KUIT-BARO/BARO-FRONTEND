@@ -12,6 +12,18 @@ export const getMyPage = {
         throw error;
       }
     },
+
+    withdraw: async () => {
+      try {
+        const response = await instance.delete("/users/me");
+        return response.data;
+      } catch (error) {
+        if (error.response?.status === 400) {
+          throw new Error("회원 탈퇴에 실패했습니다.");
+        }
+        throw error;
+      }
+    },
   
     updateProfileImage: async (profileImage: string) => {
       try {

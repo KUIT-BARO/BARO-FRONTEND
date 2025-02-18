@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { getMyPage } from '../../apis/user/getMyPage';
 import Navigation from "../../components/Navigation/Navigation";
 import ScheduleGrid from "../../components/ScheduleGrid/ScheduleGrid";
 import settingsIcon from "../../assets/icons/settings.svg";
@@ -10,21 +11,29 @@ import shareIcon from "../../assets/icons/share.svg";
 import "./MyPage.styles.css";
 import SavedPlaces from "./SavedPlaces";
 import PlaceReviews from "./PlaceReviews";
-import { getMyPage } from '../../apis/user/getMyPage';
+
+interface UserInfo {
+  nickname: string;
+  userId: number;
+  userProfile: string;
+}
 
 const MyPage = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("schedule");
   const scheduleGridRef = useRef<{ openAddModal: () => void }>(null);
-  const [userInfo, setUserInfo] = useState({
+  const [userInfo, setUserInfo] = useState<UserInfo>({
     nickname: '',
-    userId: '',
+    userId: 0,
     userProfile: '',
   });
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchMyPage = async () => {
       try {
+        setIsLoading(true);
         const response = await getMyPage.getMyPage();
         if (response.status === 200 && response.data) {
           console.log('마이페이지 조회 결과1 :', response.data);
@@ -42,12 +51,24 @@ const MyPage = () => {
           
         }
       } catch (error) {
+        setError('마이페이지 정보를 불러오는데 실패했습니다.');
         console.error('마이페이지 조회 실패:', error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
     fetchMyPage();
   }, []);
+
+  if (isLoading) {
+    return <div className="loading">로딩 중...</div>;
+  }
+
+  if (error) {
+    return <div className="error">{error}</div>;
+  }
+
 
   const getCurrentSemester = () => {
     const currentDate = new Date();
@@ -84,7 +105,7 @@ const MyPage = () => {
 
       <section className="profile-section">
         <div className="profile-image">
-          <img src={userInfo.userProfile} alt="profile" />
+          <img src={userInfo.userProfile || manAvatar} alt="profile" />
         </div>
         <div className="profile-info">
           <div className="profile-name-section">
