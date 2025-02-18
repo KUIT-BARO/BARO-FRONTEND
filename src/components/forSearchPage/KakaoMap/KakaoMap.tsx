@@ -21,6 +21,7 @@ export default function KakaoMap({
   setCurrentLocationName,
   searchKeyword,
   buttonOn,
+  staticMap,
 }: KakaoMapProps) {
   // 지도 중심
   const [center, setCenter] = useState<{
@@ -88,8 +89,10 @@ export default function KakaoMap({
         console.error("이 브라우저에서는 Geolocation이 지원되지 않습니다.");
       }
     };
-    fetchLocation();
-  }, []);
+    if (!staticMap) {
+      fetchLocation();
+    }
+  }, [staticMap]);
 
   // 검색 키워드로 지도 중심 이동
   useEffect(() => {
@@ -162,6 +165,7 @@ export default function KakaoMap({
 
 const MapWrapper = styled.div`
   position: relative;
+  width: 100%;
 `;
 
 const SetCenterButton = styled.button`

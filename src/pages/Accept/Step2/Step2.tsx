@@ -101,6 +101,7 @@ export default function Step2({ data, handleBack, handleExit }: StepInterface) {
               searchKeyword={data.place}
               buttonOn={false}
               setCurrentLocationName={data.place}
+              staticMap={true}
             />
             {/* <Section>
               {selectedLocations.map((location, idx) => (
