@@ -163,13 +163,15 @@ const Main = () => {
           </>
         ) : (
           <>
-            <Title style={{ marginBottom: "280px" }}>
-              <div>{homeDataName}님</div>
-              <div className="bold">지금은 예정된 약속이 없어요</div>
-            </Title>
+            {/* <Title style={{ marginBottom: "280px" }}> */}
             <Title>
-              {/* <div className="bold">우리 다 같이 BARO 하자</div> */}
+              <div className="name">{homeDataName} 님</div>
+              <div className="bold">지금은 예정된 약속이 없어요</div>
+              <img className="noteImg" src="https://placehold.co/148x154" alt="note image" />
             </Title>
+            {/* <Title>
+              <div className="bold">우리 다 같이 BARO 하자</div>
+            </Title> */}
             <PromiseBtn onClick={() => navigate("/suggest")}>
               <div className="plus">
                 <img src={plus} />

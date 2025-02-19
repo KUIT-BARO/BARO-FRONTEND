@@ -53,12 +53,16 @@ export const PromiseWrapper = styled.div`
     }
 
     > .location {
-      font-size: 14px;
-      color: black;
+      font-size: 10px;
+      color: gray;
       > img {
         width: 16px;
         height: 16px;
-        margin-right: 3px;
+        margin-right: 1px;
+      }
+      > span {
+        bottom: 3px;
+        position: relative;
       }
     }
 

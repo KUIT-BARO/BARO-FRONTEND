@@ -1,8 +1,8 @@
 import React from "react";
 import { Container, PromiseWrapper } from "./PromiseContainer.styles";
 
-import person from "../../assets/icons/person.svg";
-import locationIcon from "../../assets/icons/location.svg";
+import person from "../../assets/icons/사람_gray.svg";
+import locationIcon from "../../assets/icons/장소_gray.svg";
 interface PromiseContainerProps {
   left: number;
   date: string;
