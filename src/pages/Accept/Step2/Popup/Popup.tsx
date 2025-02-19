@@ -5,34 +5,31 @@ import {
   Section,
 } from "../../../../assets/styles/Steps.styles";
 
-import {
-  Category,
-  CategoryWithNumber,
-  CategoryWrapper,
-  SubTitle,
-} from "./Popup.styles";
+import { Category, CategoryWrapper, SubTitle } from "./Popup.styles";
 
 import Search from "../../../../components/Search/Search";
 import Button from "../../../../components/Button/Button";
 import Location from "../../../../components/Location/Location";
 import KakaoMap from "../../../../components/forSearchPage/KakaoMap/KakaoMap";
-
+import Desc from "../../../../components/Desc/Desc";
 type LocationType = {
+  placeId: number;
   name: string;
   address: string;
   star: number;
   comments: number;
   categories: string[];
 };
-
 export default function Popup({
-  selectedLocations,
-  setSelectedLocations,
+  locations,
+  placeId,
+  setPlaceId,
   closePopup,
 }: {
-  selectedLocations: LocationType[];
-  setSelectedLocations: React.Dispatch<React.SetStateAction<LocationType[]>>;
-  closePopup: (locations: LocationType[]) => void;
+  locations: LocationType[];
+  placeId: number[];
+  setPlaceId: React.Dispatch<React.SetStateAction<number[]>>;
+  closePopup: () => void;
 }) {
   const categorys: string[] = [
     "아기자기한",
@@ -48,30 +45,6 @@ export default function Popup({
     "아늑한",
   ];
 
-  const locations = [
-    {
-      name: "스타벅스 건대입구점",
-      address: "서울 광진구 화양동 5-47",
-      star: 2,
-      comments: 12,
-      categories: ["아기자기한", "아늑한", "귀여운"],
-    },
-    {
-      name: "스타벅스 건대역점",
-      address: "서울 광진구 화양동 5-47",
-      star: 5,
-      comments: 12,
-      categories: ["아기자기한", "아늑한", "귀여운"],
-    },
-    {
-      name: "투썸플레이스 강남역점",
-      address: "서울 광진구 화양동 5-47",
-      star: 5,
-      comments: 12,
-      categories: ["아기자기한", "아늑한", "귀여운"],
-    },
-  ];
-
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [categoryCount, setCategoryCount] = useState<Record<string, number>>(
     {}
@@ -79,60 +52,36 @@ export default function Popup({
 
   const toggleCategory = (category: string) => {
     if (selectedCategories.includes(category)) {
-      // 키워드 선택 해제
       setSelectedCategories(
         selectedCategories.filter((item) => item !== category)
       );
       setCategoryCount((prev) => ({
         ...prev,
-        [category]: Math.max(0, (prev[category] || 1) - 1), // 카운트 감소
+        [category]: Math.max(0, (prev[category] || 1) - 1),
       }));
     } else {
-      // 키워드 선택
       setSelectedCategories([...selectedCategories, category]);
       setCategoryCount((prev) => ({
         ...prev,
-        [category]: (prev[category] || 0) + 1, // 카운트 증가
+        [category]: (prev[category] || 0) + 1,
       }));
     }
   };
 
-  const toggleLocation = (location: LocationType) => {
-    const exists = selectedLocations.find((loc) => loc.name === location.name);
-    if (exists) {
-      setSelectedLocations(
-        selectedLocations.filter((loc) => loc.name !== location.name)
-      );
-    } else {
-      setSelectedLocations([...selectedLocations, location]);
-    }
+  // 🔹 장소 선택을 placeId 배열로 관리
+  const toggleLocation = (locationId: number) => {
+    setPlaceId(
+      (prev) =>
+        prev.includes(locationId)
+          ? prev.filter((id) => id !== locationId) // 선택 해제
+          : [...prev, locationId] // 선택 추가
+    );
   };
 
   return (
     <>
       <Wrapper style={{ marginBottom: "60px" }}>
         <Search placeholder={"건대입구, #아기자기한"} />
-
-        <Section
-          style={{
-            background: "#EDF1FF",
-            padding: "10px 0",
-            minHeight: "100px",
-          }}
-        >
-          <SubTitle style={{ color: "#5175FF" }}>함께 고른 키워드</SubTitle>
-          <CategoryWrapper>
-            {Object.entries(categoryCount).map(
-              ([category, count]) =>
-                count > 0 && (
-                  <CategoryWithNumber key={category}>
-                    <div className="number">{count}</div>
-                    {category}
-                  </CategoryWithNumber>
-                )
-            )}
-          </CategoryWrapper>
-        </Section>
         <Section>
           <SubTitle>키워드</SubTitle>
           <CategoryWrapper>
@@ -147,29 +96,26 @@ export default function Popup({
             ))}
           </CategoryWrapper>
         </Section>
-        <KakaoMap mapHeight="350px" />
+        <KakaoMap mapHeight="33vh" />
         <Section>
           <SubTitle>검색 결과</SubTitle>
-          {locations.map((location, idx) => (
+          <Desc>가고 싶은 장소를 선택해주세요</Desc>
+          {locations.map((location) => (
             <Location
-              key={idx}
+              key={location.placeId}
               location={location.name}
               address={location.address}
               star={location.star}
               comments={location.comments}
               categories={location.categories}
-              isSelected={selectedLocations.some(
-                (loc) => loc.name === location.name
-              )}
-              onClick={() => toggleLocation(location)}
+              isSelected={placeId.includes(location.placeId)} // 선택 여부 체크
+              onClick={() => toggleLocation(location.placeId)}
             />
           ))}
         </Section>
       </Wrapper>
       <FixedButton>
-        <Button onClick={() => closePopup(selectedLocations)}>
-          장소 선택 완료
-        </Button>
+        <Button onClick={() => closePopup()}>장소 선택 완료</Button>
       </FixedButton>
     </>
   );

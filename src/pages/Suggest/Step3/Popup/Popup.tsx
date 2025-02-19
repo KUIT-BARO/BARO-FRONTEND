@@ -9,12 +9,7 @@ import KakaoMap from "../../../../components/forSearchPage/KakaoMap/KakaoMap";
 
 import styled from "styled-components";
 
-export default function Popup({
-  setPopup,
-  address,
-  onOpenPopup,
-  setPlaceName,
-}) {
+export default function Popup({ setPopup, address, onOpenPopup }) {
   return (
     <>
       <Nav>
@@ -41,7 +36,6 @@ export default function Popup({
           </div>
           <Button
             onClick={() => {
-              setPlaceName(address.placeName);
               setPopup(false);
               onOpenPopup(true);
             }}

@@ -12,6 +12,7 @@ export default function Accept() {
   const { promiseId } = useParams();
 
   const navigate = useNavigate();
+  const [placeId, setPlaceId] = useState<[]>([]);
   const [name, setName] = useState("");
   const [purpose, setPurpose] = useState("");
   const [startDate, setStartDate] = useState<Date | null>(null);
@@ -90,6 +91,8 @@ export default function Accept() {
           element={
             data ? (
               <Step2
+                placeId={placeId}
+                setPlaceId={setPlaceId}
                 data={data}
                 handleBack={handleBack}
                 handleExit={handleExit}

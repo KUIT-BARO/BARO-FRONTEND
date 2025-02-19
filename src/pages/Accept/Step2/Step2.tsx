@@ -1,29 +1,29 @@
 import React, { useState } from "react";
-import StepInterface from "../../../interface/Step";
-import Nav from "../../../components/Nav/Nav";
 import {
   Wrapper,
   FixedButton,
   Section,
   ImgWrapper,
 } from "../../../assets/styles/Steps.styles";
-import styled from "styled-components";
 
+import styled from "styled-components";
 import profileImg_1 from "../../../assets/icons/profileImg_1.svg";
 import profileImg_2 from "../../../assets/icons/profileImg_2.svg";
 import profileImg_3 from "../../../assets/icons/profileImg_3.svg";
+
 import Button from "../../../components/Button/Button";
 import { ProgressBar } from "../../../components/ProgressBar/ProgressBar";
 import SubTitle from "../../../components/SubTitle/SubTitle";
 import Desc from "../../../components/Desc/Desc";
-
 import Search from "../../../components/Search/Search";
 import Popup from "./Popup/Popup";
 import Location from "../../../components/Location/Location";
 import KakaoMap from "../../../components/forSearchPage/KakaoMap/KakaoMap";
 import { useNavigate } from "react-router-dom";
+import Nav from "../../../components/Nav/Nav";
 
 type LocationType = {
+  placeId: number;
   name: string;
   address: string;
   star: number;
@@ -31,91 +31,104 @@ type LocationType = {
   categories: string[];
 };
 
-export default function Step2({ data, handleBack, handleExit }: StepInterface) {
+export default function Step2({
+  data,
+  placeId,
+  setPlaceId,
+  handleBack,
+  handleExit,
+}: StepInterface) {
   const [popup, setPopup] = useState(false);
-  //이 부분 부모로 올려서 props로 받기
-  const [selectedLocations, setSelectedLocations] = useState<LocationType[]>(
-    []
-  );
   const navigate = useNavigate();
 
   const openPopup = () => {
     setPopup(true);
   };
 
-  const closePopup = (locations: string[]) => {
+  const closePopup = () => {
     setPopup(false);
-    setSelectedLocations(locations);
-  };
-  const [searchTerm, setSearchTerm] = useState("");
-  const [searchResults, setSearchResults] = useState<LocationType[]>([]);
-
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.target.value);
   };
 
-  const handleSearchSubmit = async () => {
-    if (searchTerm.trim() === "") return;
-
-    try {
-      const response = await instance.get(
-        `/locations/search?query=${searchTerm}`
-      );
-      if (response?.data?.locations) {
-        setSearchResults(response.data.locations);
-      } else {
-        setSearchResults([]);
-      }
-    } catch (error) {
-      console.error("장소 검색 중 오류 발생:", error);
-      setSearchResults([]);
-    }
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
-      handleSearchSubmit();
-    }
-  };
+  // 🔹 실제 장소 데이터
+  const locations: LocationType[] = [
+    {
+      placeId: 1,
+      name: "스타벅스 건대입구점",
+      address: "서울 광진구 화양동 5-47",
+      star: 2,
+      comments: 12,
+      categories: ["아기자기한", "아늑한", "귀여운"],
+    },
+    {
+      placeId: 2,
+      name: "스타벅스 건대역점",
+      address: "서울 광진구 화양동 5-47",
+      star: 5,
+      comments: 12,
+      categories: ["아기자기한", "아늑한", "귀여운"],
+    },
+    {
+      placeId: 3,
+      name: "투썸플레이스 강남역점",
+      address: "서울 강남구 역삼동 5-47",
+      star: 5,
+      comments: 20,
+      categories: ["모던한", "깔끔한", "조용한"],
+    },
+  ];
 
   return (
     <>
       <Nav handleBack={handleBack} handleExit={handleExit} color={"Blue"} />
       {!popup ? (
         <>
-          <Wrapper style={{ marginBottom: "50px" }}>
+          <Wrapper>
             <ProgressBar percent={66} />
             <SubTitle>만나고 싶은 장소를 알려주세요!</SubTitle>
             <Desc>친구들과 함께 정할 장소를 제안해보세요</Desc>
             <SectionHeader>
               <ImgWrapper>{renderProfileImages(data.peopleNumber)}</ImgWrapper>
             </SectionHeader>
-            <Search
-              placeholder={"건대입구"}
-              value={searchTerm}
-              onChange={handleSearchChange}
-              onKeyDown={handleKeyDown}
-            />
+            <Search placeholder={"건대입구"} onClick={openPopup} />
             <KakaoMap
-              mapHeight="33vh"
+              mapHeight="46vh"
               searchKeyword={data.place}
               buttonOn={false}
               setCurrentLocationName={data.place}
               staticMap={true}
             />
-            {/* <Section>
-              {selectedLocations.map((location, idx) => (
-                <Location
-                  key={idx}
-                  location={location.name}
-                  address={location.address}
-                  star={location.star}
-                  comments={location.comments}
-                  categories={location.categories}
-                  onClick={() => toggleLocation(location.name)}
-                />
-              ))}
-            </Section> */}
+            <Section>
+              {placeId.length > 0 ? (
+                <>
+                  <SubTitle>내가 고른 장소</SubTitle>
+
+                  {placeId.map((id) => {
+                    const selectedLocation = locations.find(
+                      (loc) => loc.placeId === id
+                    );
+                    return selectedLocation ? (
+                      <Location
+                        key={selectedLocation.placeId}
+                        location={selectedLocation.name}
+                        address={selectedLocation.address}
+                        star={selectedLocation.star}
+                        comments={selectedLocation.comments}
+                        categories={selectedLocation.categories}
+                        onClick={() =>
+                          setPlaceId((prev) =>
+                            prev.filter(
+                              (pid) => pid !== selectedLocation.placeId
+                            )
+                          )
+                        }
+                      />
+                    ) : null;
+                  })}
+                </>
+              ) : (
+                <Desc>선택한 장소가 없습니다.</Desc>
+              )}
+            </Section>
           </Wrapper>
           <FixedButton>
             <Button onClick={() => navigate("../confirm")}>다음</Button>
@@ -123,9 +136,10 @@ export default function Step2({ data, handleBack, handleExit }: StepInterface) {
         </>
       ) : (
         <Popup
+          locations={locations}
+          placeId={placeId}
+          setPlaceId={setPlaceId}
           closePopup={closePopup}
-          selectedLocations={selectedLocations}
-          setSelectedLocations={setSelectedLocations}
         />
       )}
     </>

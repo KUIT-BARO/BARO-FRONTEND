@@ -6,7 +6,7 @@ const PostPromise = async (
   dateEnd: string,
   peopleNum: number | string,
   purpose: string,
-  placeName: string
+  placeId: number
 ) => {
   let validPeopleNum =
     typeof peopleNum === "string" ? parseInt(peopleNum, 10) : peopleNum;
@@ -28,7 +28,7 @@ const PostPromise = async (
         : new Date(dateEnd).toISOString().split("T")[0],
     peopleNum: validPeopleNum,
     purpose,
-    placeName: "스타벅스 강남점",
+    placeId,
   };
 
   try {
