@@ -74,6 +74,7 @@ export const Header = styled.div`
   }
 `;
 export const Title = styled.div`
+  margin: 74px auto 0 auto;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -81,10 +82,31 @@ export const Title = styled.div`
   color: white;
   font-size: 14px;
   font-weight: 600;
+
+  .name {
+    font-size: 36px;
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
   .bold {
     font-size: 25px;
     font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 36px;
   }
+
+  .noteImg {
+    width: 148px;
+    height: 154px;
+    margin: 0 auto 56px auto;
+  }
+
   .desc {
     font-size: 12px;
     font-weight: 500;
@@ -148,6 +170,7 @@ export const Dot = styled.div`
 `;
 
 export const PromiseBtn = styled.div`
+  height: 121px;
   cursor: pointer;
   margin-top: 20px;
   display: flex;
@@ -161,6 +184,7 @@ export const PromiseBtn = styled.div`
   border-radius: 10px;
   font-size: 17px;
   font-weight: 700;
+
   > .plus {
     display: flex;
     justify-content: center;
