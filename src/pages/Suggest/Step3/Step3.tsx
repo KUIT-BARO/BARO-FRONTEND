@@ -16,58 +16,20 @@ import styled from "styled-components";
 import Search from "../../../components/Search/Search";
 
 export default function Step3({
-  setPlaceName,
+  dummyaddress,
+  setPlaceId,
   handleBack,
   handleExit,
   onOpenPopup,
 }: StepInterface & { onOpenPopup: () => void }) {
   const [popup, setPopup] = useState(false);
-  const [address, setAddress] = useState<{
-    placeId: number;
-    placeName: string;
-    address: string;
-    status: string;
-  } | null>(null);
-
-  const dummyaddress = [
-    {
-      placeId: 1,
-      placeName: "스타벅스 건대입구점",
-      address: "서울 광진구 화양동 5-47",
-      status: "ACTIVE",
-    },
-    {
-      placeId: 2,
-      placeName: "투썸플레이스 강남역점",
-      address: "서울 강남구 역삼동 123-45",
-      status: "ACTIVE",
-    },
-    {
-      placeId: 3,
-      placeName: "이디야 커피 홍대점",
-      address: "서울 마포구 서교동 789-10",
-      status: "SUSPENDED",
-    },
-    {
-      placeId: 4,
-      placeName: "메가커피 신촌점",
-      address: "서울 서대문구 창천동 11-22",
-      status: "ACTIVE",
-    },
-    {
-      placeId: 5,
-      placeName: "할리스커피 강남시티점",
-      address: "서울 강남구 테헤란로 456",
-      status: "SUSPENDED",
-    },
-  ];
+  const [selectedPlaceId, setSelectedPlaceId] = useState<number | null>(null);
 
   return popup ? (
     <Popup
       onOpenPopup={onOpenPopup}
       setPopup={setPopup}
-      address={address}
-      setPlaceName={setPlaceName}
+      address={dummyaddress.find((item) => item.id === selectedPlaceId) || null}
     />
   ) : (
     <>
@@ -83,7 +45,8 @@ export default function Step3({
               <Location
                 key={address.placeId}
                 onClick={() => {
-                  setAddress(address);
+                  setSelectedPlaceId(address.id);
+                  setPlaceId(address.id);
                   setPopup(true);
                 }}
               >

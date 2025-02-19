@@ -50,10 +50,13 @@ const Location = ({
   };
 
   return (
-    <Wrapper onClick={onClick} isSelected={isSelected}>
-      <div className="title">{location}</div>
+    <Wrapper isSelected={isSelected}>
+      <div className="title">
+        <p>{location}</p>
+        <button onClick={onClick}>{isSelected ? "취소" : "선택"}</button>
+      </div>
       <div className="scope">
-        <div>{star}</div>
+        <div>{star}.0</div>
         <div className="stars">{renderStars(star)}</div>
         <div>({comments})</div>
       </div>
@@ -72,15 +75,14 @@ const Location = ({
 export default Location;
 
 const Wrapper = styled.div<{ isSelected: boolean }>`
-  width: 100%;
+  width: calc(100% + 40px); /* 부모의 padding(20px * 2)을 상쇄 */
+  margin: 0 -20px; /* 좌우 -20px 마진을 줘서 부모 padding 영향 제거 */
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 12px;
   padding: 15px 10px;
-  border-radius: 10px;
-  border-bottom: 1px solid #edf1ff;
+  margin-bottom: -17px;
 
-  cursor: pointer;
   background-color: ${(props) => (props.isSelected ? "#5175FF" : "#f4f8fb")};
   color: ${(props) => (props.isSelected ? "#f4f8fb" : "#979797")};
 
@@ -88,9 +90,25 @@ const Wrapper = styled.div<{ isSelected: boolean }>`
   font-weight: 600;
 
   .title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     font-size: 17px;
     font-weight: 700;
+    margin: 0;
     color: ${(props) => (props.isSelected ? "#f4f8fb" : "black")};
+    > button {
+      font-size: 12px;
+      font-weight: 700;
+      width: 41px;
+      height: 28px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      color: ${(props) => (props.isSelected ? "#5175FF" : "#f4f8fb")};
+      background-color: ${(props) =>
+        props.isSelected ? "#f4f8fb" : "#5175FF"};
+    }
   }
 
   .scope {
@@ -104,7 +122,7 @@ const Wrapper = styled.div<{ isSelected: boolean }>`
   }
   .categories {
     display: flex;
-    gap: 10px;
+    gap: 4px;
     .category {
       min-height: 17px;
       padding: 4px 10px;

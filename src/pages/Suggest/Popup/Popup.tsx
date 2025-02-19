@@ -23,6 +23,7 @@ interface PopupProps extends SuggestInterface {
   peopleNum: number;
   purpose: string;
   placeName: string;
+  placeId: number;
 }
 
 export default function Popup({
@@ -34,6 +35,7 @@ export default function Popup({
   peopleNum,
   purpose,
   placeName,
+  placeId,
 }: PopupProps) {
   const navigate = useNavigate();
 
@@ -45,7 +47,7 @@ export default function Popup({
         dateEnd,
         peopleNum,
         purpose,
-        placeName
+        placeId
       );
       if (response) {
         console.log(response.data.data);
