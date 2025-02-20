@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 
 import ReviewHeader from "../../components/forSearchPage/ReviewHeader/ReviewHeader";
 import ReviewDetails from "../../components/forSearchPage/ReviewDetails/ReviewDetails";
 import Modal from "../../components/forSearchPage/Modal/Modal";
+
+import { getUserPlace } from '../../apis/promise/getUserPlace';
 
 export default function ReviewPlace() {
 
@@ -32,11 +34,43 @@ export default function ReviewPlace() {
     setCategory(category);
   };
 
+  // interface userPlaceReview {
+  //   placeId: number;
+  //   address: string;
+  //   placeName: string;
+  // }
+  // interface userPlaceDto { 
+  //   reviews: userPlaceReview[]; 
+  // }
+  // const [userPlaceDto] = React.useState<userPlaceDto>({ 
+  //   reviews: [] 
+  // });
+  const [countReviews, setCountReviews] = React.useState<number>(0);
+
+  useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        const response = await getUserPlace();
+        // for (let i=0 ; i<response.data.data.userPlaceDto.length ; i++) {
+        //   userPlaceDto.reviews.push({
+        //     response.data.data.userPlaceDto[i],
+        //   });
+        // }
+        setCountReviews(response.data.data.userPlaceDto.length);
+      } catch (error) {
+        console.error("리뷰 데이터 불러오기 실패:", error);
+      }
+    }
+    fetchReviews();
+  }, []);
+
   return (
     <>
       {!isModalOpen && <>
         <ReviewWrapper>
-          <ReviewHeader 
+          <ReviewHeader
+            placeId={countReviews+1}
+            placeName={selectedLocation}
             starCount={starCount} 
             textValue={textValue}
             categories={category}

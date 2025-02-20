@@ -9,7 +9,11 @@ interface ReviewParams {
 
 export const postReview = async (params: ReviewParams) => {
   try {
-    const response = await instance.post(`/places/${params.placeId}/reviews`, params);
+    const response = await instance.post(`/places/${params.placeId}/reviews`, {
+      score: params.score,
+      note: params.note,
+      keywordIds: params.keywordIds
+    });
     return response.data;
   } catch (error) {
     if (error.response) {

@@ -9,6 +9,7 @@ import BackIcon from '../../../assets/icons/backIcon.svg'
 
 interface ReviewHeaderProps {
   placeId: number;
+  placeName: string;
   starCount: number;
   textValue: string;
   categories: number[];
@@ -21,10 +22,28 @@ export default function ReviewHeader (props: ReviewHeaderProps) {
     navigate('/search');
   };
 
+  console.log('placeId :', props.placeId);
   console.log('score :', props.starCount);
   console.log('note :', props.textValue);
   console.log('keywordIds :', props.categories);
   const handleReview = async () => {
+    if (props.placeName === '') {
+      alert('리뷰를 작성할 장소를 선택해주세요.');
+      return;
+    }
+    if (props.textValue === '') {
+      alert('리뷰 내용을 입력해주세요.');
+      return;
+    }
+    if (props.starCount === 0) {
+      alert('별점을 선택해주세요.');
+      return;
+    }
+    if (props.categories.length === 0) {
+      alert('카테고리를 선택해주세요.');
+      return;
+    }
+
     try {
       const response = await postReview({
         placeId: props.placeId,

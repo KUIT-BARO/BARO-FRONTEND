@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const PlacesWrapper = styled.div`
   width: 100%;
-  padding-bottom: 60px;
+  padding-bottom: 82px;
   display: flex;
   flex-direction: column;
   background-color: #f5f5f5;
@@ -10,14 +10,16 @@ export const PlacesWrapper = styled.div`
 
 export const PlaceWrapper = styled.div`
   background-color: #f5f5f5;
-  padding: 28px 24px 20px 20px;
+  padding: 28px 0 14px 20px;
 `;
 
 export const PlaceTitleWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
+  // display: flex;
+  // justify-content: space-between;
+  margin: 0px;
+  cursor: pointer;
 
-  div {
+  .title {
     font-family: Pretendard;
     font-size: 22px;
     font-weight: 600;
@@ -73,26 +75,65 @@ export const PlaceImage = styled.div`
 
   img {
     margin-right: 10px;
-    background-color: #C4C4C4;
     border-radius: 8px;
     cursor: pointer;
     vertical-align: middle;
-    filter: brightness(50%);
+    // filter: brightness(50%);
+
+  renderStars {
+    margin-top: 10px;
   }
 `;
 
-export const PlaceInfo = styled.div`
+export const PlaceInfo = styled.div<{ is168?: boolean }>`
   position: absolute;
-  top: 40%;
-  left: 22%;
+  top: 0;
+  align-items: center;
+  justify-content: center;
+  margin: ${props => props.is168 ? '47px auto 0 27px' : '72px auto 0 110px'};
   z-index: 1;
+`;
 
-  div {
-    font-family: Pretendard;
-    font-size: 16px;
-    color: #FFFFFF;
-    align-items: center;
-    justify-content: center;
-    display: flex;
+export const PlaceLocation = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 6px;
+  font-family: Pretendard;
+  font-size: 16px;
+  color: #FFFFFF;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+`;
+
+export const StarRating = styled.div`
+  gap: 0px;
+
+  span {
+    color: gray;
+    font-size: 14px;
+    margin-right: 3px;
+  }
+
+  img {
+    margin: 0 2px;
+    cursor: default;
+  }
+`;
+
+export const Bookmark = styled.div`
+  margin: 12px 0 0 32px;
+
+  img {
+    width: 16px;
+    height: 16px;
+    cursor: default;
+    border-radius: 0;
+    margin-right: 3px;
+  }
+
+  span {
+    color: gray;
+    font-size: 14px;
   }
 `;
