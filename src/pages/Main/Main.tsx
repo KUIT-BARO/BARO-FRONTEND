@@ -102,6 +102,14 @@ const Main = () => {
     return () => scrollRef.current?.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const calculateDday = (date: string) => {
+    const today = new Date();
+    const promiseDate = new Date(date);
+    const diffTime = promiseDate.getTime() - today.getTime();
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    return diffDays > 0 ? `D-${diffDays}` : diffDays < 0 ? `D+${Math.abs(diffDays)}` : 'D-0';
+  };
+
   return (
     <MainWrapper>
       <Header>
@@ -130,12 +138,7 @@ const Main = () => {
             </Title> */}
             <Container>
               <Ddays>
-                D-
-                {Math.ceil(
-                  (new Date(upcomingDday.date).getTime() -
-                    new Date().getTime()) /
-                    (1000 * 60 * 60 * 24)
-                )}
+                {calculateDday(upcomingDday.date)}
               </Ddays>
               <PromiseContainer
                 left={Math.ceil(
@@ -144,7 +147,7 @@ const Main = () => {
                     (1000 * 60 * 60 * 24)
                 )}
                 date={upcomingDday.date}
-                people={`${homeDataName} 외 ${upcomingDday.peopleNumber - 1}명`}
+                people={(upcomingDday.peopleNumber > 0) ? `${homeDataName} 외 ${upcomingDday.peopleNumber - 1}명` : `${homeDataName}`}
                 location={upcomingDday.place}
                 title={upcomingDday.name}
               />
@@ -157,7 +160,7 @@ const Main = () => {
                       (1000 * 60 * 60 * 24)
                   )}
                   date={item.date}
-                  people={`${homeDataName} 외 ${item.peopleNumber - 1}명`}
+                  people={(item.peopleNumber > 0) ? `${homeDataName} 외 ${item.peopleNumber - 1}명` : `${homeDataName}`}
                   location={item.place}
                   title={item.name}
                 />

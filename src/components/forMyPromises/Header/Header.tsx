@@ -9,11 +9,12 @@ const Header = () => {
       <HeaderContent>
         <div></div>
         <Title>나의 약속</Title>
-        <Icons>
+        {/* <Icons>
           <IconButton>
             <img src={bellIcon} alt="notifications" />
           </IconButton>
-        </Icons>
+        </Icons> */}
+        <div></div>
       </HeaderContent>
     </HeaderContainer>
   );
@@ -50,7 +51,7 @@ export const Title = styled.div`
   text-align: left;
   text-underline-position: from-font;
   text-decoration-skip-ink: none;
-  margin-left: 35px;
+  // margin-left: 35px;
   display: flex;
 `;
 export const Icons = styled.div`

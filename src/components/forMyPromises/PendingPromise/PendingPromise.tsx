@@ -19,14 +19,14 @@ interface PendingPromiseProps {
   };
 }
 
-const PendingPromise = ({ // promise
-  promiseId = 123,
-  name = "친구 모임",
-  purpose = "팀프로젝트 / 회의",
-  dateStart = "2025-02-15",
-  dateEnd = "2025-02-25",
-  place = "강남역 카페",
-  peopleNumber = 3
+const PendingPromise = ({ promise
+  // promiseId = 123,
+  // name = "친구 모임",
+  // purpose = "팀프로젝트 / 회의",
+  // dateStart = "2025-02-15",
+  // dateEnd = "2025-02-25",
+  // place = "강남역 카페",
+  // peopleNumber = 3
 }: PendingPromiseProps) => {
 
   return (
@@ -34,11 +34,11 @@ const PendingPromise = ({ // promise
       <ConfirmStateContainer>
         <ConfirmState>참여 대기</ConfirmState>
       </ConfirmStateContainer>
-      <PromiseTitle>{name}</PromiseTitle>
+      <PromiseTitle>{promise.name}</PromiseTitle>
       <PromiseContainer>
         <PromiseContent>
           <img src={FlagIcon} alt="flag-icon" />
-          <div>{purpose}</div>
+          <div>{promise.purpose}</div>
         </PromiseContent>
         <PromiseContent>
           <img src={CrownIcon} alt="crown-icon" />
@@ -46,16 +46,16 @@ const PendingPromise = ({ // promise
         </PromiseContent>
         <PromiseContent>
           <img src={PersonIcon} alt="person-icon" />
-          <div>이지환 외 {peopleNumber-1}명</div>
+          <div>이지환 외 {promise.peopleNumber-1}명</div>
         </PromiseContent>
         <PromiseContent>
           <img src={LocationIcon} alt="location-icon" />
-          <div>{place}</div>
+          <div>{promise.place}</div>
         </PromiseContent>
         <PromiseContent>
           <img src={CalendarIcon} alt="calendar-icon" />
           <div>
-            {dateStart.slice(5,7).replace(/^0+/,'')}/{dateStart.slice(8,10).replace(/^0+/,'')} (목) ~ {dateEnd.slice(5,7).replace(/^0+/,'')}/{dateEnd.slice(8,10).replace(/^0+/,'')} (목)
+            {promise.dateStart.slice(5,7).replace(/^0+/,'')}/{promise.dateStart.slice(8,10).replace(/^0+/,'')} (목) ~ {promise.dateEnd.slice(5,7).replace(/^0+/,'')}/{promise.dateEnd.slice(8,10).replace(/^0+/,'')} (목)
           </div>
         </PromiseContent>
       </PromiseContainer>

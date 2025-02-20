@@ -90,7 +90,7 @@ export const PlaceInfo = styled.div<{ is168?: boolean }>`
   top: 0;
   align-items: center;
   justify-content: center;
-  margin: ${props => props.is168 ? '47px auto 0 27px' : '72px auto 0 110px'};
+  margin: ${props => props.is168 ? '47px auto 0 29px' : '82px auto 0 114px'};
   z-index: 1;
 `;
 
