@@ -52,9 +52,10 @@ const Settings = () => {
     navigate("/mypage");
   };
 
+  // 수정된 handleWithdraw 함수
   const handleWithdraw = () => {
-    setWithdrawModalOpen(false);
-    navigate("/");
+    // 탈퇴 후 로그인 페이지로 리디렉션 (replace를 사용해 뒤로가기로 돌아올 수 없게 함)
+    navigate('/login', { replace: true });
   };
 
   if (isLoading) {
