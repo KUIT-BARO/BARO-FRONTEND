@@ -31,24 +31,25 @@ const profileIdToBackendFormat = {
 export default function Step4({
   handleBack,
   handleExit,
-  setSelectFriends,
+  codeList,
+  setCodeList,
 }: StepInterface) {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
+  //내 친구
   const [friends, setFriends] = useState([]);
-  const [searchedFriends, setSearchedFriends] = useState([]);
   const [selectedFriends, setSelectedFriends] = useState([]);
+  //내가 찾는 친구
+  const [searchedFriends, setSearchedFriends] = useState([]);
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const [newFriend, setNewFriend] = useState(null);
-  const [checked, setChecked] = useState({});
-
   // 친구 목록 가져오기
   useEffect(() => {
     const fetchFriends = async () => {
       try {
         const response = await GetFriends();
         if (response?.data?.data.friends) {
-          setFriends(response.data.data.friends);
+          setFriends(response?.data?.data.friends);
         } else {
           setFriends([]);
         }
@@ -70,6 +71,7 @@ export default function Step4({
       try {
         const response = await GetSearchCode(searchTerm);
         if (response?.data?.data.users) {
+          console.log(response.data.data.users);
           setSearchedFriends(response.data.data.users);
         } else {
           setSearchedFriends([]);
@@ -87,75 +89,25 @@ export default function Step4({
     return () => clearTimeout(debounceTimeout);
   }, [searchTerm]);
 
-  // 체크박스 클릭 핸들러 (이벤트 전파 방지 + 선택 로직)
-  const toggleCheckbox = (e, friend) => {
-    e.stopPropagation();
-    toggleFriendSelection(friend);
-  };
-
-  // 친구 선택 로직
-  const toggleFriendSelection = (friend) => {
-    // 1) 체크박스 상태 먼저 업데이트
-    setChecked((prevChecked) => ({
-      ...prevChecked,
-      [friend.userId]: !prevChecked[friend.userId],
-    }));
-
-    // 2) selectedFriends 배열 갱신
-    setSelectedFriends((prev) => {
-      const isSelected = prev.some((f) => f.userId === friend.userId);
-      if (isSelected) {
-        // 이미 선택되어 있다면 해제
-        return prev.filter((f) => f.userId !== friend.userId);
-      } else {
-        // 이미 친구인 상태라면 팝업 없이 추가
-        if (friend.isFriend) {
-          return [...prev, friend];
-        } else {
-          // 친구가 아닌 상태면 팝업 노출
-          setNewFriend(friend);
-          setIsPopupVisible(true);
-          return prev; // 아직은 추가하지 않음
-        }
-      }
-    });
-  };
-
   // 팝업에서 "친구 추가하기" 버튼 클릭 시 로직
-  const closePopup = async () => {
-    if (newFriend) {
-      try {
-        const response = await PostFriends(newFriend.code);
-        console.log("✅ 친구 추가 성공:", response.data);
-
-        // 새로 추가된 친구를 '이미 친구' 상태로 업데이트
-        const updatedFriend = { ...newFriend, isFriend: true };
-
-        // friends 목록에 추가
-        setFriends((prev) => [...prev, updatedFriend]);
-
-        // selectedFriends에도 추가 (중복 방지)
-        setSelectedFriends((prev) => {
-          if (!prev.some((f) => f.userId === updatedFriend.userId)) {
-            return [...prev, updatedFriend];
-          }
-          return prev;
-        });
-
-        // 체크 상태도 true로 갱신
-        setChecked((prevChecked) => ({
-          ...prevChecked,
-          [updatedFriend.userId]: true,
-        }));
-      } catch (error) {
-        console.error(
-          "🚨 친구 추가 실패:",
-          error.response ? error.response.data : error
-        );
-      }
+  const closePopup = async (friend) => {
+    try {
+      await PostFriends(friend.code); // `friendCode`가 아니라 `friend.code` 사용
+    } catch (error) {
+      console.error(
+        "🚨 친구 추가 실패:",
+        error.response ? error.response.data : error
+      );
     }
     setIsPopupVisible(false);
+    setFriends((prev) => [...prev, friend]);
+    setCodeList((prev) => Array.from(new Set([...prev, friend.code]))); // `friend.friendCode` -> `friend.code`
+    setSelectedFriends((prev) => [...prev, friend]); // 친구 목록에도 추가
+    setNewFriend(null);
   };
+  useEffect(() => {
+    console.log("업데이트된 selectedFriends:", selectedFriends);
+  }, [selectedFriends]);
 
   return (
     <>
@@ -173,18 +125,28 @@ export default function Step4({
           {/* 선택된 친구 목록 */}
           <User
             title="내가 선택한 친구"
-            friends={selectedFriends}
-            toggleCheckbox={toggleCheckbox}
-            checked={checked}
+            data={selectedFriends}
+            codeList={codeList}
+            setCodeList={setCodeList}
+            friends={friends}
+            setNewFriend={setNewFriend}
+            setIsPopupVisible={setIsPopupVisible}
+            setSelectedFriends={setSelectedFriends}
+            selectedFriends={selectedFriends}
           />
 
           {/* 검색 결과 */}
           {searchedFriends.length > 0 ? (
             <User
               title="검색 결과"
-              friends={searchedFriends}
-              toggleCheckbox={toggleCheckbox}
-              checked={checked}
+              data={searchedFriends}
+              codeList={codeList}
+              friends={friends}
+              setNewFriend={setNewFriend}
+              setCodeList={setCodeList}
+              setIsPopupVisible={setIsPopupVisible}
+              setSelectedFriends={setSelectedFriends}
+              selectedFriends={selectedFriends}
             />
           ) : searchTerm.trim() ? (
             <p style={{ textAlign: "center", color: "#979797" }}>
@@ -194,9 +156,14 @@ export default function Step4({
             // 기존 친구 목록
             <User
               title="친구 목록"
+              data={friends}
               friends={friends}
-              toggleCheckbox={toggleCheckbox}
-              checked={checked}
+              codeList={codeList}
+              setCodeList={setCodeList}
+              setNewFriend={setNewFriend}
+              setIsPopupVisible={setIsPopupVisible}
+              setSelectedFriends={setSelectedFriends}
+              selectedFriends={selectedFriends}
             />
           )}
         </Section>
@@ -216,7 +183,9 @@ export default function Step4({
                 <p className="bold">{newFriend.nickname}</p>님을 친구 추가
                 하시겠습니까?
               </p>
-              <Button onClick={closePopup}>친구 추가하기</Button>
+              <Button onClick={() => closePopup(newFriend)}>
+                친구 추가하기
+              </Button>
             </Popup>
           </PopupOverlay>
         )}
@@ -226,45 +195,92 @@ export default function Step4({
 }
 
 // 친구 목록을 표시하는 User 컴포넌트
-const User = ({ title, friends, toggleCheckbox, checked }) => {
+const User = ({
+  title,
+  data,
+  friends,
+  setNewFriend,
+  codeList,
+  setCodeList,
+  setIsPopupVisible,
+  selectedFriends,
+  setSelectedFriends,
+}) => {
   return (
     <>
       {friends.length > 0 && <h3 style={{ margin: "10px 0" }}>{title}</h3>}
       <UsersWrapper>
-        {friends.map((friend) => (
-          <UserDesc key={friend.userId}>
-            <div className="left">
-              <div className="user-icon">
-                <img
-                  alt="user icon"
-                  src={
-                    profileIdToBackendFormat[friend.profileImage] ||
-                    profileImg_default
+        {data.map((friend) => {
+          const isAdded = codeList.includes(friend.code); // `friend.code` 사용
+          const alreadyFriend = friends.some((f) => f.code === friend.code);
+          console.log("friends 배열:", friends);
+          console.log("현재 friend 객체:", friend);
+          console.log("현재 friend.code:", friend.code);
+          console.log(
+            "alreadyFriend 판별:",
+            friends.some((f) => f.code === friend.code)
+          );
+
+          return (
+            <UserDesc key={friend.userId}>
+              <div className="left">
+                <div className="user-icon">
+                  <img
+                    alt="user icon"
+                    src={
+                      profileIdToBackendFormat[friend.profileImage] ||
+                      profileImg_default
+                    }
+                  />
+                </div>
+                <div className="user-desc">
+                  <div className="name">{friend.nickname}</div>
+                  <div className="id">@{friend.code}</div>
+                </div>
+              </div>
+              <div
+                className="checkbox"
+                style={{
+                  backgroundColor: isAdded ? "#5175FF" : "white",
+                  border: isAdded
+                    ? "1.5px solid #5175FF"
+                    : "1.5px solid #c0c0c0",
+                }}
+                onClick={() => {
+                  if (!isAdded) {
+                    if (!alreadyFriend) {
+                      setNewFriend(friend);
+                      setIsPopupVisible(true); // 팝업 띄우기
+                    } else {
+                      setCodeList((prev) =>
+                        Array.from(new Set([...prev, friend.code]))
+                      ); // friend.friendCode -> friend.code
+                      setSelectedFriends((prev) => [...prev, friend]); // 친구 목록에도 추가
+                      setNewFriend(null);
+                    }
+                  } else {
+                    setCodeList((prev) => {
+                      const updatedCodeList = prev.filter(
+                        (code) => code !== friend.code
+                      );
+                      console.log("업데이트된 codeList:", updatedCodeList);
+                      return updatedCodeList;
+                    });
+                    setSelectedFriends((prev) => {
+                      const updatedCodeList = prev.filter(
+                        (f) => f.code !== friend.code
+                      );
+                      console.log("업데이트된 codeList:", updatedCodeList);
+                      return updatedCodeList;
+                    });
                   }
-                />
+                }}
+              >
+                <img src={isAdded ? checkWhite : checkIcon} alt="check-icon" />
               </div>
-              <div className="user-desc">
-                <div className="name">{friend.nickname}</div>
-                <div className="id">@{friend.code}</div>
-              </div>
-            </div>
-            <div
-              className="checkbox"
-              style={{
-                backgroundColor: checked[friend.userId] ? "#5175FF" : "white",
-                border: checked[friend.userId]
-                  ? "1.5px solid #5175FF"
-                  : "1.5px solid #c0c0c0",
-              }}
-              onClick={(e) => toggleCheckbox(e, friend)}
-            >
-              <img
-                src={checked[friend.userId] ? checkWhite : checkIcon}
-                alt="check-icon"
-              />
-            </div>
-          </UserDesc>
-        ))}
+            </UserDesc>
+          );
+        })}
       </UsersWrapper>
     </>
   );
