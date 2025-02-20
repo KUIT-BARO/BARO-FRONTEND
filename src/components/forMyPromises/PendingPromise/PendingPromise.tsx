@@ -8,7 +8,7 @@ import PersonIcon from '../../../assets/icons/person.svg';
 import LocationIcon from '../../../assets/icons/location_red.svg';
 import CalendarIcon from '../../../assets/icons/date_red.svg';
 
-import PatchPersonalReject from '../../../apis/promise/Personal/PatchPersonalreject';
+import PatchPersonalReject from '../../../apis/promise/Personal/PatchPersonalReject';
 
 interface PendingPromiseProps {
   promise: {
