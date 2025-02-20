@@ -47,21 +47,27 @@ const ScheduleAddModal: React.FC<ScheduleAddModalProps> = ({
     
     setIsLoading(true);
     setError(null);
-
+  
     try {
+      // location이 비어있으면 기본값 설정 (빈 문자열 대신 "장소 미정" 등의 기본값 사용)
+      const locationValue = location.trim() || "장소 미정";
+      
       const scheduleData = {
         name: title.trim(),
         dayOfWeek: convertDayToEng(day),
         timeStart: formatTime(startTime),
-        timeEnd: formatTime(endTime)
+        timeEnd: formatTime(endTime),
+        // null 대신 실제 값 전달
+        location: locationValue
       };
-
+  
+      console.log('Sending schedule data:', scheduleData);
       const response = await postSchedule.createSchedule(scheduleData);
       
       if (response.data) {
         onAdd({
           title: title.trim(),
-          location: location.trim(),
+          location: locationValue,
           day,
           startTime,
           endTime
@@ -75,13 +81,22 @@ const ScheduleAddModal: React.FC<ScheduleAddModalProps> = ({
         setEndTime(8);
       }
     } catch (err) {
-      setError('시간표 등록 중 오류가 발생했습니다. 다시 시도해주세요.');
-      console.error('Schedule creation error:', err);
+      // 더 상세한 오류 메시지 제공
+      if (err.response) {
+        setError(`시간표 등록 실패: ${err.response.status} - ${err.response.data?.message || '알 수 없는 오류'}`);
+        console.error('Server response error:', err.response.data);
+      } else if (err.request) {
+        setError('서버에서 응답이 없습니다. 네트워크 연결을 확인해주세요.');
+        console.error('No response from server:', err.request);
+      } else {
+        setError('시간표 등록 중 오류가 발생했습니다. 다시 시도해주세요.');
+        console.error('Schedule creation error:', err.message);
+      }
     } finally {
       setIsLoading(false);
     }
   };
-
+  
   const formatTime = (time: number) => {
     const hours = Math.floor(time);
     const minutes = Math.round((time % 1) * 60);
