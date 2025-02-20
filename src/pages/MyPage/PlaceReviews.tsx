@@ -16,10 +16,10 @@ const ReviewActions: React.FC<ReviewActionsProps> = ({ isOpen, onClose }) => {
 
   return (
     <div className="review-actions-dropdown">
-      <button className="action-button">
+      {/* <button className="action-button">
         <img src={editIcon} alt="edit" />
         수정하기
-      </button>
+      </button> */}
       <button className="action-button">
         <img src={trashIcon} alt="delete" />
         삭제하기
