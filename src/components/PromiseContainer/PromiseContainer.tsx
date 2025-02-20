@@ -19,8 +19,16 @@ const PromiseContainer = ({
   title,
   onClick,
 }: PromiseContainerProps) => {
-  return (
 
+  const calculateDday = (date: string) => {
+    const today = new Date();
+    const promiseDate = new Date(date);
+    const diffTime = promiseDate.getTime() - today.getTime();
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    return diffDays > 0 ? `D-${diffDays}` : diffDays < 0 ? `D+${Math.abs(diffDays)}` : 'D-0';
+  };
+
+  return (
     <Container>
       {/* <div className="d-day">D-{left}</div> */}
 
@@ -39,7 +47,7 @@ const PromiseContainer = ({
               <img alt="people-icon" src={person} />
               <span>{people}</span>
             </div>
-            <div className="d-day">D-{left}</div>
+            <div className="d-day">{calculateDday(date)}</div>
           </div>
         </div>
       </PromiseWrapper>
