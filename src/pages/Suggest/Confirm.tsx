@@ -15,7 +15,7 @@ import date from "../../assets/icons/date.svg";
 import locationIcon from "../../assets/icons/location.svg";
 import crown from "../../assets/icons/crown.svg";
 
-import 약속제안완료 from "../../assets/icons/약속제안완료.svg";
+import 약속제안완료 from "../../assets/icons/약속제안완료.png";
 import { useNavigate } from "react-router-dom";
 import GetSharePromise from "../../apis/user/GetSharePromise";
 
@@ -82,7 +82,7 @@ export default function Confirm({
           <Desc>친구들에게 약속을 BARO 공유해봐요</Desc>
         </Title>
         <Content>
-          <img src={약속제안완료} alt="confirm icon" />
+          <img src={약속제안완료} alt="confirm icon" width={"200px"} />
           <div className="container">
             <div className="wrap">
               <img src={flag} />
