@@ -1,11 +1,19 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { getMyPage } from '../../apis/user/getMyPage';
+import { getMyPage } from "../../apis/user/getMyPage";
 import Navigation from "../../components/Navigation/Navigation";
 import ScheduleGrid from "../../components/ScheduleGrid/ScheduleGrid";
 import settingsIcon from "../../assets/icons/settings.svg";
 import editIcon from "../../assets/icons/edit.svg";
-import manAvatar from "../../assets/icons/manavatar.svg";
+
+import profileImg_1 from "../../assets/icons/profileImg_1.svg";
+
+import profileImg_2 from "../../assets/icons/profileImg_2.svg";
+
+import profileImg_3 from "../../assets/icons/profileImg_3.svg";
+
+import profileImg_default from "../../assets/icons/profileImg_default.svg";
+
 import plusIcon from "../../assets/icons/plus.svg";
 import shareIcon from "../../assets/icons/share.svg";
 import "./MyPage.styles.css";
@@ -23,9 +31,9 @@ const MyPage = () => {
   const [activeTab, setActiveTab] = useState("schedule");
   const scheduleGridRef = useRef<{ openAddModal: () => void }>(null);
   const [userInfo, setUserInfo] = useState<UserInfo>({
-    nickname: '',
+    nickname: "",
     userId: 0,
-    userProfile: '',
+    userProfile: "",
   });
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -36,23 +44,18 @@ const MyPage = () => {
         setIsLoading(true);
         const response = await getMyPage.getMyPage();
         if (response.status === 200 && response.data) {
-          console.log('마이페이지 조회 결과1 :', response.data);
-          console.log('마이페이지 조회 결과2 :', response.data.data.user);
-          console.log('마이페이지 조회 결과3 :', response.data.data.user.nickname);
-          
-          
+          console.log("마이페이지 조회 결과1 :", response.data);
+          console.log("마이페이지 조회 결과2 :", response.data.data.user);
+
           setUserInfo({
             nickname: response.data.data.user.nickname,
             userId: response.data.data.user.userId,
-            userProfile: response.data.data.user.userProfile
+            userProfile: response.data.data.user.userProfile,
           });
-          // alert(userInfo);
-          console.log('마이페이지 조회 결과4 :', userInfo);
-          
         }
       } catch (error) {
-        setError('마이페이지 정보를 불러오는데 실패했습니다.');
-        console.error('마이페이지 조회 실패:', error);
+        setError("마이페이지 정보를 불러오는데 실패했습니다.");
+        console.error("마이페이지 조회 실패:", error);
       } finally {
         setIsLoading(false);
       }
@@ -69,7 +72,6 @@ const MyPage = () => {
     return <div className="error">{error}</div>;
   }
 
-
   const getCurrentSemester = () => {
     const currentDate = new Date();
     const year = currentDate.getFullYear();
@@ -81,9 +83,8 @@ const MyPage = () => {
   const handleTabChange = (tab: string) => {
     setActiveTab(tab);
   };
-
   const handleEditProfile = () => {
-    navigate("/profile/edit");
+    navigate("/profile/edit", { state: { userInfo } });
   };
 
   const handleSettingsClick = () => {
@@ -92,6 +93,20 @@ const MyPage = () => {
 
   const handleAddScheduleClick = () => {
     scheduleGridRef.current?.openAddModal();
+  };
+
+  const getProfileImage = (profileType: string) => {
+    switch (profileType) {
+      case "MAN":
+        return profileImg_1;
+      case "WOMAN":
+        return profileImg_2;
+      case "DOG":
+        return profileImg_3;
+      case "NONE":
+      default:
+        return profileImg_default;
+    }
   };
 
   return (
@@ -105,14 +120,21 @@ const MyPage = () => {
 
       <section className="profile-section">
         <div className="profile-image">
-          <img src={userInfo.userProfile || manAvatar} alt="profile" />
+          <img
+            src={getProfileImage(userInfo.userProfile) || profileImg_default}
+            alt="profile"
+          />
         </div>
         <div className="profile-info">
           <div className="profile-name-section">
             <h2>{userInfo.nickname}</h2>
-            <button className="edit-button" onClick={handleEditProfile}>
-              <img src={editIcon} alt="edit" />
-            </button>
+
+            <img
+              className="edit-button"
+              src={editIcon}
+              alt="edit"
+              onClick={handleEditProfile}
+            />
           </div>
           <p>@{userInfo.userId}</p>
         </div>

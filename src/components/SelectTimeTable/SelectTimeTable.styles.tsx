@@ -74,15 +74,21 @@ export const TimeWrapper = styled.div<{ datesLength: number }>`
     border-right: none;
   }
 `;
-export const TimeBlock = styled.div<{ isSelected: boolean }>`
+export const TimeBlock = styled.div<{
+  isSelected: boolean;
+  isDisabled: boolean;
+}>`
   width: 67px;
   height: 25px;
-  background-color: ${(props) => (props.isSelected ? "#007BFF" : "#fff")};
+  background-color: ${(props) =>
+    props.isDisabled ? "#e0e0e0" : props.isSelected ? "#007BFF" : "#fff"};
   border-bottom: 0.68px solid #c1cee1;
-  cursor: pointer;
   border-top: 0.68px solid #c1cee1;
   border-left: 0.68px solid #c1cee1;
+  cursor: ${(props) => (props.isDisabled ? "not-allowed" : "pointer")};
+
   &:hover {
-    background-color: ${(props) => (props.isSelected ? "#0056b3" : "#f0f0f0")};
+    background-color: ${(props) =>
+      props.isDisabled ? "#e0e0e0" : props.isSelected ? "#0056b3" : "#f0f0f0"};
   }
 `;

@@ -41,7 +41,7 @@ export default function Step1({
   setSuggestPeople: React.Dispatch<React.SetStateAction<number | null>>;
 }) {
   const navigate = useNavigate();
-
+  const [disableTimeTable, setDisableTimeTable] = useState([]);
   const [popupStage, setPopupStage] = useState<number | null>(1);
 
   const handlePopupClick = () => {
@@ -51,13 +51,14 @@ export default function Step1({
   const handleTimeTable = async () => {
     try {
       const response = await GetSchedule();
+      console.log(response);
       if (response?.data?.data?.schedules) {
         const scheduleData = response.data.data.schedules.map((schedule) => ({
           dayOfWeek: schedule.dayOfWeek, // 요일 정보 (ex: "MONDAY")
           time_start: schedule.timeStart, // 시작 시간 (ex: "18:00")
           time_end: schedule.timeEnd, // 종료 시간 (ex: "20:00")
         }));
-        setTimeTable(scheduleData); // timeTable 상태에 저장
+        setDisableTimeTable(scheduleData);
       }
     } catch (error) {
       console.error("시간표 불러오기 실패:", error);
@@ -90,6 +91,7 @@ export default function Step1({
           <SelectTimeTable
             dateStart={dateStart}
             dateEnd={dateEnd}
+            disableTimeTable={disableTimeTable}
             timeTable={timeTable}
             setTimeTable={setTimeTable}
           />

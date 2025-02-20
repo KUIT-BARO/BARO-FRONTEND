@@ -21,22 +21,30 @@ import Location from "../../../components/Location/Location";
 import KakaoMap from "../../../components/forSearchPage/KakaoMap/KakaoMap";
 import { useNavigate } from "react-router-dom";
 import Nav from "../../../components/Nav/Nav";
+import PostPersonalKeywords from "../../../apis/Promise/Personal/PostPersonalKeyword";
+import PostPersonalPlace from "../../../apis/Promise/Personal/PostPersonalPlace";
+import PostPersonalTime from "../../../apis/Promise/Personal/PostPersonalTime";
 
 type LocationType = {
-  placeId: number;
-  name: string;
+  id: number;
+  placeName: string;
+  latitude: number;
+  longitude: number;
   address: string;
   star: number;
   comments: number;
   categories: string[];
+  isSelected?: boolean;
 };
 
 export default function Step2({
+  promiseId,
+  places,
+  setPlaces,
   data,
-  placeId,
-  setPlaceId,
   handleBack,
   handleExit,
+  timeTable,
 }: StepInterface) {
   const [popup, setPopup] = useState(false);
   const navigate = useNavigate();
@@ -52,30 +60,55 @@ export default function Step2({
   // 🔹 실제 장소 데이터
   const locations: LocationType[] = [
     {
-      placeId: 1,
-      name: "스타벅스 건대입구점",
-      address: "서울 광진구 화양동 5-47",
-      star: 2,
-      comments: 12,
-      categories: ["아기자기한", "아늑한", "귀여운"],
+      id: 1,
+      placeName: "스타벅스 강남점",
+      latitude: 37.4979,
+      longitude: 127.0276,
+      address: "서울특별시 강남구 강남대로 390",
+      star: 4.2,
+      comments: 85,
+      categories: ["깔끔한", "모던한", "밝은", "시원한", "아늑한"],
     },
     {
-      placeId: 2,
-      name: "스타벅스 건대역점",
-      address: "서울 광진구 화양동 5-47",
-      star: 5,
-      comments: 12,
-      categories: ["아기자기한", "아늑한", "귀여운"],
+      id: 2,
+      placeName: "한강공원 반포지구",
+      latitude: 37.5123,
+      longitude: 126.9989,
+      address: "서울특별시 강남구 압구정동 387",
+      star: 4.7,
+      comments: 150,
+      categories: ["자연", "힙한", "밝은", "어두운", "럭셔리한"],
     },
     {
-      placeId: 3,
-      name: "투썸플레이스 강남역점",
-      address: "서울 강남구 역삼동 5-47",
-      star: 5,
-      comments: 20,
-      categories: ["모던한", "깔끔한", "조용한"],
+      id: 3,
+      placeName: "홍대 북카페",
+      latitude: 37.5565,
+      longitude: 126.9237,
+      address: "동교로 156-10 1층 북카페 산책 마포구 서울특별시 KR",
+      star: 4.3,
+      comments: 60,
+      categories: ["아기자기한", "빈티지한", "따뜻한", "아늑한", "힙한"],
     },
   ];
+
+  // 🔹 장소 선택/해제 핸들러
+  const toggleSelection = (id: number) => {
+    setPlaces((prev) =>
+      prev.map((place) =>
+        place.id === id ? { ...place, isSelected: !place.isSelected } : place
+      )
+    );
+  };
+  const handlePost = async () => {
+    try {
+      //  const responseKeyword = await PostPersonalKeywords(promiseId, [1, 3, 5]);
+      //const responsePlace = await PostPersonalPlace(promiseId, [1, 2, 3]);
+      //  const responseTime = await PostPersonalTime(promiseId, timeTable);
+    } catch (error) {
+      console.error("Error posting data:", error);
+    }
+    navigate("../confirm");
+  };
 
   return (
     <>
@@ -97,33 +130,33 @@ export default function Step2({
               setCurrentLocationName={data.place}
               staticMap={true}
             />
-            <Section>
-              {placeId.length > 0 ? (
+            <Section style={{ marginBottom: "100px" }}>
+              {places.length > 0 ? (
                 <>
-                  <SubTitle>내가 고른 장소</SubTitle>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      fontSize: "17px",
+                      fontWeight: "700",
+                      marginBottom: "-10px",
+                    }}
+                  >
+                    내가 고른 장소
+                  </div>
 
-                  {placeId.map((id) => {
-                    const selectedLocation = locations.find(
-                      (loc) => loc.placeId === id
-                    );
-                    return selectedLocation ? (
-                      <Location
-                        key={selectedLocation.placeId}
-                        location={selectedLocation.name}
-                        address={selectedLocation.address}
-                        star={selectedLocation.star}
-                        comments={selectedLocation.comments}
-                        categories={selectedLocation.categories}
-                        onClick={() =>
-                          setPlaceId((prev) =>
-                            prev.filter(
-                              (pid) => pid !== selectedLocation.placeId
-                            )
-                          )
-                        }
-                      />
-                    ) : null;
-                  })}
+                  {places.map((place) => (
+                    <Location
+                      key={place.id}
+                      placeName={place.placeName}
+                      address={place.address}
+                      star={place.star}
+                      comments={place.comments}
+                      categories={place.categories}
+                      isSelected={place.isSelected} // ✅ 선택 여부 적용
+                      onClick={() => toggleSelection(place.id)}
+                    />
+                  ))}
                 </>
               ) : (
                 <Desc>선택한 장소가 없습니다.</Desc>
@@ -131,14 +164,14 @@ export default function Step2({
             </Section>
           </Wrapper>
           <FixedButton>
-            <Button onClick={() => navigate("../confirm")}>다음</Button>
+            <Button onClick={() => handlePost()}>다음</Button>
           </FixedButton>
         </>
       ) : (
         <Popup
           locations={locations}
-          placeId={placeId}
-          setPlaceId={setPlaceId}
+          places={places}
+          setPlaces={setPlaces}
           closePopup={closePopup}
         />
       )}

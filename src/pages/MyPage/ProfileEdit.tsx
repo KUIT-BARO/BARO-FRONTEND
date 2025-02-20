@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import backIcon from "../../assets/icons/backIcon.svg";
 import editIcon from "../../assets/icons/edit_white.svg";
@@ -10,15 +11,33 @@ import Navigation from "../../components/Navigation/Navigation";
 import InputModal from "./InputModal";
 import Toast from "./Toast";
 import "./ProfileEdit.styles.css";
-import { getMyPage } from '../../apis/user/getMyPage';
+import { getMyPage } from "../../apis/user/getMyPage";
 
 const ProfileEdit = () => {
   const navigate = useNavigate();
+
+  const profileIdToBackendFormat = {
+    profile1: "MAN",
+    profile2: "WOMAN",
+    profile3: "DOG",
+    profile4: "NONE",
+  };
+  const location = useLocation();
+  const receivedUserInfo = location.state?.userInfo || {
+    nickname: "",
+    userId: 0,
+    userProfile: "NONE",
+  };
+
   const [formData, setFormData] = useState({
-    name: "이지환",
-    username: "jihwan_lee",
-    profileImage: "profile1",
+    name: receivedUserInfo.nickname,
+    username: `@${receivedUserInfo.userId}`,
+    profileImage:
+      Object.keys(profileIdToBackendFormat).find(
+        (key) => profileIdToBackendFormat[key] === receivedUserInfo.userProfile
+      ) || "profile4", // 기본 이미지 설정
   });
+
   const [nameModalOpen, setNameModalOpen] = useState(false);
   const [usernameModalOpen, setUsernameModalOpen] = useState(false);
   const [profileModalOpen, setProfileModalOpen] = useState(false);
@@ -31,20 +50,13 @@ const ProfileEdit = () => {
     profile4,
   };
 
-  const profileIdToBackendFormat = {
-    'profile1': 'MAN',
-    'profile2': 'WOMAN', 
-    'profile3': 'DOG',
-    'profile4': 'NONE'
-  };
-
   const handleProfileComplete = async (newProfile: string) => {
     try {
       await getMyPage.updateProfileImage(profileIdToBackendFormat[newProfile]);
-      setFormData(prev => ({ ...prev, profileImage: newProfile }));
+      setFormData((prev) => ({ ...prev, profileImage: newProfile }));
       setShowToast(true);
     } catch (error) {
-      console.error('프로필 이미지 변경 오류:', error);
+      console.error("프로필 이미지 변경 오류:", error);
     }
   };
 
