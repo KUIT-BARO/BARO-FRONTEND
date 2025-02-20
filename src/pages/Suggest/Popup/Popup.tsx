@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import SubTitle from "../../../components/SubTitle/SubTitle";
 import Desc from "../../../components/Desc/Desc";
@@ -13,6 +13,7 @@ import formatDateToShort from "../../../utils/formatDateToShort";
 import SuggestInterface from "../../../interface/Suggest";
 import { useNavigate } from "react-router-dom";
 import PostPromise from "../../../apis/promise/postPromise";
+import PostPromiseShare from "../../../apis/Promise/PostPromiseShare";
 
 interface PopupProps extends SuggestInterface {
   setPromiseId: (promiseId) => void;
@@ -36,6 +37,8 @@ export default function Popup({
   purpose,
   placeName,
   placeId,
+  promiseId,
+  codeList,
 }: PopupProps) {
   const navigate = useNavigate();
 
@@ -52,16 +55,22 @@ export default function Popup({
       if (response) {
         console.log(response.data.data);
         setPromiseId(response.data.data.promiseId);
-
-        // 상태 업데이트 후 네비게이션 실행
-        setTimeout(() => {
-          navigate("/suggest/step4");
-        }, 100);
       }
     } catch (error) {
       console.error("약속 생성 중 오류 발생:", error);
     }
   };
+
+  useEffect(() => {
+    if (promiseId) {
+      PostPromiseShare(promiseId, codeList)
+        .then(() => {
+          navigate("/suggest/step4");
+        })
+        .catch((error) => console.error("약속 공유 중 오류 발생:", error));
+    }
+  }, [promiseId]); // `promiseId`가 변경될 때 실행
+
   const user = sessionStorage.getItem("name");
   return (
     <Overlay>

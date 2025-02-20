@@ -45,7 +45,8 @@ export default function Suggest() {
   ]);
   const [dateStart, dateEnd] = dateRange;
   const [showPopup, setShowPopup] = useState(false);
-  const [selectFriends, setSelectFriends] = useState(false);
+  const [codeList, setCodeList] = useState<[string]>([]);
+
   const placeIndex = placeId ? Number(placeId) - 1 : 0; // 숫자로 변환하고, 유효하지 않은 경우 -1 설정
   const selectedPlaceName =
     placeIndex >= 0 && placeIndex < dummyaddress.length
@@ -127,7 +128,6 @@ export default function Suggest() {
           element={
             <Confirm
               promiseId={promiseId}
-              selectFriends={selectFriends}
               handleBack={handleBack}
               handleExit={handleExit}
               name={name}
@@ -143,7 +143,8 @@ export default function Suggest() {
           path="step4"
           element={
             <Step4
-              setSelectFriends={setSelectFriends}
+              codeList={codeList}
+              setCodeList={setCodeList}
               handleBack={handleBack}
               handleExit={handleExit}
             />
@@ -162,6 +163,8 @@ export default function Suggest() {
           placeName={selectedPlaceName}
           dateStart={dateStart}
           dateEnd={dateEnd}
+          promiseId={promiseId}
+          codeList={codeList}
         />
       )}
     </>
