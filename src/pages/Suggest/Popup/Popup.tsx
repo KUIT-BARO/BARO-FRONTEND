@@ -13,7 +13,7 @@ import formatDateToShort from "../../../utils/formatDateToShort";
 import SuggestInterface from "../../../interface/Suggest";
 import { useNavigate } from "react-router-dom";
 import PostPromise from "../../../apis/promise/postPromise";
-import PostPromiseShare from "../../../apis/Promise/PostPromiseShare";
+import PostPromiseShare from "../../../apis/promise/PostPromiseShare";
 
 interface PopupProps extends SuggestInterface {
   setPromiseId: (promiseId) => void;
