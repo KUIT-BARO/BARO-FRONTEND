@@ -16,4 +16,7 @@ export default defineConfig({
       },
     },
   },
+  scripts: {
+    build: "tsc && vite build && echo '/* /index.html 200' | cat > dist/_redirects"
+  }
 });

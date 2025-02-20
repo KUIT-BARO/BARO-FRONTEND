@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import BackIcon from '../../../assets/icons/backIcon.svg';
@@ -15,28 +16,34 @@ interface UpcomingPromiseProps {
     timeEnd: string;
     place: string;
     peopleNumber: number;
+    leaderName: string;
   };
 }
 
-const UpcomingPromise = ({ upcomingDday
-  // promiseId = 1, 
-  // name = "회의", 
-  // purpose = "팀프로젝트/회의", 
-  // date= "2025-02-10", 
-  // timeStart = "14:30:15", 
-  // timeEnd = "14:50:15", 
-  // place = "스타벅스 건대점", 
-  // peopleNumber = 3
-}: UpcomingPromiseProps) => {
-  console.log('dd',upcomingDday);
-  
+const UpcomingPromise = ({ upcomingDday }: UpcomingPromiseProps) => {
+  const navigate = useNavigate();
+
+  const handleGoToPromise = () => {
+    navigate('confirm', {
+      state: {
+        promiseId: upcomingDday.promiseId,
+        name: upcomingDday.name,
+        purpose: upcomingDday.purpose,
+        dateStart: upcomingDday.date,
+        dateEnd: upcomingDday.date,
+        place: upcomingDday.place,
+        peopleNumber: upcomingDday.peopleNumber,
+        leaderName: upcomingDday.leaderName
+      }
+    });
+  };
 
   const calculateDday = () => {
     const today = new Date();
     const promiseDate = new Date(upcomingDday.date);
     const diffTime = promiseDate.getTime() - today.getTime();
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    return diffDays > 0 ? `D-${diffDays}` : diffDays < 0 ? `D+${Math.abs(diffDays)}` : 'D-0';
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) - 1;
+    return diffDays > 0 ? `D-${diffDays}` : diffDays < 0 ? `D+${Math.abs(diffDays)}` : 'D-DAY';
   };
 
   return (
@@ -46,13 +53,17 @@ const UpcomingPromise = ({ upcomingDday
         <UpcomingDate>
           {upcomingDday.date.slice(5,7).replace(/^0+/,'')}월{upcomingDday.date.slice(8,10).replace(/^0+/,'')}일 {upcomingDday.timeStart.slice(0,2).replace(/^0+/,'')}시 {upcomingDday.timeStart.slice(3,5).replace(/^0+/,'')}분
         </UpcomingDate>
-        <GoToPromise src={BackIcon} alt="back-icon" />
+        <GoToPromise 
+          onClick={handleGoToPromise} 
+          src={BackIcon} 
+          alt="back-icon" 
+        />
       </DateContainer>
       <PromiseContainer>
         <PromiseTitle>{upcomingDday.name}</PromiseTitle>
         <PromiseContent>
           <img src={PersonIcon} alt="" />
-          <div>이지환 외 {upcomingDday.peopleNumber-1}명</div>
+          <div>{upcomingDday.leaderName} 외 {upcomingDday.peopleNumber-1}명</div>
         </PromiseContent>
         <PromiseContent>
           <img src={LocationIcon} alt="" />
@@ -81,7 +92,8 @@ export const UpcomingDday = styled.div`
   align-content: center;
   padding-top: 2px;
   padding-left: 10px;
-  width: 46px;
+  padding-right: 9px;
+  // width: 20%;
   height: 24px;
   border-radius: 100px;
   background-color: #5175FF;

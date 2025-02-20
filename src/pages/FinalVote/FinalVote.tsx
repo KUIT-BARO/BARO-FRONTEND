@@ -7,8 +7,44 @@ import Step2 from "./Step2/Step2";
 import Confirm from "./Confrim";
 // import Popup from "./Popup/Popup";
 
-export default function Accept() {
+import GetPromiseVote from "../../apis/promise/Vote/GetPromiseVote";
+
+export default function Accept(placeId: number) {
   const navigate = useNavigate();
+
+  interface promisePersonalTimeDto {
+    promisePersonalTimeId: number;
+    date: string;
+    timeStart: string;
+    timeEnd: string;
+  }
+  const [promisePersonalTimeDtoList] = useState<promisePersonalTimeDto[]>([]);
+  interface placeDto {
+    promisePersonalPlaceId: number;
+    placeName: string;
+  }
+  const [placeDtoList] = useState<placeDto[]>([]);
+
+  React.useEffect(() => {
+    const fetchVote = async () => {
+      try {
+        const response = await GetPromiseVote(placeId);
+        console.log(response);
+        if (response) {
+          for (let i = 0; i < response.data.data.promisePersonalTimeDtoList.length; i++) {
+            promisePersonalTimeDtoList.push(response.data.data.promisePersonalTimeDtoList[i]);
+          }
+          for (let i = 0; i < response.data.data.placeDtoList.length; i++) {
+            placeDtoList.push(response.data.data.placeDtoList[i]);
+          }
+        }
+      } catch (error) {
+        console.error("약속 정보 불러오기 실패:", error);
+      }
+    }
+    fetchVote
+  }, []);
+
   const [selectedTimeIndex, setSelectedTimeIndex] = useState(null);
   const [selectedLocationIndex, setSelectedLocationIndex] = useState(null);
 

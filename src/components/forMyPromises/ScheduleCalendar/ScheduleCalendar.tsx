@@ -18,9 +18,11 @@ export default function ScheduleCalendar() {
   });
 
   const [events, setEvents] = useState({
-    '2025-2-5': 3,  // 2024년 1월 5일에 3개의 일정
-    '2025-2-12': 2, // 2024년 1월 12일에 2개의 일정
-    '2025-3-20': 1, // 2024년 1월 20일에 1개의 일정
+    '2025-2-5': 3,
+    '2025-2-17': 2,
+    '2025-2-21': 4,
+    '2025-2-25': 1,
+    '2025-3-4': 2,
   });
 
   const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
