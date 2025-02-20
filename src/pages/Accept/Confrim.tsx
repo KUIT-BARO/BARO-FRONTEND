@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import styled from "styled-components";
 
-import formatDateToShort from "../../utils/formatDateToShort";
+import formatDateWithDay from "../../utils/formateDateWithDay";
 import StepInterface from "../../interface/Step";
 import SuggestInterface from "../../interface/Suggest";
 
@@ -16,7 +16,7 @@ import location from "../../assets/icons/location.svg";
 import crown from "../../assets/icons/crown.svg";
 
 import AcceptInterface from "../../interface/Accept";
-import 약속준비 from "../../assets/icons/약속준비.svg";
+import 약속준비 from "../../assets/icons/약속준비.png";
 import { useNavigate } from "react-router-dom";
 interface ConfirmProps extends StepInterface, AcceptInterface {}
 
@@ -26,6 +26,7 @@ export default function Confirm({
   data,
 }: ConfirmProps) {
   const navigate = useNavigate();
+
   return (
     <>
       <ConfirmWrapper>
@@ -39,7 +40,7 @@ export default function Confirm({
           <Desc>친구들에게 약속을 BARO 공유해봐요</Desc>
         </Title>
         <Content>
-          <img src={약속준비} alt="confirm icon" />
+          <img src={약속준비} alt="confirm icon" style={{ width: "228px" }} />
           <div className="container">
             <div className="wrap">
               <img src={flag} />
@@ -60,8 +61,8 @@ export default function Confirm({
             <div className="wrap">
               <img src={date} />
               <p>
-                {formatDateToShort(data.dateStart)} ~{" "}
-                {formatDateToShort(data.dateEnd)}
+                {formatDateWithDay(data.dateStart)} ~{" "}
+                {formatDateWithDay(data.dateEnd)}
               </p>
             </div>
           </div>

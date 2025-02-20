@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 import Navigation from "../../components/Navigation/Navigation.tsx";
 
@@ -15,11 +15,11 @@ import ScheduleCalendar from "../../components/forMyPromises/ScheduleCalendar/Sc
 import { getPromises } from "../../apis/user/getPromises.tsx";
 import getPromiseConfirm from "../../apis/promise/Confirm/GetPromiseConfirm.tsx";
 
-export default function MyPromises () {
+export default function MyPromises() {
   const [active, setActive] = React.useState("promise");
   function handleClick(active: string) {
     setActive(active);
-  };
+  }
 
   const [upcomingDday, setUpcomingDday] = React.useState({
     promiseId: 0,
@@ -48,10 +48,10 @@ export default function MyPromises () {
       try {
         const response = await getPromises.checkPromises();
         console.log(response);
-        
+
         if (response.status === 200 && response.data) {
           console.log(response.data);
-          
+
           setUpcomingDday({
             promiseId: response.data.upcomingDday.promiseId,
             name: response.data.upcomingDday.name,
@@ -84,11 +84,22 @@ export default function MyPromises () {
 
     const fetchPromiseConfirm = async () => {
       try {
-        // const response = await getPromiseConfirm(upcomingDday.promiseId);
-        const response = await getPromiseConfirm(6);
+        const response = await getPromiseConfirm(upcomingDday.promiseId);
         if (response.status === 200 && response.data) {
           console.log(response.data);
-          console.log("나의 약속 확인 정보를 조회했습니다.");
+
+          const confirmedPromise = response.data.promiseConfirmDto || {};
+
+          const formattedPromise = {
+            promiseId: confirmedPromise.promiseId || 0,
+            name: confirmedPromise.name || "약속 이름 없음",
+            purpose: confirmedPromise.purpose || "목적 없음",
+            date: confirmedPromise.date ? confirmedPromise.date : "날짜 미정",
+            placeName: confirmedPromise.placeName || "장소 미정",
+            peopleNum: confirmedPromise.peopleNum || 0,
+          };
+
+          console.log("확정된 약속 정보:", formattedPromise);
         }
       } catch (error) {
         console.error("나의 약속 확인 정보 조회 실패", error);
@@ -125,10 +136,10 @@ export default function MyPromises () {
       <Navigation />
     </>
   );
-};
+}
 
 export const PromiseWrapper = styled.div`
   padding-top: 7.5rem;
   padding-bottom: 5rem;
-  background-color: #F4F8FB;
+  background-color: #f4f8fb;
 `;

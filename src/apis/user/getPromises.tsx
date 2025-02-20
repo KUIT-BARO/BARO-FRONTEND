@@ -1,11 +1,9 @@
 import instance from "../instance/index";
 
-export const getPromises ={
+export const getPromises = {
   checkPromises: async () => {
     try {
-      const response = await instance.get("/users/promises", {
-        headers: { "Accept": "application/json" }
-      });
+      const response = await instance.get("/users/promises");
       return response;
     } catch (error) {
       if (error.response) {
@@ -17,5 +15,5 @@ export const getPromises ={
       }
       throw error;
     }
-  }
+  },
 };

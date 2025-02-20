@@ -7,18 +7,22 @@ import Step2 from "./Step2/Step2";
 import Confirm from "./Confrim";
 import GetPromise from "../../apis/Promise/GetPromise";
 // import Popup from "./Popup/Popup";
-
+type LocationType = {
+  id: number;
+  placeName: string;
+  latitude: number;
+  longitude: number;
+  address: string;
+  star: number;
+  comments: number;
+  categories: string[];
+};
 export default function Accept() {
   const { promiseId } = useParams();
 
   const navigate = useNavigate();
   const [placeId, setPlaceId] = useState<[]>([]);
-  const [name, setName] = useState("");
-  const [purpose, setPurpose] = useState("");
-  const [startDate, setStartDate] = useState<Date | null>(null);
-  const [endDate, setEndDate] = useState<Date | null>(null);
-  const [location, setLocation] = useState("");
-  const [peopleNum, setPeopleNum] = useState<number>(0);
+  const [places, setPlaces] = useState<LocationType>([]);
 
   const [timeTable, setTimeTable] = useState<[]>([]);
   const [data, setData] = useState(null);
@@ -47,7 +51,7 @@ export default function Accept() {
 
   // 홈 화면으로 이동
   const handleExit = () => {
-    navigate("/");
+    navigate("/main");
   };
 
   return (
@@ -91,11 +95,13 @@ export default function Accept() {
           element={
             data ? (
               <Step2
-                placeId={placeId}
-                setPlaceId={setPlaceId}
+                promiseId={promiseId}
+                places={places}
+                setPlaces={setPlaces}
                 data={data}
                 handleBack={handleBack}
                 handleExit={handleExit}
+                timeTable={timeTable}
               />
             ) : (
               <div>로딩중</div>

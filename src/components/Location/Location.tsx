@@ -5,7 +5,7 @@ import navyStar from "../../assets/icons/navyStar.svg";
 import whiteStar from "../../assets/icons/whiteStar.svg";
 import grayStar from "../../assets/icons/grayStar.svg";
 interface LocationProps {
-  location: string;
+  placeName: string;
   isSelected?: boolean;
   address: string;
   star: number;
@@ -15,7 +15,7 @@ interface LocationProps {
 }
 
 const Location = ({
-  location,
+  placeName,
   address,
   star,
   comments,
@@ -24,6 +24,7 @@ const Location = ({
   onClick,
 }: LocationProps) => {
   // 별 렌더링 함수
+
   const renderStars = (starCount: number) => {
     const maxStars = 5; // 별점 최대 개수
     const stars = [];
@@ -52,11 +53,11 @@ const Location = ({
   return (
     <Wrapper isSelected={isSelected}>
       <div className="title">
-        <p>{location}</p>
+        <p>{placeName}</p>
         <button onClick={onClick}>{isSelected ? "취소" : "선택"}</button>
       </div>
       <div className="scope">
-        <div>{star}.0</div>
+        <div>{star}</div>
         <div className="stars">{renderStars(star)}</div>
         <div>({comments})</div>
       </div>
@@ -80,7 +81,7 @@ const Wrapper = styled.div<{ isSelected: boolean }>`
   display: flex;
   flex-direction: column;
   gap: 12px;
-  padding: 15px 10px;
+  padding: 15px 20px;
   margin-bottom: -17px;
 
   background-color: ${(props) => (props.isSelected ? "#5175FF" : "#f4f8fb")};
