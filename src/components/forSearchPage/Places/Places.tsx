@@ -14,14 +14,12 @@ import Place_168x168 from '../../../assets/icons/장소_임시_168x168.svg';
 import Place_340x232 from '../../../assets/icons/장소_임시_340x232.svg';
 
 interface PlaceProps {
-  isBest: boolean;
   title: string;
   subtitle?: string;
 }
 
-const Place: React.FC<PlaceProps> = ({ isBest, title, subtitle }) => {
+const Place: React.FC<PlaceProps> = ({ title, subtitle }) => {
   const navigate = useNavigate();
-
   return (
     <PlaceWrapper>
       <PlaceTitleWrapper>
@@ -35,18 +33,16 @@ const Place: React.FC<PlaceProps> = ({ isBest, title, subtitle }) => {
         </Subtitle>
       </PlaceTitleWrapper>
 
-      {isBest && <PlaceImageWrapper>
-        <Place168 />
-        <Place168 />
-        <Place168 />
+      {(title === 'BEST') && <PlaceImageWrapper>
         <Place168 />
       </PlaceImageWrapper>}
 
-      {!isBest && <PlaceImageWrapper>
-        <Place340 />
-        <Place340 />
-        <Place340 />
-        <Place340 />
+      {(title === '비즈니스') && <PlaceImageWrapper>
+        <Place340_Business />
+      </PlaceImageWrapper>}
+
+      {(title === '스터디') && <PlaceImageWrapper>
+        <Place340_Study />
       </PlaceImageWrapper>}
     </PlaceWrapper>
   );
@@ -63,47 +59,145 @@ const Stars = (starCount: number) => {
   return stars;
 };
 
+interface placeReviews {
+  address: string;
+  name: string;
+  star: number;
+  bookmarks: number;
+}
+const placeReviewBest: placeReviews[] = [
+  {
+    address: "건국대학교",
+    name: "일감호",
+    star: 5,
+    bookmarks: 32,
+  },{
+    address: "어린이대공원",
+    name: "놀이동산",
+    star: 5,
+    bookmarks: 12,
+  },{
+    address: "서울시 성동구 화양동",
+    name: "느티나무 공원",
+    star: 3,
+    bookmarks: 48,
+  },{
+    address: "성수",
+    name: "앨리스랩",
+    star: 4,
+    bookmarks: 83,
+  }
+]
+const placeReviewBusiness: placeReviews[] = [
+  {
+    address: "",
+    name: "바아로 재즈바",
+    star: 4,
+    bookmarks: 58,
+  },{
+    address: "",
+    name: "패스트 파이브",
+    star: 5,
+    bookmarks: 12,
+  },{
+    address: "",
+    name: "넥스트 데이",
+    star: 3,
+    bookmarks: 7,
+  }
+]
+const placeReviewStudy: placeReviews[] = [
+  {
+    address: "",
+    name: "투썸플레이스",
+    star: 4,
+    bookmarks: 58,
+  },{
+    address: "",
+    name: "스타벅스",
+    star: 5,
+    bookmarks: 12,
+  },{
+    address: "",
+    name: "커피빈",
+    star: 3,
+    bookmarks: 7,
+  }
+]
+
 export function Place168() {
   return (
-    <PlaceImage>
-      <img src={Place_168x168} alt="Place Image" />
-      <PlaceInfo is168={true}>
-        <PlaceLocation>
-          <div>화양동</div>
-          <div>느티나무 공원</div>
-        </PlaceLocation>
-        <StarRating>
-          <span>3</span>
-          {Stars(3)}
-        </StarRating>
-        <Bookmark>
-          <img src={BookmarkIcon} alt="bookmark icon" />
-          <span>(32)</span>
-        </Bookmark>
-      </PlaceInfo>
-    </PlaceImage>
+    <>
+      {placeReviewBest.map((place, index) => (
+        <PlaceImage key={index}>
+          <img src={Place_168x168} alt="Place Image" />
+          <PlaceInfo is168={true}>
+            <PlaceLocation>
+              <div>{place.address}</div>
+              <div>{place.name}</div>
+            </PlaceLocation>
+            <StarRating>
+              <span>{place.star}</span>
+              {Stars(place.star)}
+            </StarRating>
+            <Bookmark>
+              <img src={BookmarkIcon} alt="bookmark icon" />
+              <span>({place.bookmarks})</span>
+            </Bookmark>
+          </PlaceInfo>
+        </PlaceImage>
+      ))}
+    </>
   );
 };
-
-export function Place340() {
+export function Place340_Business() {
   return (
-    <PlaceImage>
-      <img src={Place_340x232} alt="Place Image" />
-      <PlaceInfo is168={false}>
-        <PlaceLocation>
-          <div>화양동</div>
-          <div>느티나무 공원</div>
-        </PlaceLocation>
-        <StarRating>
-          <span>3</span>
-          {Stars(3)}
-        </StarRating>
-        <Bookmark>
-          <img src={BookmarkIcon} alt="bookmark icon" />
-          <span>(32)</span>
-        </Bookmark>
-      </PlaceInfo>
-    </PlaceImage>
+    <>
+      {placeReviewBusiness.map((place, index) => (
+        <PlaceImage key={index}>
+          <img src={Place_340x232} alt="Place Image" />
+          <PlaceInfo is168={false}>
+            <PlaceLocation>
+              <div>{place.address}</div>
+              <div>{place.name}</div>
+            </PlaceLocation>
+            <StarRating>
+              <span>{place.star}</span>
+              {Stars(place.star)}
+            </StarRating>
+            <Bookmark>
+              <img src={BookmarkIcon} alt="bookmark icon" />
+              <span>({place.bookmarks})</span>
+            </Bookmark>
+          </PlaceInfo>
+        </PlaceImage>
+      ))}
+    </>
+  );
+};
+export function Place340_Study() {
+  return (
+    <>
+      {placeReviewStudy.map((place, index) => (
+        <PlaceImage key={index}>
+          <img src={Place_340x232} alt="Place Image" />
+          <PlaceInfo is168={false}>
+            <PlaceLocation>
+              <div>{place.address}</div>
+              <div>{place.name}</div>
+            </PlaceLocation>
+            <StarRating>
+              <span>{place.star}</span>
+              {Stars(place.star)}
+            </StarRating>
+            <Bookmark>
+              <img src={BookmarkIcon} alt="bookmark icon" />
+              <span>({place.bookmarks})</span>
+            </Bookmark>
+          </PlaceInfo>
+        </PlaceImage>
+      ))}
+    </>
   );
 };
 
@@ -111,17 +205,14 @@ export default function Places() {
   return (
     <PlacesWrapper>
       <Place 
-        isBest={true} 
         title="BEST" 
         subtitle="좋아요를 가장 많이 받은 명소"
       />
       <Place 
-        isBest={false} 
         title="비즈니스" 
         subtitle="회의와 업무에 딱 맞는 장소"  
       />
       <Place 
-        isBest={false} 
         title="스터디"
         subtitle="효율적인 공부를 위한 최적의 장소"  
       />
