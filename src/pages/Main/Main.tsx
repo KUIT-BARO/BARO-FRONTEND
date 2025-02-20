@@ -5,7 +5,7 @@ import Navigation from "../../components/Navigation/Navigation";
 import { useNavigate } from "react-router-dom";
 import { postAuth } from "../../apis/auth/postAuth";
 
-import bigLogo from "../../assets/icons/bigLogo.svg";
+import note from "../../assets/icons/note.svg";
 import locationWhite from "../../assets/icons/locationWhite.svg";
 import logo from "../../assets/icons/logo.svg";
 import alarm from "../../assets/icons/alarm.svg";
@@ -51,11 +51,11 @@ const Main = () => {
     purpose: string;
     timeEnd: string;
     timeStart: string;
-  };
+  }
   interface upcomingPromises {
     promises: upcomingDday[];
   }
-  const [homeDataName, setHomeDataName] = useState<string>('');
+  const [homeDataName, setHomeDataName] = useState<string>("");
   const [upcomingDday, setUpcomingDday] = useState<upcomingDday>({
     date: "",
     name: "",
@@ -66,7 +66,9 @@ const Main = () => {
     timeEnd: "",
     timeStart: "",
   });
-  const [upcomingPromises, setUpcomingPromises] = useState<upcomingPromises>({ promises: [] });
+  const [upcomingPromises, setUpcomingPromises] = useState<upcomingPromises>({
+    promises: [],
+  });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -76,14 +78,16 @@ const Main = () => {
         setHomeDataName(response.data.data.name);
         setUpcomingDday(response.data.data.upcomingDday);
         // setUpcomingPromises({ promises: [...response.data.data.upcomingPromises] });
-        for (let i=0 ; i<response.data.data.upcomingPromises.length ; i++) {          
-          upcomingPromises.promises.push(response.data.data.upcomingPromises[i]);
+        for (let i = 0; i < response.data.data.upcomingPromises.length; i++) {
+          upcomingPromises.promises.push(
+            response.data.data.upcomingPromises[i]
+          );
         }
       } catch (error) {
         console.error("홈 데이터 불러오기 실패:", error);
       }
     };
-    fetchData();    
+    fetchData();
 
     const handleScroll = () => {
       if (scrollRef.current) {
@@ -100,11 +104,6 @@ const Main = () => {
 
   return (
     <MainWrapper>
-      {/* 데이터가 없을 경우 bigLogo 표시 */}
-      {/* {Object.keys(upcomingPromises).length === 0 && (
-        <img src={bigLogo} alt="big logo" className="big-logo" />
-      )} */}
-
       <Header>
         <img src={logo} alt="logo icon" className="logo" />
         <div className="header-controls">
@@ -119,7 +118,7 @@ const Main = () => {
       </Header>
 
       <section style={{ width: "100%" }}>
-        {(upcomingDday != null) ? (
+        {upcomingDday != null ? (
           <>
             {/* <Title>
               <div>{homeDataName}님의 다가올 약속</div>
@@ -131,28 +130,38 @@ const Main = () => {
             </Title> */}
             <Container>
               <Ddays>
-                D-{Math.ceil((new Date(upcomingDday.date).getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24))}
+                D-
+                {Math.ceil(
+                  (new Date(upcomingDday.date).getTime() -
+                    new Date().getTime()) /
+                    (1000 * 60 * 60 * 24)
+                )}
               </Ddays>
               <PromiseContainer
-                left={Math.ceil((new Date(upcomingDday.date).getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24))}
+                left={Math.ceil(
+                  (new Date(upcomingDday.date).getTime() -
+                    new Date().getTime()) /
+                    (1000 * 60 * 60 * 24)
+                )}
                 date={upcomingDday.date}
                 people={`${homeDataName} 외 ${upcomingDday.peopleNumber - 1}명`}
                 location={upcomingDday.place}
                 title={upcomingDday.name}
               />
               {/* <Promises ref={scrollRef}> */}
-                {upcomingPromises.promises.map((item, index) => (
-                  <PromiseContainer
-                    key={index}
-                    left={Math.ceil((new Date(item.date).getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24))}
-                    date={item.date}
-
-                    people={`${homeDataName} 외 ${item.peopleNumber - 1}명`}
-                    location={item.place}
-                    title={item.name}
-
-                  />
-                ))}
+              {upcomingPromises.promises.map((item, index) => (
+                <PromiseContainer
+                  key={index}
+                  left={Math.ceil(
+                    (new Date(item.date).getTime() - new Date().getTime()) /
+                      (1000 * 60 * 60 * 24)
+                  )}
+                  date={item.date}
+                  people={`${homeDataName} 외 ${item.peopleNumber - 1}명`}
+                  location={item.place}
+                  title={item.name}
+                />
+              ))}
               {/* </Promises> */}
               {/* <Dots>
                 {upcomingPromises.promises.map((_, index) => (
@@ -167,7 +176,7 @@ const Main = () => {
             <Title>
               <div className="name">{homeDataName} 님</div>
               <div className="bold">지금은 예정된 약속이 없어요</div>
-              <img className="noteImg" src="https://placehold.co/148x154" alt="note image" />
+              <img className="noteImg" src={note} alt="note image" />
             </Title>
             {/* <Title>
               <div className="bold">우리 다 같이 BARO 하자</div>
