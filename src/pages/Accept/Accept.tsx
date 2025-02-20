@@ -5,7 +5,7 @@ import Introduction from "./Introduction";
 import Step1 from "./Step1/Step1";
 import Step2 from "./Step2/Step2";
 import Confirm from "./Confrim";
-import GetPromise from "../../apis/Promise/GetPromise";
+import GetPromise from "../../apis/promise/GetPromise";
 // import Popup from "./Popup/Popup";
 
 export default function Accept() {

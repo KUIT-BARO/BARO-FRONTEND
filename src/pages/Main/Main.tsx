@@ -66,7 +66,7 @@ const Main = () => {
     timeEnd: "",
     timeStart: "",
   });
-  const [upcomingPromises, setUpcomingPromises] = useState<upcomingPromises>({
+  const [upcomingPromises] = useState<upcomingPromises>({
     promises: [],
   });
 
