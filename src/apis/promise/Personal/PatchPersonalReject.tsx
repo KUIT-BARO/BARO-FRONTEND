@@ -1,8 +1,9 @@
 import instance from "../../instance";
 import { createErrorResponse } from "../../../interface/api/Message";
-const PostPersonalReject = async (promiseId: number) => {
+
+const PatchPersonalReject = async (promiseId: number) => {
   try {
-    return await instance.post(`/promise/personal/${promiseId}/reject`);
+    return await instance.patch(`/promise/personal/${promiseId}/reject`);
   } catch (error) {
     if (error.response) {
       const errorData = createErrorResponse(error.response.status.toString());
@@ -14,4 +15,4 @@ const PostPersonalReject = async (promiseId: number) => {
   }
 };
 
-export default PostPersonalReject;
+export default PatchPersonalReject;

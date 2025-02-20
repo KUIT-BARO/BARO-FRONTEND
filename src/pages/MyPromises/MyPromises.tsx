@@ -10,11 +10,12 @@ import PendingPromise from "../../components/forMyPromises/PendingPromise/Pendin
 import UpcomingPromise from "../../components/forMyPromises/UpcomingPromise/UpcomingPromise.tsx";
 import SuggestPromise from "../../components/forMyPromises/SuggestPromise/SuggestPromise.tsx";
 
+import PromiseConfirm from "../../components/forMyPromises/PromiseConfirm/PromiseConfirm.tsx";
+
 import ScheduleCalendar from "../../components/forMyPromises/ScheduleCalendar/ScheduleCalendar.tsx";
 
 import { getPromises } from "../../apis/user/getPromises.tsx";
 import getPromise from "../../apis/promise/GetPromise.tsx";
-// import getPromiseConfirm from "../../apis/promise/Confirm/GetPromiseConfirm.tsx";
 
 export default function MyPromises() {
   const [active, setActive] = React.useState("promise");
@@ -102,21 +103,60 @@ export default function MyPromises() {
         <PromiseButton updateActive={handleClick} />
         {active === "promise" && (
           <PromiseWrapper>
-            {pendingPromises.promises.map((item, index) => (
+            <PendingPromise promise={
+              {
+                promiseId: 1,
+                name: "회계원리 팀플",
+                purpose: "팀프로젝트 / 회의",
+                dateStart: "2025-02-25",
+                dateEnd: "2025-02-27",
+                place: "건대입구역 주변",
+                peopleNumber: 3,
+                leaderName: "이지환"
+              }
+            } />
+            {/* {pendingPromises.promises.map((item, index) => (
               <PendingPromise key={index} promise={item} />
-            ))}
-            {upcomingPromises.promises.map((item, index) => (
+            ))} */}
+
+            <UpcomingPromise upcomingDday={
+              {
+                promiseId: 1,
+                name: "쿠잇 BARO 데모데이",
+                purpose: "팀프로젝트/회의",
+                date: "2025-02-21",
+                timeStart: "15:30:15",
+                timeEnd: "16:50:15",
+                place: "성수 앨리스랩",
+                peopleNumber: 5,
+                leaderName: "이지환"
+              }
+            } />
+            {/* {upcomingPromises.promises.map((item, index) => (
               <UpcomingPromise key={index} upcomingDday={item} />
-            ))}
+            ))} */}
             <SuggestPromise />
           </PromiseWrapper>
         )}
         {active === "schedule" && (
           <PromiseWrapper>
             <ScheduleCalendar />
-            {upcomingPromises.promises.map((item, index) => (
+            <UpcomingPromise upcomingDday={
+              {
+                promiseId: 1,
+                name: "쿠잇 BARO 데모데이",
+                purpose: "팀프로젝트/회의",
+                date: "2025-02-21",
+                timeStart: "15:30:15",
+                timeEnd: "16:50:15",
+                place: "성수 앨리스랩",
+                peopleNumber: 5,
+                leaderName: "이지환"
+              }
+            } />
+            {/* {upcomingPromises.promises.map((item, index) => (
               <UpcomingPromise key={index} upcomingDday={item} />
-            ))}
+            ))} */}
           </PromiseWrapper>
         )}
       </main>

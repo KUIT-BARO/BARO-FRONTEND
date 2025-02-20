@@ -1,11 +1,14 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import FlagIcon from '../../../assets/icons/flag.svg';
 import CrownIcon from '../../../assets/icons/crown.svg';
 import PersonIcon from '../../../assets/icons/person.svg';
-import LocationIcon from '../../../assets/icons/location.svg';
-import CalendarIcon from '../../../assets/icons/date.svg';
+import LocationIcon from '../../../assets/icons/location_red.svg';
+import CalendarIcon from '../../../assets/icons/date_red.svg';
+
+import PatchPersonalReject from '../../../apis/promise/Personal/PatchPersonalreject';
 
 interface PendingPromiseProps {
   promise: {
@@ -16,7 +19,18 @@ interface PendingPromiseProps {
     dateEnd: string;
     place: string;
     peopleNumber: number;
+    leaderName: string;
   };
+}
+
+const handleReject = async (promiseId: number) => {
+  try {
+    await PatchPersonalReject(promiseId);
+    console.log("약속 거절에 성공하였습니다.");
+    // window.location.reload(); // Remove this line
+  } catch (error) {
+    console.error("거절하기 실패:", error);
+  }
 }
 
 const PendingPromise = ({ promise
@@ -28,6 +42,7 @@ const PendingPromise = ({ promise
   // place = "강남역 카페",
   // peopleNumber = 3
 }: PendingPromiseProps) => {
+  const navigate = useNavigate();
 
   return (
     <ConfirmContainer>
@@ -42,26 +57,26 @@ const PendingPromise = ({ promise
         </PromiseContent>
         <PromiseContent>
           <img src={CrownIcon} alt="crown-icon" />
-          <div>이지환</div>
+          <div>{promise.leaderName}</div>
         </PromiseContent>
         <PromiseContent>
           <img src={PersonIcon} alt="person-icon" />
-          <div>이지환 외 {promise.peopleNumber-1}명</div>
+          <div>{promise.leaderName} 외 {promise.peopleNumber-1}명</div>
         </PromiseContent>
         <PromiseContent>
           <img src={LocationIcon} alt="location-icon" />
-          <div>{promise.place}</div>
+          <div className='red'>{promise.place}</div>
         </PromiseContent>
         <PromiseContent>
           <img src={CalendarIcon} alt="calendar-icon" />
-          <div>
-            {promise.dateStart.slice(5,7).replace(/^0+/,'')}/{promise.dateStart.slice(8,10).replace(/^0+/,'')} (목) ~ {promise.dateEnd.slice(5,7).replace(/^0+/,'')}/{promise.dateEnd.slice(8,10).replace(/^0+/,'')} (목)
+          <div className='red'>
+            {promise.dateStart.slice(5,7).replace(/^0+/,'')}/{promise.dateStart.slice(8,10).replace(/^0+/,'')} ({new Date(promise.dateStart).toLocaleString('ko-KR', {weekday: 'short'})}) ~ {promise.dateEnd.slice(5,7).replace(/^0+/,'')}/{promise.dateEnd.slice(8,10).replace(/^0+/,'')} ({new Date(promise.dateEnd).toLocaleString('ko-KR', {weekday: 'short'})})
           </div>
         </PromiseContent>
       </PromiseContainer>
       <ButtonContainer>
-        <ConfirmButton>수락하기</ConfirmButton>
-        <DenyButton>거절하기</DenyButton>
+        <ConfirmButton onClick={() => navigate('/accept/37')}>수락하기</ConfirmButton>
+        <DenyButton onClick={() => handleReject(promise.promiseId)}>거절하기</DenyButton>
       </ButtonContainer>
     </ConfirmContainer>
   );
@@ -125,6 +140,10 @@ export const PromiseContent = styled.div`
     width: 14px;
     height: 14px;
     margin: 1.5px 12px 1.5px 0;
+  }
+
+  .red {
+    color: red;
   }
 `;
 export const ButtonContainer = styled.div`

@@ -8,9 +8,9 @@ const SuggestPromise = () => {
   const navigate = useNavigate();
   return (
     <>
-      <SuggestContainer>
+      <SuggestContainer onClick={() => navigate("/suggest")}>
         <PlusButton><img src={plusIcon} alt="add" /></PlusButton>
-        <Suggest onClick={() => navigate("/suggest")}>새로운 모임 제안하기</Suggest>
+        <Suggest>새로운 모임 제안하기</Suggest>
       </SuggestContainer>
     </>
   );
