@@ -10,11 +10,11 @@ export const MainWrapper = styled.div`
   gap: 25px;
   // background: linear-gradient(180deg, #5175ff 0%, #cfdae6 100%);
   background: linear-gradient(
-    to bottom, 
-  #5175FF 22%, 
-  #A1B3F8 36%, 
-  #F0F0F0 80%, 
-  #747474 110%
+    to bottom,
+    #5175ff 22%,
+    #a1b3f8 36%,
+    #f0f0f0 80%,
+    #747474 110%
   );
 
   font-family: "Pretendard", sans-serif;
@@ -33,7 +33,7 @@ export const Header = styled.div`
   justify-content: space-between;
   align-items: center;
   // margin-bottom: 15px;
-  
+
   .logo {
     height: 20px;
     margin: 0;
@@ -58,7 +58,7 @@ export const Header = styled.div`
       text-decoration: underline;
     }
   }
-  
+
   .alarm-wrapper {
     position: relative;
     cursor: pointer;
@@ -104,7 +104,7 @@ export const Title = styled.div`
   .noteImg {
     width: 148px;
     height: 154px;
-    margin: 0 auto 56px auto;
+    margin: 0 auto;
   }
 
   .desc {
