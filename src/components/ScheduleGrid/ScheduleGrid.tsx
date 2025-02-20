@@ -68,7 +68,8 @@ const ScheduleGrid = forwardRef<ScheduleGridHandle, ScheduleGridProps>(({ readOn
               endTime: parseInt(schedule.timeEnd.split(':')[0]),
               day: convertDayOfWeek(schedule.dayOfWeek),
               type: 'class',
-              color: getRandomColor()
+              color: getRandomColor(),
+              location: schedule.location || "" // null이나 undefined인 경우 빈 문자열로 처리
             }));
             setSchedules(formattedSchedules);
           }
