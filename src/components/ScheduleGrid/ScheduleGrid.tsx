@@ -62,7 +62,8 @@ const ScheduleGrid = forwardRef<ScheduleGridHandle, ScheduleGridProps>(({ readOn
           
           if (response.data?.schedules) {
             const formattedSchedules = response.data.schedules.map(schedule => ({
-              id: parseInt(schedule.scheduleId) || Date.now(),
+              // id: parseInt(schedule.scheduleId) || Date.now(),
+              id: parseInt(schedule.id),
               title: schedule.name,
               startTime: parseInt(schedule.timeStart.split(':')[0]),
               endTime: parseInt(schedule.timeEnd.split(':')[0]),
