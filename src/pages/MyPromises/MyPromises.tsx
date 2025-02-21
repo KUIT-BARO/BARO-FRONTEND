@@ -63,17 +63,21 @@ export default function MyPromises() {
     const fetchPromises = async () => {
       try {
         const response = await getPromises.checkPromises();
-        
+
         if (response.status === 200 && response.data) {
           console.log(response.data.data.upcomingPromises[0]);
 
-          for (let i=0 ; i<response.data.data.pendingPromises.length ; i++) {
-            pendingPromisesId.promiseId.push(response.data.data.pendingPromises[i].promiseId);
+          for (let i = 0; i < response.data.data.pendingPromises.length; i++) {
+            pendingPromisesId.promiseId.push(
+              response.data.data.pendingPromises[i].promiseId
+            );
           }
           if (pendingPromisesId.promiseId.length > 0) {
             try {
-              for (let i=0 ; i<pendingPromisesId.promiseId.length ; i++) {
-                const response2 = await getPromise(pendingPromisesId.promiseId[i]);
+              for (let i = 0; i < pendingPromisesId.promiseId.length; i++) {
+                const response2 = await getPromise(
+                  pendingPromisesId.promiseId[i]
+                );
                 pendingPromises.promises.push(response2.data.data);
               }
             } catch (error) {
@@ -81,8 +85,10 @@ export default function MyPromises() {
             }
           }
 
-          for (let i=0 ; i<response.data.data.upcomingPromises.length ; i++) {
-            upcomingPromises.promises.push(response.data.data.upcomingPromises[i]);
+          for (let i = 0; i < response.data.data.upcomingPromises.length; i++) {
+            upcomingPromises.promises.push(
+              response.data.data.upcomingPromises[i]
+            );
           }
 
           console.log("나의 약속 정보를 조회했습니다.");
@@ -103,24 +109,24 @@ export default function MyPromises() {
         <PromiseButton updateActive={handleClick} />
         {active === "promise" && (
           <PromiseWrapper>
-            <PendingPromise promise={
-              {
-                promiseId: 1,
-                name: "회계원리 팀플",
+            <PendingPromise
+              promise={{
+                promiseId: 87,
+                name: "BARO 데모데이이",
                 purpose: "팀프로젝트 / 회의",
-                dateStart: "2025-02-25",
-                dateEnd: "2025-02-27",
-                place: "건대입구역 주변",
-                peopleNumber: 3,
-                leaderName: "이지환"
-              }
-            } />
+                dateStart: "2025-02-21",
+                dateEnd: "2025-02-22",
+                place: "성수역 주변",
+                peopleNumber: 9,
+                leaderName: "이지환",
+              }}
+            />
             {/* {pendingPromises.promises.map((item, index) => (
               <PendingPromise key={index} promise={item} />
             ))} */}
 
-            <UpcomingPromise upcomingDday={
-              {
+            <UpcomingPromise
+              upcomingDday={{
                 promiseId: 1,
                 name: "쿠잇 BARO 데모데이",
                 purpose: "팀프로젝트/회의",
@@ -129,9 +135,9 @@ export default function MyPromises() {
                 timeEnd: "16:50:15",
                 place: "성수 앨리스랩",
                 peopleNumber: 5,
-                leaderName: "이지환"
-              }
-            } />
+                leaderName: "이지환",
+              }}
+            />
             {/* {upcomingPromises.promises.map((item, index) => (
               <UpcomingPromise key={index} upcomingDday={item} />
             ))} */}
@@ -141,8 +147,8 @@ export default function MyPromises() {
         {active === "schedule" && (
           <PromiseWrapper>
             <ScheduleCalendar />
-            <UpcomingPromise upcomingDday={
-              {
+            <UpcomingPromise
+              upcomingDday={{
                 promiseId: 1,
                 name: "쿠잇 BARO 데모데이",
                 purpose: "팀프로젝트/회의",
@@ -151,9 +157,9 @@ export default function MyPromises() {
                 timeEnd: "16:50:15",
                 place: "성수 앨리스랩",
                 peopleNumber: 5,
-                leaderName: "이지환"
-              }
-            } />
+                leaderName: "이지환",
+              }}
+            />
             {/* {upcomingPromises.promises.map((item, index) => (
               <UpcomingPromise key={index} upcomingDday={item} />
             ))} */}
