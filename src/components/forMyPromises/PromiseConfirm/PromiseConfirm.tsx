@@ -10,12 +10,40 @@ import person from "../../../assets/icons/person.svg";
 import date from "../../../assets/icons/date.svg";
 import locationIcon from "../../../assets/icons/location.svg";
 import crown from "../../../assets/icons/crown.svg";
-import ThumbsUp from "../../../assets/icons/약속확정2.svg";
+import ThumbsUp from "../../../assets/icons/Like.png";
+
+import GetSharePromise from "../../../apis/user/GetSharePromise";
 
 export default function PromiseConfirm() {
   const navigate = useNavigate();
   const location = useLocation();
   const promiseData = location.state;
+
+  const [linkPopup, setLinkPopup] = React.useState(false);
+  const [link, setLink] = React.useState<string | null>(null);
+  const showPopup = async () => {
+    try {
+      if (!promiseData.promiseId) {
+        console.error("promiseId가 설정되지 않았습니다.");
+        return null;
+      }
+
+      setLinkPopup(true);
+      const response = await GetSharePromise(promiseData.promiseId);
+
+      if (response?.data?.data.url) {
+        setLink(response.data.data.url);
+        setTimeout(() => {
+          setLinkPopup(false);
+        }, 1000);
+
+        return response.data.data.url; // ✅ 공유 링크 반환
+      }
+    } catch (error) {
+      console.error("공유 링크 가져오는 중 오류 발생:", error);
+    }
+    return null; // 실패 시 null 반환
+  };
 
   return (
     <>
@@ -67,7 +95,26 @@ export default function PromiseConfirm() {
           background: "white",
         }}
       >
-        <Button onClick={() => navigate(-1)}>공유하기</Button>
+        {linkPopup && (
+          <LinkPopupWrapper>
+            <div>링크가 복사되었습니다.</div>
+          </LinkPopupWrapper>
+        )}
+        <Button 
+          onClick={async () => {
+            const copiedLink = await showPopup(); // 공유 링크를 가져온 후
+            if (copiedLink) {
+              try {
+                await navigator.clipboard.writeText(copiedLink);
+                console.log("링크 복사 완료:", copiedLink);
+              } catch (error) {
+                console.error("클립보드 복사 실패:", error);
+              }
+            } else {
+              console.warn("복사할 링크가 없습니다.");
+            }
+          }}
+        >공유하기</Button>
         <Button onClick={() => navigate(-1)} color="Gray">완료하기</Button>
       </div>
     </>
@@ -136,6 +183,47 @@ const Content = styled.div`
         font-size: 16px;
         font-weight: 400;
       }
+    }
+  }
+`;
+
+const LinkPopupWrapper = styled.div`
+  position: fixed;
+  bottom: 20%;
+  left: 50%;
+
+  transform: translate(-50%, 50%);
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 70px;
+  padding: 0 20px;
+  border-radius: 16px;
+  background-color: #f5f5f5;
+  font-size: 17px;
+  font-weight: 600;
+  z-index: 1000;
+  opacity: 0.8;
+  animation: fadeInOut 3s ease-in-out forwards;
+
+  @keyframes fadeInOut {
+    0% {
+      opacity: 0;
+      transform: translate(-50%, 55%);
+    }
+    10% {
+      opacity: 1;
+      transform: translate(-50%, 50%);
+    }
+    90% {
+      opacity: 1;
+      transform: translate(-50%, 50%);
+    }
+    100% {
+      opacity: 0;
+      transform: translate(-50%, 45%);
     }
   }
 `;

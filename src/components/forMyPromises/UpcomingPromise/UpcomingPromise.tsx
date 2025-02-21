@@ -42,7 +42,7 @@ const UpcomingPromise = ({ upcomingDday }: UpcomingPromiseProps) => {
     const today = new Date();
     const promiseDate = new Date(upcomingDday.date);
     const diffTime = promiseDate.getTime() - today.getTime();
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) - 1;
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
     return diffDays > 0 ? `D-${diffDays}` : diffDays < 0 ? `D+${Math.abs(diffDays)}` : 'D-DAY';
   };
 
