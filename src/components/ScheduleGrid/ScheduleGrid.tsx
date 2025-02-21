@@ -9,7 +9,7 @@ export interface ScheduleGridHandle {
 }
 
 interface Schedule {
-  id: number;
+  id: string;
   title: string;
   startTime: number;
   endTime: number;
