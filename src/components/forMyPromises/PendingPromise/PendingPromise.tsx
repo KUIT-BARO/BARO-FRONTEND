@@ -88,7 +88,7 @@ PendingPromiseProps) => {
         </PromiseContent>
       </PromiseContainer>
       <ButtonContainer>
-        <ConfirmButton onClick={() => navigate("/accept/87")}>
+        <ConfirmButton onClick={() => navigate("/accept/92")}>
           수락하기
         </ConfirmButton>
         <DenyButton onClick={() => handleReject(promise.promiseId)}>
