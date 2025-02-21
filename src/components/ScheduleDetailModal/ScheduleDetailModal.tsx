@@ -71,25 +71,28 @@ const ScheduleDetailModal: React.FC<ScheduleDetailModalProps> = ({
 
   const handleDelete = async () => {
     if (!schedule || !onDelete) return;
-      
+  
     setIsLoading(true);
     setError(null);
   
     try {
-      await deleteSchedule.removeSchedule(schedule.id);
+      console.log(`삭제 요청 scheduleId: ${schedule.id}`);
+      await deleteSchedule.removeSchedule(schedule.id); // DELETE 요청 실행
+      console.log("삭제 성공");
+  
       onDelete(schedule.id);
       onClose();
     } catch (err) {
-      console.error('Schedule deletion error:', err);
+      console.error("Schedule deletion error:", err);
       if (err.response) {
-        console.log('Error response:', err.response);
+        console.log("Error response:", err.response);
       }
-      setError('일정 삭제 중 오류가 발생했습니다. 다시 시도해주세요.');
+      setError("일정 삭제 중 오류가 발생했습니다. 다시 시도해주세요.");
     } finally {
       setIsLoading(false);
     }
   };
-
+  
   const handleUpdate = async () => {
     if (!schedule || !schedule.id) {
       setError('일정 ID가 없습니다.');
