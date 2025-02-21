@@ -14,7 +14,7 @@ import date from "../../assets/icons/date.svg";
 import location from "../../assets/icons/location.svg";
 import crown from "../../assets/icons/crown.svg";
 
-import 제안수락 from "../../assets/icons/제안수락.svg";
+import 제안수락 from "../../assets/icons/image.png";
 import { useNavigate } from "react-router-dom";
 import formatDateWithDay from "../../utils/formateDateWithDay";
 
@@ -41,7 +41,7 @@ export default function Introduction({
           <Desc>선호하는 시간과 장소를 알려주세요</Desc>
         </Title>
         <Content>
-          <img src={제안수락} alt="confirm icon" />
+          <img src={제안수락} alt="confirm icon" style={{ width: "200px" }} />
           <div className="container">
             <div className="wrap">
               <img src={flag} />
@@ -54,7 +54,7 @@ export default function Introduction({
             <div className="wrap">
               <img src={person} />
               <p>
-                {user} 외 {data.peopleNumber}
+                {user} 외 1{data.peopleNumber}
               </p>
             </div>
             <div className="wrap">

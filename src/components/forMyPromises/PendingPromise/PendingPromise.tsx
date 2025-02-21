@@ -1,14 +1,14 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
 
-import FlagIcon from '../../../assets/icons/flag.svg';
-import CrownIcon from '../../../assets/icons/crown.svg';
-import PersonIcon from '../../../assets/icons/person.svg';
-import LocationIcon from '../../../assets/icons/location_red.svg';
-import CalendarIcon from '../../../assets/icons/date_red.svg';
+import FlagIcon from "../../../assets/icons/flag.svg";
+import CrownIcon from "../../../assets/icons/crown.svg";
+import PersonIcon from "../../../assets/icons/person.svg";
+import LocationIcon from "../../../assets/icons/location_red.svg";
+import CalendarIcon from "../../../assets/icons/date_red.svg";
 
-import PatchPersonalReject from '../../../apis/promise/Personal/PatchPersonalReject';
+import PatchPersonalReject from "../../../apis/promise/Personal/PatchPersonalReject";
 
 interface PendingPromiseProps {
   promise: {
@@ -31,17 +31,18 @@ const handleReject = async (promiseId: number) => {
   } catch (error) {
     console.error("거절하기 실패:", error);
   }
-}
+};
 
-const PendingPromise = ({ promise
-  // promiseId = 123,
-  // name = "친구 모임",
-  // purpose = "팀프로젝트 / 회의",
-  // dateStart = "2025-02-15",
-  // dateEnd = "2025-02-25",
-  // place = "강남역 카페",
-  // peopleNumber = 3
-}: PendingPromiseProps) => {
+const PendingPromise = ({
+  promise,
+}: // promiseId = 123,
+// name = "친구 모임",
+// purpose = "팀프로젝트 / 회의",
+// dateStart = "2025-02-15",
+// dateEnd = "2025-02-25",
+// place = "강남역 카페",
+// peopleNumber = 3
+PendingPromiseProps) => {
   const navigate = useNavigate();
 
   return (
@@ -61,22 +62,38 @@ const PendingPromise = ({ promise
         </PromiseContent>
         <PromiseContent>
           <img src={PersonIcon} alt="person-icon" />
-          <div>{promise.leaderName} 외 {promise.peopleNumber-1}명</div>
+          <div>
+            {promise.leaderName} 외 {promise.peopleNumber - 1}명
+          </div>
         </PromiseContent>
         <PromiseContent>
           <img src={LocationIcon} alt="location-icon" />
-          <div className='red'>{promise.place}</div>
+          <div className="red">{promise.place}</div>
         </PromiseContent>
         <PromiseContent>
           <img src={CalendarIcon} alt="calendar-icon" />
-          <div className='red'>
-            {promise.dateStart.slice(5,7).replace(/^0+/,'')}/{promise.dateStart.slice(8,10).replace(/^0+/,'')} ({new Date(promise.dateStart).toLocaleString('ko-KR', {weekday: 'short'})}) ~ {promise.dateEnd.slice(5,7).replace(/^0+/,'')}/{promise.dateEnd.slice(8,10).replace(/^0+/,'')} ({new Date(promise.dateEnd).toLocaleString('ko-KR', {weekday: 'short'})})
+          <div className="red">
+            {promise.dateStart.slice(5, 7).replace(/^0+/, "")}/
+            {promise.dateStart.slice(8, 10).replace(/^0+/, "")} (
+            {new Date(promise.dateStart).toLocaleString("ko-KR", {
+              weekday: "short",
+            })}
+            ) ~ {promise.dateEnd.slice(5, 7).replace(/^0+/, "")}/
+            {promise.dateEnd.slice(8, 10).replace(/^0+/, "")} (
+            {new Date(promise.dateEnd).toLocaleString("ko-KR", {
+              weekday: "short",
+            })}
+            )
           </div>
         </PromiseContent>
       </PromiseContainer>
       <ButtonContainer>
-        <ConfirmButton onClick={() => navigate('/accept/37')}>수락하기</ConfirmButton>
-        <DenyButton onClick={() => handleReject(promise.promiseId)}>거절하기</DenyButton>
+        <ConfirmButton onClick={() => navigate("/accept/87")}>
+          수락하기
+        </ConfirmButton>
+        <DenyButton onClick={() => handleReject(promise.promiseId)}>
+          거절하기
+        </DenyButton>
       </ButtonContainer>
     </ConfirmContainer>
   );
@@ -87,10 +104,10 @@ export const ConfirmContainer = styled.div`
   height: 300px;
   gap: 0px;
   border-radius: 10px;
-  border: 2px solid #FF6467;
+  border: 2px solid #ff6467;
   opacity: 0px;
-  background-color: #FFFFFF;
-  box-shadow: 0px 0px 4px 0px #C9D2F5;
+  background-color: #ffffff;
+  box-shadow: 0px 0px 4px 0px #c9d2f5;
 `;
 export const ConfirmStateContainer = styled.div`
   margin: 20px 0 0 24px;
@@ -105,7 +122,7 @@ export const ConfirmState = styled.div`
   text-align: left;
   text-underline-position: from-font;
   text-decoration-skip-ink: none;
-  color: #FF6467;
+  color: #ff6467;
 `;
 export const PromiseTitle = styled.div`
   margin: 10px 0 0 24px;
@@ -117,7 +134,7 @@ export const PromiseTitle = styled.div`
   text-align: left;
   text-underline-position: from-font;
   text-decoration-skip-ink: none;
-  color: #000000;  
+  color: #000000;
 `;
 export const PromiseContainer = styled.div`
   margin: 10px 0 0 24px;
@@ -128,7 +145,7 @@ export const PromiseContainer = styled.div`
   letter-spacing: -0.025em;
   text-align: left;
   text-underline-position: from-font;
-  text-decoration-skip-ink: none; 
+  text-decoration-skip-ink: none;
   color: #000000;
 `;
 export const PromiseContent = styled.div`
@@ -159,7 +176,7 @@ export const ConfirmButton = styled.button`
   gap: 10px;
   border-radius: 10px;
   opacity: 0px;
-  background-color: #5175FF;
+  background-color: #5175ff;
   font-family: Pretendard;
   font-size: 17px;
   font-weight: 500;
@@ -168,7 +185,7 @@ export const ConfirmButton = styled.button`
   text-align: center;
   text-underline-position: from-font;
   text-decoration-skip-ink: none;
-  color: #FFFFFF;
+  color: #ffffff;
   border: none;
   cursor: pointer;
 `;
@@ -179,7 +196,7 @@ export const DenyButton = styled.button`
   gap: 10px;
   border-radius: 10px;
   opacity: 0px;
-  background-color: #D9D9D9;
+  background-color: #d9d9d9;
   font-family: Pretendard;
   font-size: 17px;
   font-weight: 500;
@@ -188,7 +205,7 @@ export const DenyButton = styled.button`
   text-align: center;
   text-underline-position: from-font;
   text-decoration-skip-ink: none;
-  color: #FFFFFF;
+  color: #ffffff;
   border: none;
   cursor: pointer;
 `;
