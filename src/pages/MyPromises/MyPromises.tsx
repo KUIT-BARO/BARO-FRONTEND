@@ -111,10 +111,10 @@ export default function MyPromises() {
           <PromiseWrapper>
             <PendingPromise
               promise={{
-                promiseId: 87,
-                name: "BARO 데모데이이",
+                promiseId: 92,
+                name: "바로 프로젝트",
                 purpose: "팀프로젝트 / 회의",
-                dateStart: "2025-02-21",
+                dateStart: "2025-02-15",
                 dateEnd: "2025-02-22",
                 place: "성수역 주변",
                 peopleNumber: 9,
