@@ -49,6 +49,7 @@ const ScheduleDetailModal: React.FC<ScheduleDetailModalProps> = ({
 
   useEffect(() => {
     if (schedule) {
+      console.log("받아온 schedule:", schedule);
       setTitle(schedule.title || '');
       setLocation(schedule.location || '');
       setDay(schedule.day || '');
@@ -70,58 +71,64 @@ const ScheduleDetailModal: React.FC<ScheduleDetailModalProps> = ({
 
   const handleDelete = async () => {
     if (!schedule || !onDelete) return;
-    
+      
     setIsLoading(true);
     setError(null);
-
+  
     try {
       await deleteSchedule.removeSchedule(schedule.id);
       onDelete(schedule.id);
       onClose();
     } catch (err) {
-      setError('일정 삭제 중 오류가 발생했습니다. 다시 시도해주세요.');
       console.error('Schedule deletion error:', err);
+      if (err.response) {
+        console.log('Error response:', err.response);
+      }
+      setError('일정 삭제 중 오류가 발생했습니다. 다시 시도해주세요.');
     } finally {
       setIsLoading(false);
     }
   };
 
   const handleUpdate = async () => {
-    if (!schedule || !onUpdate) return;
-    if (!title.trim()) {
-      setError('약속명을 입력해주세요.');
+    if (!schedule || !schedule.id) {
+      setError('일정 ID가 없습니다.');
       return;
     }
-
+  
     setIsLoading(true);
     setError(null);
-
+  
     try {
       const scheduleData = {
         name: title.trim(),
         dayOfWeek: convertDayToEng(day),
         timeStart: formatTime(startTime),
-        timeEnd: formatTime(endTime)
+        timeEnd: formatTime(endTime),
+        location: location || ''  // undefined 대신 빈 문자열 전송
       };
-
+  
       await putSchedule.updateSchedule(schedule.id, scheduleData);
-      
-      onUpdate(schedule.id, {
-        title: title.trim(),
-        location,
-        day,
-        startTime,
-        endTime
-      });
-      
+  
+      if (onUpdate) {
+        onUpdate(schedule.id, {
+          title: scheduleData.name,
+          day: day,
+          startTime: startTime,
+          endTime: endTime,
+          location: scheduleData.location
+        });
+      }
+  
       onClose();
     } catch (err) {
-      setError('일정 수정 중 오류가 발생했습니다. 다시 시도해주세요.');
       console.error('Schedule update error:', err);
+      setError('일정 수정 중 오류가 발생했습니다. 다시 시도해주세요.');
     } finally {
       setIsLoading(false);
     }
   };
+  
 
   const formatTime = (time: number) => {
     const hours = Math.floor(time);

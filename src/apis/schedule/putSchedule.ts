@@ -5,10 +5,15 @@ interface ScheduleUpdateRequest {
   dayOfWeek: string;
   timeStart: string;
   timeEnd: string;
+  location?: string;
 }
 
 export const putSchedule = {
-  updateSchedule: (scheduleId: number, data: ScheduleUpdateRequest) => {
-    return instance.put(`/users/schedule/${scheduleId}`, data);
+  updateSchedule: (scheduleId: number | string, data: ScheduleUpdateRequest) => {
+    // scheduleId를 query parameter나 request body에 포함시키는 방식으로 변경
+    return instance.put('/users/schedule', {
+      ...data,
+      scheduleId: scheduleId
+    });
   },
 };

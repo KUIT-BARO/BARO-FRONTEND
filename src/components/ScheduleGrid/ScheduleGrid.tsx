@@ -62,14 +62,14 @@ const ScheduleGrid = forwardRef<ScheduleGridHandle, ScheduleGridProps>(({ readOn
           
           if (response.data?.schedules) {
             const formattedSchedules = response.data.schedules.map(schedule => ({
-              id: schedule.scheduleId,
+              id: parseInt(schedule.scheduleId) || Date.now(),
               title: schedule.name,
               startTime: parseInt(schedule.timeStart.split(':')[0]),
               endTime: parseInt(schedule.timeEnd.split(':')[0]),
               day: convertDayOfWeek(schedule.dayOfWeek),
               type: 'class',
               color: getRandomColor(),
-              location: schedule.location || "" // null이나 undefined인 경우 빈 문자열로 처리
+              location: schedule.location || ""
             }));
             setSchedules(formattedSchedules);
           }
@@ -106,7 +106,7 @@ const ScheduleGrid = forwardRef<ScheduleGridHandle, ScheduleGridProps>(({ readOn
   };
 
   const handleScheduleClick = (schedule: Schedule) => {
-    if (readOnly) return;
+    console.log("선택된 스케줄:", schedule);
     setSelectedSchedule(schedule);
     setIsDetailModalOpen(true);
   };

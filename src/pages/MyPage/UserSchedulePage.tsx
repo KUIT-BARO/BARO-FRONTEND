@@ -12,11 +12,18 @@ interface Schedule {
   dayOfWeek: string;
   timeStart: string;
   timeEnd: string;
+  location: string;
 }
 
 interface UserSchedule {
-  userId: number;
+  userId: string;  // Changed from number to string
   schedules: Schedule[];
+}
+
+interface ApiResponse {
+  code: number;
+  message: string;
+  data: UserSchedule;
 }
 
 const UserSchedulePage = () => {
@@ -44,10 +51,11 @@ const UserSchedulePage = () => {
       try {
         setIsLoading(true);
         setError(null);
-        const response = await getUserSchedule.ById(Number(userId));
+        const response = await getUserSchedule.getScheduleById(userId); // Removed Number() conversion
         
-        if (response.data?.data) {
-          setUserSchedule(response.data.data);
+        if (response.data) {
+          const apiResponse = response.data as ApiResponse;
+          setUserSchedule(apiResponse.data);
         }
       } catch (err) {
         setError('시간표를 불러오는데 실패했습니다.');
@@ -88,7 +96,8 @@ const UserSchedulePage = () => {
     startTime: parseInt(schedule.timeStart.split(':')[0]),
     endTime: parseInt(schedule.timeEnd.split(':')[0]),
     day: convertDayOfWeek(schedule.dayOfWeek),
-    type: 'class'
+    type: 'class',
+    location: schedule.location
   })) || [];
 
   return (
