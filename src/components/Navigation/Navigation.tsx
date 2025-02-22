@@ -2,15 +2,15 @@ import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import styles from "./Navigation.module.css";
 
-import homeIcon from "../../assets/icons/forMyPromises/home.svg";
-import homeActiveIcon from "../../assets/icons/forMyPromises/home-black.svg";
-import searchIcon from "../../assets/icons/searchIcon.svg";
-import searchActiveIcon from "../../assets/icons/searchIcon-black.svg";
-import plusIcon from "../../assets/icons/forMyPromises/plus.svg";
-import timeIcon from "../../assets/icons/forMyPromises/time.svg";
-import timeActiveIcon from "../../assets/icons/forMyPromises/time-black.svg";
-import profileIcon from "../../assets/icons/forMyPromises/profile.svg";
-import profileActiveIcon from "../../assets/icons/forMyPromises/profile-black.svg";
+import home from "../../assets/icons/Buttons/home.svg";
+import homeActive from "../../assets/icons/Buttons/homeBlack.svg";
+import search from "../../assets/icons/Buttons/search.svg";
+import searchActive from "../../assets/icons/Buttons/searchBlack.svg";
+import 약속잡기 from "../../assets/icons/Buttons/약속잡기.svg";
+import timer from "../../assets/icons/Buttons/timer.svg";
+import timerActive from "../../assets/icons/Buttons/timerBlack.svg";
+import person from "../../assets/icons/Buttons/person.svg";
+import personActive from "../../assets/icons/Buttons/personBlack.svg";
 
 interface NavItem {
   path: string;
@@ -20,6 +20,16 @@ interface NavItem {
 }
 
 const Navigation = () => {
+  return (
+    <>
+      {/* 네비게이션 바의 공간을 차지하는 placeholder */}
+      <div className={styles.placeholder}></div>
+      <Bar />
+    </>
+  );
+};
+
+const Bar = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
@@ -27,26 +37,26 @@ const Navigation = () => {
     {
       path: "/main",
       label: "홈",
-      icon: homeIcon,
-      activeIcon: homeActiveIcon,
+      icon: home,
+      activeIcon: homeActive,
     },
     {
       path: "/search",
       label: "탐색",
-      icon: searchIcon,
-      activeIcon: searchActiveIcon,
+      icon: search,
+      activeIcon: searchActive,
     },
     {
       path: "/mypromises",
       label: "약속",
-      icon: timeIcon,
-      activeIcon: timeActiveIcon,
+      icon: timer,
+      activeIcon: timerActive,
     },
     {
       path: "/mypage",
       label: "나",
-      icon: profileIcon,
-      activeIcon: profileActiveIcon,
+      icon: person,
+      activeIcon: personActive,
     },
   ];
 
@@ -74,12 +84,14 @@ const Navigation = () => {
             <span>{item.label}</span>
           </button>
         ))}
-        <button
+
+        <img
+          src={약속잡기}
+          alt="약속잡기 btn"
           className={styles.plusButton}
           onClick={() => navigate("/suggest")}
-        >
-          <img src={plusIcon} alt="약속 만들기" />
-        </button>
+        />
+
         {navItems.slice(2).map((item) => (
           <button
             key={item.path}
