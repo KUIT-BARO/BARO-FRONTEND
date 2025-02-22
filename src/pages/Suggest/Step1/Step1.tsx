@@ -9,16 +9,16 @@ import {
   Wrapper,
   FixedButton,
   Section,
-} from "../../../assets/styles/Steps.styles";
+} from "../../../components/Steps/Steps.styles";
 import SubTitle from "../../../components/SubTitle/SubTitle";
 import { SectionTitle } from "./Step1.styles";
-import InputWithCounter from "../../../components/InputWithCounter/InputWithCounter";
-import Dropdown from "../../../components/DropDown/DropDown";
+import InputWithCounter from "../components/InputWithCounter/InputWithCounter";
+import Dropdown from "../components/DropDown/DropDown";
 import { useNavigate } from "react-router-dom";
 export default function Step1({
-  name = "",
+  name,
   setName,
-  purpose = "",
+  purpose,
   setPurpose,
   peopleNum,
   setPeopleNum,
@@ -34,7 +34,6 @@ export default function Step1({
 }) {
   const navigate = useNavigate();
 
-  // ✅ 목적 선택 값을 ENUM으로 매핑
   const purposeMap: { [key: string]: string } = {
     "팀 프로젝트/회의": "MEETING",
     "스터디/ 공부": "STUDY",

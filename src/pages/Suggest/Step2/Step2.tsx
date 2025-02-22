@@ -9,7 +9,7 @@ import {
   Wrapper,
   FixedButton,
   Section,
-} from "../../../assets/styles/Steps.styles";
+} from "../../../components/Steps/Steps.styles";
 import SubTitle from "../../../components/SubTitle/SubTitle";
 import Desc from "../../../components/Desc/Desc";
 import monthBack from "../../../assets/icons/monthBack.svg";

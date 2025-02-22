@@ -1,5 +1,5 @@
 import React from "react";
-import 약속제안 from "../../assets/icons/약속제안.png";
+import 약속제안 from "../../assets/icons/Promise/약속제안.png";
 import styled from "styled-components";
 import TopBar from "../../components/TopBar/TopBar";
 import Button from "../../components/Button/Button";
@@ -50,7 +50,7 @@ const IntroductionWrapper = styled.div`
   flex-direction: column;
   gap: 10px;
   align-items: center;
-  padding: 20px;
+  padding: 0 20px;
   background-color: white;
   box-sizing: border-box;
 `;

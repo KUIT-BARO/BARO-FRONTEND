@@ -3,9 +3,7 @@ import {
   Wrapper,
   FixedButton,
   Section,
-  ImgWrapper,
-} from "../../../assets/styles/Steps.styles";
-
+} from "../../../components/Steps/Steps.styles";
 import styled from "styled-components";
 import profileImg_1 from "../../../assets/icons/profileImg_1.svg";
 import profileImg_2 from "../../../assets/icons/profileImg_2.svg";

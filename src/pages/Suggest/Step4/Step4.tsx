@@ -6,7 +6,7 @@ import {
   Wrapper,
   FixedButton,
   Section,
-} from "../../../assets/styles/Steps.styles";
+} from "../../../components/Steps/Steps.styles";
 import Search from "../../../components/Search/Search";
 import PopupOverlay, { UsersWrapper, UserDesc, Popup } from "./Step4.styles";
 import checkIcon from "../../../assets/icons/checkIcon.svg";

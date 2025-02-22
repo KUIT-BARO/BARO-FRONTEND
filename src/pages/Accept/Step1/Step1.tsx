@@ -6,8 +6,7 @@ import {
   Wrapper,
   FixedButton,
   Section,
-  ImgWrapper,
-} from "../../../assets/styles/Steps.styles";
+} from "../../../components/Steps/Steps.styles";
 import SubTitle from "../../../components/SubTitle/SubTitle";
 
 import Button from "../../../components/Button/Button";

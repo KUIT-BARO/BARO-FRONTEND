@@ -8,7 +8,7 @@ import {
   Wrapper,
   FixedButton,
   Section,
-} from "../../../assets/styles/Steps.styles";
+} from "../../../components/Steps/Steps.styles";
 import Button from "../../../components/Button/Button";
 import Desc from "../../../components/Desc/Desc";
 

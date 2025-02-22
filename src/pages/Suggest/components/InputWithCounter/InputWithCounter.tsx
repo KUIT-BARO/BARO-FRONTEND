@@ -13,10 +13,12 @@ const InputWithCounter = ({ text, setText, placeholder, maxlength }) => {
           type="text"
           placeholder={`ex. ${placeholder}`}
           value={text}
-          maxLength={maxlength - 1}
+          maxLength={maxlength}
           onChange={handleChange}
         />
-        <Counter>{text.length}/12</Counter>
+        <Counter>
+          {text.length}/{maxlength}
+        </Counter>
       </InputWrapper>
       {text.length == maxlength && (
         <ErrorMessage>최대 {maxlength}글자입니다</ErrorMessage>
@@ -37,7 +39,7 @@ const Input = styled.input`
   background-color: transparent;
   outline: none;
   border: none;
-  padding-bottom: 15px;
+  padding-bottom: 10px;
   border-bottom: 1px solid #c1c1c1;
 
   ::placeholder {
@@ -59,5 +61,4 @@ const Counter = styled.span`
 const ErrorMessage = styled.div`
   font-size: 12px;
   color: red;
-  margin-top: 8px;
 `;

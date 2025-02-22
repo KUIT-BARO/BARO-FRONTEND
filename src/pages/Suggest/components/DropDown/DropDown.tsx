@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import downIcon from "../../assets/icons/downIcon.svg";
+import downIcon from "../../../../assets/icons/downIcon.svg";
 
 function Dropdown({ people, setPeople, maxPeople }) {
   const [isOpen, setIsOpen] = useState(false);
