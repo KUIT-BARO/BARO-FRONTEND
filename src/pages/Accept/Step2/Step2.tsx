@@ -20,7 +20,7 @@ import Popup from "./Popup/Popup";
 import Location from "../../../components/Location/Location";
 import KakaoMap from "../../../components/forSearchPage/KakaoMap/KakaoMap";
 import { useNavigate } from "react-router-dom";
-import Nav from "../../../components/Nav/Nav";
+import TopBar from "../../../components/TopBar/TopBar";
 import PostPersonalKeywords from "../../../apis/Promise/Personal/PostPersonalKeyword";
 import PostPersonalPlace from "../../../apis/Promise/Personal/PostPersonalPlace";
 import PostPersonalTime from "../../../apis/Promise/Personal/PostPersonalTime";

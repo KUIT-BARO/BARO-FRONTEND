@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import StepInterface from "../../../interface/Step";
-import Nav from "../../../components/Nav/Nav";
+import TopBar from "../../../components/TopBar/TopBar";
 
 import {
   Wrapper,

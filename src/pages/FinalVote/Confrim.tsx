@@ -6,7 +6,7 @@ import formatDateToShort from "../../utils/formatDateToShort";
 import StepInterface from "../../interface/Step";
 import SuggestInterface from "../../interface/Suggest";
 
-import Nav from "../../components/Nav/Nav";
+import TopBar from "../../components/TopBar/TopBar";
 import Button from "../../components/Button/Button";
 import Desc from "../../components/Desc/Desc";
 import flag from "../../assets/icons/flag.svg";
@@ -28,7 +28,7 @@ export default function Introduction({
   return (
     <>
       <ConfirmWrapper>
-        <Nav handleBack={handleBack} handleExit={handleExit} />
+        <TopBar handleBack={handleBack} handleExit={handleExit} />
         <Title>
           <p className="bold">
             {data.suggestTitle}

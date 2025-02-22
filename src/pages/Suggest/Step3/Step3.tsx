@@ -3,7 +3,7 @@ import StepInterface from "../../../interface/Step";
 
 import Button from "../../../components/Button/Button";
 import { ProgressBar } from "../../../components/ProgressBar/ProgressBar";
-import Nav from "../../../components/Nav/Nav";
+import TopBar from "../../../components/TopBar/TopBar";
 import Popup from "./Popup/Popup";
 import {
   Wrapper,
@@ -33,7 +33,7 @@ export default function Step3({
     />
   ) : (
     <>
-      <Nav handleBack={handleBack} handleExit={handleExit} color={"Blue"} />
+      <TopBar handleBack={handleBack} handleExit={handleExit} color={"Blue"} />
       <Wrapper>
         <ProgressBar percent={75} />
 

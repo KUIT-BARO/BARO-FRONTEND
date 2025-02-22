@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import formatDate from "../../../utils/formatDate";
-import Nav from "../../../components/Nav/Nav";
+import TopBar from "../../../components/TopBar/TopBar";
 import SubTitle from "../../../components/SubTitle/SubTitle";
 import { SectionTitle } from "./Step1.styles";
 import {
@@ -25,7 +25,7 @@ export default function Step1({
 }) {
   return (
     <>
-      <Nav handleBack={handleBack} handleExit={handleExit} color={"Blue"} />
+      <TopBar handleBack={handleBack} handleExit={handleExit} color={"Blue"} />
       <Wrapper>
         <SubTitle>최종 투표를 진행해주세요</SubTitle>
         <Desc>최적의 약속 시간과 장소입니다</Desc>

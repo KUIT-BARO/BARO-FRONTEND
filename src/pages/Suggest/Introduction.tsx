@@ -1,7 +1,7 @@
 import React from "react";
 import 약속제안 from "../../assets/icons/약속제안.png";
 import styled from "styled-components";
-import Nav from "../../components/Nav/Nav";
+import TopBar from "../../components/TopBar/TopBar";
 import Button from "../../components/Button/Button";
 
 import StepInterface from "../../interface/Step";
@@ -15,7 +15,7 @@ export default function Introduction({
   const navigate = useNavigate();
   return (
     <IntroductionWrapper>
-      <Nav handleBack={handleBack} handleExit={handleExit} />
+      <TopBar handleBack={handleBack} handleExit={handleExit} />
       <Title>
         <p className="bold">
           새로운 약속을 BARO
