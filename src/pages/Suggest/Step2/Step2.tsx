@@ -3,13 +3,13 @@ import StepInterface from "../../../interface/Step";
 
 import Button from "../../../components/Button/Button";
 import { ProgressBar } from "../../../components/ProgressBar/ProgressBar";
-import Nav from "../../../components/Nav/Nav";
+import TopBar from "../../../components/TopBar/TopBar";
 
 import {
   Wrapper,
   FixedButton,
   Section,
-} from "../../../assets/styles/Steps.styles";
+} from "../../../components/Steps/Steps.styles";
 import SubTitle from "../../../components/SubTitle/SubTitle";
 import Desc from "../../../components/Desc/Desc";
 import monthBack from "../../../assets/icons/monthBack.svg";
@@ -54,7 +54,7 @@ export default function Step2({
 
   return (
     <>
-      <Nav handleBack={handleBack} handleExit={handleExit} color={"Blue"} />
+      <TopBar handleBack={handleBack} handleExit={handleExit} color={"Blue"} />
       <Wrapper>
         <ProgressBar percent={50} />
 

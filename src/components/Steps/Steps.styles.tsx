@@ -5,8 +5,8 @@ export const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  padding: 20px;
-  gap: 20px;
+  padding: 0 20px;
+  gap: 18px;
   min-height: 100vh;
 `;
 
@@ -24,7 +24,7 @@ export const Section = styled.section`
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 13px;
   margin-bottom: 20px;
   box-sizing: border-box;
   > .btn-wrapper {

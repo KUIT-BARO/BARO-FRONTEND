@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import StepInterface from "../../../interface/Step";
 import Button from "../../../components/Button/Button";
-import Nav from "../../../components/Nav/Nav";
+import TopBar from "../../../components/TopBar/TopBar";
 import {
   Wrapper,
   FixedButton,
   Section,
-} from "../../../assets/styles/Steps.styles";
+} from "../../../components/Steps/Steps.styles";
 import Search from "../../../components/Search/Search";
 import PopupOverlay, { UsersWrapper, UserDesc, Popup } from "./Step4.styles";
 import checkIcon from "../../../assets/icons/checkIcon.svg";
@@ -111,7 +111,7 @@ export default function Step4({
 
   return (
     <>
-      <Nav handleBack={handleBack} handleExit={handleExit} color={"Blue"} />
+      <TopBar handleBack={handleBack} handleExit={handleExit} color={"Blue"} />
       <Wrapper>
         <Section>
           <Search

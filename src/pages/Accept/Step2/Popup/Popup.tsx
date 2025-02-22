@@ -3,7 +3,7 @@ import {
   Wrapper,
   FixedButton,
   Section,
-} from "../../../../assets/styles/Steps.styles";
+} from "../../../../components/Steps/Steps.styles";
 
 import { Category, CategoryWrapper, SubTitle } from "./Popup.styles";
 
