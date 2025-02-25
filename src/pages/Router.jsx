@@ -7,7 +7,7 @@ import SignupPage from "./Login/SignupPage";
 import LoginPage from "./Login/LoginPage";
 import MyPromises from "./MyPromises/MyPromises";
 import FinalVote from "./FinalVote/FinalVote";
-import MyPage from "./MyPage/MyPage";
+import MyPage from "./MyPage/mypage-main/MyPage";
 import ProfileEdit from "./MyPage/ProfileEdit";
 import Settings from "./MyPage/Settings";
 import Contact from "./MyPage/Contact";
