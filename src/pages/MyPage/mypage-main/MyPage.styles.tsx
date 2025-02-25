@@ -81,10 +81,7 @@ export const Nav = styled.nav`
   border-block: 1px solid #e3eaf4;
 `;
 
-export const NavButton =
-  styled.button <
-  { active: Boolean } >
-  `
+export const NavButton = styled.button<{ active: Boolean }>`
   flex: 1;
   background: none;
   border: none;
@@ -110,3 +107,9 @@ export const NavButton =
     }
   `}
 `;
+
+export const Title = styled.h1``;
+export const SettingImg = styled.img``;
+export const ProfileImg = styled.img``;
+export const NickName = styled.h2``;
+export const UserId = styled.p``;

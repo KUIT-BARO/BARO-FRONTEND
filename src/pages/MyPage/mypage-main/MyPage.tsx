@@ -13,6 +13,11 @@ import {
   ProfileInfo,
   ProfileSection,
   SettingsButton,
+  Title,
+  SettingImg,
+  ProfileImg,
+  NickName,
+  UserId,
 } from "./MyPage.styles";
 import Schedule from "./Schedule/Schedule";
 
@@ -60,23 +65,23 @@ const MyPage: React.FC = () => {
   return (
     <MyPageContainer>
       <MyPageHeader>
-        <h1>마이페이지</h1>
+        <Title>마이페이지</Title>
         <SettingsButton onClick={() => navigate("/settings")}>
-          <img src={settingsIcon} alt="settings" />
+          <SettingImg src={settingsIcon} alt="settings" />
         </SettingsButton>
       </MyPageHeader>
       <ProfileSection>
         <ProfileImage>
-          <img src={profileImg_default} alt="profile" />
+          <ProfileImg src={profileImg_default} alt="profile" />
         </ProfileImage>
         <ProfileInfo>
-          <h2>{userInfo.nickname}</h2>
+          <NickName>{userInfo.nickname}</NickName>
           <EditButton
             src={editIcon}
             alt="edit"
             onClick={() => navigate("/profile/edit")}
           />
-          <p>@{userInfo.userId}</p>
+          <UserId>@{userInfo.userId}</UserId>
         </ProfileInfo>
       </ProfileSection>
       <Schedule />
