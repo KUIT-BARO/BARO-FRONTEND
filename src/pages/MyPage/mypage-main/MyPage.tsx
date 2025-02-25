@@ -55,7 +55,6 @@ const MyPage: React.FC = () => {
         setIsLoading(false);
       }
     };
-
     fetchMyPage();
   }, []);
 
@@ -70,7 +69,6 @@ const MyPage: React.FC = () => {
           <img src={settingsIcon} alt="settings" />
         </SettingsButton>
       </MyPageHeader>
-
       <ProfileSection>
         <ProfileImage>
           <img src={profileImg_default} alt="profile" />
@@ -85,27 +83,7 @@ const MyPage: React.FC = () => {
           <p>@{userInfo.userId}</p>
         </ProfileInfo>
       </ProfileSection>
-
-      <Nav>
-        {["schedule", "savedPlaces", "placeReviews"].map((tab) => (
-          <NavButton
-            key={tab}
-            active={activeTab === tab}
-            onClick={() => setActiveTab(tab)}
-          >
-            {tab === "schedule"
-              ? "시간표"
-              : tab === "savedPlaces"
-              ? "저장한 장소"
-              : "내 장소 리뷰"}
-          </NavButton>
-        ))}
-      </Nav>
-
-      {activeTab === "schedule" && <Schedule />}
-
-      {activeTab === "savedPlaces" && <SavedPlaces />}
-      {activeTab === "placeReviews" && <PlaceReviews />}
+      <Schedule />
       <Navigation />
     </MyPageContainer>
   );
