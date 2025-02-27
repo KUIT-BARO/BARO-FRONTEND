@@ -8,7 +8,7 @@ import profile3 from "../../../assets/icons/dogavatar.svg";
 import profile4 from "../../../assets/icons/useravatar.svg";
 import Navigation from "../../../components/Navigation/Navigation";
 import InputModal from "./InputModal/InputModal";
-import Toast from "../Toast";
+import Toast from "./Toast/Toast";
 import { getMyPage } from "../../../apis/user/getMyPage";
 import {
   ProfileEditContainer,
