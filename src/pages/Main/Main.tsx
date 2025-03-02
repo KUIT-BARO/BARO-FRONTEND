@@ -11,7 +11,7 @@ import logo from "../../assets/icons/logo.svg";
 import alarm from "../../assets/icons/alarm.svg";
 import personWhite from "../../assets/icons/personWhite.svg";
 
-import plus from "../../assets/icons/forMyPromises/plus.svg";
+// import plus from "../../assets/icons/forMyPromises/plus.svg";
 import PromiseContainer from "../../components/PromiseContainer/PromiseContainer";
 
 import { getHome } from "../../apis/user/getHome";
@@ -186,7 +186,7 @@ const Main = () => {
             </Title> */}
             <PromiseBtn onClick={() => navigate("/suggest")}>
               <div className="plus">
-                <img src={plus} />
+                {/* <img src={plus} /> */}
               </div>
               <div>새로운 약속 만들기</div>
             </PromiseBtn>
