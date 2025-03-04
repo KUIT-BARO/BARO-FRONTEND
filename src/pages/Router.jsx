@@ -16,7 +16,6 @@ import UserSchedulePage from "./MyPage/UserSchedulePage";
 import Accept from "./Accept/Accept";
 import SearchPage from "./SearchPage/SearchPage";
 import Landing from "./Landing/Landing";
-import PromiseConfirm from "../components/forMyPromises/PromiseConfirm/PromiseConfirm";
 import Test from "./test";
 
 // 로그인 여부 확인
@@ -74,14 +73,6 @@ const Router = () => {
       element: (
         <ProtectedRoute isAuthenticated={isAuthenticated}>
           <MyPromises />
-        </ProtectedRoute>
-      ),
-    },
-    {
-      path: "/mypromises/confirm",
-      element: (
-        <ProtectedRoute isAuthenticated={isAuthenticated}>
-          <PromiseConfirm />
         </ProtectedRoute>
       ),
     },
