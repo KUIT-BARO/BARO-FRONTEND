@@ -83,7 +83,11 @@ export default function Promise({
 };
 
 const Layout = styled.div`
-  width: 362px;
+  @media (min-width: 568px) {
+    width: 476px;
+    height: 182px;
+  }
+  width: 352px;
   height: 184px;
   background-color: #FFFFFF;
   border-radius: 10px;

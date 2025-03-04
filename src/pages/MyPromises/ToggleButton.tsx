@@ -4,9 +4,12 @@ import styled from "styled-components";
 import CrownOn from "../../assets/icons/MyPromisesPage/crownWhite.svg";
 import CrownOff from "../../assets/icons/MyPromisesPage/CrownGray.svg";
 
-export default function ToggleButton() {
-  const [toggleActive, setToggleActive] = React.useState(true);
+interface ToggleButtonProps {
+  toggleActive: boolean;
+  setToggleActive: (value: boolean) => void;
+}
 
+export default function ToggleButton({ toggleActive, setToggleActive }: ToggleButtonProps) {
   return (
     <Layout>
       <Wrapper>

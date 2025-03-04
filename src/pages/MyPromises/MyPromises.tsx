@@ -6,35 +6,51 @@ import Promise from "./Promise";
 import Navigation from "../../components/Navigation/Navigation.tsx";
 
 export default function MyPromises() {
+  const [toggleActive, setToggleActive] = React.useState(true);
+
   return (
     <Layout>
       <Header>
         <div>나의 약속</div>
       </Header>
-      <ToggleButton />
-      <PromisesWrapper>
-        <Promise 
-          color="blue" 
-          title="KUIT BARO 2차 회의"
-          info="투표까지 기한"
-          location="건대입구역 주변"
-          date="2/25 (수) ~ 2/28 (금)"
-        />
-        <Promise 
-          color="yellow" 
-          title="KUIT BARO 2차 회의"
-          info="투표종료까지 기한"
-          location="건대입구역 주변"
-          date="2/25 (수) ~ 2/28 (금)"
-        />
-        <Promise 
-          color="red" 
-          title="KUIT BARO 2차 회의"
-          info="뭐넣을지 생각안함"
-          location="건대입구역"
-          date="2/25 (수) 3시"
-        />
-      </PromisesWrapper>
+      <ToggleButton toggleActive={toggleActive} setToggleActive={setToggleActive} />
+      {toggleActive ? 
+        // 참여 약속
+        <PromisesWrapper>
+          <Promise 
+            color="blue" 
+            title="KUIT BARO 2차 회의"
+            info="투표까지 기한"
+            location="건대입구역 주변"
+            date="2/25 (수) ~ 2/28 (금)"
+          />
+          <Promise 
+            color="yellow" 
+            title="KUIT BARO 2차 회의"
+            info="투표종료까지 기한"
+            location="건대입구역 주변"
+            date="2/25 (수) ~ 2/28 (금)"
+          />
+          <Promise 
+            color="red" 
+            title="KUIT BARO 2차 회의"
+            info="뭐넣을지 생각안함"
+            location="건대입구역"
+            date="2/25 (수) 3시"
+          />
+        </PromisesWrapper>
+      : 
+        // 내가 호스트인 약속
+        <PromisesWrapper>
+          <Promise 
+            color="red" 
+            title="KUIT BARO 2차 회의"
+            info="뭐넣을지 생각안함"
+            location="건대입구역"
+            date="2/25 (수) 3시"
+          />
+        </PromisesWrapper>
+      }
       <Navigation />
     </Layout>
   );

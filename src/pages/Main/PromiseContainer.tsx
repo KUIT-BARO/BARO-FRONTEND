@@ -46,7 +46,12 @@ export default function PromiseContainer ({
 };
 
 const Container = styled.div`
-  width: 370px;
+  @media (min-width: 568px) {
+    width: 470px;
+    height: 162px;
+    padding: 26px 41px;
+  }
+  width: 354px;
   height: 142px;
   display: flex;
   flex-direction: column;
