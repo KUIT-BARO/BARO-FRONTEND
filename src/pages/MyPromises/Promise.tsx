@@ -83,15 +83,14 @@ export default function Promise({
 };
 
 const Layout = styled.div`
+  width: 362px;
+  height: 184px;
   background-color: #FFFFFF;
   border-radius: 10px;
   box-shadow: 0px 0px 4px 0px #D7DEF7;
-  height: 199px;
-  margin: 20px 0;
-  // padding: 20px;
+  margin: 10px 0;
   display: flex;
   flex-direction: column;
-  gap: 10px;
 `;
 const Title = styled.div<{ color: string }>`
   display: flex;

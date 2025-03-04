@@ -42,9 +42,9 @@ export default function MyPromises() {
 
 const Layout = styled.div`
   background-color: #F4F8FB;
-  // background-color: black;
   width: 100%;
-  // height: 10%;
+  height: 100vh;
+  min-height: 100vh;
 `;
 const Header = styled.div`
   background-color: #F4F8FB;
@@ -69,8 +69,8 @@ const Header = styled.div`
   }
 `;
 const PromisesWrapper = styled.div`
-  padding-top: 7.3rem;
-  padding-bottom: 5rem;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-top: 8rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
