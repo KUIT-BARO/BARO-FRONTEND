@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { Layout, Header, Title, PromiseBtn, Container, Ddays } from "./Main.styles";
+import { Layout, Header, Container, Ddays, Title, PromiseBtn } from "./Main.styles";
 
 import Navigation from "../../components/Navigation/Navigation";
 import PromiseContainer from "./PromiseContainer";
@@ -9,19 +9,13 @@ import PromiseContainer from "./PromiseContainer";
 import { postAuth } from "../../apis/auth/postAuth";
 import { getHome } from "../../apis/user/getHome";
 
-import note from "../../assets/icons/note.svg";
-// import locationWhite from "../../assets/icons/locationWhite.svg";
 import logo from "../../assets/icons/logo.svg";
 import alarm from "../../assets/icons/alarm.svg";
-// import personWhite from "../../assets/icons/personWhite.svg";
-// import plus from "../../assets/icons/forMyPromises/plus.svg";
+import note from "../../assets/icons/note.svg";
 import 약속잡기 from "../../assets/icons/Buttons/약속잡기.svg";
 
 export default function Main() {
   const navigate = useNavigate();
-
-  // const scrollRef = useRef<HTMLDivElement | null>(null);
-  // const [activeIndex, setActiveIndex] = useState(0);
 
   const handleLogout = async () => {
     try {
