@@ -1,30 +1,13 @@
 import styled from "styled-components";
-export const MainWrapper = styled.div`
+
+export const Layout = styled.div`
   position: relative;
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   min-height: 100vh;
   padding: 20px;
-  gap: 25px;
-  // background: linear-gradient(180deg, #5175ff 0%, #cfdae6 100%);
-  background: linear-gradient(
-    to bottom,
-    #5175ff 22%,
-    #a1b3f8 36%,
-    #f0f0f0 80%,
-    #747474 110%
-  );
-
-  font-family: "Pretendard", sans-serif;
-  .big-logo {
-    position: absolute;
-    top: 20%;
-    right: 0;
-    width: 230px;
-    z-index: 0;
-  }
+  background: linear-gradient(to bottom, #5175ff 22%, #a1b3f8 36%, #f0f0f0 80%, #747474 110%);
 `;
 
 export const Header = styled.div`
@@ -32,7 +15,6 @@ export const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  // margin-bottom: 15px;
 
   .logo {
     height: 20px;
@@ -42,17 +24,27 @@ export const Header = styled.div`
   .header-controls {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 22px;
   }
 
   .logout-btn {
     background: transparent;
     border: none;
-    color: white;
-    font-size: 10px;
-    font-weight: 600;
     cursor: pointer;
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--bg-bluewhite, #F4F8FB);
+    font-feature-settings: 'liga' off, 'clig' off;
+    text-shadow: 0px 0px 2px rgba(215, 222, 247, 0.30);
+    font-family: Pretendard;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 140%; /* 14px */
+    letter-spacing: -0.25px;
 
     &:hover {
       text-decoration: underline;
@@ -62,6 +54,7 @@ export const Header = styled.div`
   .alarm-wrapper {
     position: relative;
     cursor: pointer;
+
     > span {
       position: absolute;
       background-color: red;
@@ -73,8 +66,29 @@ export const Header = styled.div`
     }
   }
 `;
+
+export const Container = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 68px;
+`;
+
+export const Ddays = styled.div`
+  color: #FFF;
+  font-feature-settings: 'liga' off, 'clig' off;
+  font-family: Pretendard;
+  font-size: 128px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 140%; /* 179.2px */
+  letter-spacing: -3.2px;
+  margin: 26px 0 68px 0;
+`;
+
 export const Title = styled.div`
-  margin: 74px auto 0 auto;
+  margin: 74px auto 28px auto;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -84,21 +98,31 @@ export const Title = styled.div`
   font-weight: 600;
 
   .name {
+    margin-bottom: 21px;
+    color: var(--bg-bluewhite, #F4F8FB);
+    text-align: center;
+    font-feature-settings: 'liga' off, 'clig' off;
+    text-shadow: 0px 0px 2px rgba(215, 222, 247, 0.30);
+    font-family: Pretendard;
     font-size: 36px;
-    font-weight: 700;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 140%; /* 50.4px */
+    letter-spacing: -0.9px;
   }
 
   .bold {
-    font-size: 25px;
-    font-weight: 700;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     margin-bottom: 36px;
+    color: var(--bg-bluewhite, #F4F8FB);
+    text-align: center;
+    font-feature-settings: 'liga' off, 'clig' off;
+    text-shadow: 0px 0px 2px rgba(215, 222, 247, 0.30);
+    font-family: Pretendard;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 140%; /* 35px */
+    letter-spacing: -0.625px;
   }
 
   .noteImg {
@@ -106,96 +130,40 @@ export const Title = styled.div`
     height: 154px;
     margin: 0 auto;
   }
-
-  .desc {
-    font-size: 12px;
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-
-    > img {
-      width: 18px;
-    }
-  }
-`;
-
-export const Container = styled.div`
-  background: inherit;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  // gap: 25px;
-  box-sizing: border-box;
-  margin-top: 68px;
-`;
-
-export const Ddays = styled.div`
-  font-size: 128px;
-  color: white;
-  font-weight: 700;
-  margin-bottom: 72px;
-`;
-
-export const Promises = styled.div`
-  display: flex;
-  width: 100%;
-  overflow-x: auto;
-  white-space: nowrap;
-  scroll-snap-type: x mandatory;
-  gap: 12px;
-  scroll-behavior: smooth;
-  position: relative;
-  box-sizing: border-box;
-
-  &::-webkit-scrollbar {
-    display: none; /* 스크롤바 숨김 */
-  }
-`;
-
-export const Dots = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-top: 10px;
-  gap: 8px;
-`;
-
-export const Dot = styled.div`
-  width: ${(props) => (props.active ? "24px" : "10px")};
-  height: 10px;
-  background-color: ${(props) => (props.active ? "#5175FF" : "#D3D3D3")};
-  border-radius: 5px;
-  transition: all 0.3s ease;
 `;
 
 export const PromiseBtn = styled.div`
+  @media screen and (max-width: 400px) {
+    width: 98%;
+  }
+  width: 362px;
   height: 121px;
   cursor: pointer;
-  margin-top: 20px;
+  margin: 38px auto 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 10px;
   align-items: center;
   justify-content: center;
-  padding: 20px;
-  width: 100%;
   background-color: white;
   border-radius: 10px;
-  font-size: 17px;
-  font-weight: 700;
+  box-shadow: 0px 0px 4px 0px #D7DEF7;
 
-  > .plus {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+
+  img {
     width: 24px;
     height: 24px;
-    background-color: #5175ff;
-    color: white;
-    border-radius: 50%;
-    > img {
-      width: 9px;
-    }
+    margin: -10px 0 10px 0;
+  }
+
+  div {
+    color: #404040;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 17px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 140%; /* 23.8px */
+    letter-spacing: -0.425px;
   }
 `;

@@ -1,37 +1,28 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Header, MainWrapper, PromiseBtn, Title } from "./Main.styles";
-import { Container, Ddays, Promises, Dots, Dot } from "./Main.styles";
-import Navigation from "../../components/Navigation/Navigation";
 import { useNavigate } from "react-router-dom";
+
+import { Layout, Header, Title, PromiseBtn, Container, Ddays } from "./Main.styles";
+
+import Navigation from "../../components/Navigation/Navigation";
+import PromiseContainer from "./PromiseContainer";
+
 import { postAuth } from "../../apis/auth/postAuth";
-
-import note from "../../assets/icons/note.svg";
-import locationWhite from "../../assets/icons/locationWhite.svg";
-import logo from "../../assets/icons/logo.svg";
-import alarm from "../../assets/icons/alarm.svg";
-import personWhite from "../../assets/icons/personWhite.svg";
-
-// import plus from "../../assets/icons/forMyPromises/plus.svg";
-import PromiseContainer from "../../components/PromiseContainer/PromiseContainer";
-
 import { getHome } from "../../apis/user/getHome";
 
-const Main = () => {
-  const dummyData = [
-    {
-      left: 3,
-      date: "11월 22일 14시 00분",
-      title: "웹 개발 프로젝트 회의",
-      people: "김민수 외 3명",
-      location: "스타벅스 강남점",
-      promiseId: 37,
-    },
-  ];
+import note from "../../assets/icons/note.svg";
+// import locationWhite from "../../assets/icons/locationWhite.svg";
+import logo from "../../assets/icons/logo.svg";
+import alarm from "../../assets/icons/alarm.svg";
+// import personWhite from "../../assets/icons/personWhite.svg";
+// import plus from "../../assets/icons/forMyPromises/plus.svg";
+import 약속잡기 from "../../assets/icons/Buttons/약속잡기.svg";
 
+export default function Main() {
   const navigate = useNavigate();
 
-  const scrollRef = useRef<HTMLDivElement | null>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
+  // const scrollRef = useRef<HTMLDivElement | null>(null);
+  // const [activeIndex, setActiveIndex] = useState(0);
+
   const handleLogout = async () => {
     try {
       await postAuth.logout();
@@ -40,6 +31,14 @@ const Main = () => {
     } catch (error) {
       console.error("로그아웃 실패:", error);
     }
+  };
+
+  const calculateDday = (date: string) => {
+    const today = new Date();
+    const promiseDate = new Date(date);
+    const diffTime = promiseDate.getTime() - today.getTime();
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    return diffDays > 0 ? `D-${diffDays}` : diffDays < 0 ? `D+${Math.abs(diffDays)}` : 'D-0';
   };
 
   interface upcomingDday {
@@ -88,126 +87,49 @@ const Main = () => {
       }
     };
     fetchData();
-
-    const handleScroll = () => {
-      if (scrollRef.current) {
-        const scrollLeft = scrollRef.current.scrollLeft;
-        const containerWidth = scrollRef.current.offsetWidth;
-        const newIndex = Math.round(scrollLeft / containerWidth);
-        setActiveIndex(newIndex);
-      }
-    };
-
-    scrollRef.current?.addEventListener("scroll", handleScroll);
-    return () => scrollRef.current?.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const calculateDday = (date: string) => {
-    const today = new Date();
-    const promiseDate = new Date(date);
-    const diffTime = promiseDate.getTime() - today.getTime();
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    return diffDays > 0 ? `D-${diffDays}` : diffDays < 0 ? `D+${Math.abs(diffDays)}` : 'D-0';
-  };
-
   return (
-    <MainWrapper>
+    <Layout>
       <Header>
-        <img src={logo} alt="logo icon" className="logo" />
+        <img className="logo" src={logo} alt="logo icon" />
         <div className="header-controls">
-          <button onClick={handleLogout} className="logout-btn">
+          <button className="logout-btn" onClick={handleLogout}>
             로그아웃
           </button>
-          {/* <div className="alarm-wrapper">
+          <div className="alarm-wrapper">
             <img src={alarm} alt="alarm icon" />
             <span></span>
-          </div> */}
+          </div>
         </div>
       </Header>
-
-      <section style={{ width: "100%" }}>
-        {upcomingDday != null ? (
-          <>
-            {/* <Title>
-              <div>{homeDataName}님의 다가올 약속</div>
-              <div className="bold">마케팅 관리 팀플</div>
-              <div className="desc">
-                <img src={personWhite} alt="person icon" />
-                <span>김지환 외 2명</span>
-              </div>
-            </Title> */}
-            <Container>
-              <Ddays>
-                {calculateDday(upcomingDday.date)}
-              </Ddays>
-              <PromiseContainer
-                left={Math.ceil(
-                  (new Date(upcomingDday.date).getTime() -
-                    new Date().getTime()) /
-                    (1000 * 60 * 60 * 24)
-                )}
-                date={upcomingDday.date}
-                people={(upcomingDday.peopleNumber > 0) ? `${homeDataName} 외 ${upcomingDday.peopleNumber - 1}명` : `${homeDataName}`}
-                location={upcomingDday.place}
-                title={upcomingDday.name}
-              />
-              {/* <Promises ref={scrollRef}> */}
-              {upcomingPromises.promises.map((item, index) => (
-                <PromiseContainer
-                  key={index}
-                  left={Math.ceil(
-                    (new Date(item.date).getTime() - new Date().getTime()) /
-                      (1000 * 60 * 60 * 24)
-                  )}
-                  date={item.date}
-                  people={(item.peopleNumber > 0) ? `${homeDataName} 외 ${item.peopleNumber - 1}명` : `${homeDataName}`}
-                  location={item.place}
-                  title={item.name}
-                />
-              ))}
-              {/* </Promises> */}
-              {/* <Dots>
-                {upcomingPromises.promises.map((_, index) => (
-                  <Dot key={index} active={index === activeIndex} />
-                ))}
-              </Dots> */}
-            </Container>
-          </>
-        ) : (
-          <>
-            {/* <Title style={{ marginBottom: "280px" }}> */}
-            <Title>
-              <div className="name">{homeDataName} 님</div>
-              <div className="bold">지금은 예정된 약속이 없어요</div>
-              <img className="noteImg" src={note} alt="note image" />
-            </Title>
-            {/* <Title>
-              <div className="bold">우리 다 같이 BARO 하자</div>
-            </Title> */}
-            <PromiseBtn onClick={() => navigate("/suggest")}>
-              <div className="plus">
-                {/* <img src={plus} /> */}
-              </div>
-              <div>새로운 약속 만들기</div>
-            </PromiseBtn>
-          </>
-        )}
-      </section>
-
-      {/* 위치 정보 섹션 */}
-      {/* <section style={{ width: "100%", marginBottom: "70px" }}>
-        <Title>
-          <div className="bold">BARO 이곳에서</div>
-          <div className="desc">
-            <img src={locationWhite} alt="location icon" />
-            <span>건대입구역 주변</span>
-          </div>
-        </Title>
-      </section> */}
-
+      {upcomingDday ? (
+        <>
+          <Container>
+            <Ddays>{calculateDday(upcomingDday.date)}</Ddays>
+            <PromiseContainer
+              left={calculateDday(upcomingDday.date)}
+              date={upcomingDday.date}
+              people={(upcomingDday.peopleNumber > 0) ? `${homeDataName} 외 ${upcomingDday.peopleNumber - 1}명` : `${homeDataName}`}
+              location={upcomingDday.place}
+              title={upcomingDday.name}
+            />
+          </Container>
+        </>
+      ) : (
+        <>
+          <Title>
+            <div className="name">{homeDataName} 님</div>
+            <div className="bold">지금은 예정된 약속이 없어요</div>
+            <img className="noteImg" src={note} alt="note image" />
+          </Title>
+          <PromiseBtn onClick={() => navigate("/suggest")}>
+            <img src={약속잡기} />
+            <div>새로운 약속 제안하기</div>
+          </PromiseBtn>
+        </>
+      )}
       <Navigation />
-    </MainWrapper>
+    </Layout>
   );
 };
-
-export default Main;
