@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { getMyPage } from "../../../apis/user/getMyPage";
 import backIcon from "../../../assets/icons/backIcon.svg";
 import manAvatar from "../../../assets/icons/manavatar.svg";
-import WithdrawModal from "../WithdrawModal";
+import WithdrawModal from "./Withdraw/WithdrawModal";
 import Navigation from "../../../components/Navigation/Navigation";
 import {
   SettingsContainer,
