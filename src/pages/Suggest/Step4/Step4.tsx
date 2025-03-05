@@ -15,7 +15,7 @@ import x from "../../../assets/icons/x.svg";
 import profileImg_1 from "../../../assets/icons/profileImg_1.svg";
 import profileImg_2 from "../../../assets/icons/profileImg_2.svg";
 import profileImg_3 from "../../../assets/icons/profileImg_3.svg";
-import profileImg_default from "../../../assets/icons/mypage/profileImg_default.svg";
+import profileImg_default from "../../../assets/icons/profileImg_default.svg";
 import { useNavigate } from "react-router-dom";
 import GetFriends from "../../../apis/user/GetFriends";
 import GetSearchCode from "../../../apis/user/GetSearchCode";
