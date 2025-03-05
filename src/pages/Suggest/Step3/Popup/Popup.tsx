@@ -3,8 +3,11 @@ import React from "react";
 import Button from "../../../../components/Button/Button";
 
 import BackIcon from "../../../../assets/icons/backIcon.svg";
-import { Wrapper, Section } from "../../../../assets/styles/Steps.styles";
-
+import {
+  Wrapper,
+  FixedButton,
+  Section,
+} from "../../../../components/Steps/Steps.styles";
 import KakaoMap from "../../../../components/forSearchPage/KakaoMap/KakaoMap";
 
 import styled from "styled-components";

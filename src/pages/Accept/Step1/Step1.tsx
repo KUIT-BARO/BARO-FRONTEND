@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import StepInterface from "../../../interface/Step";
-import Nav from "../../../components/Nav/Nav";
+import TopBar from "../../../components/TopBar/TopBar";
 
 import {
   Wrapper,
   FixedButton,
   Section,
-  ImgWrapper,
-} from "../../../assets/styles/Steps.styles";
+} from "../../../components/Steps/Steps.styles";
 import SubTitle from "../../../components/SubTitle/SubTitle";
 
 import Button from "../../../components/Button/Button";

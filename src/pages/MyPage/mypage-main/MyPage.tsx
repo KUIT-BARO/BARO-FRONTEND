@@ -72,7 +72,9 @@ const MyPage: React.FC = () => {
       </MyPageHeader>
       <ProfileSection>
         <ProfileImage>
+
           <ProfileImg src={Default} alt="profile" />
+
         </ProfileImage>
         <ProfileInfo>
           <NickName>{userInfo.nickname}</NickName>
