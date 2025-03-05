@@ -17,9 +17,9 @@ import { ButtonWrapper, SectionHeader } from "./Step1.styles";
 import SmallButton from "../../../components/SmallButton/SmallButton";
 import SelectTimeTable from "../../../components/SelectTimeTable/SelectTimeTable";
 
-import profileImg_1 from "../../../assets/icons/profileImg_1.svg";
-import profileImg_2 from "../../../assets/icons/profileImg_2.svg";
-import profileImg_3 from "../../../assets/icons/profileImg_3.svg";
+import Man from "../../../assets/icons/Profileimg/Man.svg";
+import Girl from "../../../assets/icons/profileimg/Girl.svg";
+import Dog from "../../../assets/icons/Profileimg/Dog.svg";
 import defaultImg from "../../../assets/icons/profileImg_default.svg";
 import { useNavigate } from "react-router-dom";
 import GetSchedule from "../../../apis/user/GetSchedule";
@@ -108,7 +108,7 @@ export default function Step1({
   );
 }
 const renderProfileImages = (peopleNumber: number | undefined) => {
-  const profileImages = [profileImg_1, profileImg_2, profileImg_3];
+  const profileImages = [Man, Girl, Dog];
   if (peopleNumber == 0) {
     peopleNumber = 1;
   }
