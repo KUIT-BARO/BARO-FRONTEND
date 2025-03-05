@@ -1,8 +1,8 @@
 import React from 'react';
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
-import SearchPlace from './SearchPlace';
-import ReviewPlace from './ReviewPlace';
+import SearchPlace from './SearchMain';
+import ReviewPlace from './AddPin';
 import BestPlace from './BestPlace';
 
 export default function SearchPage() {
@@ -17,10 +17,10 @@ export default function SearchPage() {
           path=":placeId"
           element={<ReviewPlace />}
         />
-        <Route
+        {/* <Route
           path="bestplace"
           element={<BestPlace />}
-        />
+        /> */}
       </Routes>
     </>
   );

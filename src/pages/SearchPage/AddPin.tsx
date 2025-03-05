@@ -7,7 +7,7 @@ import Modal from "../../components/forSearchPage/Modal/Modal";
 
 import { getUserPlace } from '../../apis/promise/getUserPlace';
 
-export default function ReviewPlace() {
+export default function AddPin() {
 
   const [isModalOpen, setIsModalOpen] = React.useState(false);
   const [selectedLocation, setSelectedLocation] = React.useState("");
