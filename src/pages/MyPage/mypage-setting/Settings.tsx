@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { getMyPage } from "../../../apis/user/getMyPage";
 import backIcon from "../../../assets/icons/backIcon.svg";
 import manAvatar from "../../../assets/icons/manavatar.svg";
-import WithdrawModal from "../WithdrawModal";
+import WithdrawModal from "./withdraw/WithdrawModal";
 import Navigation from "../../../components/Navigation/Navigation";
 import {
   SettingsContainer,
@@ -22,7 +22,7 @@ import {
   SubTitle,
   UserId,
   Withdraw,
-} from "./Settings.styles"; // ✅ styled-components import
+} from "./Settings.styles";
 
 interface UserInfo {
   nickname: string;
@@ -100,7 +100,6 @@ const Settings: React.FC = () => {
             <UserId>@{userInfo.userId}</UserId>
           </ProfileInfo>
         </ProfileSection>
-
         <SettingsMenu>
           <MenuItem withdraw onClick={() => setWithdrawModalOpen(true)}>
             <Withdraw>탈퇴하기</Withdraw>

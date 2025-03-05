@@ -12,21 +12,21 @@ import PopupOverlay, { UsersWrapper, UserDesc, Popup } from "./Step4.styles";
 import checkIcon from "../../../assets/icons/checkIcon.svg";
 import checkWhite from "../../../assets/icons/checkWhite.svg";
 import x from "../../../assets/icons/x.svg";
-import profileImg_1 from "../../../assets/icons/profileImg_1.svg";
-import profileImg_2 from "../../../assets/icons/profileImg_2.svg";
-import profileImg_3 from "../../../assets/icons/profileImg_3.svg";
-import profileImg_default from "../../../assets/icons/profileImg_default.svg";
+import MAN from "../../../assets/icons/Profileimg/Man.svg";
+import WOMAN from "../../../assets/icons/Profileimg/Girl.svg";
+import Dog from "../../../assets/icons/Profileimg/Dog.svg";
+import Default from "../../../assets/icons/Profileimg/Default.svg";
 import { useNavigate } from "react-router-dom";
 import GetFriends from "../../../apis/user/GetFriends";
 import GetSearchCode from "../../../apis/user/GetSearchCode";
 import PostFriends from "../../../apis/user/PostFriends";
 
-const profileIdToBackendFormat = {
-  MAN: profileImg_1,
-  WOMAN: profileImg_2,
-  DOG: profileImg_3,
-  NONE: profileImg_default,
-};
+// const profileIdToBackendFormat = {
+//   MAN: profileImg_1,
+//   WOMAN: profileImg_2,
+//   DOG: profileImg_3,
+//   NONE: profileImg_default,
+// };
 
 export default function Step4({
   handleBack,
@@ -225,13 +225,7 @@ const User = ({
             <UserDesc key={friend.userId}>
               <div className="left">
                 <div className="user-icon">
-                  <img
-                    alt="user icon"
-                    src={
-                      profileIdToBackendFormat[friend.profileImage] ||
-                      profileImg_default
-                    }
-                  />
+                  <img alt="user icon" src={friend.profileImage || Default} />
                 </div>
                 <div className="user-desc">
                   <div className="name">{friend.nickname}</div>

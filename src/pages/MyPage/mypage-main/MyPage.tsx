@@ -4,7 +4,7 @@ import { getMyPage } from "../../../apis/user/getMyPage";
 import Navigation from "../../../components/Navigation/Navigation";
 import settingsIcon from "../../../assets/icons/mypage/settings.svg";
 import editIcon from "../../../assets/icons/mypage/edit.svg";
-import profileImg_default from "../../../assets/icons/mypage/profileImg_default.svg";
+import Default from "../../../assets/icons/Profileimg/Default.svg";
 import {
   EditButton,
   MyPageContainer,
@@ -72,7 +72,7 @@ const MyPage: React.FC = () => {
       </MyPageHeader>
       <ProfileSection>
         <ProfileImage>
-          <ProfileImg src={profileImg_default} alt="profile" />
+          <ProfileImg src={Default} alt="profile" />
         </ProfileImage>
         <ProfileInfo>
           <NickName>{userInfo.nickname}</NickName>
