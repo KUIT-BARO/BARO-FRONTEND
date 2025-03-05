@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import checkIcon from '../../assets/icons/check.svg';
-import './Toast.styles.css';
+import React, { useEffect, useState } from "react";
+import checkIcon from "../../../../assets/icons/check.svg";
+import { ToastContainer, ToastIcon, ToastMessage } from "./Toast.styles";
 
 interface ToastProps {
   message: string;
@@ -26,12 +26,12 @@ const Toast: React.FC<ToastProps> = ({ message, isVisible, onClose }) => {
   if (!isVisible) return null;
 
   return (
-    <div className={`toast-container ${visible ? 'visible' : ''}`}>
-      <div className="toast-icon">
-        <img src={checkIcon} alt="check" />
-      </div>
-      <span className="toast-message">{message}</span>
-    </div>
+    <ToastContainer visible={visible}>
+      <ToastIcon>
+        <img src={checkIcon} alt="check" width={16} height={16} />
+      </ToastIcon>
+      <ToastMessage>{message}</ToastMessage>
+    </ToastContainer>
   );
 };
 
