@@ -1,9 +1,6 @@
-interface Suggest {
+export default interface SuggestInterface {
   name: string;
-  purpose: string;
-  peopleNum: number;
-  location: string;
+  placeName: string;
   dateStart: Date;
   dateEnd: Date;
-  promiseId: number;
 }

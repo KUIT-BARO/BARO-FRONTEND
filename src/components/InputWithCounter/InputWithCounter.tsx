@@ -1,17 +1,24 @@
 import React from "react";
 import styled from "styled-components";
-
-const InputWithCounter = ({ text, setText, placeholder, maxlength }) => {
+import LocationIcon from "../../assets/icons/Promise/location.svg";
+const InputWithCounter = ({
+  text = "",
+  setText,
+  placeholder,
+  maxlength,
+  location = false,
+}) => {
   const handleChange = (e) => {
     setText(e.target.value);
   };
 
   return (
-    <>
-      <InputWrapper>
+    <InputWrapper>
+      <div className="input">
+        {location ? <img src={LocationIcon} /> : ""}
         <Input
           type="text"
-          placeholder={`ex. ${placeholder}`}
+          placeholder={`${placeholder}`}
           value={text}
           maxLength={maxlength}
           onChange={handleChange}
@@ -19,19 +26,30 @@ const InputWithCounter = ({ text, setText, placeholder, maxlength }) => {
         <Counter>
           {text.length}/{maxlength}
         </Counter>
-      </InputWrapper>
+      </div>
       {text.length == maxlength && (
         <ErrorMessage>최대 {maxlength}글자입니다</ErrorMessage>
       )}
-    </>
+    </InputWrapper>
   );
 };
 
 export default InputWithCounter;
 
 const InputWrapper = styled.div`
-  position: relative;
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  > .input {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    border-bottom: 1px solid #c1c1c1;
+
+    padding-bottom: 10px;
+  }
 `;
 
 const Input = styled.input`
@@ -39,8 +57,6 @@ const Input = styled.input`
   background-color: transparent;
   outline: none;
   border: none;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #c1c1c1;
 
   ::placeholder {
     font-size: 16px;

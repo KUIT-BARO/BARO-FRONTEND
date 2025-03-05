@@ -3,20 +3,20 @@ export const Wrapper = styled.div`
   background-color: #f4f8fb;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   padding: 0 20px;
+  gap: 20px;
+  > .placeholder {
+    height: 90px;
+  }
 `;
 
 export const Section = styled.section`
   width: 100%;
-  height: calc(100vh - 2em - 90px);
-
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 20px;
-  box-sizing: border-box;
-
+  gap: 17px;
   box-sizing: border-box;
 `;
 
@@ -28,6 +28,7 @@ export const FixedButton = styled.div`
   height: 90px;
   padding: 20px;
   display: flex;
+
   background-color: #f4f8fb;
   box-sizing: border-box;
 `;

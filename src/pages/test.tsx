@@ -3,6 +3,8 @@ import Navigation from "../components/Navigation/Navigation";
 import styled from "styled-components";
 import TopBar from "../components/TopBar/TopBar";
 import Search from "../components/Search/Search";
+import Button from "../components/Button/Button";
+import SmallButton from "../components/SmallButton/SmallButton";
 export default function Test() {
   return (
     <>
@@ -11,6 +13,8 @@ export default function Test() {
         value={""}
         onChange={() => console.log()}
       />
+      <Button />
+      <SmallButton />
       <TestWrapper>jzzx</TestWrapper>
       <Navigation />
     </>
