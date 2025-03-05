@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import LocationIcon from "../../assets/icons/Promise/location.svg";
+import LocationIcon from "../../assets/icons/Promise/locationGray.svg";
 const InputWithCounter = ({
   text = "",
   setText,
