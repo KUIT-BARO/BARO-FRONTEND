@@ -36,7 +36,7 @@ const Color = {
 };
 
 const FontColor = {
-  White: "black",
+  White: "#C0C0C0",
   Blue: "white",
   Gray: "white",
 };

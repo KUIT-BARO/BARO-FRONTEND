@@ -1,110 +1,62 @@
 import React, { useState } from "react";
-import StepInterface from "../../../interface/Step";
 
 import Button from "../../../components/Button/Button";
 import { ProgressBar } from "../../../components/ProgressBar/ProgressBar";
 import TopBar from "../../../components/TopBar/TopBar";
 
-import {
-  Wrapper,
-  FixedButton,
-  Section,
-} from "../../../components/Steps/Steps.styles";
-import SubTitle from "../../../components/SubTitle/SubTitle";
-import Desc from "../../../components/Desc/Desc";
-import monthBack from "../../../assets/icons/monthBack.svg";
-import monthNext from "../../../assets/icons/monthNext.svg";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import { ko } from "date-fns/locale";
+import { Wrapper, FixedButton, Section } from "./Step2.styles";
 
-import "./Step2.css";
 import { useNavigate } from "react-router-dom";
+import Question from "../../../components/Question/Question";
+import InputWithCounter from "../../../components/InputWithCounter/InputWithCounter";
+import CustomDatepicker from "../components/Datepicker/CustomDatepicker";
 
 export default function Step2({
-  handleBack,
   handleExit,
-  dateRange,
   setDateRange,
-  startDate,
-  endDate,
-}: StepInterface) {
+  dateStart,
+  dateEnd,
+  placeName,
+  setPlaceName,
+  handleOpenPopup,
+  handleClosePopup,
+}) {
   const navigate = useNavigate();
-  // 날짜 초기값 설정
-  const [internalStartDate, setInternalStartDate] = useState<Date | null>(
-    startDate || new Date()
-  );
-  const [internalEndDate, setInternalEndDate] = useState<Date | null>(
-    endDate || new Date()
-  );
-
-  const isDateSelected = internalStartDate !== null && internalEndDate !== null;
-
-  const handleDateChange = (update: [Date | null, Date | null] | Date) => {
-    if (Array.isArray(update)) {
-      setInternalStartDate(update[0]);
-      setInternalEndDate(update[1]);
-      setDateRange(update); // 외부 상태 업데이트
-    } else {
-      setInternalStartDate(update);
-      setInternalEndDate(update);
-      setDateRange([update, update]); // 단일 날짜로 범위 설정
-    }
-  };
+  const isFormComplete =
+    dateStart != null && dateEnd != null && (placeName ?? "").trim().length > 0;
 
   return (
     <>
-      <TopBar handleBack={handleBack} handleExit={handleExit} color={"Blue"} />
+      <TopBar handleExit={handleExit} color={"Blue"} />
       <Wrapper>
         <ProgressBar percent={50} />
-
-        <SubTitle>언제 만나실건가요?</SubTitle>
-        <Desc>약속 장소의 대략적인 위치를 설정해주세요</Desc>
-
         <Section>
-          <DatePicker
-            selected={internalStartDate}
-            onChange={handleDateChange}
-            startDate={internalStartDate}
-            endDate={internalEndDate}
-            selectsRange
-            dayClassName={(date) => {
-              if (
-                internalStartDate &&
-                internalEndDate &&
-                date > internalStartDate &&
-                date < internalEndDate
-              ) {
-                return "middle-date";
-              }
-              return "";
-            }}
-            inline
-            locale={ko}
-            dateFormat="yyyy년 MM월"
-            renderCustomHeader={({ date, decreaseMonth, increaseMonth }) => (
-              <div className="custom-header">
-                <span>
-                  {date.getFullYear()}년 {date.getMonth() + 1}월
-                </span>
-                <div className="btn-wrapper">
-                  <div onClick={decreaseMonth}>
-                    <img src={monthBack} alt="back" />
-                  </div>
-                  <div onClick={increaseMonth}>
-                    <img src={monthNext} alt="next" />
-                  </div>
-                </div>
-              </div>
-            )}
+          <Question
+            title="언제 만나실건가요?"
+            desc="조정 가능한 날짜 범위를 지정해주세요"
+          />
+          <CustomDatepicker
+            setDateRange={setDateRange}
+            dateStart={dateStart}
+            dateEnd={dateEnd}
           />
         </Section>
-
+        <Section style={{ gap: "45px" }}>
+          <Question
+            title="어디서 만나실건가요?"
+            desc="대략적인 약속 장소의 위치를 제안해보세요"
+          />
+          <InputWithCounter
+            text={placeName}
+            setText={setPlaceName}
+            placeholder={"장소를 입력해주세요"}
+            maxlength={12}
+            location={true}
+          />
+        </Section>
+        <div className="placeholder"></div>
         <FixedButton>
-          <Button
-            onClick={() => navigate("/suggest/step3")}
-            disabled={!isDateSelected}
-          >
+          <Button disabled={!isFormComplete} onClick={() => handleOpenPopup()}>
             다음
           </Button>
         </FixedButton>
