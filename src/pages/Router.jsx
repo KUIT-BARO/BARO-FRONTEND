@@ -17,7 +17,6 @@ import Accept from "./Accept/Accept";
 import SearchPage from "./SearchPage/SearchPage";
 import Landing from "./Landing/Landing";
 import PromiseConfirm from "../components/forMyPromises/PromiseConfirm/PromiseConfirm";
-import Test from "./test";
 import PromiseStatus from "./PromiseStatus/PromiseStatus";
 
 // 로그인 여부 확인
@@ -39,7 +38,6 @@ const Router = () => {
   }, []);
 
   const router = createBrowserRouter([
-    { path: "/test", element: <Test /> },
     { path: "/", element: <Landing /> },
     { path: "/main", element: <Main /> },
     { path: "/login", element: <LoginPage /> },
