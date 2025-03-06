@@ -3,9 +3,7 @@ import {
   Wrapper,
   FixedButton,
   Section,
-  ImgWrapper,
-} from "../../../assets/styles/Steps.styles";
-
+} from "../../../components/Steps/Steps.styles";
 import styled from "styled-components";
 import Man from "../../../assets/icons/Profileimg/Man.svg";
 import Girl from "../../../assets/icons/profileimg/Girl.svg";
@@ -20,7 +18,7 @@ import Popup from "./Popup/Popup";
 import Location from "../../../components/Location/Location";
 import KakaoMap from "../../../components/forSearchPage/KakaoMap/KakaoMap";
 import { useNavigate } from "react-router-dom";
-import Nav from "../../../components/Nav/Nav";
+import TopBar from "../../../components/TopBar/TopBar";
 import PostPersonalKeywords from "../../../apis/Promise/Personal/PostPersonalKeyword";
 import PostPersonalPlace from "../../../apis/Promise/Personal/PostPersonalPlace";
 import PostPersonalTime from "../../../apis/Promise/Personal/PostPersonalTime";

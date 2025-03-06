@@ -1,8 +1,8 @@
-import React from 'react';
-import styled from 'styled-components';
-import { useNavigate, useLocation } from 'react-router-dom';
+import React from "react";
+import styled from "styled-components";
+import { useNavigate, useLocation } from "react-router-dom";
 
-import Nav from "../../../components/Nav/Nav";
+import TopBar from "../../../components/TopBar/TopBar";
 import Button from "../../../components/Button/Button";
 import Desc from "../../../components/Desc/Desc";
 import flag from "../../../assets/icons/flag.svg";
@@ -52,10 +52,10 @@ export default function PromiseConfirm() {
           <div className="bold">
             <div>{promiseData.name}</div>
             <div>모임이 확정되었어요!</div>
-            <div className='light'>친구들에게 결과를 BARO 공유해보세요</div>
+            <div className="light">친구들에게 결과를 BARO 공유해보세요</div>
           </div>
         </Title>
-        <img className='image' src={ThumbsUp} alt="" />
+        <img className="image" src={ThumbsUp} alt="" />
         <Content>
           <div className="container">
             <div className="wrap">
@@ -68,7 +68,9 @@ export default function PromiseConfirm() {
             </div>
             <div className="wrap">
               <img src={person} />
-              <p>{promiseData.leaderName} 외 {promiseData.peopleNumber-1}명</p>
+              <p>
+                {promiseData.leaderName} 외 {promiseData.peopleNumber - 1}명
+              </p>
             </div>
             <div className="wrap">
               <img src={locationIcon} />
@@ -77,7 +79,12 @@ export default function PromiseConfirm() {
             <div className="wrap">
               <img src={date} />
               <p>
-                {promiseData.dateStart.slice(5,7).replace(/^0+/,'')}/{promiseData.dateStart.slice(8,10).replace(/^0+/,'')} ({new Date(promiseData.dateStart).toLocaleString('ko-KR', {weekday: 'short'})})
+                {promiseData.dateStart.slice(5, 7).replace(/^0+/, "")}/
+                {promiseData.dateStart.slice(8, 10).replace(/^0+/, "")} (
+                {new Date(promiseData.dateStart).toLocaleString("ko-KR", {
+                  weekday: "short",
+                })}
+                )
               </p>
             </div>
           </div>
@@ -100,7 +107,7 @@ export default function PromiseConfirm() {
             <div>링크가 복사되었습니다.</div>
           </LinkPopupWrapper>
         )}
-        <Button 
+        <Button
           onClick={async () => {
             const copiedLink = await showPopup(); // 공유 링크를 가져온 후
             if (copiedLink) {
@@ -114,12 +121,16 @@ export default function PromiseConfirm() {
               console.warn("복사할 링크가 없습니다.");
             }
           }}
-        >공유하기</Button>
-        <Button onClick={() => navigate(-1)} color="Gray">완료하기</Button>
+        >
+          공유하기
+        </Button>
+        <Button onClick={() => navigate(-1)} color="Gray">
+          완료하기
+        </Button>
       </div>
     </>
   );
-};
+}
 
 const ConfirmWrapper = styled.div`
   display: flex;
