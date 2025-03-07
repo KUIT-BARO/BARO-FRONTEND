@@ -1,9 +1,9 @@
 import React from 'react';
 import { Route, Routes } from "react-router-dom";
 
-import SearchPlace from './SearchMain';
-import ReviewPlace from './AddPin';
-import BestPlace from './BestPlace';
+import SearchPlace from './SearchMain/SearchMain';
+import ReviewPlace from './AddPin/AddPin';
+// import BestPlace from './BestPlace/BestPlace';
 
 export default function SearchPage() {
   return (
