@@ -1,5 +1,5 @@
-interface TimeTable {
-  date: string;
-  time_start: string;
-  time_end: string;
+export default interface TimeTableInterface {
+  dayOfWeek: string;
+  timeStart: string;
+  timeEnd: string;
 }

@@ -29,6 +29,7 @@ export default function Step1({
         <ProgressBar percent={25} />
         <Section>
           <Question
+            color={"Blue"}
             title={"어떤 약속인가요?"}
             desc={"약속 장소의 대략적인 위치를 설정해주세요"}
           />
