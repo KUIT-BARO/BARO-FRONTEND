@@ -1,11 +1,18 @@
 import React from "react";
-import styled from "styled-components";
 
 import { Roadview } from "react-kakao-maps-sdk";
+
+import { 
+  Layout, 
+  Review, LocationSetting, ReviewWrite, 
+  Rating, Category, CategoryButton
+} from "./AddPinForm.styles.tsx";
 
 import Location from '../../../assets/icons/locationWhite.svg';
 import BlueStar from '../../../assets/icons/blueStar.svg';
 import GrayStar from '../../../assets/icons/grayStar.svg';
+
+import { PIN_CATEGORIES } from '../../../utils/constant/Categories.tsx';
 
 interface ReviewDetailsProps {
   selectedPosition: { lat: number; lng: number; radius: number; };
@@ -62,21 +69,16 @@ export default function AddPinForm(props: ReviewDetailsProps) {
     if (selectedCategories.includes(category)) {
       const newCategories = selectedCategories.filter((c) => c !== category);
       setSelectedCategories(newCategories);
-      props.onCategoryChange(newCategories.map(c => categories.indexOf(c)));
+      props.onCategoryChange(newCategories.map(c => PIN_CATEGORIES.indexOf(c)));
     } else {
       if (selectedCategories.length < 5) {
         const newCategories = [...selectedCategories, category];
         setSelectedCategories(newCategories);
-        const sortedIndices = newCategories.map(c => categories.indexOf(c)).sort((a, b) => a - b);
+        const sortedIndices = newCategories.map(c => PIN_CATEGORIES.indexOf(c)).sort((a, b) => a - b);
         props.onCategoryChange(sortedIndices);
       }
     }
   };
-  const categories: string[] = [
-    '비즈니스', '스터디', '여가 생활', '커플', 
-    '아늑한', '북적이는', '독특한', '전통적인', 
-    '반려동물', '실버', '키즈존'
-  ];
 
   const [starCount, setStarCount] = React.useState(0);
   const handleStar = (count: number) => {
@@ -140,7 +142,7 @@ export default function AddPinForm(props: ReviewDetailsProps) {
           <span>(최대5개)</span>
         </div>
         <Category>
-          {categories.map((category, idx) => (
+          {PIN_CATEGORIES.map((category, idx) => (
             <CategoryButton 
               key={idx}
               isSelected={selectedCategories.includes(category)}
@@ -154,157 +156,3 @@ export default function AddPinForm(props: ReviewDetailsProps) {
     </Layout>
   );
 };
-
-const Layout = styled.div`
-  width: 100%;
-  height: 80vh;
-  min-height: 80vh;
-`;
-
-const Review = styled.div`
-  margin: 0 20px;
-`;
-
-const LocationSetting = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 18px;
-
-  div {
-    margin-top: 2px;
-    font-family: Pretendard;
-    font-size: 17px;
-    font-weight: 500;
-    line-height: 23.8px;
-    letter-spacing: -0.025em;
-    text-align: left;
-    text-underline-position: from-font;
-    text-decoration-skip-ink: none;
-    color: #ADBEFF;
-    cursor: pointer;
-  }
-
-  
-`;
-
-const ReviewWrite = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin: 12px 6px 17px 6px;
-
-  div {
-    margin-left: auto;
-    font-family: Pretendard;
-    font-size: 12px;
-    font-weight: 500;
-    line-height: 18px;
-    letter-spacing: -0.025em;
-    text-align: left;
-    text-underline-position: from-font;
-    text-decoration-skip-ink: none;
-    color: #F4F8FB;
-  }
-
-  textarea {
-    background: none;
-    border: none;
-    width: 100%;
-    height: 78px;
-    margin-top: 16px;
-    resize: none;
-    outline: none;
-    
-    font-family: Pretendard;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 21px;
-    letter-spacing: -0.025em;
-    text-align: left;
-    text-underline-position: from-font;
-    text-decoration-skip-ink: none;
-    color: #FFFFFF;
-
-    &::placeholder, &focus {
-      font-family: Pretendard;
-      font-size: 14px;
-      font-weight: 400;
-      line-height: 21px;
-      letter-spacing: -0.025em;
-      text-align: left;
-      text-underline-position: from-font;
-      text-decoration-skip-ink: none;
-      color: #FFFFFF;
-    }
-  }
-`;
-
-const Rating = styled.div`
-  padding: 20px 20px 0 20px;
-  background-color: #EDF1FF;
-  height: 42vh;
-  min-height: 42vh;
-
-  color: #5175FF;
-  font-feature-settings: 'liga' off, 'clig' off;
-  font-family: Pretendard;
-  font-size: 17px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 140%; /* 23.8px */
-  letter-spacing: -0.425px;
-
-  .rating-stars {
-    display: flex;
-    margin-top: 11px;
-    margin-bottom: 32px;
-    gap: 5.34px;
-
-    img {
-      cursor: pointer;
-      width: 32px;
-    } 
-  }
-
-  span {
-    margin-left: 3px;
-    color: #ADBEFF;
-    font-feature-settings: 'liga' off, 'clig' off;
-    font-family: Pretendard;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 140%;
-    letter-spacing: -0.35px;
-  }
-`;
-
-const Category = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: 4px;
-  gap: 4px;
-`;
-
-const CategoryButton = styled.button<{ isSelected: boolean }>`
-  margin-top: 11px;
-  width: 83px;
-  height: 40px;
-  top: 7px;
-  gap: 8px;
-  border-radius: 10px;
-  border: 1.5px solid #5175FF;
-  opacity: 0px;
-  background: none;
-  font-family: Pretendard;
-  font-size: 12px;
-  font-weight: 600;
-  line-height: 16.8px;
-  letter-spacing: -0.025em;
-  text-align: center;
-  text-underline-position: from-font;
-  text-decoration-skip-ink: none;
-  cursor: pointer;
-  color: ${(props) => (props.isSelected ? "#FFF" : "#5175FF")};
-  background-color: ${(props) => (props.isSelected ? "#5175ff" : "transparent")};
-`;

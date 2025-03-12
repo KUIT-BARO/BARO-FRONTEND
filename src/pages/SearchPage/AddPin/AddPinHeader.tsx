@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 import { postReview } from "../../../apis/Place/postReview";
 
-import BackIcon from '../../../assets/icons/backIcon_white.svg'
+import BackIcon from '../../../assets/icons/backIcon_white.svg';
 
 interface ReviewHeaderProps {
   placeId: number;
@@ -85,7 +85,6 @@ const Layout = styled.div`
 
   color: var(--bg-bluewhite, #F4F8FB);
   font-feature-settings: 'liga' off, 'clig' off;
-  font-family: Pretendard;
   font-size: 19px;
   font-style: normal;
   font-weight: 600;

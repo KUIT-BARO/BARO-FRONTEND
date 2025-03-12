@@ -53,7 +53,6 @@ export default function SearchMain() {
 const Layout = styled.div`
   background-color: #F4F8FB;
   width: 100%;
-  height: 100vh;
   min-height: 100vh;
 `;
 const Header = styled.div`

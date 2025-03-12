@@ -59,7 +59,6 @@ export default function MyPromises() {
 const Layout = styled.div`
   background-color: #F4F8FB;
   width: 100%;
-  height: 100vh;
   min-height: 100vh;
 `;
 const Header = styled.div`
@@ -76,7 +75,6 @@ const Header = styled.div`
     margin: 17px auto 11px auto;
     color: var(--baro_black, #17171B);
     font-feature-settings: 'liga' off, 'clig' off;
-    font-family: Pretendard;
     font-size: 19px;
     font-style: normal;
     font-weight: 600;

@@ -64,14 +64,13 @@ const Container = styled.div`
     img {
       width: 16px;
       height: 16px;
-      // margin-right: 1px;
+      margin-right: 2px;
     }
 
     span {
       bottom: 3px;
       position: relative;
       color: #787878;
-      font-family: Pretendard;
       font-size: 10px;
       font-style: normal;
       font-weight: 500;
@@ -84,7 +83,6 @@ const Container = styled.div`
     margin: 2px 0 0 0;
     color: #5175FF;
     font-feature-settings: 'liga' off, 'clig' off;
-    font-family: Pretendard;
     font-size: 25px;
     font-style: normal;
     font-weight: 600;
@@ -120,7 +118,6 @@ const Container = styled.div`
       span {
         color: var(--baro_black, #17171B);
         font-feature-settings: 'liga' off, 'clig' off;
-        font-family: Pretendard;
         font-size: 14px;
         font-style: normal;
         font-weight: 400;
@@ -141,7 +138,6 @@ const Container = styled.div`
       border-radius: 100px;
       background: rgba(255, 100, 103, 0.90);
       color: #FFF;
-      font-family: Pretendard;
       font-size: 14px;
       font-style: normal;
       font-weight: 500;

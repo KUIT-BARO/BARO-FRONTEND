@@ -39,7 +39,6 @@ export const Header = styled.div`
     color: var(--bg-bluewhite, #F4F8FB);
     font-feature-settings: 'liga' off, 'clig' off;
     text-shadow: 0px 0px 2px rgba(215, 222, 247, 0.30);
-    font-family: Pretendard;
     font-size: 10px;
     font-style: normal;
     font-weight: 600;
@@ -78,7 +77,6 @@ export const Container = styled.div`
 export const Ddays = styled.div`
   color: #FFF;
   font-feature-settings: 'liga' off, 'clig' off;
-  font-family: Pretendard;
   font-size: 128px;
   font-style: normal;
   font-weight: 700;
@@ -103,7 +101,6 @@ export const Title = styled.div`
     text-align: center;
     font-feature-settings: 'liga' off, 'clig' off;
     text-shadow: 0px 0px 2px rgba(215, 222, 247, 0.30);
-    font-family: Pretendard;
     font-size: 36px;
     font-style: normal;
     font-weight: 600;
@@ -117,7 +114,6 @@ export const Title = styled.div`
     text-align: center;
     font-feature-settings: 'liga' off, 'clig' off;
     text-shadow: 0px 0px 2px rgba(215, 222, 247, 0.30);
-    font-family: Pretendard;
     font-size: 25px;
     font-style: normal;
     font-weight: 600;
@@ -148,8 +144,6 @@ export const PromiseBtn = styled.div`
   border-radius: 10px;
   box-shadow: 0px 0px 4px 0px #D7DEF7;
 
-
-
   img {
     width: 24px;
     height: 24px;
@@ -159,7 +153,6 @@ export const PromiseBtn = styled.div`
   div {
     color: #404040;
     text-align: center;
-    font-family: Pretendard;
     font-size: 17px;
     font-style: normal;
     font-weight: 500;
