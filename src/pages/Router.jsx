@@ -3,20 +3,21 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoute"; // 보호된 라우트 추가
 import Main from "./Main/Main";
 import Suggest from "./Suggest/Suggest";
-import SignupPage from "./Login/SignupPage";
-import LoginPage from "./Login/LoginPage";
+import SignupPage from "./Login/SignupPage/SignupPage";
+import LoginPage from "./Login/LoginPage/LoginPage";
 import MyPromises from "./MyPromises/MyPromises";
 import FinalVote from "./FinalVote/FinalVote";
 import MyPage from "./MyPage/mypage-main/MyPage";
-import ProfileEdit from "./MyPage/ProfileEdit";
-import Settings from "./MyPage/Settings";
+import ProfileEdit from "./MyPage/mypage-profile-edit/ProfileEdit";
+import Settings from "./MyPage/mypage-setting/Settings";
 import Contact from "./MyPage/Contact";
 import SavedPlacesDetail from "./MyPage/SavedPlacesDetail";
 import UserSchedulePage from "./MyPage/UserSchedulePage";
 import Accept from "./Accept/Accept";
 import SearchPage from "./SearchPage/SearchPage";
 import Landing from "./Landing/Landing";
-import Test from "./test";
+import PromiseConfirm from "../components/forMyPromises/PromiseConfirm/PromiseConfirm";
+import PromiseStatus from "./PromiseStatus/PromiseStatus";
 
 // 로그인 여부 확인
 const getAuthStatus = () => {
@@ -37,7 +38,6 @@ const Router = () => {
   }, []);
 
   const router = createBrowserRouter([
-    { path: "/test", element: <Test /> },
     { path: "/", element: <Landing /> },
     { path: "/main", element: <Main /> },
     { path: "/login", element: <LoginPage /> },
@@ -73,6 +73,14 @@ const Router = () => {
       element: (
         <ProtectedRoute isAuthenticated={isAuthenticated}>
           <MyPromises />
+        </ProtectedRoute>
+      ),
+    },
+    {
+      path: "/mypromises/confirm",
+      element: (
+        <ProtectedRoute isAuthenticated={isAuthenticated}>
+          <PromiseConfirm />
         </ProtectedRoute>
       ),
     },
@@ -121,6 +129,14 @@ const Router = () => {
       element: (
         <ProtectedRoute isAuthenticated={isAuthenticated}>
           <SearchPage />
+        </ProtectedRoute>
+      ),
+    },
+    {
+      path: "/status",
+      element: (
+        <ProtectedRoute isAuthenticated={isAuthenticated}>
+          <PromiseStatus />
         </ProtectedRoute>
       ),
     },
