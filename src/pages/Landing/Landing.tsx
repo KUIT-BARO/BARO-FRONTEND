@@ -7,7 +7,7 @@ import landingData from "./LandingData";
 import { motion } from "framer-motion";
 import {
   Content,
-  Icon,
+  Iconimg,
   LandingContainer,
   Logoimg,
   Mockup,
@@ -39,9 +39,7 @@ const Landing: React.FC = () => {
       <Content>
         <Subtitle>약속 정할 때 언제 어디로?</Subtitle>
         <Logoimg src={landinglogo} alt="logo" />
-        <Icon>
-          <Logoimg src={landingicon} alt="logo" />
-        </Icon>
+        <Iconimg src={landingicon} alt="icon" />
         <Scroll>
           <Scrollimg src={landingscroll} alt="scroll" />
           <ScrollText>스크롤해보세요</ScrollText>
