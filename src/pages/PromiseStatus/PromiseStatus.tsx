@@ -13,7 +13,7 @@ import Man from "../../assets/icons/Profileimg/Man.svg";
 import 장소 from "../../assets/icons/Status/장소.png";
 import 시간 from "../../assets/icons/Status/시간.png";
 import crown from "../../assets/icons/Status/crown.svg";
-import TimePopup from "./시간팝업/TimePopup";
+import TimePopup from "./TimePopup/TimePopup";
 import TimeTableInterface from "../../interface/TimeTable";
 
 export default function PromiseStatus() {
