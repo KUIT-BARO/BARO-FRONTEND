@@ -14,7 +14,7 @@ import checkWhite from "../../../assets/icons/checkWhite.svg";
 import x from "../../../assets/icons/x.svg";
 import MAN from "../../../assets/icons/Profileimg/Man.svg";
 import WOMAN from "../../../assets/icons/Profileimg/Girl.svg";
-import Dog from "../../../assets/icons/Profileimg/Dog.svg";
+import Dog from "../../../assets/icons/Profileimg/DOG.svg";
 import Default from "../../../assets/icons/Profileimg/Default.svg";
 import { useNavigate } from "react-router-dom";
 import GetFriends from "../../../apis/user/GetFriends";
