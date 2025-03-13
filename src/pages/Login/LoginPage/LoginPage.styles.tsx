@@ -110,20 +110,10 @@ export const AutoLoginCheckbox = styled.input.attrs({ type: "checkbox" })`
   }
 `;
 
-export const LoginButton = styled.button`
-  width: 100%;
+export const ButtonBox = styled.div`
   max-width: 400px;
-  height: 50px;
-  background: #5175ff;
-  border: none;
-  border-radius: 10px;
-  color: white;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
+  width: 100%;
   margin-bottom: 24px;
-  transition: background-color 0.2s;
-
   &:hover {
     background: #3561d8;
   }
@@ -151,7 +141,7 @@ export const SignupText = styled.a`
 
 export const ResponsiveContainer = styled.div`
   @media (max-width: 768px) {
-    ${InputContainer}, ${LoginButton} {
+    ${InputContainer} {
       max-width: 100%;
     }
   }

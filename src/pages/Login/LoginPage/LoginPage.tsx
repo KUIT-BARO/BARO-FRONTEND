@@ -12,9 +12,9 @@ import {
   InputWrapper,
   InputIcon,
   LoginInput,
+  ButtonBox,
   AutoLoginWrapper,
   AutoLoginCheckbox,
-  LoginButton,
   SignupWrapper,
   Line,
   SignupText,
@@ -23,6 +23,7 @@ import {
   Passwardimg,
   AutoLabel,
 } from "./LoginPage.styles";
+import Button from "../../../components/Button/Button";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -88,8 +89,9 @@ const LoginPage = () => {
         <AutoLabel htmlFor="autoLogin">자동로그인 설정</AutoLabel>
       </AutoLoginWrapper>
 
-      <LoginButton onClick={handleLogin}>로그인</LoginButton>
-
+      <ButtonBox>
+        <Button onClick={handleLogin}>로그인</Button>
+      </ButtonBox>
       <SignupWrapper>
         <Line>────</Line>
         <SignupText as={Link} to="/signup">
