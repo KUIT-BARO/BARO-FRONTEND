@@ -13,7 +13,7 @@ import SelectTimeTable from "../../../components/SelectTimeTable/SelectTimeTable
 
 import Man from "../../../assets/icons/Profileimg/Man.svg";
 import Girl from "../../../assets/icons/Profileimg/Girl.svg";
-import Dog from "../../../assets/icons/Profileimg/Dog.svg";
+import Dog from "../../../assets/icons/Profileimg/DOG.svg";
 
 import { useNavigate } from "react-router-dom";
 import GetSchedule from "../../../apis/user/GetSchedule";
