@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import CrownOn from "../../assets/icons/MyPromisesPage/crownWhite.svg";
-import CrownOff from "../../assets/icons/MyPromisesPage/CrownGray.svg";
+import CrownOff from "../../assets/icons/MyPromisesPage/Crown.svg";
 
 interface ToggleButtonProps {
   toggleActive: boolean;
