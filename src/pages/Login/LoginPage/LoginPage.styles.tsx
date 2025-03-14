@@ -36,7 +36,9 @@ export const InputWrapper = styled.div`
   width: 100%;
 `;
 
-export const InputIcon = styled.div`
+export const Iconimg = styled.img`
+  width: 24px;
+  height: 24px;
   position: absolute;
   left: 16px;
   top: 50%;
@@ -44,11 +46,6 @@ export const InputIcon = styled.div`
   display: flex;
   align-items: center;
   z-index: 1;
-
-  img {
-    width: 24px;
-    height: 24px;
-  }
 `;
 
 export const LoginInput = styled.input`
@@ -148,8 +145,6 @@ export const ResponsiveContainer = styled.div`
 `;
 
 export const Logoimg = styled.img``;
-
-export const Userimg = styled.img``;
 
 export const Passwardimg = styled.img``;
 

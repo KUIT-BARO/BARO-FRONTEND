@@ -10,7 +10,6 @@ import {
   WelcomeText,
   InputContainer,
   InputWrapper,
-  InputIcon,
   LoginInput,
   ButtonBox,
   AutoLoginWrapper,
@@ -19,8 +18,7 @@ import {
   Line,
   SignupText,
   Logoimg,
-  Userimg,
-  Passwardimg,
+  Iconimg,
   AutoLabel,
 } from "./LoginPage.styles";
 import Button from "../../../components/Button/Button";
@@ -61,9 +59,7 @@ const LoginPage = () => {
 
       <InputContainer>
         <InputWrapper>
-          <InputIcon>
-            <Userimg src={userIcon} alt="user" />
-          </InputIcon>
+          <Iconimg src={userIcon} alt="user" />
           <LoginInput
             type="text"
             placeholder="이메일 혹은 아이디 입력"
@@ -72,9 +68,7 @@ const LoginPage = () => {
           />
         </InputWrapper>
         <InputWrapper>
-          <InputIcon>
-            <Passwardimg src={lockIcon} alt="password" />
-          </InputIcon>
+          <Iconimg src={lockIcon} alt="password" />
           <LoginInput
             type="password"
             placeholder="비밀번호 입력"
