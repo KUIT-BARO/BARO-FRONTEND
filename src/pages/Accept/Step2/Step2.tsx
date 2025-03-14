@@ -6,8 +6,8 @@ import {
 } from "../../../components/Steps/Steps.styles";
 import styled from "styled-components";
 import Man from "../../../assets/icons/Profileimg/Man.svg";
-import Girl from "../../../assets/icons/profileimg/Girl.svg";
-import Dog from "../../../assets/icons/Profileimg/Dog.svg";
+import Girl from "../../../assets/icons/Profileimg/Girl.svg";
+import Dog from "../../../assets/icons/Profileimg/DOG.svg";
 
 import Button from "../../../components/Button/Button";
 import { ProgressBar } from "../../../components/ProgressBar/ProgressBar";
