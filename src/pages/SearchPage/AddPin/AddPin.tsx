@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 
 import Header from "./AddPinHeader";
-import Form from "./AddPinForm";
+import Form from "./AddPinForm";
 import SetLocation from "./AddPinLocation";
 
 // import { getUserPlace } from '../../apis/promise/getUserPlace';
