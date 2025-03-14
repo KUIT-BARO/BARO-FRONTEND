@@ -30,7 +30,6 @@ export const Day = styled.div`
     width: 67px;
     text-align: center;
     padding-left: 10px;
-
     font-size: 12px;
     color: #979797;
   }
@@ -44,7 +43,7 @@ export const TimeLabel = styled.div`
 
   > .label {
     width: 50px;
-    height: 50px; /* 한 시간 간격으로 표시되므로 높이 조정 */
+    height: 50px;
     display: flex;
     align-items: flex-start;
     justify-content: center;
@@ -54,11 +53,11 @@ export const TimeLabel = styled.div`
 `;
 
 export const TimeWrapper = styled.div<{ datesLength: number }>`
-  display: grid;
-  grid-template-columns: repeat(${(props) => props.datesLength}, 1fr);
+  display: flex;
   gap: 0;
-
+  padding-right: 20px;
   > .column {
+    width: 67px;
     display: flex;
     flex-direction: column;
     &:last-child {

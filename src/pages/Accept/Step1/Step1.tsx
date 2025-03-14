@@ -18,8 +18,8 @@ import SmallButton from "../../../components/SmallButton/SmallButton";
 import SelectTimeTable from "../../../components/SelectTimeTable/SelectTimeTable";
 
 import Man from "../../../assets/icons/Profileimg/Man.svg";
-import Girl from "../../../assets/icons/profileimg/Girl.svg";
-import Dog from "../../../assets/icons/Profileimg/Dog.svg";
+import Girl from "../../../assets/icons/Profileimg/Girl.svg";
+import Dog from "../../../assets/icons/Profileimg/DOG.svg";
 import defaultImg from "../../../assets/icons/profileImg_default.svg";
 import { useNavigate } from "react-router-dom";
 import GetSchedule from "../../../apis/user/GetSchedule";

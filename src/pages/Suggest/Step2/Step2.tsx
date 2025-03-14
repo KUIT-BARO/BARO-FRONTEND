@@ -32,6 +32,7 @@ export default function Step2({
         <ProgressBar percent={50} />
         <Section>
           <Question
+            color="Blue"
             title="언제 만나실건가요?"
             desc="조정 가능한 날짜 범위를 지정해주세요"
           />
@@ -43,6 +44,7 @@ export default function Step2({
         </Section>
         <Section style={{ gap: "45px" }}>
           <Question
+            color="Blue"
             title="어디서 만나실건가요?"
             desc="대략적인 약속 장소의 위치를 제안해보세요"
           />

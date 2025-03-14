@@ -14,21 +14,13 @@ import ScheduleGrid from "../../../../components/ScheduleGrid/ScheduleGrid";
 const Schedule: React.FC = () => {
   const scheduleGridRef = useRef<{ openAddModal: () => void }>(null);
 
-  const handleAddScheduleClick = () => {
-    scheduleGridRef.current?.openAddModal();
-  };
-
   return (
     <ScheduleContainer>
       <ScheduleHeader>
         <SemesterText>2025년 1학기</SemesterText>
         <ScheduleActions>
           <ActionButton>
-            <Buttonimg
-              src={plusIcon}
-              alt="add"
-              onClick={handleAddScheduleClick}
-            />
+            <Buttonimg src={plusIcon} alt="add" />
           </ActionButton>
           <ActionButton>
             <Buttonimg src={shareIcon} alt="share" />

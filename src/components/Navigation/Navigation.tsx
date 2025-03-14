@@ -17,16 +17,6 @@ interface NavItem {
   label: string;
   icon: string;
   activeIcon: string;
-}
-
-const Navigation = () => {
-  return (
-    <>
-      {/* 네비게이션 바의 공간을 차지하는 placeholder */}
-      <div className={styles.placeholder}></div>
-      <Bar />
-    </>
-  );
 };
 
 const Bar = () => {
@@ -112,4 +102,12 @@ const Bar = () => {
   );
 };
 
-export default Navigation;
+export default function Navigation() {
+  return (
+    <>
+      {/* 네비게이션 바의 공간을 차지하는 placeholder */}
+      <div className={styles.placeholder}></div>
+      <Bar />
+    </>
+  );
+};
