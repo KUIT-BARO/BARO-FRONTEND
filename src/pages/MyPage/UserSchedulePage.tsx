@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import backIcon from '../../assets/icons/backIcon.svg';
-import womanAvatar from '../../assets/icons/womanavatar.svg';
-import ScheduleGrid from '../../components/ScheduleGrid/ScheduleGrid';
-import { getUserSchedule } from '../../apis/schedule/getUserSchedule';
-import './UserSchedulePage.styles.css';
+import React, { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import backIcon from "../../assets/icons/backIcon.svg";
+import womanAvatar from "../../assets/icons/womanavatar.svg";
+import ScheduleGridContainer from "../../components/ScheduleGrid/ScheduleGridContainer";
+import { getUserSchedule } from "../../apis/schedule/getUserSchedule";
+import "./UserSchedulePage.styles.css";
 
 interface Schedule {
   scheduleId: number;
@@ -16,7 +16,7 @@ interface Schedule {
 }
 
 interface UserSchedule {
-  userId: string;  // Changed from number to string
+  userId: string; // Changed from number to string
   schedules: Schedule[];
 }
 
@@ -35,11 +35,11 @@ const UserSchedulePage = () => {
 
   const convertDayOfWeek = (day: string) => {
     const dayMap = {
-      'MONDAY': '월',
-      'TUESDAY': '화',
-      'WEDNESDAY': '수',
-      'THURSDAY': '목',
-      'FRIDAY': '금',
+      MONDAY: "월",
+      TUESDAY: "화",
+      WEDNESDAY: "수",
+      THURSDAY: "목",
+      FRIDAY: "금",
     };
     return dayMap[day] || day;
   };
@@ -47,19 +47,19 @@ const UserSchedulePage = () => {
   useEffect(() => {
     const fetchUserSchedule = async () => {
       if (!userId) return;
-      
+
       try {
         setIsLoading(true);
         setError(null);
         const response = await getUserSchedule.getScheduleById(userId); // Removed Number() conversion
-        
+
         if (response.data) {
           const apiResponse = response.data as ApiResponse;
           setUserSchedule(apiResponse.data);
         }
       } catch (err) {
-        setError('시간표를 불러오는데 실패했습니다.');
-        console.error('Failed to fetch user schedule:', err);
+        setError("시간표를 불러오는데 실패했습니다.");
+        console.error("Failed to fetch user schedule:", err);
       } finally {
         setIsLoading(false);
       }
@@ -69,9 +69,9 @@ const UserSchedulePage = () => {
   }, [userId]);
 
   const dummyUser = {
-    name: '김예진',
-    username: '@yejin_kim',
-    profileImage: womanAvatar
+    name: "김예진",
+    username: "@yejin_kim",
+    profileImage: womanAvatar,
   };
 
   if (isLoading) {
@@ -90,15 +90,16 @@ const UserSchedulePage = () => {
     );
   }
 
-  const formattedSchedules = userSchedule?.schedules.map(schedule => ({
-    id: schedule.scheduleId,
-    title: schedule.name,
-    startTime: parseInt(schedule.timeStart.split(':')[0]),
-    endTime: parseInt(schedule.timeEnd.split(':')[0]),
-    day: convertDayOfWeek(schedule.dayOfWeek),
-    type: 'class',
-    location: schedule.location
-  })) || [];
+  const formattedSchedules =
+    userSchedule?.schedules.map((schedule) => ({
+      id: schedule.scheduleId,
+      title: schedule.name,
+      startTime: parseInt(schedule.timeStart.split(":")[0]),
+      endTime: parseInt(schedule.timeEnd.split(":")[0]),
+      day: convertDayOfWeek(schedule.dayOfWeek),
+      type: "class",
+      location: schedule.location,
+    })) || [];
 
   return (
     <div className="user-schedule-container">
@@ -119,10 +120,7 @@ const UserSchedulePage = () => {
         </div>
       </section>
 
-      <ScheduleGrid 
-        readOnly 
-        schedules={formattedSchedules}
-      />
+      <ScheduleGridContainer />
     </div>
   );
 };

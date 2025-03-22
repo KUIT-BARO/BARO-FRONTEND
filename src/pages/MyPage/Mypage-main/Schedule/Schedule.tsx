@@ -9,10 +9,14 @@ import {
 import React, { useRef } from "react";
 import plusIcon from "../../../../assets/icons/mypage/plus.svg";
 import shareIcon from "../../../../assets/icons/mypage/share.svg";
-import ScheduleGrid from "../../../../components/ScheduleGrid/ScheduleGrid";
+import ScheduleGridContainer from "../../../../components/ScheduleGrid/ScheduleGridContainer";
 
 const Schedule: React.FC = () => {
   const scheduleGridRef = useRef<{ openAddModal: () => void }>(null);
+
+  const handleAddScheduleClick = () => {
+    scheduleGridRef.current?.openAddModal();
+  };
 
   return (
     <ScheduleContainer>
@@ -20,14 +24,18 @@ const Schedule: React.FC = () => {
         <SemesterText>2025년 1학기</SemesterText>
         <ScheduleActions>
           <ActionButton>
-            <Buttonimg src={plusIcon} alt="add" />
+            <Buttonimg
+              src={plusIcon}
+              alt="add"
+              onClick={handleAddScheduleClick}
+            />
           </ActionButton>
           <ActionButton>
             <Buttonimg src={shareIcon} alt="share" />
           </ActionButton>
         </ScheduleActions>
       </ScheduleHeader>
-      <ScheduleGrid ref={scheduleGridRef} />
+      <ScheduleGridContainer ref={scheduleGridRef} />
     </ScheduleContainer>
   );
 };

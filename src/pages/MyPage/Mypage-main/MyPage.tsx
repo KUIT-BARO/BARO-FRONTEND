@@ -35,32 +35,32 @@ const MyPage: React.FC = () => {
     userId: 0,
     userProfile: "",
   });
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  // const [isLoading, setIsLoading] = useState(true);
+  // const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const fetchMyPage = async () => {
-      try {
-        setIsLoading(true);
-        const response = await getMyPage.getMyPage();
-        if (response.status === 200 && response.data) {
-          setUserInfo({
-            nickname: response.data.data.user.nickname,
-            userId: response.data.data.user.userId,
-            userProfile: response.data.data.user.userProfile,
-          });
-        }
-      } catch (error) {
-        setError("마이페이지 정보를 불러오는데 실패했습니다.");
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchMyPage();
-  }, []);
+  // useEffect(() => {
+  //   const fetchMyPage = async () => {
+  //     try {
+  //       setIsLoading(true);
+  //       const response = await getMyPage.getMyPage();
+  //       if (response.status === 200 && response.data) {
+  //         setUserInfo({
+  //           nickname: response.data.data.user.nickname,
+  //           userId: response.data.data.user.userId,
+  //           userProfile: response.data.data.user.userProfile,
+  //         });
+  //       }
+  //     } catch (error) {
+  //       setError("마이페이지 정보를 불러오는데 실패했습니다.");
+  //     } finally {
+  //       setIsLoading(false);
+  //     }
+  //   };
+  //   fetchMyPage();
+  // }, []);
 
-  if (isLoading) return <div>로딩 중...</div>;
-  if (error) return <div>{error}</div>;
+  // if (isLoading) return <div>로딩 중...</div>;
+  // if (error) return <div>{error}</div>;
 
   return (
     <MyPageContainer>
@@ -72,9 +72,7 @@ const MyPage: React.FC = () => {
       </MyPageHeader>
       <ProfileSection>
         <ProfileImage>
-
           <ProfileImg src={Default} alt="profile" />
-
         </ProfileImage>
         <ProfileInfo>
           <NickName>{userInfo.nickname}</NickName>

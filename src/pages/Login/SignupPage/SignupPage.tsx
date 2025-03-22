@@ -7,99 +7,95 @@ import {
   InputLabel,
   InputWrapper,
   SignupInput,
-  DuplicateCheckButton,
+  CheckButton,
   SignupButton,
-  DuplicateMessage,
 } from "./SignupPage.styles";
 
 const SignupPage = () => {
   const navigate = useNavigate();
-  const [userId, setUserId] = useState("");
+  const [email, setemail] = useState("");
   const [password, setPassword] = useState("");
   const [nickname, setNickname] = useState("");
-  const [duplicateMessage, setDuplicateMessage] = useState("");
-  const [isDuplicateChecked, setIsDuplicateChecked] = useState(false);
+  const [emailCheck, setEmailCheck] = useState("");
+  const [isEmailCheck, setisEmailCheck] = useState(false);
 
-  const handleSignup = async () => {
-    console.log("회원가입 시도:", { id: userId, password, nickname });
-    try {
-      if (!userId || !password || !nickname) {
-        alert("모든 필드를 입력해주세요");
-        return;
-      }
+  // const handleSignup = async () => {
+  //   console.log("회원가입 시도:", { id: email, password, nickname });
+  //   try {
+  //     if (!email || !password || !nickname) {
+  //       alert("모든 필드를 입력해주세요");
+  //       return;
+  //     }
 
-      if (!isDuplicateChecked) {
-        alert("아이디 중복 확인을 해주세요");
-        return;
-      }
+  //     if (!isDuplicateChecked) {
+  //       alert("아이디 중복 확인을 해주세요");
+  //       return;
+  //     }
 
-      if (password.length < 8) {
-        alert("비밀번호는 8자리 이상이어야 합니다");
-        return;
-      }
+  //     if (password.length < 8) {
+  //       alert("비밀번호는 8자리 이상이어야 합니다");
+  //       return;
+  //     }
 
-      const response = await postAuth.signup({
-        id: userId,
-        password: password,
-        nickname: nickname,
-      });
+  //     const response = await postAuth.signup({
+  //       id: email,
+  //       password: password,
+  //       nickname: nickname,
+  //     });
 
-      console.log("응답:", response);
+  //     console.log("응답:", response);
 
-      if (response.status === 201) {
-        alert("회원가입에 성공했습니다.");
-        navigate("/login");
-        return;
-      }
-    } catch (error) {
-      console.log("에러 상세:", error);
-      console.error("회원가입 오류:", error);
-    }
-  };
+  //     if (response.status === 201) {
+  //       alert("회원가입에 성공했습니다.");
+  //       navigate("/login");
+  //       return;
+  //     }
+  //   } catch (error) {
+  //     console.log("에러 상세:", error);
+  //     console.error("회원가입 오류:", error);
+  //   }
+  // };
 
-  const handleDuplicateCheck = () => {
-    if (!userId) {
-      setDuplicateMessage("아이디를 입력해주세요");
+  const handleEmailCheck = () => {
+    if (!email) {
+      alert("아이디를 입력해주세요");
       return;
     }
-
-    // 중복 확인 API (현재는 테스트용) 미개발
-    const isDuplicate = userId === "test";
-
-    if (isDuplicate) {
-      setDuplicateMessage("이미 존재하는 아이디입니다");
-    } else {
-      setDuplicateMessage("사용 가능한 아이디입니다");
-    }
-    setIsDuplicateChecked(true);
+    setisEmailCheck(true);
   };
 
   return (
     <SignupContainer>
       <InputSection>
-        <InputLabel>아이디</InputLabel>
+        <InputLabel>이메일</InputLabel>
         <InputWrapper>
           <SignupInput
             type="text"
             placeholder="영어로 입력해주세요"
-            value={userId}
+            value={email}
             onChange={(e) => {
-              setUserId(e.target.value);
-              setIsDuplicateChecked(false);
-              setDuplicateMessage("");
+              setemail(e.target.value);
             }}
           />
-          <DuplicateCheckButton onClick={handleDuplicateCheck}>
-            중복 확인
-          </DuplicateCheckButton>
+          <CheckButton onClick={handleEmailCheck}>인증</CheckButton>
         </InputWrapper>
-        {duplicateMessage && (
-          <DuplicateMessage isError={duplicateMessage.includes("이미 존재")}>
-            {duplicateMessage}
-          </DuplicateMessage>
-        )}
       </InputSection>
-
+      {isEmailCheck && (
+        <InputSection>
+          <InputLabel>이메일 인증</InputLabel>
+          <InputWrapper>
+            <SignupInput
+              type="text"
+              placeholder="인증번호를 입력해주세요"
+              value={emailCheck}
+              onChange={(e) => {
+                setEmailCheck(e.target.value);
+              }}
+            />
+            <CheckButton>확인</CheckButton>
+          </InputWrapper>
+        </InputSection>
+      )}
       <InputSection>
         <InputLabel>비밀번호</InputLabel>
         <InputWrapper>
@@ -124,7 +120,7 @@ const SignupPage = () => {
         </InputWrapper>
       </InputSection>
 
-      <SignupButton onClick={handleSignup}>회원가입</SignupButton>
+      <SignupButton>회원가입</SignupButton>
     </SignupContainer>
   );
 };
