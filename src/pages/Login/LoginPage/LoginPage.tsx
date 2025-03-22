@@ -62,7 +62,7 @@ const LoginPage = () => {
           <Iconimg src={userIcon} alt="user" />
           <LoginInput
             type="text"
-            placeholder="이메일 혹은 아이디 입력"
+            placeholder="이메일 입력"
             value={id}
             onChange={(e) => setId(e.target.value)}
           />

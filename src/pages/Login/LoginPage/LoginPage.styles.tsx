@@ -53,7 +53,7 @@ export const LoginInput = styled.input`
   height: 50px;
   background: rgba(255, 255, 255, 0.3);
   border: none;
-  border-radius: 24px;
+  border-radius: 10px;
   padding: 0 16px 0 52px;
   color: white;
   font-family: "Pretendard", sans-serif;
@@ -77,7 +77,6 @@ export const AutoLoginWrapper = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 30px;
-  margin-left: 40px;
   color: white;
   font-size: 14px;
 `;
