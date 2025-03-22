@@ -84,6 +84,9 @@ export const StartButton = styled.button`
   &:hover {
     background-color: #062b5d;
   }
+  @media (min-width: 1024px) {
+    width: 362px;
+  }
 `;
 
 export const Section = styled.div`
