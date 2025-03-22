@@ -9,7 +9,7 @@ import {
 import React, { useRef } from "react";
 import plusIcon from "../../../../assets/icons/mypage/plus.svg";
 import shareIcon from "../../../../assets/icons/mypage/share.svg";
-import ScheduleGrid from "../../../../components/ScheduleGrid/ScheduleGrid";
+import ScheduleGridContainer from "../../../../components/ScheduleGrid/ScheduleGridContainer";
 
 const Schedule: React.FC = () => {
   const scheduleGridRef = useRef<{ openAddModal: () => void }>(null);
@@ -35,7 +35,7 @@ const Schedule: React.FC = () => {
           </ActionButton>
         </ScheduleActions>
       </ScheduleHeader>
-      <ScheduleGrid ref={scheduleGridRef} />
+      <ScheduleGridContainer ref={scheduleGridRef} />
     </ScheduleContainer>
   );
 };
