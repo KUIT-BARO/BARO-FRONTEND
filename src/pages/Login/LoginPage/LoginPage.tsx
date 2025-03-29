@@ -28,26 +28,15 @@ const LoginPage = () => {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = async () => {
-    try {
-      if (!id || !password) {
-        alert("아이디와 비밀번호를 입력해주세요");
-        return;
-      }
-      const response = await postAuth.login({ id, password });
-      if (response.status === 200) {
-        console.log("로그인 성공 응답 데이터 :", response);
-
-        sessionStorage.setItem("login", "true");
-        sessionStorage.setItem("name", response.data.name);
-        sessionStorage.setItem("isAuthenticated", "true");
-
-        window.dispatchEvent(new Event("storage"));
-        navigate("/main");
-      }
-    } catch (error) {
-      console.error("로그인 오류:", error);
+  const handleLogin = () => {
+    if (!id || !password) {
+      alert("모든 항목을 입력해주세요;");
+      return;
     }
+    const loginData = {
+      id,
+      password,
+    };
   };
 
   return (

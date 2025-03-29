@@ -36,7 +36,7 @@ const SignupPage = () => {
       return;
     }
     const signupData = {
-      email,
+      id: email,
       password,
       nickname,
     };
