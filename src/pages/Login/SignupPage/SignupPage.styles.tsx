@@ -11,64 +11,6 @@ export const SignupContainer = styled.div`
   font-family: "Pretendard", sans-serif;
 `;
 
-export const InputSection = styled.div`
-  width: 100%;
-  max-width: 400px;
-  margin-bottom: 24px;
-`;
-
-export const InputLabel = styled.label`
-  display: block;
-  color: white;
-  font-size: 19px;
-  margin-bottom: 3px;
-  font-weight: 900;
-`;
-
-export const InputWrapper = styled.div`
-  position: relative;
-  width: 100%;
-  display: flex;
-  align-items: center;
-`;
-
-export const SignupInput = styled.input`
-  width: 70%;
-  height: 50px;
-  border: none;
-  border-bottom: 1px solid white;
-  background: transparent;
-  padding: 0;
-  color: white;
-  font-family: "Pretendard", sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-
-  &::placeholder {
-    color: rgba(255, 255, 255, 0.8);
-    font-weight: 300;
-  }
-
-  &:focus {
-    outline: none;
-  }
-`;
-
-export const CheckButton = styled.button`
-  position: absolute;
-  right: 0;
-  height: 44px;
-  padding: 0 15px;
-  background: #5175ff;
-  border: none;
-  border-radius: 8.6px;
-  color: white;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  font-family: "Pretendard", sans-serif;
-`;
-
 export const SignupButton = styled.button`
   width: 100%;
   max-width: 400px;
@@ -88,10 +30,10 @@ export const SignupButton = styled.button`
   }
 `;
 
-export const ResponsiveContainer = styled.div`
-  @media (max-width: 768px) {
-    ${InputSection}, ${SignupButton} {
-      max-width: 100%;
-    }
-  }
-`;
+// export const ResponsiveContainer = styled.div`
+//   @media (max-width: 768px) {
+//     ${InputSection}, ${SignupButton} {
+//       max-width: 100%;
+//     }
+//   }
+// `;
