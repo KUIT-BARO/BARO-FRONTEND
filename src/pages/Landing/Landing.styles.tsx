@@ -49,12 +49,10 @@ export const Subtitle = styled.h2`
   margin-bottom: 34px;
 `;
 
-export const Icon = styled.div`
-  img {
-    width: 80px;
-    height: 80px;
-    margin-top: 79px;
-  }
+export const Iconimg = styled.img`
+  width: 80px;
+  height: 80px;
+  margin-top: 79px;
 `;
 
 export const Scroll = styled.div`
@@ -85,6 +83,9 @@ export const StartButton = styled.button`
   z-index: 1000;
   &:hover {
     background-color: #062b5d;
+  }
+  @media (min-width: 1024px) {
+    width: 362px;
   }
 `;
 

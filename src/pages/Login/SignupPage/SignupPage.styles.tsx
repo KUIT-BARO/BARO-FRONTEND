@@ -54,7 +54,7 @@ export const SignupInput = styled.input`
   }
 `;
 
-export const DuplicateCheckButton = styled.button`
+export const CheckButton = styled.button`
   position: absolute;
   right: 0;
   height: 44px;
@@ -86,13 +86,6 @@ export const SignupButton = styled.button`
   &:hover {
     background: #3561d8;
   }
-`;
-
-export const DuplicateMessage = styled.p<{ isError?: boolean }>`
-  margin-top: 8px;
-  font-size: 14px;
-  font-weight: 600;
-  color: ${(props) => (props.isError ? "#FF0000" : "#69DB7C")};
 `;
 
 export const ResponsiveContainer = styled.div`
