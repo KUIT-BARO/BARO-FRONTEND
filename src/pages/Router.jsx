@@ -20,7 +20,8 @@ import PromiseStatus from "./PromiseStatus/PromiseStatus";
 
 // 로그인 여부 확인
 const getAuthStatus = () => {
-  return sessionStorage.getItem("login") === "true";
+  // return sessionStorage.getItem("login") === "true";
+  return true
 };
 
 const Router = () => {
@@ -46,9 +47,7 @@ const Router = () => {
     {
       path: "/suggest/*",
       element: (
-        <ProtectedRoute isAuthenticated={isAuthenticated}>
           <Suggest />
-        </ProtectedRoute>
       ),
     },
     {

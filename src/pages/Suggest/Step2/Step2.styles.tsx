@@ -5,7 +5,7 @@ export const Wrapper = styled.div`
   flex-direction: column;
   align-items: flex-start;
   padding: 0 20px;
-  gap: 20px;
+  gap: 40px;
   > .placeholder {
     height: 90px;
   }

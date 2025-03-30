@@ -42,7 +42,7 @@ export default function Step2({
             dateEnd={dateEnd}
           />
         </Section>
-        <Section style={{ gap: "45px" }}>
+        <Section >
           <Question
             color="Blue"
             title="어디서 만나실건가요?"
