@@ -6,10 +6,21 @@ import {
   ProgressContainer,
   Progress,
   Footer,
+  ImgsWrapper,
   ImgWrapper,
+  UserImg,
+  CrownImg,
+  Placeholder,
+  Desc,
+  BtnWrapper,
+  VoteBtn,
+  VoteBtnImg,
 } from "./PromiseStatus.styles";
 import Button from "../../components/Button/Button";
-import Man from "../../assets/icons/Profileimg/Man.svg";
+import DEFAULT from "../../assets/icons/Profileimg/DEFAULT.svg";
+import GIRL from "../../assets/icons/Profileimg/Girl.svg";
+import DOG from "../../assets/icons/Profileimg/DOG.svg";
+import MAN from "../../assets/icons/Profileimg/Man.svg";
 import 장소 from "../../assets/icons/Status/장소.png";
 import 시간 from "../../assets/icons/Status/시간.png";
 import crown from "../../assets/icons/Status/crown.svg";
@@ -24,6 +35,30 @@ export default function PromiseStatus() {
     dateEnd: new Date("2024-03-19T16:00:00"),
     profileImg: 1,
   };
+  const dummyStatus = {
+    isHost: true,
+    promiseStatus: "PENDING",
+  };
+  const dummyCurrentPeople = [
+    {
+      id: 1,
+      profileImg: "DOG",
+      isHost: false,
+      percent: 0,
+    },
+    {
+      id: 2,
+      isHost: true,
+      profileImg: "GIRL",
+      percent: 50,
+    },
+    {
+      id: 3,
+      isHost: false,
+      profileImg: "MAN",
+      percent: 50,
+    },
+  ];
   const [locationPopup, setLocationPopup] = useState(false);
   const [timePopup, setTimePopup] = useState(false);
 
@@ -54,39 +89,64 @@ export default function PromiseStatus() {
     <Wrapper>
       <Header>{dummyData.name}</Header>
       <Main>
-        <ProgressBar percent={100} profileImg={dummyData.profileImg} />
-        <div className="desc">
+        <ProgressBar percent={100} dummyCurrentPeople={dummyCurrentPeople} />
+        <Desc>
           원하는 장소와 시간을
           <br /> 추가해주세요
-        </div>
-        <div className="btn-wrapper">
-          <div className="btn" onClick={() => setLocationPopup(true)}>
-            {" "}
-            {/* 📌 버튼 클릭 시 팝업 열기 */}
-            <img src={장소} alt="장소 아이콘" />
-          </div>
-          <div className="btn" onClick={() => setTimePopup(true)}>
-            {" "}
-            {/* 📌 시간 팝업 열기 */}
-            <img src={시간} alt="시간 아이콘" />
-          </div>
-        </div>
+        </Desc>
+        <BtnWrapper>
+          <VoteBtn onClick={() => setLocationPopup(true)}>
+            <VoteBtnImg src={장소} alt="장소 아이콘" />
+          </VoteBtn>
+          <VoteBtn className="btn" onClick={() => setTimePopup(true)}>
+            <VoteBtnImg src={시간} alt="시간 아이콘" />
+          </VoteBtn>
+        </BtnWrapper>
       </Main>
-      <div className="placeholder"></div>
+      <Placeholder />
       <Footer>
-        <Button onClick={() => console.log("투표 시작")}>투표시작</Button>
+        {dummyStatus.isHost ? (
+          <Button onClick={() => console.log("남은 시간 보여주기")}>
+            남은 시간 보여주기
+          </Button>
+        ) : (
+          <Button onClick={() => console.log("투표 시작")}>투표시작</Button>
+        )}
       </Footer>
     </Wrapper>
   );
 }
 
-function ProgressBar({ percent, profileImg }) {
+function ProgressBar({ percent, dummyCurrentPeople }) {
+  const profileImgs: Record<string, string> = {
+    DOG,
+    GIRL,
+    MAN,
+  };
+  const samePercentOffsetMap = new Map<number, number>();
+
   return (
     <ProgressContainer>
-      <ImgWrapper percent={percent}>
-        <img className="crown" alt="crown img" src={crown} />
-        <img className="user" alt="user img" src={Man} />
-      </ImgWrapper>
+      <ImgsWrapper>
+        {dummyCurrentPeople.map((people, index) => {
+          const count = samePercentOffsetMap.get(people.percent) || 0;
+          samePercentOffsetMap.set(people.percent, count + 1);
+
+          const offset = count * 40;
+
+          return (
+            <ImgWrapper
+              key={index}
+              percent={people.percent}
+              offset={offset} // 추가 전달
+            >
+              {people.isHost && <CrownImg alt="crown img" src={crown} />}
+              <UserImg alt="user img" src={profileImgs[people.profileImg]} />
+            </ImgWrapper>
+          );
+        })}
+      </ImgsWrapper>
+
       <Progress percent={percent}>
         <div className="progress"></div>
       </Progress>
