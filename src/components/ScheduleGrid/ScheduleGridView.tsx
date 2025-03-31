@@ -1,4 +1,3 @@
-// ScheduleGridView.tsx
 import React from "react";
 import {
   Wrapper,
@@ -7,14 +6,17 @@ import {
   MainGridContainer,
   TimeColumn,
   TimeSlot,
-  ScheduleGridContainer,
+  Container,
   DayColumn,
   GridCell,
   ScheduleItem,
 } from "./ScheduleGrid.styles";
 
 import { ResponseSchedule } from "../../interface/api/schedules/schedule";
-
+import {
+  randomColor,
+  timeStringToDecimal,
+} from "../Schedulecomponent/scheduleFunction";
 interface ScheduleGridViewProps {
   schedules: ResponseSchedule[];
   onClickSchedule?: (schedule: ResponseSchedule) => void;
@@ -29,14 +31,9 @@ const ScheduleGridView: React.FC<ScheduleGridViewProps> = ({
     hour: Math.floor(i / 2) + 7,
     minute: i % 2 === 0 ? "00" : "30",
   }));
-  const timeStringToDecimal = (timeStr: string): number => {
-    const [hourStr, minStr] = timeStr.split(":");
-    const hours = parseInt(hourStr, 10);
-    const minutes = parseInt(minStr, 10);
-    return hours + minutes / 60;
-  };
+
   const getScheduleStyle = (schedule: ResponseSchedule) => {
-    const start = timeStringToDecimal(schedule.startTime); // 예: "15:30:00"
+    const start = timeStringToDecimal(schedule.startTime);
     const end = timeStringToDecimal(schedule.endTime);
     const startMinutes = (start - 7) * 60;
     const endMinutes = (end - 7) * 60;
@@ -65,7 +62,7 @@ const ScheduleGridView: React.FC<ScheduleGridViewProps> = ({
           ))}
         </TimeColumn>
 
-        <ScheduleGridContainer>
+        <Container>
           {days.map((day, index) => (
             <DayColumn key={day} style={{ position: "relative" }}>
               {schedules
@@ -75,7 +72,7 @@ const ScheduleGridView: React.FC<ScheduleGridViewProps> = ({
                     key={schedule.scheduleId}
                     style={{
                       ...getScheduleStyle(schedule),
-                      backgroundColor: "blue",
+                      backgroundColor: randomColor(),
                       position: "absolute",
                     }}
                     onClick={() => onClickSchedule?.(schedule)}
@@ -92,7 +89,7 @@ const ScheduleGridView: React.FC<ScheduleGridViewProps> = ({
               ))}
             </DayColumn>
           ))}
-        </ScheduleGridContainer>
+        </Container>
       </MainGridContainer>
     </Wrapper>
   );
