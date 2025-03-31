@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Button from "../Button/Button";
 import xIcon from "../../assets/icons/x_gray.svg";
 import * as S from "./ScheduleAddModal.styles";
-import { ResponseSchedule } from "../../interface/api/schedules/schedule";
+import { RequestSchedule } from "../../interface/api/schedules/schedule";
 import {
   getKoreanDay,
   getDayNumber,
