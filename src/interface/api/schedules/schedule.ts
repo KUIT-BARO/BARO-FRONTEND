@@ -25,5 +25,9 @@ export interface RequestSchedule {
   dayOfWeek: number;
   startTime: string;
   endTime: string;
-  placeName?: string;
+  placeName: string;
+}
+
+export interface ScheduleGridHandle {
+  openAddModal: () => void;
 }

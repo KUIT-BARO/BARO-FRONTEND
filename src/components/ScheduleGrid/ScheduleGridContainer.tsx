@@ -1,10 +1,9 @@
-// ScheduleGridContainer.tsx
 import React, { useState, useImperativeHandle, forwardRef } from "react";
 import ScheduleGridView from "./ScheduleGridView";
 import ScheduleAddModal from "../ScheduleAddModal/ScheduleAddModal";
 import ScheduleDetailModal from "../ScheduleDetailModal/ScheduleDetailModal";
-import { ResponseSchedule } from "../interface/api/schedules/schedule.ts";
-
+import { ResponseSchedule } from "../../interface/api/schedules/schedule.ts";
+import { ScheduleGridHandle } from "../../interface/api/schedules/schedule.ts";
 const dummySchedules: ResponseSchedule[] = [
   {
     scheduleId: 1,
@@ -29,31 +28,15 @@ const dummySchedules: ResponseSchedule[] = [
   },
 ];
 
-const randomColor = () => {
-  const colors = ["#6699FF", "#708AFF", "#7893FF", "#7BB2FF"];
-  return colors[Math.floor(Math.random() * colors.length)];
-};
-
 const ScheduleGridContainer = forwardRef<ScheduleGridHandle>((_, ref) => {
+  useImperativeHandle(ref, () => ({
+    openAddModal: () => setAddOpen(true),
+  }));
   const [schedules, setSchedules] =
     useState<ResponseSchedule[]>(dummySchedules);
   const [selectedSchedule, setSelectedSchedule] =
     useState<ResponseSchedule | null>(null);
   const [isAddOpen, setAddOpen] = useState(false);
-
-  useImperativeHandle(ref, () => ({
-    openAddModal: () => setAddOpen(true),
-  }));
-
-  const handleAdd = (data: Omit<Schedule, "scheduleId" | "color">) => {
-    const newSchedule: Schedule = {
-      ...data,
-      scheduleId: Date.now(),
-      color: randomColor(),
-    };
-    setSchedules([...schedules, newSchedule]);
-    setAddOpen(false);
-  };
 
   const handleDelete = (scheduleId: number) => {
     setSchedules((prev) => prev.filter((s) => s.scheduleId !== scheduleId));
@@ -73,11 +56,7 @@ const ScheduleGridContainer = forwardRef<ScheduleGridHandle>((_, ref) => {
         schedules={schedules}
         onClickSchedule={(s) => setSelectedSchedule(s)}
       />
-      <ScheduleAddModal
-        isOpen={isAddOpen}
-        onClose={() => setAddOpen(false)}
-        onAdd={handleAdd}
-      />
+      <ScheduleAddModal isOpen={isAddOpen} onClose={() => setAddOpen(false)} />
       <ScheduleDetailModal
         isOpen={!!selectedSchedule}
         schedule={selectedSchedule}
