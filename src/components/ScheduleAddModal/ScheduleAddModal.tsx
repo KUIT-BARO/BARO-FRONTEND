@@ -26,6 +26,13 @@ const ScheduleAddModal = ({
   const [endTime, setEndTime] = useState("08:00:00");
 
   const handleSubmit = () => {
+    const submitSchedule: RequestSchedule = {
+      scheduleName,
+      dayOfWeek,
+      startTime,
+      endTime,
+      placeName,
+    };
     onClose();
   };
 
