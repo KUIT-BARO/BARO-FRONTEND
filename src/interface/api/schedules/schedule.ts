@@ -31,3 +31,8 @@ export interface RequestSchedule {
 export interface ScheduleGridHandle {
   openAddModal: () => void;
 }
+export interface ScheduleDetailModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  schedule: ResponseSchedule | null;
+}

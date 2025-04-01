@@ -38,18 +38,6 @@ const ScheduleGridContainer = forwardRef<ScheduleGridHandle>((_, ref) => {
     useState<ResponseSchedule | null>(null);
   const [isAddOpen, setAddOpen] = useState(false);
 
-  const handleDelete = (scheduleId: number) => {
-    setSchedules((prev) => prev.filter((s) => s.scheduleId !== scheduleId));
-    setSelectedSchedule(null);
-  };
-
-  const handleUpdate = (scheduleId: number, update: Partial<Schedule>) => {
-    setSchedules((prev) =>
-      prev.map((s) => (s.scheduleId === scheduleId ? { ...s, ...update } : s))
-    );
-    setSelectedSchedule(null);
-  };
-
   return (
     <>
       <ScheduleGridView
@@ -61,8 +49,6 @@ const ScheduleGridContainer = forwardRef<ScheduleGridHandle>((_, ref) => {
         isOpen={!!selectedSchedule}
         schedule={selectedSchedule}
         onClose={() => setSelectedSchedule(null)}
-        onDelete={handleDelete}
-        onUpdate={handleUpdate}
       />
     </>
   );
