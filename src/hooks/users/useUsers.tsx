@@ -2,6 +2,7 @@ import useApi from "../useApi";
 import {
   RequestProfile,
   RequestPassword,
+  SignupInfo,
 } from "../../interface/api/mypage/mypage";
 const useUsers = () => {
   const { usersApi } = useApi();
@@ -50,6 +51,26 @@ const useUsers = () => {
       .delete("/")
       .then((response) => {
         return response;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const signupUser = (signupInfo: SignupInfo) => {
+    return usersApi
+      .post("/signup", signupInfo)
+      .then((response) => {
+        return response;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const getHomeInfo = () => {
+    return usersApi
+      .get("/")
+      .then((response) => {
+        return response.data;
       })
       .catch((err) => {
         console.log(err);
