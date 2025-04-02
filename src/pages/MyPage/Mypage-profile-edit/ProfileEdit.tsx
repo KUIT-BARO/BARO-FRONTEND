@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback } from "react";
+import React, { useState, useMemo, useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import backIcon from "../../../assets/icons/backIcon.svg";
 import editIcon from "../../../assets/icons/edit_white.svg";
@@ -9,8 +9,11 @@ import profile4 from "../../../assets/icons/useravatar.svg";
 import Navigation from "../../../components/Navigation/Navigation";
 import InputModal from "./InputModal/InputModal";
 import Toast from "./Toast/Toast";
-import { RequestProfile } from "../../../interface/api/mypage/mypage";
 import { getMyPage } from "../../../apis/user/getMyPage";
+import {
+  InputModalProps,
+  RequestProfile,
+} from "../../../interface/api/mypage/mypage";
 import {
   ProfileEditContainer,
   ProfileEditHeader,
@@ -33,7 +36,7 @@ import {
 } from "./ProfileEdit.styles";
 
 const dummydata: RequestProfile = {
-  newName: "",
+  newName: "황규운",
   newProfileImage: "NONE",
 };
 const ProfileEdit: React.FC = () => {
@@ -62,8 +65,6 @@ const ProfileEdit: React.FC = () => {
       ) || "profile4",
   });
 
-  const [nameModalOpen, setNameModalOpen] = useState(false);
-  // const [usernameModalOpen, setUsernameModalOpen] = useState(false);
   const [profileModalOpen, setProfileModalOpen] = useState(false);
   const [showToast, setShowToast] = useState(false);
 
@@ -76,46 +77,14 @@ const ProfileEdit: React.FC = () => {
     navigate(`/mypage`);
   };
   const handleImageChange = () => setProfileModalOpen(true);
-  const handleProfileComplete = useCallback(
-    async (newProfile: string) => {
-      try {
-        await getMyPage.updateProfileImage(
-          profileIdToBackendFormat[newProfile]
-        );
-        setFormData((prev) => ({ ...prev, profileImage: newProfile }));
-        setShowToast(true);
-      } catch (error) {
-        console.error("프로필 이미지 변경 오류:", error);
-      }
-    },
-    [profileIdToBackendFormat]
-  );
-  const renderInputModal = (
-    isOpen: boolean,
-    setOpen: React.Dispatch<React.SetStateAction<boolean>>,
-    title: string,
-    value: string,
-    maxLength: number,
-    onComplete: (value: string) => void,
-    type?: "username" | "profile"
-  ) => (
-    <InputModal
-      isOpen={isOpen}
-      onClose={() => setOpen(false)}
-      title={title}
-      initialValue={value}
-      placeholder={`${title}을(를) 설정해주세요`}
-      maxLength={maxLength}
-      onComplete={(newValue) => {
-        setFormData((prev) => ({
-          ...prev,
-          [type === "username" ? "username" : "name"]: newValue,
-        }));
-        setShowToast(true);
-      }}
-      type={type}
-    />
-  );
+
+  const handleProfileComplete = (newProfileId: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      newProfileImage: newProfileId,
+    }));
+    setShowToast(true);
+  };
 
   return (
     <ProfileEditContainer>
@@ -146,51 +115,15 @@ const ProfileEdit: React.FC = () => {
             <InputFieldWrapper>
               <InputField
                 value={formData.newName}
-                readOnly
-                onFocus={() => setNameModalOpen(true)}
+                onChange={(e) =>
+                  setFormData((prev) => ({ ...prev, newName: e.target.value }))
+                }
               />
               <CharCount>{formData.newName.length}/12</CharCount>
             </InputFieldWrapper>
           </InputRow>
         </InputGroup>
-
-        {/* <InputGroup>
-          <InputRow>
-            <InputLabel>아이디</InputLabel>
-            <InputFieldWrapper>
-              <InputField
-                value={formData.username}
-                readOnly
-                onFocus={() => setUsernameModalOpen(true)}
-              />
-              <CharCount>{formData.username.length}/15</CharCount>
-            </InputFieldWrapper>
-          </InputRow>
-        </InputGroup> */}
       </ProfileEditContent>
-
-      {renderInputModal(
-        nameModalOpen,
-        setNameModalOpen,
-        "이름",
-        formData.newName,
-        12,
-        (newName) => {
-          setFormData((prev) => ({ ...prev, name: newName }));
-        }
-      )}
-
-      {/* {renderInputModal(
-        usernameModalOpen,
-        setUsernameModalOpen,
-        "아이디",
-        formData.username,
-        15,
-        (newUsername) => {
-          setFormData((prev) => ({ ...prev, username: newUsername }));
-        },
-        "username"
-      )} */}
 
       <InputModal
         isOpen={profileModalOpen}

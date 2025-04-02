@@ -14,3 +14,14 @@ export interface RequestPassword {
   newPassword: string;
   confirmPassword: string;
 }
+
+export interface InputModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  title: string;
+  initialValue: string;
+  placeholder?: string;
+  maxLength?: number;
+  onComplete: (value: string) => void;
+  type?: "passwordChange" | "profile";
+}
