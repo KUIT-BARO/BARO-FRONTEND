@@ -25,6 +25,7 @@ import {
   UserId,
   Withdraw,
 } from "./Settings.styles";
+import InputModal from "../Mypage-profile-edit/InputModal/InputModal";
 
 interface UserInfo {
   nickname: string;
@@ -35,37 +36,12 @@ interface UserInfo {
 const Settings: React.FC = () => {
   const navigate = useNavigate();
   const [withdrawModalOpen, setWithdrawModalOpen] = useState(false);
+  const [passwordModalOpen, setPasswordModalOpen] = useState(false);
   const [userInfo, setUserInfo] = useState<UserInfo>({
     nickname: "",
     userId: 0,
     userProfile: "",
   });
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchUserInfo = async () => {
-      try {
-        setIsLoading(true);
-        const response = await getMyPage.getMyPage();
-        console.log("반응 오는거", response);
-        if (response.status === 200 && response.data) {
-          setUserInfo({
-            nickname: response.data.data.user.nickname,
-            userId: response.data.data.user.userId,
-            userProfile: response.data.data.user.userProfile,
-          });
-        }
-      } catch (error) {
-        setError("사용자 정보를 불러오는데 실패했습니다.");
-        console.error("사용자 정보 조회 실패:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchUserInfo();
-  }, []);
 
   const handleBack = () => {
     navigate("/mypage");
@@ -74,14 +50,6 @@ const Settings: React.FC = () => {
   const handleWithdraw = () => {
     navigate("/login", { replace: true });
   };
-
-  if (isLoading) {
-    return <div>로딩 중...</div>;
-  }
-
-  if (error) {
-    return <ErrorMessage>{error}</ErrorMessage>;
-  }
 
   return (
     <SettingsContainer>
@@ -103,6 +71,11 @@ const Settings: React.FC = () => {
           </ProfileInfo>
         </ProfileSection>
         <SettingsMenu>
+          <MenuItem onClick={() => setPasswordModalOpen(true)}>
+            <Withdraw>비밀번호 변경</Withdraw>
+          </MenuItem>
+        </SettingsMenu>
+        <SettingsMenu>
           <MenuItem withdraw onClick={() => setWithdrawModalOpen(true)}>
             <Withdraw>탈퇴하기</Withdraw>
           </MenuItem>
@@ -113,6 +86,19 @@ const Settings: React.FC = () => {
         isOpen={withdrawModalOpen}
         onClose={() => setWithdrawModalOpen(false)}
         onWithdraw={handleWithdraw}
+      />
+
+      <InputModal
+        isOpen={passwordModalOpen}
+        onClose={() => setPasswordModalOpen(false)}
+        title="비밀번호 변경"
+        initialValue=""
+        type="passwordChange"
+        onComplete={(data) => {
+          console.log("비밀번호 변경 정보:", data);
+          // 서버 전송 로직 연결 가능
+          setPasswordModalOpen(false);
+        }}
       />
 
       <Navigation />
