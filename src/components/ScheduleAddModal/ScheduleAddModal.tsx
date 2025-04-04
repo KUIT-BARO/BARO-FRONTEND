@@ -2,43 +2,37 @@ import React, { useState } from "react";
 import Button from "../Button/Button";
 import xIcon from "../../assets/icons/x_gray.svg";
 import * as S from "./ScheduleAddModal.styles";
-
-interface ScheduleAddModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  onAdd: (schedule: {
-    title: string;
-    location?: string;
-    day: string;
-    startTime: number;
-    endTime: number;
-  }) => void;
-}
+import { RequestSchedule } from "../../interface/api/schedules/schedule";
+import {
+  getKoreanDay,
+  getDayNumber,
+  formatToHourMinute,
+  formatToHourMinuteSecond,
+} from "../Schedulecomponent/scheduleFunction";
 
 const MAX_LENGTH = 20;
 
-const ScheduleAddModal: React.FC<ScheduleAddModalProps> = ({
+const ScheduleAddModal = ({
   isOpen,
   onClose,
-  onAdd,
+}: {
+  isOpen: boolean;
+  onClose: () => void;
 }) => {
-  const [title, setTitle] = useState("");
-  const [location, setLocation] = useState("");
-  const [day, setDay] = useState("월");
-  const [startTime, setStartTime] = useState(7);
-  const [endTime, setEndTime] = useState(8);
-
-  const formatTime = (time: number) => {
-    const hours = Math.floor(time);
-    const minutes = Math.round((time % 1) * 60);
-    return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(
-      2,
-      "0"
-    )}`;
-  };
+  const [scheduleName, setScheduleName] = useState("");
+  const [placeName, setPlaceName] = useState("");
+  const [dayOfWeek, setDayOfWeek] = useState(1);
+  const [startTime, setStartTime] = useState("07:00:00");
+  const [endTime, setEndTime] = useState("08:00:00");
 
   const handleSubmit = () => {
-    onAdd({ title, location, day, startTime, endTime });
+    const submitSchedule: RequestSchedule = {
+      scheduleName,
+      dayOfWeek,
+      startTime,
+      endTime,
+      placeName,
+    };
     onClose();
   };
 
@@ -58,10 +52,10 @@ const ScheduleAddModal: React.FC<ScheduleAddModalProps> = ({
         <S.FormSection>
           <S.FormLabel>요일</S.FormLabel>
           <S.FormSelect
-            value={`${day}요일`}
+            value={`${getKoreanDay(dayOfWeek)}요일`}
             onChange={(e) => {
-              const newDay = e.target.value.replace("요일", "");
-              setDay(newDay);
+              const newDay = getDayNumber(e.target.value.replace("요일", ""));
+              setDayOfWeek(newDay);
             }}
           >
             {[
@@ -83,12 +77,9 @@ const ScheduleAddModal: React.FC<ScheduleAddModalProps> = ({
             <S.TimeColumn>
               <S.FormLabel>시작 시간</S.FormLabel>
               <S.FormSelect
-                value={formatTime(startTime)}
+                value={formatToHourMinute(startTime)}
                 onChange={(e) => {
-                  const [hours, minutes] = e.target.value
-                    .split(":")
-                    .map(Number);
-                  setStartTime(hours + minutes / 60);
+                  setStartTime(formatToHourMinuteSecond(e.target.value));
                 }}
               >
                 {Array.from({ length: 29 }, (_, i) => {
@@ -106,12 +97,9 @@ const ScheduleAddModal: React.FC<ScheduleAddModalProps> = ({
             <S.TimeColumn>
               <S.FormLabel>종료 시간</S.FormLabel>
               <S.FormSelect
-                value={formatTime(endTime)}
+                value={formatToHourMinute(endTime)}
                 onChange={(e) => {
-                  const [hours, minutes] = e.target.value
-                    .split(":")
-                    .map(Number);
-                  setEndTime(hours + minutes / 60);
+                  setEndTime(formatToHourMinuteSecond(e.target.value));
                 }}
               >
                 {Array.from({ length: 29 }, (_, i) => {
@@ -131,12 +119,12 @@ const ScheduleAddModal: React.FC<ScheduleAddModalProps> = ({
             <S.FormInput
               type="text"
               placeholder="약속명을 추가해주세요"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
+              value={scheduleName}
+              onChange={(e) => setScheduleName(e.target.value)}
               maxLength={MAX_LENGTH}
             />
             <S.InputCharCount>
-              {title.length}/{MAX_LENGTH}
+              {scheduleName.length}/{MAX_LENGTH}
             </S.InputCharCount>
           </S.InputWrapper>
 
@@ -158,18 +146,18 @@ const ScheduleAddModal: React.FC<ScheduleAddModalProps> = ({
             <S.LocationInput
               type="text"
               placeholder="장소를 추가해주세요 (선택사항)"
-              value={location}
-              onChange={(e) => setLocation(e.target.value)}
+              value={placeName}
+              onChange={(e) => setPlaceName(e.target.value)}
               maxLength={MAX_LENGTH}
             />
             <S.InputCharCount>
-              {location.length}/{MAX_LENGTH}
+              {placeName.length}/{MAX_LENGTH}
             </S.InputCharCount>
           </S.LocationWrapper>
         </S.FormSection>
 
         <S.ButtonContainer>
-          <Button onClick={onClose} color="Gray">
+          <Button color="Gray" onClick={onClose}>
             취소
           </Button>
           <Button color="Blue" onClick={handleSubmit}>

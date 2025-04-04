@@ -1,76 +1,42 @@
-// ScheduleGridContainer.tsx
 import React, { useState, useImperativeHandle, forwardRef } from "react";
-import ScheduleGridView, { Schedule } from "./ScheduleGridView";
+import ScheduleGridView from "./ScheduleGridView";
 import ScheduleAddModal from "../ScheduleAddModal/ScheduleAddModal";
 import ScheduleDetailModal from "../ScheduleDetailModal/ScheduleDetailModal";
-
-export interface ScheduleGridHandle {
-  openAddModal: () => void;
-}
-const dummySchedules: Schedule[] = [
+import { ResponseSchedule } from "../../interface/api/schedules/schedule.ts";
+import { ScheduleGridHandle } from "../../interface/api/schedules/schedule.ts";
+const dummySchedules: ResponseSchedule[] = [
   {
-    id: 1,
-    title: "리액트 강의",
-    startTime: 9,
-    endTime: 10.5,
-    day: "월",
-    color: "#6699FF",
+    scheduleId: 1,
+    scheduleName: "리액트 강의",
+    startTime: "9:00:00",
+    endTime: "10:30:00",
+    dayOfWeek: 1,
   },
   {
-    id: 2,
-    title: "운동",
-    startTime: 12.5,
-    endTime: 13.5,
-    day: "수",
-    color: "#708AFF",
+    scheduleId: 2,
+    scheduleName: "운동",
+    startTime: "12:30:00",
+    endTime: "13:30:00",
+    dayOfWeek: 3,
   },
   {
-    id: 3,
-    title: "스터디 모임",
-    startTime: 15,
-    endTime: 16.5,
-    day: "금",
-    color: "#7893FF",
+    scheduleId: 3,
+    scheduleName: "스터디 모임",
+    startTime: "15:00:00",
+    endTime: "16:30:00",
+    dayOfWeek: 5,
   },
 ];
 
-const randomColor = () => {
-  const colors = ["#6699FF", "#708AFF", "#7893FF", "#7BB2FF"];
-  return colors[Math.floor(Math.random() * colors.length)];
-};
-
 const ScheduleGridContainer = forwardRef<ScheduleGridHandle>((_, ref) => {
-  const [schedules, setSchedules] = useState<Schedule[]>(dummySchedules);
-  const [selectedSchedule, setSelectedSchedule] = useState<Schedule | null>(
-    null
-  );
-  const [isAddOpen, setAddOpen] = useState(false);
-
   useImperativeHandle(ref, () => ({
     openAddModal: () => setAddOpen(true),
   }));
-
-  const handleAdd = (data: Omit<Schedule, "id" | "color">) => {
-    const newSchedule: Schedule = {
-      ...data,
-      id: Date.now(),
-      color: randomColor(),
-    };
-    setSchedules([...schedules, newSchedule]);
-    setAddOpen(false);
-  };
-
-  const handleDelete = (id: number) => {
-    setSchedules((prev) => prev.filter((s) => s.id !== id));
-    setSelectedSchedule(null);
-  };
-
-  const handleUpdate = (id: number, update: Partial<Schedule>) => {
-    setSchedules((prev) =>
-      prev.map((s) => (s.id === id ? { ...s, ...update } : s))
-    );
-    setSelectedSchedule(null);
-  };
+  const [schedules, setSchedules] =
+    useState<ResponseSchedule[]>(dummySchedules);
+  const [selectedSchedule, setSelectedSchedule] =
+    useState<ResponseSchedule | null>(null);
+  const [isAddOpen, setAddOpen] = useState(false);
 
   return (
     <>
@@ -78,17 +44,11 @@ const ScheduleGridContainer = forwardRef<ScheduleGridHandle>((_, ref) => {
         schedules={schedules}
         onClickSchedule={(s) => setSelectedSchedule(s)}
       />
-      <ScheduleAddModal
-        isOpen={isAddOpen}
-        onClose={() => setAddOpen(false)}
-        onAdd={handleAdd}
-      />
+      <ScheduleAddModal isOpen={isAddOpen} onClose={() => setAddOpen(false)} />
       <ScheduleDetailModal
         isOpen={!!selectedSchedule}
         schedule={selectedSchedule}
         onClose={() => setSelectedSchedule(null)}
-        onDelete={handleDelete}
-        onUpdate={handleUpdate}
       />
     </>
   );

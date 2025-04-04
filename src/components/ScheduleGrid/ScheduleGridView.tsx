@@ -1,4 +1,3 @@
-// ScheduleGridView.tsx
 import React from "react";
 import {
   Wrapper,
@@ -7,24 +6,20 @@ import {
   MainGridContainer,
   TimeColumn,
   TimeSlot,
-  ScheduleGridContainer,
+  Container,
   DayColumn,
   GridCell,
   ScheduleItem,
 } from "./ScheduleGrid.styles";
 
-export interface Schedule {
-  id: number;
-  title: string;
-  startTime: number;
-  endTime: number;
-  day: string;
-  color?: string;
-}
-
+import { ResponseSchedule } from "../../interface/api/schedules/schedule";
+import {
+  randomColor,
+  timeStringToDecimal,
+} from "../Schedulecomponent/scheduleFunction";
 interface ScheduleGridViewProps {
-  schedules: Schedule[];
-  onClickSchedule?: (schedule: Schedule) => void;
+  schedules: ResponseSchedule[];
+  onClickSchedule?: (schedule: ResponseSchedule) => void;
 }
 
 const ScheduleGridView: React.FC<ScheduleGridViewProps> = ({
@@ -37,9 +32,11 @@ const ScheduleGridView: React.FC<ScheduleGridViewProps> = ({
     minute: i % 2 === 0 ? "00" : "30",
   }));
 
-  const getScheduleStyle = (schedule: Schedule) => {
-    const startMinutes = (schedule.startTime - 7) * 60;
-    const endMinutes = (schedule.endTime - 7) * 60;
+  const getScheduleStyle = (schedule: ResponseSchedule) => {
+    const start = timeStringToDecimal(schedule.startTime);
+    const end = timeStringToDecimal(schedule.endTime);
+    const startMinutes = (start - 7) * 60;
+    const endMinutes = (end - 7) * 60;
     const top = (startMinutes / 30) * 20;
     const height = ((endMinutes - startMinutes) / 30) * 20;
     return { top: `${top}px`, height: `${height}px` };
@@ -65,22 +62,22 @@ const ScheduleGridView: React.FC<ScheduleGridViewProps> = ({
           ))}
         </TimeColumn>
 
-        <ScheduleGridContainer>
-          {days.map((day) => (
+        <Container>
+          {days.map((day, index) => (
             <DayColumn key={day} style={{ position: "relative" }}>
               {schedules
-                .filter((s) => s.day === day)
+                .filter((s) => s.dayOfWeek === index + 1)
                 .map((schedule) => (
                   <ScheduleItem
-                    key={schedule.id}
+                    key={schedule.scheduleId}
                     style={{
                       ...getScheduleStyle(schedule),
-                      backgroundColor: schedule.color,
+                      backgroundColor: randomColor(),
                       position: "absolute",
                     }}
                     onClick={() => onClickSchedule?.(schedule)}
                   >
-                    {schedule.title}
+                    {schedule.scheduleName}
                   </ScheduleItem>
                 ))}
 
@@ -92,7 +89,7 @@ const ScheduleGridView: React.FC<ScheduleGridViewProps> = ({
               ))}
             </DayColumn>
           ))}
-        </ScheduleGridContainer>
+        </Container>
       </MainGridContainer>
     </Wrapper>
   );

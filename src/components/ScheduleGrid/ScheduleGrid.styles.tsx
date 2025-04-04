@@ -39,7 +39,7 @@ export const TimeSlot = styled.div<{ halfHour?: boolean }>`
   color: ${({ halfHour }) => (halfHour ? "transparent" : "#979797")};
 `;
 
-export const ScheduleGridContainer = styled.div`
+export const Container = styled.div`
   flex: 1;
   border: 0.5px solid #c1cee1;
   border-radius: 10px;
