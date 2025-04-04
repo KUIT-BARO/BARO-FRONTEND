@@ -5,6 +5,10 @@ import profile2 from "../../../../assets/icons/womanavatar.svg";
 import profile3 from "../../../../assets/icons/dogavatar.svg";
 import profile4 from "../../../../assets/icons/useravatar.svg";
 import {
+  InputModalProps,
+  RequestPassword,
+} from "../../../../interface/api/mypage/mypage";
+import {
   ModalOverlay,
   ModalContainer,
   ModalHeader,
@@ -13,41 +17,32 @@ import {
   HeaderTitle,
   CompleteButton,
   ModalContent,
-  FieldWrapper,
   InputField,
-  CharCount,
   ErrorMessage,
   ProfileContent,
   ProfileOptions,
   ProfileOption,
   ProfileImg,
   ProfileDescription,
+  PasswordInputBlock,
+  PasswordLabel,
 } from "./InputModal.styles";
-
-interface InputModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  title: string;
-  initialValue: string;
-  placeholder?: string;
-  maxLength?: number;
-  onComplete: (value: string) => void;
-  type?: "name" | "username" | "profile";
-}
 
 const InputModal: React.FC<InputModalProps> = ({
   isOpen,
   onClose,
   title,
   initialValue,
-  placeholder,
-  maxLength,
   onComplete,
-  type = "name",
+  type,
 }) => {
-  const [value, setValue] = useState(initialValue);
-  const [error, setError] = useState<string | null>(null);
   const [selectedProfile, setSelectedProfile] = useState(initialValue);
+  const [error, setError] = useState<string | null>(null);
+  const [passwords, setPasswords] = useState<RequestPassword>({
+    currentPassword: "",
+    newPassword: "",
+    confirmPassword: "",
+  });
 
   const profiles = [
     { id: "profile1", src: profile1 },
@@ -58,17 +53,21 @@ const InputModal: React.FC<InputModalProps> = ({
 
   useEffect(() => {
     if (isOpen) {
-      setValue(initialValue);
       setSelectedProfile(initialValue);
       setError(null);
+      setPasswords({
+        currentPassword: "",
+        newPassword: "",
+        confirmPassword: "",
+      });
     }
   }, [isOpen, initialValue]);
 
   const handleComplete = () => {
     if (type === "profile") {
       onComplete(selectedProfile);
-    } else {
-      onComplete(value);
+    } else if (type === "passwordChange") {
+      console.log(passwords);
     }
     onClose();
   };
@@ -87,8 +86,8 @@ const InputModal: React.FC<InputModalProps> = ({
           <CompleteButton onClick={handleComplete}>완료</CompleteButton>
         </ModalHeader>
 
-        <ModalContent>
-          {type === "profile" ? (
+        {type === "profile" ? (
+          <ModalContent>
             <ProfileContent>
               <ProfileOptions>
                 {profiles.map((profile) => (
@@ -105,23 +104,32 @@ const InputModal: React.FC<InputModalProps> = ({
                 원하는 사진으로 프로필을 변경해주세요.
               </ProfileDescription>
             </ProfileContent>
-          ) : (
-            <FieldWrapper>
-              <InputField
-                type="text"
-                value={value}
-                onChange={(e) => setValue(e.target.value)}
-                maxLength={maxLength}
-                placeholder={placeholder}
-                autoFocus
-              />
-              <CharCount>
-                {value.length}/{maxLength}
-              </CharCount>
-              {error && <ErrorMessage>{error}</ErrorMessage>}
-            </FieldWrapper>
-          )}
-        </ModalContent>
+          </ModalContent>
+        ) : (
+          <ModalContent column>
+            {[
+              { label: "현재 비밀번호", key: "currentPassword" },
+              { label: "새 비밀번호", key: "newPassword" },
+              { label: "비밀번호 확인", key: "confirmPassword" },
+            ].map((item) => (
+              <PasswordInputBlock key={item.key}>
+                <InputField
+                  type="password"
+                  value={passwords[item.key as keyof typeof passwords]}
+                  onChange={(e) =>
+                    setPasswords((prev) => ({
+                      ...prev,
+                      [item.key]: e.target.value,
+                    }))
+                  }
+                  placeholder={item.label}
+                />
+              </PasswordInputBlock>
+            ))}
+
+            {error && <ErrorMessage>{error}</ErrorMessage>}
+          </ModalContent>
+        )}
       </ModalContainer>
     </>
   );

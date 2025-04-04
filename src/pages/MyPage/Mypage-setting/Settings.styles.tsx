@@ -36,15 +36,14 @@ export const BackButton = styled.button`
   }
 `;
 
-export const SettingsContent = styled.div`
-  padding: 0 20px;
-`;
+export const SettingsContent = styled.div``;
 
 export const ProfileSection = styled.div`
   display: flex;
   align-items: center;
   padding-bottom: 32px;
   border-bottom: 1px solid #f0f0f0;
+  padding: 0 20px 24px;
 `;
 
 export const ProfileImage = styled.div`
@@ -110,4 +109,6 @@ export const Title = styled.h1``;
 export const ProfileImg = styled.img``;
 export const SubTitle = styled.h2``;
 export const UserId = styled.p``;
-export const Withdraw = styled.span``;
+export const Withdraw = styled.span`
+  padding: 0 20px;
+`;

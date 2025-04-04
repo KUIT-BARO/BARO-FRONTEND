@@ -4,6 +4,7 @@ import { postAuth } from "../../../apis/auth/postAuth";
 import userIcon from "../../../assets/icons/login_user.svg";
 import lockIcon from "../../../assets/icons/login_password.svg";
 import Logo from "../../../assets/icons/logo.svg";
+import { LoginInfo } from "../../../interface/api/auth/auth";
 import {
   LoginContainer,
   LogoWrapper,
@@ -25,16 +26,16 @@ import Button from "../../../components/Button/Button";
 
 const LoginPage = () => {
   const navigate = useNavigate();
-  const [id, setId] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleLogin = () => {
-    if (!id || !password) {
+    if (!email || !password) {
       alert("모든 항목을 입력해주세요;");
       return;
     }
-    const loginData = {
-      id,
+    const loginData: LoginInfo = {
+      email,
       password,
     };
   };
@@ -52,8 +53,8 @@ const LoginPage = () => {
           <LoginInput
             type="text"
             placeholder="이메일 입력"
-            value={id}
-            onChange={(e) => setId(e.target.value)}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </InputWrapper>
         <InputWrapper>

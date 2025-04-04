@@ -10,9 +10,6 @@ import FinalVote from "./FinalVote/FinalVote";
 import MyPage from "./MyPage/Mypage-main/MyPage";
 import ProfileEdit from "./MyPage/Mypage-profile-edit/ProfileEdit";
 import Settings from "./MyPage/Mypage-setting/Settings";
-import Contact from "./MyPage/Contact";
-import SavedPlacesDetail from "./MyPage/SavedPlacesDetail";
-import UserSchedulePage from "./MyPage/UserSchedulePage";
 import Accept from "./Accept/Accept";
 import SearchPage from "./SearchPage/SearchPage";
 import Landing from "./Landing/Landing";
@@ -84,14 +81,6 @@ const Router = () => {
       ),
     },
     {
-      path: "/places/:category",
-      element: (
-        <ProtectedRoute isAuthenticated={isAuthenticated}>
-          <SavedPlacesDetail />
-        </ProtectedRoute>
-      ),
-    },
-    {
       path: "/profile/edit",
       element: (
         <ProtectedRoute isAuthenticated={isAuthenticated}>
@@ -102,17 +91,9 @@ const Router = () => {
     {
       path: "/settings",
       element: (
-        <ProtectedRoute isAuthenticated={isAuthenticated}>
-          <Settings />
-        </ProtectedRoute>
-      ),
-    },
-    {
-      path: "/contact",
-      element: (
-        <ProtectedRoute isAuthenticated={isAuthenticated}>
-          <Contact />
-        </ProtectedRoute>
+        // <ProtectedRoute isAuthenticated={isAuthenticated}>
+        <Settings />
+        // </ProtectedRoute>
       ),
     },
     {
@@ -130,14 +111,6 @@ const Router = () => {
           <PromiseStatus />
         </ProtectedRoute>
       ),
-    },
-    {
-      path: "/schedule/:userId",
-      element: <UserSchedulePage />,
-    },
-    {
-      path: "/users/schedule/:userId",
-      element: <UserSchedulePage />,
     },
   ]);
 
