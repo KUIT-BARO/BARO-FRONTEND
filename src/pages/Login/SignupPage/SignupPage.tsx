@@ -3,26 +3,26 @@ import { useNavigate } from "react-router-dom";
 import { postAuth } from "../../../apis/auth/postAuth";
 import { SignupContainer, SignupButton } from "./SignupPage.styles";
 import InputSection from "../../../components/SignUpInputSection/InputSection";
+import { SignupInfo } from "../../../interface/api/mypage/mypage";
 const isValidEmail = (email: string): boolean => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
 };
-interface SignupPayload {
-  id: string;
-  password: string;
-  nickname: string;
-}
+
 const SignupPage = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [nickname, setNickname] = useState("");
+  const [name, setName] = useState("");
   const [emailCheck, setEmailCheck] = useState("");
   const [isEmailCheck, setisEmailCheck] = useState(false);
 
   const handleEmailCheck = () => {
     if (!email) {
-      alert("아이디를 입력해주세요");
+      alert("이메일을을 입력해주세요");
+      return;
+    } else if (!isValidEmail(email)) {
+      alert("이메일 형식이 틀렸습니다.");
       return;
     } else if (isValidEmail(email)) {
       alert("이메일 형식이 틀렸습니다.");
@@ -31,17 +31,17 @@ const SignupPage = () => {
     setisEmailCheck(true);
   };
   const handleSignup = () => {
-    if (!email || !password || !nickname) {
+    if (!email || !password || !name) {
       alert("모든 항목을 입력해주세요.");
       return;
     }
-    const signupData = {
-      id: email,
+    const signupData: SignupInfo = {
+      email,
       password,
-      nickname,
+      name,
     };
   };
-
+  const handleEmailVerification = () => {};
   return (
     <SignupContainer>
       <InputSection
@@ -75,8 +75,8 @@ const SignupPage = () => {
       </InputSection>
 
       <InputSection
-        value={nickname}
-        setValue={setNickname}
+        value={name}
+        setValue={setName}
         placeholder="사용할 이름을 입력해주세요 (최대 8글자)"
       >
         이름

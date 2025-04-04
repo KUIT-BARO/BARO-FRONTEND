@@ -25,3 +25,8 @@ export interface InputModalProps {
   onComplete: (value: string) => void;
   type?: "passwordChange" | "profile";
 }
+export interface SignupInfo {
+  email: string;
+  password: string;
+  name: string;
+}
