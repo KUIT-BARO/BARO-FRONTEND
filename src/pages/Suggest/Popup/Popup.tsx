@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-import SuggestInterface from "../../../interface/Suggest";
+import SuggestInterface from "../../../interface/SuggestPromise/Suggest";
 
 import Button from "../../../components/Button/Button";
 import Question from "../../../components/Question/Question";
