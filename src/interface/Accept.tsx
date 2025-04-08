@@ -1,4 +1,0 @@
-interface Accept {
-  //timetable
-  //location
-}
