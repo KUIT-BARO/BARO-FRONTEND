@@ -1,6 +1,5 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { postAuth } from "../../../apis/auth/postAuth";
+import React, { useState, useRef } from "react";
+import { Link } from "react-router-dom";
 import userIcon from "../../../assets/icons/login_user.svg";
 import lockIcon from "../../../assets/icons/login_password.svg";
 import Logo from "../../../assets/icons/logo.svg";
@@ -25,13 +24,20 @@ import {
 import Button from "../../../components/Button/Button";
 
 const LoginPage = () => {
-  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+  const [isEmailFocused, setIsEmailFocused] = useState(false);
+  const [isPasswordFocused, setIsPasswordFocused] = useState(false);
 
   const handleLogin = () => {
-    if (!email || !password) {
-      alert("모든 항목을 입력해주세요;");
+    if (!email) {
+      emailRef.current?.focus();
+      return;
+    }
+    if (!password) {
+      passwordRef.current?.focus();
       return;
     }
     const loginData: LoginInfo = {
@@ -52,18 +58,28 @@ const LoginPage = () => {
           <Iconimg src={userIcon} alt="user" />
           <LoginInput
             type="text"
-            placeholder="이메일 입력"
+            placeholder={
+              isEmailFocused ? "이메일을 입력해주세요" : "이메일 입력"
+            }
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            onFocus={() => setIsEmailFocused(true)}
+            onBlur={() => setIsEmailFocused(false)}
+            ref={emailRef}
           />
         </InputWrapper>
         <InputWrapper>
           <Iconimg src={lockIcon} alt="password" />
           <LoginInput
             type="password"
-            placeholder="비밀번호 입력"
+            placeholder={
+              isPasswordFocused ? "비밀번호를 입력해주세요!" : "비밀번호 입력"
+            }
+            onFocus={() => setIsPasswordFocused(true)}
+            onBlur={() => setIsPasswordFocused(false)}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            ref={passwordRef}
           />
         </InputWrapper>
       </InputContainer>

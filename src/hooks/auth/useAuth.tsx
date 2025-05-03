@@ -1,7 +1,10 @@
 import useApi from "../useApi";
 import { LoginInfo, authCode } from "../../interface/api/auth/auth";
+import { useNavigate } from "react-router-dom";
+
 const useAuth = () => {
   const { authApi } = useApi();
+  const navigate = useNavigate();
   const loginUser = (loginInfo: LoginInfo) => {
     return authApi
       .post("/login", loginInfo)
@@ -10,6 +13,7 @@ const useAuth = () => {
       })
       .catch((err) => {
         console.log("로그인 실패", err);
+        navigate("/login");
       });
   };
   const reissueToken = () => {
