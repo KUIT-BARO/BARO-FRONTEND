@@ -4,7 +4,9 @@ import styled from "styled-components";
 
 import { postReview } from "../../../apis/Place/postReview";
 
+
 import BackIcon from '../../../assets/icons/Search/backIcon_white.svg';
+
 
 interface ReviewHeaderProps {
   placeId: number;

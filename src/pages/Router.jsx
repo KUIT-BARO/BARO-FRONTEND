@@ -6,14 +6,15 @@ import Suggest from "./Suggest/Suggest";
 import SignupPage from "./Login/SignupPage/SignupPage";
 import LoginPage from "./Login/LoginPage/LoginPage";
 import MyPromises from "./MyPromises/MyPromises";
-import FinalVote from "./FinalVote/FinalVote";
 import MyPage from "./MyPage/Mypage-main/MyPage";
 import ProfileEdit from "../pages/MyPage/Mypage-profile-edit/ProfileEdit.tsx";
 import Settings from "./MyPage/Mypage-setting/Settings";
 
 
 
+
 import Search from "./Search/Search";
+
 import Landing from "./Landing/Landing";
 import PromisePending from "./PromisePending/PromisePending";
 
@@ -48,14 +49,6 @@ const Router = () => {
       element: <Suggest />,
     },
 
-    {
-      path: "/finalvote/*",
-      element: (
-        <ProtectedRoute isAuthenticated={isAuthenticated}>
-          <FinalVote />
-        </ProtectedRoute>
-      ),
-    },
     {
       path: "/mypromises",
       element: (

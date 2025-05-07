@@ -11,6 +11,7 @@ import {
 import BackIcon from '../../../assets/icons/Search/backIcon_white.svg';
 import Scope from '../../../assets/icons/Search/scope.svg';
 
+
 export default function AddPinLocation(props) {
 
   function updateIsLocationOpen() {
