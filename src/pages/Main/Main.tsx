@@ -9,9 +9,9 @@ import PromiseContainer from "./PromiseContainer";
 import { postAuth } from "../../apis/auth/postAuth";
 import { getHome } from "../../apis/user/getHome";
 
-import logo from "../../assets/icons/logo.svg";
-import alarm from "../../assets/icons/alarm.svg";
-import note from "../../assets/icons/note.svg";
+import logo from "../../assets/icons/Main/logo.svg";
+import alarm from "../../assets/icons/Main/alarm.svg";
+import note from "../../assets/icons/Main/note.svg";
 import 약속잡기 from "../../assets/icons/Buttons/약속잡기.svg";
 
 export default function Main() {
