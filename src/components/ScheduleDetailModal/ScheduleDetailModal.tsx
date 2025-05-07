@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Button from "../Button/Button";
-import xIcon from "../../assets/icons/x_gray.svg";
-import locationIcon from "../../assets/icons/location_gray.svg";
+import xIcon from "../../assets/icons/Schedule/x_gray.svg";
+import locationIcon from "../../assets/icons/Schedule/location_gray.svg";
 import * as S from "./ScheduleDetailModal.styles";
 import {
   ScheduleDetailModalProps,
