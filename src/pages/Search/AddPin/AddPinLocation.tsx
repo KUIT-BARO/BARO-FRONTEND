@@ -8,8 +8,8 @@ import {
   SettingLocationHeader, SettingLocation, SettingButton
 } from "./AddPinLocation.styles.tsx";
 
-import BackIcon from '../../../assets/icons/backIcon.svg';
-import Scope from '../../../assets/icons/스코프.svg';
+import BackIcon from '../../../assets/icons/Search/backIcon_white.svg';
+import Scope from '../../../assets/icons/Search/scope.svg';
 
 export default function AddPinLocation(props) {
 

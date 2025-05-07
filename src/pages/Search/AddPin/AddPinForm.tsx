@@ -8,9 +8,9 @@ import {
   Rating, Category, CategoryButton
 } from "./AddPinForm.styles.tsx";
 
-import Location from '../../../assets/icons/locationWhite.svg';
-import BlueStar from '../../../assets/icons/blueStar.svg';
-import GrayStar from '../../../assets/icons/grayStar.svg';
+import Location from '../../../assets/icons/Search/location_white.svg';
+import BlueStar from '../../../assets/icons/Search/blueStar.svg';
+import GrayStar from '../../../assets/icons/Search/grayStar.svg';
 
 import { PIN_CATEGORIES } from '../../../utils/constant/Categories.tsx';
 
