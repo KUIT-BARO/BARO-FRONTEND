@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import SearchIcon from "../../assets/icons/searchIcon.svg";
 
-// export default function Search({ placeholder, value, onChange, ...props }) {
 export default function Search({ placeholder, value, onKeyDown, ...props }) {
   const [isInputFocused, setIsInputFocused] = React.useState<boolean>(false);
   const [inputValue, setInputValue] = React.useState<string>("");
@@ -12,11 +11,12 @@ export default function Search({ placeholder, value, onKeyDown, ...props }) {
       <img src={SearchIcon} alt="Search Icon" />
       <input
         type="text"
-        // placeholder={placeholder}
-        placeholder={!isInputFocused ? placeholder : ''}
+        placeholder={isInputFocused ? '' : placeholder}
         value={inputValue}
-        // onChange={onChange}
-        onFocus={() => setIsInputFocused(true)}
+        onFocus={() => {
+          setIsInputFocused(true);
+          setInputValue('');
+        }}
         onBlur={() => setIsInputFocused(false)}
         onChange={(e) => setInputValue(e.target.value)}
         onKeyDown={onKeyDown}
@@ -69,3 +69,4 @@ const SearchWrapper = styled.div`
     outline: none;
   }
 `;
+
