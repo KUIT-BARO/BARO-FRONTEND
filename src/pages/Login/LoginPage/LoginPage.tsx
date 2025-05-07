@@ -1,8 +1,8 @@
 import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
-import userIcon from "../../../assets/icons/login_user.svg";
-import lockIcon from "../../../assets/icons/login_password.svg";
-import Logo from "../../../assets/icons/logo.svg";
+import userIcon from "../../../assets/icons/Login/login_user.svg";
+import lockIcon from "../../../assets/icons/Login/login_password.svg";
+import Logo from "../../../assets/icons/Login/logo.svg";
 import { LoginInfo } from "../../../interface/api/auth/auth";
 import {
   LoginContainer,
