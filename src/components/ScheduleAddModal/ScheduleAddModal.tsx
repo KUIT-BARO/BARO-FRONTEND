@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Button from "../Button/Button";
-import xIcon from "../../assets/icons/x_gray.svg";
+import xIcon from "../../assets/icons/Schedule/x_gray.svg";
 import * as S from "./ScheduleAddModal.styles";
 import { RequestSchedule } from "../../interface/api/schedules/schedule";
 import {

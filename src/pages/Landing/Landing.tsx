@@ -45,7 +45,6 @@ const Landing: React.FC = () => {
           <ScrollText>스크롤해보세요</ScrollText>
         </Scroll>
       </Content>
-
       <StartButton onClick={() => navigate("/login")}>시작하기</StartButton>
 
       {landingData.map((section, index) => (

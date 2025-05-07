@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import checkIcon from "../../../../assets/icons/check.svg";
+// import checkIcon from "../../../../assets/icons/check.svg";
 import { ToastContainer, ToastIcon, ToastMessage } from "./Toast.styles";
 
 interface ToastProps {
@@ -28,7 +28,7 @@ const Toast: React.FC<ToastProps> = ({ message, isVisible, onClose }) => {
   return (
     <ToastContainer visible={visible}>
       <ToastIcon>
-        <img src={checkIcon} alt="check" width={16} height={16} />
+        {/* <img src={checkIcon} alt="check" width={16} height={16} /> */}
       </ToastIcon>
       <ToastMessage>{message}</ToastMessage>
     </ToastContainer>
