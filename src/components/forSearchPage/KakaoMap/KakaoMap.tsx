@@ -4,14 +4,14 @@ import debounce from "lodash/debounce";
 
 import styled from "styled-components";
 
-import MarkerBlue from "../../../assets/icons/location.svg";
-import MarkerRed from "../../../assets/icons/location_red.svg";
-import Scope from "../../../assets/icons/스코프.svg";
+import MarkerBlue from "../../../assets/icons/KakaoMap/location.svg";
+import MarkerRed from "../../../assets/icons/KakaoMap/location_red.svg";
+import Scope from "../../../assets/icons/KakaoMap/scope.svg";
 import GoToButton from "../../../assets/icons/Buttons/right.svg";
-import InfoWindowTail from "../../../assets/icons/infowindow_tail.svg";
-import NavyStar from "../../../assets/icons/navyStar.svg";
-import GrayStar from "../../../assets/icons/grayStar.svg";
-import HalfStar from "../../../assets/icons/grayStar.svg";
+import InfoWindowTail from "../../../assets/icons/KakaoMap/infowindow_tail.svg";
+import NavyStar from "../../../assets/icons/KakaoMap/navyStar.svg";
+import GrayStar from "../../../assets/icons/KakaoMap/grayStar.svg";
+import HalfStar from "../../../assets/icons/KakaoMap/grayStar.svg";
 
 //========================================================
 const PINNED_PLACES = [

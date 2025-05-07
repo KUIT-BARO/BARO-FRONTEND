@@ -11,12 +11,8 @@ import MyPage from "./MyPage/Mypage-main/MyPage";
 import ProfileEdit from "./MyPage/Mypage-profile-edit/ProfileEdit";
 import Settings from "./MyPage/Mypage-setting/Settings";
 
-import Contact from "./MyPage/Contact";
-import SavedPlacesDetail from "./MyPage/SavedPlacesDetail";
-import UserSchedulePage from "./MyPage/UserSchedulePage";
 
-
-import SearchPage from "./SearchPage/SearchPage";
+import Search from "./Search/Search";
 import Landing from "./Landing/Landing";
 import PromisePending from "./PromisePending/PromisePending";
 
@@ -95,7 +91,7 @@ const Router = () => {
       path: "/search/*",
       element: (
         <ProtectedRoute isAuthenticated={isAuthenticated}>
-          <SearchPage />
+          <Search />
         </ProtectedRoute>
       ),
     },

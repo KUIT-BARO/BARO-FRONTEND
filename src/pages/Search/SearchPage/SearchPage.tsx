@@ -7,7 +7,7 @@ import CategroyTab from "./CategoryTab";
 import KakaoMap from "../../../components/forSearchPage/KakaoMap/KakaoMap";
 import Navigation from "../../../components/Navigation/Navigation";
 
-import Pencil from "../../../assets/icons/연필.svg";
+import Pencil from "../../../assets/icons/Search/pencil.svg";
 
 export default function SearchPage() {
   const navigate = useNavigate();

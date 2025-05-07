@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import SearchIcon from "../../assets/icons/searchIcon.svg";
+import SearchIcon from "../../assets/icons/Search/searchIcon.svg";
 
 export default function Search({ placeholder, value, onKeyDown, ...props }) {
   const [isInputFocused, setIsInputFocused] = React.useState<boolean>(false);
