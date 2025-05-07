@@ -8,15 +8,10 @@ import LoginPage from "./Login/LoginPage/LoginPage";
 import MyPromises from "./MyPromises/MyPromises";
 import FinalVote from "./FinalVote/FinalVote";
 import MyPage from "./MyPage/Mypage-main/MyPage";
-import ProfileEdit from "./MyPage/Mypage-profile-edit/ProfileEdit";
+import ProfileEdit from "../pages/MyPage/Mypage-profile-edit/ProfileEdit.tsx";
 import Settings from "./MyPage/Mypage-setting/Settings";
 
-import Contact from "./MyPage/Contact";
-import SavedPlacesDetail from "./MyPage/SavedPlacesDetail";
-import UserSchedulePage from "./MyPage/UserSchedulePage";
-
-
-import SearchPage from "./SearchPage/SearchPage";
+import SearchPage from "./Search/Search";
 import Landing from "./Landing/Landing";
 import PromisePending from "./PromisePending/PromisePending";
 
