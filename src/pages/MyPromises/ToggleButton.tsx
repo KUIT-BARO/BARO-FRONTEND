@@ -59,6 +59,7 @@ const Toggle = styled.button<{ active: boolean }>`
   cursor: pointer;
   background-color: ${props => props.active ? '#5175FF' : 'transparent'};
   color: ${props => props.active ? 'white' : '#C0C0C0'};
+  transition: all 0.3s ease-in-out;
 
   text-align: center;
   font-size: 16px;
@@ -68,5 +69,6 @@ const Toggle = styled.button<{ active: boolean }>`
 
   img {
     padding-top: 3px;
+    transition: opacity 0.3s ease-in-out;
   }
 `;

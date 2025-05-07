@@ -1,11 +1,11 @@
 import React, { useState, useMemo, useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import backIcon from "../../../assets/icons/backIcon.svg";
-import editIcon from "../../../assets/icons/edit_white.svg";
-import profile1 from "../../../assets/icons/manavatar.svg";
-import profile2 from "../../../assets/icons/womanavatar.svg";
-import profile3 from "../../../assets/icons/dogavatar.svg";
-import profile4 from "../../../assets/icons/useravatar.svg";
+import backIcon from "../../../assets/icons/MypageProfile/backIcon.svg";
+import editIcon from "../../../assets/icons/MypageProfile/edit_white.svg";
+import profile1 from "../../../assets/icons/MypageProfile/manavatar.svg";
+import profile2 from "../../../assets/icons/MypageProfile/womanavatar.svg";
+import profile3 from "../../../assets/icons/MypageProfile/dogavatar.svg";
+import profile4 from "../../../assets/icons/MypageProfile/useravatar.svg";
 import Navigation from "../../../components/Navigation/Navigation";
 import InputModal from "./InputModal/InputModal";
 import Toast from "./Toast/Toast";

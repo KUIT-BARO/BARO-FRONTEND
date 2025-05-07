@@ -1,8 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import landinglogo from "../../assets/icons/landinglogo.svg";
-import landingicon from "../../assets/icons/landingicon.svg";
-import landingscroll from "../../assets/icons/landingscroll.svg";
+import landinglogo from "../../assets/icons/Landing/landinglogo.svg";
+import landingicon from "../../assets/icons/Landing/landingicon.svg";
+import landingscroll from "../../assets/icons/Landing/landingscroll.svg";
 import landingData from "./LandingData";
 import { motion } from "framer-motion";
 import {

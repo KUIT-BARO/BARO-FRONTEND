@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getMyPage } from "../../../apis/user/getMyPage";
-import backIcon from "../../../assets/icons/backIcon.svg";
-import manAvatar from "../../../assets/icons/manavatar.svg";
+import backIcon from "../../../assets/icons/MypageProfile/backIcon.svg";
+import manAvatar from "../../../assets/icons/MypageProfile/manavatar.svg";
 
 import WithdrawModal from "./Withdraw/WithdrawModal";
 
