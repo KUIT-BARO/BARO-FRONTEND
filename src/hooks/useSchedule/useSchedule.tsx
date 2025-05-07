@@ -1,4 +1,4 @@
-import useApi from "../useApi.jsx";
+import useApi from "../useApi";
 import { RequestSchedule } from "../../interface/api/schedules/schedule.js";
 const useSchedule = () => {
   const { scheduleApi } = useApi();

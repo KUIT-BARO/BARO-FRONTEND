@@ -8,8 +8,9 @@ import LoginPage from "./Login/LoginPage/LoginPage";
 import MyPromises from "./MyPromises/MyPromises";
 import FinalVote from "./FinalVote/FinalVote";
 import MyPage from "./MyPage/Mypage-main/MyPage";
-import ProfileEdit from "./MyPage/Mypage-profile-edit/ProfileEdit";
+import ProfileEdit from "../pages/MyPage/Mypage-profile-edit/ProfileEdit.tsx";
 import Settings from "./MyPage/Mypage-setting/Settings";
+
 
 
 import Search from "./Search/Search";
