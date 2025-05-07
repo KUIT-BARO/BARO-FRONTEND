@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
-import person from "../../assets/icons/사람_gray.svg";
-import locationIcon from "../../assets/icons/장소_gray.svg";
+import person from "../../assets/icons/Search/person.svg";
+import locationIcon from "../../assets/icons/Search/location.svg";
 
 interface PromiseContainerProps {
   left: string;
