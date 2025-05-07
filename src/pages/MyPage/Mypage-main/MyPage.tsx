@@ -20,47 +20,17 @@ import {
   UserId,
 } from "./MyPage.styles";
 import Schedule from "./Schedule/Schedule";
+import { UserInfo } from "../../../interface/api/mypage/mypage";
 
-interface UserInfo {
-  nickname: string;
-  userId: number;
-  userProfile: string;
-}
-
+const dummydata: UserInfo = {
+  userName: "",
+  email: "",
+  profileImage: "",
+};
 const MyPage: React.FC = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("schedule");
-  const [userInfo, setUserInfo] = useState<UserInfo>({
-    nickname: "",
-    userId: 0,
-    userProfile: "",
-  });
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchMyPage = async () => {
-      try {
-        setIsLoading(true);
-        const response = await getMyPage.getMyPage();
-        if (response.status === 200 && response.data) {
-          setUserInfo({
-            nickname: response.data.data.user.nickname,
-            userId: response.data.data.user.userId,
-            userProfile: response.data.data.user.userProfile,
-          });
-        }
-      } catch (error) {
-        setError("마이페이지 정보를 불러오는데 실패했습니다.");
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchMyPage();
-  }, []);
-
-  if (isLoading) return <div>로딩 중...</div>;
-  if (error) return <div>{error}</div>;
+  const [userInfo, setUserInfo] = useState<UserInfo>(dummydata);
 
   return (
     <MyPageContainer>
@@ -72,18 +42,16 @@ const MyPage: React.FC = () => {
       </MyPageHeader>
       <ProfileSection>
         <ProfileImage>
-
-          <ProfileImg src={Default} alt="profile" />
-
+          <ProfileImg src={userInfo.profileImage} alt="profile" />
         </ProfileImage>
         <ProfileInfo>
-          <NickName>{userInfo.nickname}</NickName>
+          <NickName>{userInfo.userName}</NickName>
           <EditButton
             src={editIcon}
             alt="edit"
             onClick={() => navigate("/profile/edit")}
           />
-          <UserId>@{userInfo.userId}</UserId>
+          <UserId>@{userInfo.email}</UserId>
         </ProfileInfo>
       </ProfileSection>
       <Schedule />

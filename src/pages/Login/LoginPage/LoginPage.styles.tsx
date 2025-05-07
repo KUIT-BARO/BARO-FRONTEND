@@ -36,7 +36,9 @@ export const InputWrapper = styled.div`
   width: 100%;
 `;
 
-export const InputIcon = styled.div`
+export const Iconimg = styled.img`
+  width: 24px;
+  height: 24px;
   position: absolute;
   left: 16px;
   top: 50%;
@@ -44,11 +46,6 @@ export const InputIcon = styled.div`
   display: flex;
   align-items: center;
   z-index: 1;
-
-  img {
-    width: 24px;
-    height: 24px;
-  }
 `;
 
 export const LoginInput = styled.input`
@@ -56,7 +53,7 @@ export const LoginInput = styled.input`
   height: 50px;
   background: rgba(255, 255, 255, 0.3);
   border: none;
-  border-radius: 24px;
+  border-radius: 10px;
   padding: 0 16px 0 52px;
   color: white;
   font-family: "Pretendard", sans-serif;
@@ -80,7 +77,6 @@ export const AutoLoginWrapper = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 30px;
-  margin-left: 40px;
   color: white;
   font-size: 14px;
 `;
@@ -148,8 +144,6 @@ export const ResponsiveContainer = styled.div`
 `;
 
 export const Logoimg = styled.img``;
-
-export const Userimg = styled.img``;
 
 export const Passwardimg = styled.img``;
 

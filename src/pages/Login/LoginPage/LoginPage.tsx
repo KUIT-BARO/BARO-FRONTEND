@@ -1,16 +1,15 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { postAuth } from "../../../apis/auth/postAuth";
+import React, { useState, useRef } from "react";
+import { Link } from "react-router-dom";
 import userIcon from "../../../assets/icons/login_user.svg";
 import lockIcon from "../../../assets/icons/login_password.svg";
 import Logo from "../../../assets/icons/logo.svg";
+import { LoginInfo } from "../../../interface/api/auth/auth";
 import {
   LoginContainer,
   LogoWrapper,
   WelcomeText,
   InputContainer,
   InputWrapper,
-  InputIcon,
   LoginInput,
   ButtonBox,
   AutoLoginWrapper,
@@ -19,37 +18,32 @@ import {
   Line,
   SignupText,
   Logoimg,
-  Userimg,
-  Passwardimg,
+  Iconimg,
   AutoLabel,
 } from "./LoginPage.styles";
 import Button from "../../../components/Button/Button";
 
 const LoginPage = () => {
-  const navigate = useNavigate();
-  const [id, setId] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+  const [isEmailFocused, setIsEmailFocused] = useState(false);
+  const [isPasswordFocused, setIsPasswordFocused] = useState(false);
 
-  const handleLogin = async () => {
-    try {
-      if (!id || !password) {
-        alert("아이디와 비밀번호를 입력해주세요");
-        return;
-      }
-      const response = await postAuth.login({ id, password });
-      if (response.status === 200) {
-        console.log("로그인 성공 응답 데이터 :", response);
-
-        sessionStorage.setItem("login", "true");
-        sessionStorage.setItem("name", response.data.name);
-        sessionStorage.setItem("isAuthenticated", "true");
-
-        window.dispatchEvent(new Event("storage"));
-        navigate("/main");
-      }
-    } catch (error) {
-      console.error("로그인 오류:", error);
+  const handleLogin = () => {
+    if (!email) {
+      emailRef.current?.focus();
+      return;
     }
+    if (!password) {
+      passwordRef.current?.focus();
+      return;
+    }
+    const loginData: LoginInfo = {
+      email,
+      password,
+    };
   };
 
   return (
@@ -61,25 +55,31 @@ const LoginPage = () => {
 
       <InputContainer>
         <InputWrapper>
-          <InputIcon>
-            <Userimg src={userIcon} alt="user" />
-          </InputIcon>
+          <Iconimg src={userIcon} alt="user" />
           <LoginInput
             type="text"
-            placeholder="이메일 혹은 아이디 입력"
-            value={id}
-            onChange={(e) => setId(e.target.value)}
+            placeholder={
+              isEmailFocused ? "이메일을 입력해주세요" : "이메일 입력"
+            }
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            onFocus={() => setIsEmailFocused(true)}
+            onBlur={() => setIsEmailFocused(false)}
+            ref={emailRef}
           />
         </InputWrapper>
         <InputWrapper>
-          <InputIcon>
-            <Passwardimg src={lockIcon} alt="password" />
-          </InputIcon>
+          <Iconimg src={lockIcon} alt="password" />
           <LoginInput
             type="password"
-            placeholder="비밀번호 입력"
+            placeholder={
+              isPasswordFocused ? "비밀번호를 입력해주세요!" : "비밀번호 입력"
+            }
+            onFocus={() => setIsPasswordFocused(true)}
+            onBlur={() => setIsPasswordFocused(false)}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            ref={passwordRef}
           />
         </InputWrapper>
       </InputContainer>
