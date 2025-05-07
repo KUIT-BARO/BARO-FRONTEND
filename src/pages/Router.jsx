@@ -10,17 +10,20 @@ import FinalVote from "./FinalVote/FinalVote";
 import MyPage from "./MyPage/Mypage-main/MyPage";
 import ProfileEdit from "./MyPage/Mypage-profile-edit/ProfileEdit";
 import Settings from "./MyPage/Mypage-setting/Settings";
+
 import Contact from "./MyPage/Contact";
 import SavedPlacesDetail from "./MyPage/SavedPlacesDetail";
 import UserSchedulePage from "./MyPage/UserSchedulePage";
-import Accept from "./Accept/Accept";
-import Search from "./Search/Search";
+
+
+import SearchPage from "./SearchPage/SearchPage";
 import Landing from "./Landing/Landing";
-import PromiseStatus from "./PromiseStatus/PromiseStatus";
+import PromisePending from "./PromisePending/PromisePending";
 
 // 로그인 여부 확인
 const getAuthStatus = () => {
-  return sessionStorage.getItem("login") === "true";
+  // return sessionStorage.getItem("login") === "true";
+  return true;
 };
 
 const Router = () => {
@@ -45,20 +48,9 @@ const Router = () => {
     // 보호된 라우트 적용
     {
       path: "/suggest/*",
-      element: (
-        <ProtectedRoute isAuthenticated={isAuthenticated}>
-          <Suggest />
-        </ProtectedRoute>
-      ),
+      element: <Suggest />,
     },
-    {
-      path: "/accept/:promiseId/*",
-      element: (
-        <ProtectedRoute isAuthenticated={isAuthenticated}>
-          <Accept />
-        </ProtectedRoute>
-      ),
-    },
+
     {
       path: "/finalvote/*",
       element: (
@@ -84,14 +76,6 @@ const Router = () => {
       ),
     },
     {
-      path: "/places/:category",
-      element: (
-        <ProtectedRoute isAuthenticated={isAuthenticated}>
-          <SavedPlacesDetail />
-        </ProtectedRoute>
-      ),
-    },
-    {
       path: "/profile/edit",
       element: (
         <ProtectedRoute isAuthenticated={isAuthenticated}>
@@ -102,42 +86,26 @@ const Router = () => {
     {
       path: "/settings",
       element: (
-        <ProtectedRoute isAuthenticated={isAuthenticated}>
-          <Settings />
-        </ProtectedRoute>
-      ),
-    },
-    {
-      path: "/contact",
-      element: (
-        <ProtectedRoute isAuthenticated={isAuthenticated}>
-          <Contact />
-        </ProtectedRoute>
+        // <ProtectedRoute isAuthenticated={isAuthenticated}>
+        <Settings />
+        // </ProtectedRoute>
       ),
     },
     {
       path: "/search/*",
       element: (
         <ProtectedRoute isAuthenticated={isAuthenticated}>
-          <Search />
+          <SearchPage />
         </ProtectedRoute>
       ),
     },
     {
-      path: "/status",
+      path: "/pending",
       element: (
         <ProtectedRoute isAuthenticated={isAuthenticated}>
-          <PromiseStatus />
+          <PromisePending />
         </ProtectedRoute>
       ),
-    },
-    {
-      path: "/schedule/:userId",
-      element: <UserSchedulePage />,
-    },
-    {
-      path: "/users/schedule/:userId",
-      element: <UserSchedulePage />,
     },
   ]);
 
