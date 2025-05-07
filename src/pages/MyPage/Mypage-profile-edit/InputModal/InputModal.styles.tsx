@@ -65,11 +65,14 @@ export const CompleteButton = styled.button`
   right: 20px;
 `;
 
-export const ModalContent = styled.div`
+export const ModalContent = styled.div<{ column?: boolean }>`
   padding: 0 20px;
   flex: 1;
   display: flex;
   align-items: center;
+  flex-direction: ${({ column }) => (column ? "column" : "row")};
+  justify-content: ${({ column }) => (column ? "center" : "initial")};
+  gap: ${({ column }) => (column ? "44px" : "")};
 `;
 
 export const FieldWrapper = styled.div`
@@ -157,4 +160,17 @@ export const ProfileDescription = styled.p`
   font-size: 14px;
   font-weight: 500;
   text-align: center;
+`;
+export const PasswordInputBlock = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 8px;
+  margin-bottom: 24px;
+`;
+
+export const PasswordLabel = styled.label`
+  font-size: 14px;
+  font-weight: 500;
+  color: white;
 `;

@@ -66,6 +66,7 @@ interface Props {
   setValue: (value: string) => void;
   buttonText?: string;
   onButtonClick?: () => void;
+  ref: React.RefObject<HTMLInputElement>;
 }
 const InputSection: React.FC<Props> = ({
   children,
@@ -74,6 +75,7 @@ const InputSection: React.FC<Props> = ({
   setValue,
   buttonText,
   onButtonClick,
+  ref,
 }) => {
   return (
     <InputContainer>
@@ -86,6 +88,7 @@ const InputSection: React.FC<Props> = ({
           onChange={(e) => {
             setValue(e.target.value);
           }}
+          ref={ref}
         />
         {buttonText && onButtonClick && (
           <CheckButton onClick={onButtonClick}>{buttonText}</CheckButton>
