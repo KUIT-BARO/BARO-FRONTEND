@@ -1,13 +1,13 @@
-import landingchat from "../../assets/icons/landingchatmockup.svg";
-import landingmockup1 from "../../assets/icons/landingmockup1.svg";
-import landingmockup2 from "../../assets/icons/landingmockup2.svg";
-import landingmockup3 from "../../assets/icons/landingmockup3.svg";
-import landingmockup4 from "../../assets/icons/landingmockup4.svg";
-import landingmockup5 from "../../assets/icons/landingmockup5.svg";
-import landingmockup6 from "../../assets/icons/landingmockup6.svg";
-import landingmockup7 from "../../assets/icons/landingmockup7.svg";
-import landinglast from "../../assets/icons/landinglast.svg";
-import landinglogo2 from "../../assets/icons/landinglogo2.svg";
+import landingchat from "../../assets/icons/Landing/landingchatmockup.svg";
+import landingmockup1 from "../../assets/icons/Landing/landingmockup1.svg";
+import landingmockup2 from "../../assets/icons/Landing/landingmockup2.svg";
+import landingmockup3 from "../../assets/icons/Landing/landingmockup3.svg";
+import landingmockup4 from "../../assets/icons/Landing/landingmockup4.svg";
+import landingmockup5 from "../../assets/icons/Landing/landingmockup5.svg";
+import landingmockup6 from "../../assets/icons/Landing/landingmockup6.svg";
+import landingmockup7 from "../../assets/icons/Landing/landingmockup7.svg";
+import landinglast from "../../assets/icons/Landing/landinglast.svg";
+import landinglogo2 from "../../assets/icons/Landing/landinglogo2.svg";
 
 export interface LandingItem {
   img: string | string[]; // 단일 이미지 또는 여러 개의 이미지 배열
