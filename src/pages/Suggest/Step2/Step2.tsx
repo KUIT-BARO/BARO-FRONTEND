@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import Button from "../../../components/Button/Button";
 import { ProgressBar } from "../../../components/ProgressBar/ProgressBar";
@@ -21,7 +21,6 @@ export default function Step2({
   handleOpenPopup,
   handleClosePopup,
 }) {
-  const navigate = useNavigate();
   const isFormComplete =
     dateStart != null && dateEnd != null && (placeName ?? "").trim().length > 0;
 
@@ -42,7 +41,7 @@ export default function Step2({
             dateEnd={dateEnd}
           />
         </Section>
-        <Section style={{ gap: "45px" }}>
+        <Section>
           <Question
             color="Blue"
             title="어디서 만나실건가요?"

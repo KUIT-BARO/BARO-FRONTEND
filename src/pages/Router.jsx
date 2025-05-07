@@ -10,14 +10,20 @@ import FinalVote from "./FinalVote/FinalVote";
 import MyPage from "./MyPage/Mypage-main/MyPage";
 import ProfileEdit from "./MyPage/Mypage-profile-edit/ProfileEdit";
 import Settings from "./MyPage/Mypage-setting/Settings";
-import Accept from "./Accept/Accept";
+
+import Contact from "./MyPage/Contact";
+import SavedPlacesDetail from "./MyPage/SavedPlacesDetail";
+import UserSchedulePage from "./MyPage/UserSchedulePage";
+
+
 import SearchPage from "./SearchPage/SearchPage";
 import Landing from "./Landing/Landing";
-import PromiseStatus from "./PromiseStatus/PromiseStatus";
+import PromisePending from "./PromisePending/PromisePending";
 
 // 로그인 여부 확인
 const getAuthStatus = () => {
-  return sessionStorage.getItem("login") === "true";
+  // return sessionStorage.getItem("login") === "true";
+  return true;
 };
 
 const Router = () => {
@@ -42,20 +48,9 @@ const Router = () => {
     // 보호된 라우트 적용
     {
       path: "/suggest/*",
-      element: (
-        <ProtectedRoute isAuthenticated={isAuthenticated}>
-          <Suggest />
-        </ProtectedRoute>
-      ),
+      element: <Suggest />,
     },
-    {
-      path: "/accept/:promiseId/*",
-      element: (
-        <ProtectedRoute isAuthenticated={isAuthenticated}>
-          <Accept />
-        </ProtectedRoute>
-      ),
-    },
+
     {
       path: "/finalvote/*",
       element: (
@@ -105,10 +100,10 @@ const Router = () => {
       ),
     },
     {
-      path: "/status",
+      path: "/pending",
       element: (
         <ProtectedRoute isAuthenticated={isAuthenticated}>
-          <PromiseStatus />
+          <PromisePending />
         </ProtectedRoute>
       ),
     },

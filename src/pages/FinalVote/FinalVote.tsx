@@ -31,8 +31,14 @@ export default function Accept(placeId: number) {
         const response = await GetPromiseVote(placeId);
         console.log(response);
         if (response) {
-          for (let i = 0; i < response.data.data.promisePersonalTimeDtoList.length; i++) {
-            promisePersonalTimeDtoList.push(response.data.data.promisePersonalTimeDtoList[i]);
+          for (
+            let i = 0;
+            i < response.data.data.promisePersonalTimeDtoList.length;
+            i++
+          ) {
+            promisePersonalTimeDtoList.push(
+              response.data.data.promisePersonalTimeDtoList[i]
+            );
           }
           for (let i = 0; i < response.data.data.placeDtoList.length; i++) {
             placeDtoList.push(response.data.data.placeDtoList[i]);
@@ -41,8 +47,8 @@ export default function Accept(placeId: number) {
       } catch (error) {
         console.error("약속 정보 불러오기 실패:", error);
       }
-    }
-    fetchVote
+    };
+    fetchVote;
   }, []);
 
   const [selectedTimeIndex, setSelectedTimeIndex] = useState(null);
@@ -98,7 +104,7 @@ export default function Accept(placeId: number) {
 
   return (
     <>
-      <Routes>
+      {/* <Routes>
         <Route
           path="/"
           element={
@@ -131,7 +137,7 @@ export default function Accept(placeId: number) {
         />
 
         <Route path="confirm" element={<Confirm data={dummyData} />} />
-      </Routes>
+      </Routes> */}
     </>
   );
 }

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 export const Overlay = styled.div`
   position: fixed;
   top: 0;
@@ -18,8 +19,7 @@ export const PopupContent = styled.div`
   width: 100%;
   height: 70vh;
   background-color: white;
-
-  border-radius: 16px 16px 0px 0px;
+  border-radius: 16px 16px 0 0;
   padding: 40px 20px 20px 20px;
   gap: 10px;
   text-align: center;
@@ -33,28 +33,38 @@ export const InfoBox = styled.div`
   flex-direction: column;
   gap: 16px;
   align-items: flex-start;
-
   background-color: #f4f8fb;
   border-radius: 10px;
-
   padding: 25px 20px;
   box-sizing: border-box;
-  .title {
-    font-size: 20px;
-    font-weight: 600;
-  }
-  .container {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-  .container > .wrap {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    > p {
-      font-size: 16px;
-      font-weight: 400;
-    }
-  }
+`;
+
+export const InfoTitle = styled.p`
+  font-size: 20px;
+  font-weight: 600;
+`;
+
+export const InfoContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+`;
+
+export const InfoWrap = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+`;
+
+export const InfoText = styled.p`
+  font-size: 16px;
+  font-weight: 400;
+`;
+
+export const ButtonColumn = styled.div`
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 `;
