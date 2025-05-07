@@ -2,19 +2,19 @@ import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import styled from "styled-components";
 
-// import Header from "../../components/forSearchPage/Header/Header";
 import Search from "../../../components/Search/Search";
+import CategroyTab from "./CategoryTab";
 import KakaoMap from "../../../components/forSearchPage/KakaoMap/KakaoMap";
-// import Places from "../../components/forSearchPage/Places/Places";
 import Navigation from "../../../components/Navigation/Navigation";
 
 import Pencil from "../../../assets/icons/연필.svg";
 
-export default function SearchMain() {
+export default function SearchPage() {
   const navigate = useNavigate();
 
   const [currentLocationName, setCurrentLocationName] = useState<string>("");
   const [searchAddress, setSearchAddress] = useState<string>("");
+  const [selectedCategory, setSelectedCategory] = useState<string>("");
   
   return (
     <Layout>
@@ -22,29 +22,31 @@ export default function SearchMain() {
         <Search 
           placeholder={currentLocationName}
           value={searchAddress}
-          // onChange={(e) => setSearchAddress(e.target.value)}
           onKeyDown={(e) => {
             if (e.key === 'Enter') {
               setSearchAddress(e.target.value);
-              e.currentTarget.blur();
+              // e.currentTarget.blur();
             }
           }}
         />
         <img
           className="addPinButton"
           src={Pencil} alt="pencil icon" 
-          onClick={() => navigate('/search/reviewplace')}
+          onClick={() => navigate('/search/review')}
         />
       </Header>
 
+      <CategroyTab onCategorySelected={setSelectedCategory} />
+
       <KakaoMap 
-        mapHeight="483px" 
+        mapHeight="74vh" 
         setCurrentLocationName={setCurrentLocationName}
         searchKeyword={searchAddress}
         buttonOn={true}
+        staticMap={false}
+        selectedCategory={selectedCategory}
       />
 
-      {/* <Places /> */}
       <Navigation />
     </Layout>
   );
@@ -53,14 +55,18 @@ export default function SearchMain() {
 const Layout = styled.div`
   background-color: #F4F8FB;
   width: 100%;
-  min-height: 100vh;
+  min-height: 95vh;
 `;
 const Header = styled.div`
+  position: fixed;
+  top: 0;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: #F4F8FB;
-  padding: 24px 17px 24px 20px;
+  padding: 24px 17px 0px 20px;
+  z-index: 50;
   gap: 11px;
 
   .addPinButton {

@@ -14,7 +14,7 @@ import Contact from "./MyPage/Contact";
 import SavedPlacesDetail from "./MyPage/SavedPlacesDetail";
 import UserSchedulePage from "./MyPage/UserSchedulePage";
 import Accept from "./Accept/Accept";
-import SearchPage from "./SearchPage/SearchPage";
+import Search from "./Search/Search";
 import Landing from "./Landing/Landing";
 import PromiseStatus from "./PromiseStatus/PromiseStatus";
 
@@ -119,7 +119,7 @@ const Router = () => {
       path: "/search/*",
       element: (
         <ProtectedRoute isAuthenticated={isAuthenticated}>
-          <SearchPage />
+          <Search />
         </ProtectedRoute>
       ),
     },

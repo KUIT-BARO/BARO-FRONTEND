@@ -1,11 +1,11 @@
 import React from 'react';
 import { Route, Routes } from "react-router-dom";
 
-import SearchPlace from './SearchMain/SearchMain';
+import SearchPlace from './SearchPage/SearchPage';
 import ReviewPlace from './AddPin/AddPin';
 // import BestPlace from './BestPlace/BestPlace';
 
-export default function SearchPage() {
+export default function Search() {
   return (
     <>
       <Routes>
@@ -14,7 +14,7 @@ export default function SearchPage() {
           element={<SearchPlace />}
         />
         <Route 
-          path=":placeId"
+          path="/place/:id"
           element={<ReviewPlace />}
         />
         {/* <Route
