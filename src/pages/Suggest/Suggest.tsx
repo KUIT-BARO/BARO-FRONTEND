@@ -1,37 +1,30 @@
-import React, { useState } from "react";
+// ✅ 리팩토링된 Suggest.tsx
+import React from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
-
 import Step1 from "./Step1/Step1";
 import Step2 from "./Step2/Step2";
 import Popup from "./Popup/Popup";
+import usePromiseSuggest from "../../hook/usePromiseSuggest/usePromiseSuggest";
 
 export default function Suggest() {
   const navigate = useNavigate();
+  const {
+    promiseId,
+    setPromiseId,
+    name,
+    setName,
+    placeName,
+    setPlaceName,
+    dateRange,
+    setDateRange,
+    showPopup,
+    handleOpenPopup,
+    handleClosePopup,
+  } = usePromiseSuggest();
 
-  const [promiseId, setPromiseId] = useState<number | null>(null);
-  const [name, setName] = useState<string>("");
-  const [placeName, setPlaceName] = useState<string>("");
-  const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([
-    null,
-    null,
-  ]);
   const [dateStart, dateEnd] = dateRange;
-  const [showPopup, setShowPopup] = useState(false);
 
-  // 홈 화면으로 이동
-  const handleExit = () => {
-    navigate("/main");
-  };
-
-  // 팝업 열기
-  const handleOpenPopup = () => {
-    setShowPopup(true);
-  };
-
-  // 팝업 닫기
-  const handleClosePopup = () => {
-    setShowPopup(false);
-  };
+  const handleExit = () => navigate("/main");
 
   return (
     <>

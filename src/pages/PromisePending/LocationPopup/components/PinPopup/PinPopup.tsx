@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import LocationInterface from "../../../../interface/Location/Location";
 import { SearchBar, SearchImg, SearchInput } from "../../LocationPopup.styles";
 import search from "../../../../../assets/icons/Buttons/search.svg";
 import {
@@ -17,11 +16,12 @@ import {
 import { PlacesWrapper } from "../../LocationPopup.styles";
 import { PlaceInterface } from "../../../../interface/Place/Place";
 import PlaceWrapper from "../PlaceWrapper/PlaceWrapper";
+import { PinInterface } from "../../../../../interface/Pin/Pin";
 interface PinPopupInterface {
-  locationCart: LocationInterface[];
+  locationCart: PinInterface[];
   setLocationCart: (locations: PlaceInterface[]) => void;
   suggestedRegion: string;
-  places: LocationInterface[];
+  places: PlaceInterface[];
   setIsPinPopup: (state: boolean) => void;
 }
 

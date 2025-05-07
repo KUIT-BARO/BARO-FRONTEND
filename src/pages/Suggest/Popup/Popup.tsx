@@ -1,65 +1,54 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-import SuggestInterface from "../../../interface/SuggestPromise/Suggest";
-
 import Button from "../../../components/Button/Button";
 import Question from "../../../components/Question/Question";
-import { InfoBox, Overlay, PopupContent } from "./Popup.styles";
+import {
+  InfoBox,
+  Overlay,
+  PopupContent,
+  InfoTitle,
+  InfoContainer,
+  InfoWrap,
+  InfoText,
+  ButtonColumn,
+} from "./Popup.styles";
 
 import formatDateToShort from "../../../utils/formatDateToShort";
-
-import PostPromise from "../../../apis/promise/postPromise";
-import PostPromiseShare from "../../../apis/promise/PostPromiseShare";
 
 import crown from "../../../assets/icons/Promise/crown.svg";
 import calender from "../../../assets/icons/Promise/calender.svg";
 import location from "../../../assets/icons/Promise/location.svg";
 
-interface PopupProps extends SuggestInterface {
+interface PopupProps {
   setPromiseId: (promiseId: number) => void;
   handleClosePopup: () => void;
+  name: string;
+  placeName: string;
+  dateStart: Date;
+  dateEnd: Date;
 }
 
 export default function Popup({
   handleClosePopup,
+  setPromiseId,
   name,
   placeName,
   dateStart,
   dateEnd,
 }: PopupProps) {
   const navigate = useNavigate();
+  const user = sessionStorage.getItem("name");
 
-  const handlePostPromise = async () => {
-    // try {
-    //   const response = await PostPromise(
-    //     name,
-    //     dateStart,
-    //     dateEnd,
-    //     peopleNum,
-    //     purpose,
-    //     placeId
-    //   );
-    //   if (response) {
-    //     console.log(response.data.data);
-    //     setPromiseId(response.data.data.promiseId);
-    //   }
-    // } catch (error) {
-    //   console.error("약속 생성 중 오류 발생:", error);
-    // }
+  const handleConfirm = async () => {
+    // TODO: 서버 연동 예정
+    // const response = await PostPromise(...);
+    // setPromiseId(response.data.promiseId);
+
+    handleClosePopup();
+    navigate("/main");
   };
 
-  // useEffect(() => {
-  //   if (promiseId) {
-  //     PostPromiseShare(promiseId, codeList)
-  //       .then(() => {
-  //         navigate("/suggest/step4");
-  //       })
-  //       .catch((error) => console.error("약속 공유 중 오류 발생:", error));
-  //   }
-  // }, [promiseId]); // `promiseId`가 변경될 때 실행
-
-  const user = sessionStorage.getItem("name");
   return (
     <Overlay>
       <PopupContent>
@@ -69,48 +58,31 @@ export default function Popup({
         />
 
         <InfoBox>
-          <p className="title">{name}</p>
-          <div className="container">
-            <div className="wrap">
-              <img src={crown} />
-              <p>{user}</p>
-            </div>
-
-            <div className="wrap">
-              <img src={location} />
-              <p>{placeName}</p>
-            </div>
-            <div className="wrap">
-              <img src={calender} />
-              <p>
+          <InfoTitle>{name}</InfoTitle>
+          <InfoContainer>
+            <InfoWrap>
+              <img src={crown} alt="주최자" />
+              <InfoText>{user}</InfoText>
+            </InfoWrap>
+            <InfoWrap>
+              <img src={location} alt="장소" />
+              <InfoText>{placeName}</InfoText>
+            </InfoWrap>
+            <InfoWrap>
+              <img src={calender} alt="날짜" />
+              <InfoText>
                 {formatDateToShort(dateStart)} ~ {formatDateToShort(dateEnd)}
-              </p>
-            </div>
-          </div>
+              </InfoText>
+            </InfoWrap>
+          </InfoContainer>
         </InfoBox>
-        <div
-          style={{
-            position: "relative",
-            width: "100%",
-            boxSizing: "border-box",
-            display: "flex",
-            flexDirection: "column",
-            gap: "8px",
-          }}
-        >
-          <Button
-            onClick={async () => {
-              // await handlePostPromise();
-              handleClosePopup();
-              navigate("/main");
-            }}
-          >
-            확인
-          </Button>
+
+        <ButtonColumn>
+          <Button onClick={handleConfirm}>확인</Button>
           <Button onClick={handleClosePopup} color="White">
             수정할래요
           </Button>
-        </div>
+        </ButtonColumn>
       </PopupContent>
     </Overlay>
   );

@@ -84,3 +84,17 @@ export const PlacesWrapper = styled.div`
   flex-direction: column;
   width: 100%;
 `;
+
+export const ErrorMessage = styled.span<{ visible: boolean }>`
+  position: absolute;
+  top: 28px;
+  right: 45px;
+
+  background-color: #f4f8fb;
+  color: red;
+  font-size: 14px;
+  opacity: ${({ visible }) => (visible ? 1 : 0)};
+  transform: ${({ visible }) =>
+    visible ? "translateY(0)" : "translateY(-10px)"};
+  transition: opacity 0.5s ease, transform 0.5s ease;
+`;

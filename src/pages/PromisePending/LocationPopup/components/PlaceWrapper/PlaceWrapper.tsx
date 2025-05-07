@@ -1,11 +1,11 @@
 import React from "react";
-import { PlaceInterface } from "../../../../../interface/Place/Place";
+import { PinInterface } from "../../../../../interface/Pin/Pin";
 import styled from "styled-components";
 import star_white from "../../../../../assets/icons/Place/star_white.svg";
 import star_blue from "../../../../../assets/icons/Place/star_blue.svg";
-interface PlaceWrapperProps extends PlaceInterface {
-  locationCart: PlaceInterface[];
-  setLocationCart: (locations: PlaceInterface[]) => void;
+interface PlaceWrapperProps extends PinInterface {
+  locationCart: PinInterface[];
+  setLocationCart: (locations: PinInterface[]) => void;
 }
 function PlaceWrapper({
   placeName,

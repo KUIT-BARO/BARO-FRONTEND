@@ -6,7 +6,7 @@ interface ButtonProps {
   children: React.ReactNode;
   disabled?: boolean;
   color?: "white" | "blue" | "gray";
-  variant?: "filled" | "outlined" | "text"; // 버튼 스타일 타입 추가
+  variant?: "filled" | "outlined" | "text";
 }
 
 const SmallButton: React.FC<ButtonProps> = ({
@@ -41,9 +41,7 @@ const StyledButton = styled.button<{
   border: none;
   box-sizing: border-box;
   white-space: nowrap;
-
   ${(props) => {
-    // 색상 설정
     const colors = {
       white: "#FFFFFF",
       blue: "#5175FF",
@@ -78,7 +76,7 @@ const StyledButton = styled.button<{
         return "";
     }
   }}
-
+  text-align:center;
   opacity: ${(props) => (props.disabled ? 0.6 : 1)};
 `;
 

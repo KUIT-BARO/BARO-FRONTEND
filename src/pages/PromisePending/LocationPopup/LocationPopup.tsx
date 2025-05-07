@@ -11,54 +11,36 @@ import {
   SearchImg,
   SearchInput,
   PlacesWrapper,
+  ErrorMessage,
 } from "./LocationPopup.styles";
-
-import { ProfileImgType } from "../../../interface/ProfileImg/ProfileImg";
 import PinPopup from "./components/PinPopup/Pinpopup";
-import search from "../../../assets/icons/Buttons/search.svg";
-import MAN from "../../../assets/icons/Profileimg/Man.svg";
-import GIRL from "../../../assets/icons/Profileimg/Girl.svg";
-import DOG from "../../../assets/icons/Profileimg/DOG.svg";
-import DEFAULT from "../../../assets/icons/Profileimg/Default.svg";
-import LocationInterface from "../../../interface/Location/Location";
-import { PlaceInterface } from "../../../interface/Place/Place";
 import PlaceWrapper from "./components/PlaceWrapper/PlaceWrapper";
 import { SectionTitle } from "./components/PinPopup/PinPopup.styles";
+
+import search from "../../../assets/icons/Buttons/search.svg";
+import profileImgs from "../../../utils/profileImgs";
+
+import { ProfileImgType } from "../../../interface/ProfileImg/ProfileImg";
+import { PinInterface } from "../../../interface/Pin/Pin";
+import LocationInterface from "../../../interface/Place/Place";
+
 interface LocationPopupInterface {
   setLocationPopup: (exit: boolean) => void;
   location: LocationInterface;
   setLocation: React.Dispatch<React.SetStateAction<LocationInterface>>;
 }
+
 export default function LocationPopup({
   setLocationPopup,
   location,
   setLocation,
 }: LocationPopupInterface) {
-  const dummyData: {
-    suggestedRegion: string;
-    places: LocationInterface[];
-    members: {
-      userId: number;
-      profileImage: ProfileImgType;
-    }[];
-  } = {
-    suggestedRegion: "건대입구",
-    places: [
-      {
-        placeId: 1,
-        latitude: 37.5423265,
-        longitude: 127.0759204,
-      },
-    ],
-    members: [
-      {
-        userId: 1,
-        profileImage: "DOG",
-      },
-    ],
-  };
   const [isPinPopup, setIsPinPopup] = useState<boolean>(false);
-  const dummyPlacesDesc = [
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [visible, setVisible] = useState(true);
+
+  const [locationCart, setLocationCart] = useState<PinInterface[]>([
+    // dummy
     {
       placeName: "서울상상나라",
       star: 3.0,
@@ -80,9 +62,47 @@ export default function LocationPopup({
       placeAddress: "서울 광진구 능동로 216",
       placeCategories: ["키즈존", "자연", "동물원"],
     },
-  ];
-  const [locationCart, setLocationCart] =
-    useState<PlaceInterface[]>(dummyPlacesDesc);
+  ]);
+
+  const dummyData = {
+    suggestedRegion: "건대입구",
+    places: [
+      {
+        placeId: 1,
+        latitude: 37.5423265,
+        longitude: 127.0759204,
+      },
+    ],
+    members: [
+      {
+        userId: 1,
+        profileImage: "DOG" as ProfileImgType,
+      },
+    ],
+  };
+
+  useEffect(() => {
+    if (errorMessage) {
+      setVisible(true);
+      const timer = setTimeout(() => {
+        setVisible(false);
+        setTimeout(() => setErrorMessage(null), 500);
+      }, 1500);
+      return () => clearTimeout(timer);
+    }
+  }, [errorMessage]);
+
+  const handleExit = () => {
+    if (locationCart.length !== 1) {
+      setErrorMessage(
+        locationCart.length === 0
+          ? "장소를 선택해주세요."
+          : "장소를 하나만 선택해주세요."
+      );
+      return;
+    }
+    setLocationPopup(false);
+  };
 
   return isPinPopup ? (
     <PinPopup
@@ -94,7 +114,11 @@ export default function LocationPopup({
     />
   ) : (
     <>
-      <TopBar handleExit={() => setLocationPopup(false)} color={"Blue"} />
+      <TopBar handleExit={handleExit} color="Blue" />
+      {errorMessage && (
+        <ErrorMessage visible={visible}>{errorMessage}</ErrorMessage>
+      )}
+
       <Wrapper>
         <Question
           title="만나고 싶은 장소를 알려주세요"
@@ -104,68 +128,35 @@ export default function LocationPopup({
 
         <SectionHeader>
           <ImgWrapper>
-            {renderProfileImages({
-              members: dummyData.members,
-            })}
+            {dummyData.members.map(({ userId, profileImage }) => (
+              <UserImg
+                key={userId}
+                src={profileImgs[profileImage]}
+                alt="profile img"
+              />
+            ))}
           </ImgWrapper>
         </SectionHeader>
+
         <SearchBar onClick={() => setIsPinPopup(true)}>
           <SearchImg src={search} />
           <SearchInput placeholder={dummyData.suggestedRegion} />
         </SearchBar>
-        <Section></Section>
+
         <Section>
           <SectionTitle>내가 고른 장소</SectionTitle>
           <PlacesWrapper>
-            {locationCart.map((place) => {
-              const {
-                placeName,
-                star,
-                pinCount,
-                placeAddress,
-                placeCategories,
-              } = place;
-              return (
-                <PlaceWrapper
-                  placeName={placeName}
-                  star={star}
-                  pinCount={pinCount}
-                  placeAddress={placeAddress}
-                  placeCategories={placeCategories}
-                  locationCart={locationCart}
-                  setLocationCart={setLocationCart}
-                />
-              );
-            })}
+            {locationCart.map((place) => (
+              <PlaceWrapper
+                key={place.placeName}
+                {...place}
+                locationCart={locationCart}
+                setLocationCart={setLocationCart}
+              />
+            ))}
           </PlacesWrapper>
         </Section>
       </Wrapper>
     </>
   );
 }
-
-type Member = { userId: number; profileImage: ProfileImgType };
-type RenderProfileImagesProps = {
-  members: Member[];
-};
-
-const renderProfileImages = ({ members }: RenderProfileImagesProps) => {
-  const profileImgs: Record<ProfileImgType, string> = {
-    DOG,
-    GIRL,
-    MAN,
-    DEFAULT,
-  };
-
-  return (
-    <>
-      {members.map((member) => (
-        <UserImg
-          key={member.userId}
-          src={profileImgs[member.profileImage]}
-          alt="profile img"
-        />
-      ))}
-    </>
-  );
-};

@@ -13,15 +13,15 @@ import Settings from "./MyPage/Mypage-setting/Settings";
 import Contact from "./MyPage/Contact";
 import SavedPlacesDetail from "./MyPage/SavedPlacesDetail";
 import UserSchedulePage from "./MyPage/UserSchedulePage";
-import Accept from "./Accept/Accept";
+
 import SearchPage from "./SearchPage/SearchPage";
 import Landing from "./Landing/Landing";
-import PromiseStatus from "./PromiseStatus/PromiseStatus";
+import PromisePending from "./PromisePending/PromisePending";
 
 // 로그인 여부 확인
 const getAuthStatus = () => {
   // return sessionStorage.getItem("login") === "true";
-  return true
+  return true;
 };
 
 const Router = () => {
@@ -46,18 +46,9 @@ const Router = () => {
     // 보호된 라우트 적용
     {
       path: "/suggest/*",
-      element: (
-          <Suggest />
-      ),
+      element: <Suggest />,
     },
-    {
-      path: "/accept/:promiseId/*",
-      element: (
-        <ProtectedRoute isAuthenticated={isAuthenticated}>
-          <Accept />
-        </ProtectedRoute>
-      ),
-    },
+
     {
       path: "/finalvote/*",
       element: (
@@ -123,10 +114,10 @@ const Router = () => {
       ),
     },
     {
-      path: "/status",
+      path: "/pending",
       element: (
         <ProtectedRoute isAuthenticated={isAuthenticated}>
-          <PromiseStatus />
+          <PromisePending />
         </ProtectedRoute>
       ),
     },

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Header,
   Wrapper,
@@ -18,20 +18,26 @@ import {
   VoteBtnImg,
 } from "./PromisePending.styles";
 import Button from "../../components/Button/Button";
-import DEFAULT from "../../assets/icons/Profileimg/DEFAULT.svg";
-import GIRL from "../../assets/icons/Profileimg/Girl.svg";
-import DOG from "../../assets/icons/Profileimg/DOG.svg";
-import MAN from "../../assets/icons/Profileimg/Man.svg";
 import 장소 from "../../assets/icons/Status/장소.png";
 import 시간 from "../../assets/icons/Status/시간.png";
 import crown from "../../assets/icons/Status/crown.svg";
 import TimePopup from "./TimePopup/TimePopup";
-import TimeTableInterface from "../../interface/TimeTable/TimeTable";
-import { ProfileImgType } from "../../interface/ProfileImg/ProfileImg";
 import LocationPopup from "./LocationPopup/LocationPopup";
-import LocationInterface from "../../interface/Location/Location";
+import usePopupState from "../../hook/usePopupState/usePopupState";
+import profileImgs from "../../utils/profileImgs";
 
 export default function PromisePending({ isHost = true }) {
+  const {
+    popupType,
+    location,
+    setLocation,
+    timeTable,
+    setTimeTable,
+    openLocationPopup,
+    openTimePopup,
+    closePopup,
+  } = usePopupState();
+
   const dummyData = {
     promiseName: "KUIT BARO 2차 회의",
     isVotingReady: true,
@@ -46,35 +52,38 @@ export default function PromisePending({ isHost = true }) {
         userId: 2,
         suggestionProgress: "NONE",
         isHost: false,
-        profileImage: "DOG",
+        profileImage: "GIRL",
       },
       {
-        userId: 2,
+        userId: 3,
         suggestionProgress: "COMPLETE",
         isHost: false,
-        profileImage: "DOG",
+        profileImage: "MAN",
       },
     ],
   };
 
-  const [locationPopup, setLocationPopup] = useState(false);
-  const [location, setLocation] = useState<LocationInterface | null>(null);
-  const [timePopup, setTimePopup] = useState(false);
+  if (popupType === "location") {
+    return (
+      <LocationPopup
+        setLocationPopup={closePopup}
+        location={location}
+        setLocation={setLocation}
+      />
+    );
+  }
 
-  const [timeTable, setTimeTable] = useState<TimeTableInterface[] | null>(null);
-  return locationPopup ? (
-    // <TimePopup
-    //   setTimePopup={setTimePopup}
-    //   timeTable={timeTable}
-    //   setTimeTable={setTimeTable}
-    // />
+  if (popupType === "time") {
+    return (
+      <TimePopup
+        setTimePopup={closePopup}
+        timeTable={timeTable}
+        setTimeTable={setTimeTable}
+      />
+    );
+  }
 
-    <LocationPopup
-      setLocationPopup={setLocationPopup}
-      location={location}
-      setLocation={setLocation}
-    />
-  ) : (
+  return (
     <Wrapper>
       <Header>{dummyData.promiseName}</Header>
       <Main>
@@ -84,16 +93,10 @@ export default function PromisePending({ isHost = true }) {
           <br /> 추가해주세요
         </Desc>
         <BtnWrapper>
-          <VoteBtn onClick={() => setLocationPopup(true)}>
+          <VoteBtn onClick={openLocationPopup}>
             <VoteBtnImg src={장소} alt="장소 아이콘" />
           </VoteBtn>
-          <VoteBtn
-            className="btn"
-            onClick={() => {
-              setTimePopup(true);
-              console.log("in");
-            }}
-          >
+          <VoteBtn onClick={openTimePopup}>
             <VoteBtnImg src={시간} alt="시간 아이콘" />
           </VoteBtn>
         </BtnWrapper>
@@ -112,45 +115,33 @@ export default function PromisePending({ isHost = true }) {
   );
 }
 
-function Status({ userSuggestState }) {
-  const profileImgs: Record<ProfileImgType, string> = {
-    DOG,
-    GIRL,
-    MAN,
-    DEFAULT,
-  };
+const Status = ({ userSuggestState }) => {
   const progressEnum: Record<string, number> = {
     NONE: 0,
     HALF: 50,
     COMPLETE: 100,
   };
   const samePercentOffsetMap = new Map<number, number>();
-  const userProgress =
-    progressEnum[userSuggestState.find((x) => x.isHost).suggestionProgress];
+
+  const host = userSuggestState.find((x) => x.isHost);
+  const userProgress = host ? progressEnum[host.suggestionProgress] : 0;
 
   return (
     <ProgressContainer>
       <ImgsWrapper>
         {userSuggestState.map((people, index) => {
-          const count =
-            samePercentOffsetMap.get(progressEnum[people.suggestionProgress]) ||
-            0;
-          samePercentOffsetMap.set(
-            progressEnum[people.suggestionProgress],
-            count + 1
-          );
-
-          const offset =
-            count * (people.suggestionProgress == "COMPLETE" ? -50 : 50);
+          const progress = progressEnum[people.suggestionProgress];
+          const count = samePercentOffsetMap.get(progress) || 0;
+          samePercentOffsetMap.set(progress, count + 1);
+          const offset = count * (progress === 100 ? -50 : 50);
 
           return (
-            <ImgWrapper
-              key={index}
-              percent={progressEnum[people.suggestionProgress]}
-              offset={offset}
-            >
+            <ImgWrapper key={index} percent={progress} offset={offset}>
               {people.isHost && <CrownImg alt="crown img" src={crown} />}
-              <UserImg alt="user img" src={profileImgs[people.profileImage]} />
+              <UserImg
+                alt="user img"
+                src={profileImgs[people.profileImage] || profileImgs.DEFAULT}
+              />
             </ImgWrapper>
           );
         })}
@@ -160,4 +151,4 @@ function Status({ userSuggestState }) {
       </ProgressBar>
     </ProgressContainer>
   );
-}
+};
