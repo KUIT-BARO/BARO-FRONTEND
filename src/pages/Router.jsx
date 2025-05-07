@@ -11,7 +11,9 @@ import MyPage from "./MyPage/Mypage-main/MyPage";
 import ProfileEdit from "../pages/MyPage/Mypage-profile-edit/ProfileEdit.tsx";
 import Settings from "./MyPage/Mypage-setting/Settings";
 
-import SearchPage from "./Search/Search";
+
+
+import Search from "./Search/Search";
 import Landing from "./Landing/Landing";
 import PromisePending from "./PromisePending/PromisePending";
 
@@ -90,7 +92,7 @@ const Router = () => {
       path: "/search/*",
       element: (
         <ProtectedRoute isAuthenticated={isAuthenticated}>
-          <SearchPage />
+          <Search />
         </ProtectedRoute>
       ),
     },
