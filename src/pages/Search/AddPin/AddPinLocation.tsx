@@ -11,8 +11,14 @@ import {
 import BackIcon from '../../../assets/icons/Search/backIcon_white.svg';
 import Scope from '../../../assets/icons/Search/scope.svg';
 
+interface SetLocationProps {
+  updateIsLocationOpen: (isLocationOpen: boolean) => void;
+  setSelectedLocation: (location: string) => void;
+  setSelectedPosition: (position: { lat: number; lng: number; radius: number }) => void;
+  setPlaceAddress: (address: string) => void;
+}
 
-export default function AddPinLocation(props) {
+export default function AddPinLocation(props: SetLocationProps) {
 
   function updateIsLocationOpen() {
     props.updateIsLocationOpen(false);
@@ -47,6 +53,25 @@ export default function AddPinLocation(props) {
   const [currentLocation, setCurrentLocation] = React.useState<{ lat: number; lng: number; }>({ lat: 33.450701, lng: 126.570667 });
 
   const [locationList, setLocationList] = React.useState<any[]>([]);
+
+  // 주소 정보도 함께 설정
+  const handlePlaceSelect = (place: kakao.maps.services.PlacesSearchResultItem) => {
+    // 기존 코드: 장소명, 위치 설정
+    props.setSelectedLocation(place.place_name);
+    props.setSelectedPosition({
+      lat: parseFloat(place.y),
+      lng: parseFloat(place.x),
+      radius: 50
+    });
+
+    // 추가: 주소 정보 설정
+    // 도로명 주소가 있으면 사용하고, 없으면 지번 주소 사용
+    const address = place.road_address_name || place.address_name;
+    props.setPlaceAddress(address);
+
+    // 위치 선택 후 돌아가기
+    props.updateIsLocationOpen(false);
+  };
 
   React.useEffect(() => {
     const fetchLocation = () => {

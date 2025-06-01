@@ -5,10 +5,7 @@ import Header from "./AddPinHeader";
 import Form from "./AddPinForm";
 import SetLocation from "./AddPinLocation";
 
-// import { getUserPlace } from '../../apis/promise/getUserPlace';
-
 export default function AddPin() {
-
   const [isLocationOpen, setIsLocationOpen] = React.useState(false);
   const [selectedLocation, setSelectedLocation] = React.useState("");
   const [selectedPosition, setSelectedPosition] = React.useState({
@@ -16,6 +13,8 @@ export default function AddPin() {
     lng: 126.570667,
     radius: 50
   });
+
+  const [placeAddress, setPlaceAddress] = React.useState("");
 
   function handleClick(isLocationOpen: boolean) {
     setIsLocationOpen(isLocationOpen);    
@@ -34,17 +33,9 @@ export default function AddPin() {
     setCategory(category);
   };
 
-  // interface userPlaceReview {
-  //   placeId: number;
-  //   address: string;
-  //   placeName: string;
-  // }
-  // interface userPlaceDto { 
-  //   reviews: userPlaceReview[]; 
-  // }
-  // const [userPlaceDto] = React.useState<userPlaceDto>({ 
-  //   reviews: [] 
-  // });
+  const handleAddressChange = (address: string) => {
+    setPlaceAddress(address);
+  };
 
   useEffect(() => {
     const fetchReviews = async () => {
@@ -70,6 +61,7 @@ export default function AddPin() {
           updateIsLocationOpen={handleClick}
           setSelectedLocation={setSelectedLocation}
           setSelectedPosition={setSelectedPosition}
+          setPlaceAddress={handleAddressChange}
         />
       :
         <Layout>
@@ -79,6 +71,9 @@ export default function AddPin() {
             starCount={starCount} 
             textValue={textValue}
             categories={category}
+            placeAddress={placeAddress}
+            latitude={selectedPosition.lat}
+            longitude={selectedPosition.lng}
           />
           <Form 
             updateIsLocationOpen={handleClick} 

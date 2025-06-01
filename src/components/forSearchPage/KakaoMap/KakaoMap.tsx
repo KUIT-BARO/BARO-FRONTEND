@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 import { CustomOverlayMap, Map, MapMarker } from "react-kakao-maps-sdk";
 import debounce from "lodash/debounce";
 
@@ -22,6 +23,7 @@ import { usePinnedPlaces } from "../../../hook/usePinnedPlaces/usePinnedPlaces";
 
 import { getPlaces } from "../../../apis/places/getPlaces";
 import { getPlacesInfo } from "../../../apis/places/getPlacesInfo";
+import { PIN_CATEGORIES } from "../../../utils/constant/Categories";
 
 //========================================================
 const PLACES = [
@@ -44,6 +46,7 @@ const PLACES = [
 
 const PLACES_INFO = [
   {
+    placeId: 1,
     placeName: "카페온더플랜 건대점",
     star: 3.6,
     pinCount: 12,
@@ -51,6 +54,7 @@ const PLACES_INFO = [
     placeCategories: ["스터디", "북적이는"]
   },
   {
+    placeId: 2,
     placeName: "KU 시네마테크",
     star: 3.3,
     pinCount: 12,
@@ -58,6 +62,7 @@ const PLACES_INFO = [
     placeCategories: ["여가 생활", "아늑한"]
   },
   {
+    placeId: 3,
     placeName: "오마카세 오사이초밥 건대본점",
     star: 4.3,
     pinCount: 12,
@@ -84,6 +89,12 @@ export default function KakaoMap({
   staticMap,
   selectedCategory
 }: KakaoMapProps) {
+  const navigate = useNavigate();
+
+  const navigateToPinInfo = (placeId: number, placeName: string) => {
+    console.log("핀 상세 정보로 이동:", placeId);
+    navigate(`/search/pin/${placeId}?placeName=${encodeURIComponent(placeName)}`);
+  };
 
   // 지도의 중심
   const [mapCenter, setMapCenter] = useState<{
@@ -130,18 +141,32 @@ export default function KakaoMap({
 
   // API로부터 장소 데이터 가져오기
   useEffect(() => {
+    console.log(selectedCategory);
+    
     const fetchPlacesData = async () => {
-      if (!currentLocation.lat || !currentLocation.lng) return;
+      const locationToUse = !showMyLocationMarker && searchLocation.lat && searchLocation.lng 
+        ? searchLocation 
+        : currentLocation;
+
+      if (!locationToUse.lat || !locationToUse.lng) return;
       
       setIsDataLoading(true);
       try {
-        // 카테고리 ID는 실제 사용 환경에 맞게 수정해야 함
-        const placeCategoryIds = selectedCategory ? [1] : []; // 예시로 1을 사용
+        let placeCategoryIds;
+
+        if (!selectedCategory || selectedCategory === "ALL") {
+          placeCategoryIds = "1,2,3,4,5,6,7,8,9,10";
+        } else {
+          const categoryIndex = PIN_CATEGORIES.indexOf(selectedCategory);
+          placeCategoryIds = categoryIndex !== -1 ? categoryIndex.toString() : "0";
+        }
+
+        console.log("선택된 카테고리 ID:", placeCategoryIds);
         
         const placesResult = await getPlaces({
           placeCategoryIds: placeCategoryIds,
-          latitude: currentLocation.lat,
-          longitude: currentLocation.lng
+          latitude: locationToUse.lat,
+          longitude: locationToUse.lng
         });
         
         if (placesResult && placesResult.data) {
@@ -281,7 +306,15 @@ export default function KakaoMap({
           lng: mapCenter.lng ?? 126.9780
         }}
         onCenterChanged={updateCenter}
-        onClick={() => setSelectedPlace(null)}
+        onClick={(_, event) => {
+          // kakao.maps.event.MouseEvent를 DOM MouseEvent로 타입 변환
+          const domEvent = event as unknown as { target: HTMLElement };
+          const targetElement = domEvent.target;
+          const isInfoWindow = targetElement.closest('.info-window-container');
+          if (!isInfoWindow) {
+            setSelectedPlace(null);
+          }
+        }}
       >
         {/* 현재 위치 핀 */}
         {showMyLocationMarker && currentLocation.lat && currentLocation.lng && (
@@ -338,10 +371,17 @@ export default function KakaoMap({
                 xAnchor={0.3}
                 yAnchor={1.6}
               >
-                <InfoWindow>
+                <InfoWindow onClick={(e) => e.stopPropagation()}>
                   <div className="info_name_wrapper">
                     <div className="info_name">{placesInfoData[index].placeName}</div>
-                    <img src={GoToButton} alt="핀 상세 정보" />
+                    <img 
+                      src={GoToButton} 
+                      alt="핀 상세 정보" 
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        navigateToPinInfo(place.placeId, placesInfoData[index].placeName);
+                      }}
+                    />
                   </div>
                   <div className="info_content">
                     <p className="info_stars">
@@ -371,6 +411,75 @@ export default function KakaoMap({
               </CustomOverlayMap>
             )}
           </React.Fragment>
+        ))}
+
+        {/* 하드코딩 핀 마커 */}
+        {filteredCoordinates.map((place, index) => (
+          <>
+            <MapMarker
+              key={index}
+              position={{ lat: place.lat, lng: place.lng}}
+              image={{
+                src: MarkerRed,
+                size: { width: 24, height: 35 },
+              }}
+              onClick={() => {
+                console.log("핀 클릭:", place.placeName);
+                setSelectedPlace(selectedPlace === place.placeName ? null : place.placeName);
+                setMapCenter({ lat: place.lat, lng: place.lng });
+              }}
+            />
+            {selectedPlace === place.placeName && (
+              <CustomOverlayMap
+                position={{ lat: place.lat, lng: place.lng }}
+                xAnchor={0.3}
+                yAnchor={1.6}
+              >
+                <InfoWindow className="info-window-contaiener" onClick={(e) => e.stopPropagation()}>
+                  <div className="info_name_wrapper">
+                    <div className="info_name">{place.placeName}</div>
+                    <img 
+                      src={GoToButton} 
+                      alt=""
+                      onClick={(e) => {
+                        console.log("핀 상세 정보 클릭:", place.placeName);
+                        e.stopPropagation();
+                        const placeInfo = PLACES_INFO.find(p => p.placeName === place.placeName);
+                        if (placeInfo) {
+                          navigateToPinInfo(placeInfo.placeId, placeInfo.placeName);
+                        }
+                      }}
+                    />
+                  </div>
+                  <div className="info_content">
+                    <p className="info_stars">
+                      {(PLACES_INFO.find(p => p.placeName === place.placeName)?.star || 0).toFixed(1)}
+                      <p>{renderStars(PLACES_INFO.find(p => p.placeName === place.placeName)?.star || 0)}</p>
+                      ({PLACES_INFO.find(p => p.placeName === place.placeName)?.pinCount || 0})
+                    </p>
+                    <div className="info_address">
+                      {PLACES_INFO.find(p => p.placeName === place.placeName)?.placeAddress || 0}
+                    </div>
+                    {PLACES_INFO.find(p => p.placeName === place.placeName)?.placeCategories.slice(0, 2).map((category, index) => (
+                      <p key={index} className="info_category">{category}</p>
+                    ))}
+                  </div>
+                </InfoWindow>
+                <img 
+                  src={InfoWindowTail} 
+                  alt="tail" 
+                  style={{
+                    position: "absolute",
+                    top: "130%",
+                    left: "30%",
+                    transform: "translate(-50%, -100%)",
+                    zIndex: -1,
+                  }}
+                  onClick={(e) => e.stopPropagation()}
+                />
+              </CustomOverlayMap>
+            )}
+          </>
         ))}
       </Map>
 
@@ -444,6 +553,7 @@ const InfoWindow = styled.div`
   border-radius: 10px;
   font-size: 11px;
   z-index: 2;
+  pointer-events: auto;
   // margin-bottom: 130px;
 
   .info_name_wrapper {
