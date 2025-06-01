@@ -1,5 +1,5 @@
 import useApi from "../useApi";
-import { LoginInfo, authCode } from "../../interface/api/auth/auth";
+import { LoginInfo, SignupInfo } from "../../interface/api/auth/auth";
 import { useNavigate } from "react-router-dom";
 
 const useAuth = () => {
@@ -46,9 +46,9 @@ const useAuth = () => {
         console.log("이메일 코드 보내기 실패", err);
       });
   };
-  const verifyAuthCode = (codeInfo: authCode) => {
+  const verifyAuthCode = (codeInfo: SignupInfo) => {
     return authApi
-      .post("/mail/check")
+      .post("/mail/check", codeInfo)
       .then((response) => {
         return response;
       })
