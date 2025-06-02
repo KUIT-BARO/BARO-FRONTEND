@@ -19,7 +19,15 @@ export default function CustomDatepicker({ setDateRange, dateStart, dateEnd }) {
 
   const handleDateChange = (update: [Date | null, Date | null]) => {
     setInternalDateRange(update);
-    setDateRange(update);
+
+    // 날짜를 "YYYY-MM-DD" 형식 문자열로 변환
+    const formattedRange: [string | null, string | null] = [
+      update[0] ? update[0].toISOString().split("T")[0] : null,
+      update[1] ? update[1].toISOString().split("T")[0] : null,
+    ];
+
+    setDateRange(formattedRange);
+    console.log(formattedRange);
   };
 
   return (

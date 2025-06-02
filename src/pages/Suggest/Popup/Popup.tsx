@@ -19,19 +19,18 @@ import formatDateToShort from "../../../utils/formatDateToShort";
 import crown from "../../../assets/icons/Promise/crown.svg";
 import calender from "../../../assets/icons/Promise/calender.svg";
 import location from "../../../assets/icons/Promise/location.svg";
+import PostPromise from "../../../apis/promise/postPromise";
 
 interface PopupProps {
-  setPromiseId: (promiseId: number) => void;
   handleClosePopup: () => void;
   name: string;
   placeName: string;
-  dateStart: Date;
-  dateEnd: Date;
+  dateStart: string;
+  dateEnd: string;
 }
 
 export default function Popup({
   handleClosePopup,
-  setPromiseId,
   name,
   placeName,
   dateStart,
@@ -44,6 +43,7 @@ export default function Popup({
     // TODO: 서버 연동 예정
     // const response = await PostPromise(...);
     // setPromiseId(response.data.promiseId);
+    const response = await PostPromise(name, dateStart, dateEnd, placeName);
 
     handleClosePopup();
     navigate("/main");

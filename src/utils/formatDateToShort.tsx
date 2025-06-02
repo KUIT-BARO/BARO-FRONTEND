@@ -1,8 +1,9 @@
-export default function formatDateToShort(date: Date) {
+export default function formatDateToShort(dateStr: string) {
   const dayNames = ["일", "월", "화", "수", "목", "금", "토"];
-  const month = date.getMonth() + 1; // 월은 0부터 시작하므로 +1
+  const date = new Date(dateStr); // 문자열을 Date 객체로 변환
+  const month = date.getMonth() + 1;
   const day = date.getDate();
-  const weekday = dayNames[date.getDay()]; // 요일 가져오기
+  const weekday = dayNames[date.getDay()];
 
   return `${month}/${day} (${weekday})`;
 }
