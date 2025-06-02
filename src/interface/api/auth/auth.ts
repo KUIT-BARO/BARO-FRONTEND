@@ -3,7 +3,7 @@ export interface LoginInfo {
   password: string;
 }
 
-export interface authCode {
+export interface SignupInfo {
   email: string;
-  authcode: string;
+  authCode: string;
 }

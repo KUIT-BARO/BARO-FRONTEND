@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { getMyPage } from "../../../apis/user/getMyPage";
 import backIcon from "../../../assets/icons/MypageProfile/backIcon.svg";
 import manAvatar from "../../../assets/icons/MypageProfile/manavatar.svg";
-
+import Default from "../../../assets/icons/Profileimg/Default.svg";
 import WithdrawModal from "./Withdraw/WithdrawModal";
 
 import Navigation from "../../../components/Navigation/Navigation";
@@ -38,9 +38,9 @@ const Settings: React.FC = () => {
   const [withdrawModalOpen, setWithdrawModalOpen] = useState(false);
   const [passwordModalOpen, setPasswordModalOpen] = useState(false);
   const [userInfo, setUserInfo] = useState<UserInfo>({
-    nickname: "",
+    nickname: "황규운",
     userId: 0,
-    userProfile: "",
+    userProfile: Default,
   });
 
   const handleBack = () => {

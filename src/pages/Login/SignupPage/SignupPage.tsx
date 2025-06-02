@@ -2,7 +2,12 @@ import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { SignupContainer, SignupButton } from "./SignupPage.styles";
 import InputSection from "../../../components/SignUpInputSection/InputSection";
-import { SignupInfo } from "../../../interface/api/mypage/mypage";
+import {
+  SignupInfo,
+  EmailCheckResponse,
+} from "../../../interface/api/mypage/mypage";
+import useUsers from "../../../hooks/useUsers/useUsers";
+import useAuth from "../../../hooks/useAuth/useAuth";
 const isValidEmail = (email: string): boolean => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
@@ -19,8 +24,13 @@ const SignupPage = () => {
   const [name, setName] = useState("");
   const [emailCheck, setEmailCheck] = useState("");
   const [isEmailCheck, setisEmailCheck] = useState(false);
+  const [isfinalcheck, setisfinalCheck] = useState(false);
 
-  const handleEmailCheck = () => {
+  const { signupUser } = useUsers();
+  const { sendAuthCode, verifyAuthCode } = useAuth();
+  const navigate = useNavigate(); // 성공 시 리디렉션용
+
+  const handleEmailCheck = async () => {
     if (!email) {
       emailRef.current?.focus();
       return;
@@ -28,26 +38,39 @@ const SignupPage = () => {
       alert("이메일 형식이 틀렸습니다.");
       emailRef.current?.focus();
       return;
-    } else if (isValidEmail(email)) {
-      alert("이메일 형식이 틀렸습니다.");
-      emailRef.current?.focus();
-      return;
     }
+    try {
+      const response = await sendAuthCode(email);
+      setisEmailCheck(true);
+    } catch (error) {
+      alert("이메일 인증에 실패했습니다. 다시 시도해주세요.");
+      console.error("Email check error:", error);
+    }
+  };
+  const handleEmailVerify = async () => {
     if (!emailCheck) {
       emailCheckRef.current?.focus();
       return;
     }
-    if (!password) {
-      passwordRef.current?.focus();
-      return;
+    try {
+      const emailCheckInfo: EmailCheckResponse = {
+        email,
+        authCode: emailCheck,
+      };
+      console.log("emailCheckInfo:", emailCheckInfo);
+      const response = await verifyAuthCode(emailCheckInfo);
+      if (response?.status === 200) {
+        alert("이메일 인증이 완료되었습니다.");
+        setisfinalCheck(true);
+      } else {
+        alert("인증번호가 일치하지 않습니다. 다시 시도해주세요.");
+      }
+    } catch (error) {
+      alert("인증에 실패했습니다. 다시 시도해주세요.");
+      console.error("Email verification error:", error);
     }
-    if (!name) {
-      nameRef.current?.focus();
-      return;
-    }
-    setisEmailCheck(true);
   };
-  const handleSignup = () => {
+  const handleSignup = async () => {
     if (!email || !password || !name) {
       alert("모든 항목을 입력해주세요.");
       return;
@@ -57,6 +80,18 @@ const SignupPage = () => {
       password,
       name,
     };
+    try {
+      const response = await signupUser(signupData);
+      if (response?.status === 200 || response?.status === 201) {
+        alert("회원가입이 완료되었습니다!");
+        navigate("/login"); // 또는 메인 페이지 등으로 이동
+      } else {
+        alert("회원가입에 실패했습니다. 다시 시도해주세요.");
+      }
+    } catch (error) {
+      alert("에러가 발생했습니다. 다시 시도해주세요.");
+      console.error("Signup error:", error);
+    }
   };
   const handleEmailVerification = () => {};
   return (
@@ -78,7 +113,7 @@ const SignupPage = () => {
           setValue={setEmailCheck}
           placeholder="인증번호를 입력해주세요"
           buttonText="확인"
-          onButtonClick={handleSignup}
+          onButtonClick={handleEmailVerify}
           ref={emailCheckRef}
         >
           이메일 인증
@@ -103,7 +138,12 @@ const SignupPage = () => {
         이름
       </InputSection>
 
-      <SignupButton>회원가입</SignupButton>
+      <SignupButton
+        //  disabled={!isfinalcheck}
+        onClick={handleSignup}
+      >
+        회원가입
+      </SignupButton>
     </SignupContainer>
   );
 };

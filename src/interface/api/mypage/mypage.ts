@@ -30,3 +30,8 @@ export interface SignupInfo {
   password: string;
   name: string;
 }
+
+export interface EmailCheckResponse {
+  email: string;
+  authCode: string;
+}

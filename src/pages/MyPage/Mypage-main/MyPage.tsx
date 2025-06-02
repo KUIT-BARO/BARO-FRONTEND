@@ -23,9 +23,9 @@ import Schedule from "./Schedule/Schedule";
 import { UserInfo } from "../../../interface/api/mypage/mypage";
 
 const dummydata: UserInfo = {
-  userName: "",
-  email: "",
-  profileImage: "",
+  userName: "황규운",
+  email: "gka365@naver.com",
+  profileImage: Default,
 };
 const MyPage: React.FC = () => {
   const navigate = useNavigate();

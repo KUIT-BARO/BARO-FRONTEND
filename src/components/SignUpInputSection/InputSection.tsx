@@ -68,33 +68,29 @@ interface Props {
   onButtonClick?: () => void;
   ref: React.RefObject<HTMLInputElement>;
 }
-const InputSection: React.FC<Props> = ({
-  children,
-  placeholder,
-  value,
-  setValue,
-  buttonText,
-  onButtonClick,
-  ref,
-}) => {
-  return (
-    <InputContainer>
-      <InputLabel>{children}</InputLabel>
-      <InputWrapper>
-        <SignupInput
-          type="text"
-          placeholder={placeholder}
-          value={value}
-          onChange={(e) => {
-            setValue(e.target.value);
-          }}
-          ref={ref}
-        />
-        {buttonText && onButtonClick && (
-          <CheckButton onClick={onButtonClick}>{buttonText}</CheckButton>
-        )}
-      </InputWrapper>
-    </InputContainer>
-  );
-};
+const InputSection = React.forwardRef<HTMLInputElement, Props>(
+  (
+    { children, placeholder, value, setValue, buttonText, onButtonClick },
+    ref
+  ) => {
+    return (
+      <InputContainer>
+        <InputLabel>{children}</InputLabel>
+        <InputWrapper>
+          <SignupInput
+            type="text"
+            placeholder={placeholder}
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
+            ref={ref}
+          />
+          {buttonText && onButtonClick && (
+            <CheckButton onClick={onButtonClick}>{buttonText}</CheckButton>
+          )}
+        </InputWrapper>
+      </InputContainer>
+    );
+  }
+);
+InputSection.displayName = "InputSection";
 export default InputSection;
