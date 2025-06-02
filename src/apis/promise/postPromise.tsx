@@ -4,35 +4,23 @@ const PostPromise = async (
   name: string,
   dateStart: string,
   dateEnd: string,
-  peopleNum: number | string,
-  purpose: string,
-  placeId: number
+  placeName: string
 ) => {
-  let validPeopleNum =
-    typeof peopleNum === "string" ? parseInt(peopleNum, 10) : peopleNum;
-
-  // ✅ 변환 후 숫자가 아닐 경우 예외 처리
-  if (isNaN(validPeopleNum)) {
-    throw new Error("peopleNum 값이 올바르지 않습니다. 숫자로 입력해주세요.");
-  }
-
   const requestData = {
-    name,
-    dateStart:
+    promiseName: name,
+    suggestedStartDate:
       typeof dateStart === "string"
         ? dateStart.split("T")[0]
         : new Date(dateStart).toISOString().split("T")[0],
-    dateEnd:
+    suggestedEndDate:
       typeof dateEnd === "string"
         ? dateEnd.split("T")[0]
         : new Date(dateEnd).toISOString().split("T")[0],
-    peopleNum: validPeopleNum,
-    purpose,
-    placeId,
+    suggestedRegion: placeName,
   };
 
   try {
-    return await instance.post("/promise/suggest", requestData, {
+    return await instance.post("/promises", requestData, {
       withCredentials: true,
     });
   } catch (error) {

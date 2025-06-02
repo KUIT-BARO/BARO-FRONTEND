@@ -1,13 +1,9 @@
 import { useState } from "react";
 
 export default function useSuggestState() {
-  const [promiseId, setPromiseId] = useState<number | null>(null);
   const [name, setName] = useState<string>("");
   const [placeName, setPlaceName] = useState<string>("");
-  const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([
-    null,
-    null,
-  ]);
+  const [dateRange, setDateRange] = useState<[string, string]>(["", ""]);
   const [showPopup, setShowPopup] = useState(false);
 
   const handleOpenPopup = () => {
@@ -19,8 +15,6 @@ export default function useSuggestState() {
   };
 
   return {
-    promiseId,
-    setPromiseId,
     name,
     setName,
     placeName,

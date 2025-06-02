@@ -1,5 +1,3 @@
-import React from "react";
-
 import Button from "../../../components/Button/Button";
 import { ProgressBar } from "../../../components/ProgressBar/ProgressBar";
 import TopBar from "../../../components/TopBar/TopBar";

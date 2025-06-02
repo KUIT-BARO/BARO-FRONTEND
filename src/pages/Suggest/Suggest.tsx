@@ -9,8 +9,6 @@ import usePromiseSuggest from "../../hook/usePromiseSuggest/usePromiseSuggest";
 export default function Suggest() {
   const navigate = useNavigate();
   const {
-    promiseId,
-    setPromiseId,
     name,
     setName,
     placeName,
@@ -21,11 +19,11 @@ export default function Suggest() {
     handleOpenPopup,
     handleClosePopup,
   } = usePromiseSuggest();
-
-  const [dateStart, dateEnd] = dateRange;
-
+  const dateStart = dateRange[0] ? new Date(dateRange[0]) : null;
+  const dateEnd = dateRange[1] ? new Date(dateRange[1]) : null;
   const handleExit = () => navigate("/main");
-
+  const dateStartStr = dateRange[0];
+  const dateEndStr = dateRange[1];
   return (
     <>
       <Routes>
@@ -54,12 +52,11 @@ export default function Suggest() {
 
       {showPopup && (
         <Popup
-          setPromiseId={setPromiseId}
           handleClosePopup={handleClosePopup}
           name={name}
           placeName={placeName}
-          dateStart={dateStart}
-          dateEnd={dateEnd}
+          dateStart={dateStartStr} // string 형식으로 넘김
+          dateEnd={dateEndStr}
         />
       )}
     </>
