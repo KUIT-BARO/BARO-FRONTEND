@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 import { CustomOverlayMap, Map, MapMarker } from "react-kakao-maps-sdk";
 import debounce from "lodash/debounce";
 
 import styled from "styled-components";
 
+// 아이콘 import
 import MarkerBlue from "../../../assets/icons/KakaoMap/location.svg";
 import MarkerRed from "../../../assets/icons/KakaoMap/location_red.svg";
 import Scope from "../../../assets/icons/KakaoMap/scope.svg";
@@ -13,9 +15,38 @@ import NavyStar from "../../../assets/icons/KakaoMap/navyStar.svg";
 import GrayStar from "../../../assets/icons/KakaoMap/grayStar.svg";
 import HalfStar from "../../../assets/icons/KakaoMap/grayStar.svg";
 
+// 커스텀훅 import
+import { useGeolocation } from "../../../hook/useGeolocation/useGeolocation";
+import { useKakaoAddress } from "../../../hook/useKakaoAddress/useKakaoAddress";
+import { useKakaoSearch } from "../../../hook/useKakaoSearch/useKakaoSearch";
+import { usePinnedPlaces } from "../../../hook/usePinnedPlaces/usePinnedPlaces";
+
+import { getPlaces } from "../../../apis/places/getPlaces";
+import { getPlacesInfo } from "../../../apis/places/getPlacesInfo";
+import { PIN_CATEGORIES } from "../../../utils/constant/Categories";
+
 //========================================================
-const PINNED_PLACES = [
+const PLACES = [
   {
+    placeId: 1,
+    latitude: 37.5451809,
+    longitude: 127.0727712,
+  },
+  {
+    placeId: 2,
+    latitude: 37.5428904,
+    longitude: 127.07307,
+  },
+  {
+    placeId: 3,
+    latitude: 37.544633,
+    longitude: 127.0715027,
+  },
+]
+
+const PLACES_INFO = [
+  {
+    placeId: 1,
     placeName: "카페온더플랜 건대점",
     star: 3.6,
     pinCount: 12,
@@ -23,6 +54,7 @@ const PINNED_PLACES = [
     placeCategories: ["스터디", "북적이는"]
   },
   {
+    placeId: 2,
     placeName: "KU 시네마테크",
     star: 3.3,
     pinCount: 12,
@@ -30,6 +62,7 @@ const PINNED_PLACES = [
     placeCategories: ["여가 생활", "아늑한"]
   },
   {
+    placeId: 3,
     placeName: "오마카세 오사이초밥 건대본점",
     star: 4.3,
     pinCount: 12,
@@ -39,24 +72,29 @@ const PINNED_PLACES = [
 ]
 //========================================================
 
-// interface KakaoMapProps {
-//   mapHeight: string;
-//   // currentLocation: { lat: number; lng: number };
-//   setCurrentLocationName: (name: string) => void;
-//   searchKeyword: string;
-//   buttonOn: boolean;
-//   staticMap: boolean;
-// }
+interface KakaoMapProps {
+  mapHeight: string;
+  setCurrentLocationName: (name: string) => void;
+  searchKeyword: string;
+  buttonOn: boolean;
+  staticMap: boolean;
+  selectedCategory: string | null;
+}
 
 export default function KakaoMap({
   mapHeight,
-  // currentLocation,
   setCurrentLocationName,
   searchKeyword,
   buttonOn,
   staticMap,
   selectedCategory
-}) {
+}: KakaoMapProps) {
+  const navigate = useNavigate();
+
+  const navigateToPinInfo = (placeId: number, placeName: string) => {
+    console.log("핀 상세 정보로 이동:", placeId);
+    navigate(`/search/pin/${placeId}?placeName=${encodeURIComponent(placeName)}`);
+  };
 
   // 지도의 중심
   const [mapCenter, setMapCenter] = useState<{
@@ -64,119 +102,145 @@ export default function KakaoMap({
     lng: number | null;
   }>({ lat: null, lng: null });
 
-  // 내 현재 위치
-  const [currentLocation, setCurrentLocation] = useState<{
-    lat: number | null;
-    lng: number | null;
-  }>({ lat: null, lng: null });
+  // 선택된 장소
+  const [selectedPlace, setSelectedPlace] = useState<string | null>(null);
 
-  // 검색 장소 위치
-  const [searchLocation, setSearchLocation] = useState<{
-    lat: number | null;
-    lng: number | null;
-  }>({ lat: null, lng: null });
+  // 내 현재 위치의 주소 가져오기
+  const { currentLocation, error: locationError, isLoading: locationLoading } = !staticMap 
+    ? useGeolocation() 
+    : { currentLocation: { lat: null, lng: null }, error: null, isLoading: false };
+  const { address } = useKakaoAddress({ 
+    lat: currentLocation.lat, 
+    lng: currentLocation.lng 
+  });
 
+  // 내 현재 위치의 마커 표시 상태
+  const [showMyLocationMarker, setShowMyLocationMarker] = useState<boolean>(true);
+
+  // 검색 키워드에 따른 위치 찾기
+  const { searchLocation, placeName: searchPlaceName } = useKakaoSearch({ 
+    keyword: searchKeyword 
+  });
+
+  // 데이터 로딩 상태
+  const [isDataLoading, setIsDataLoading] = useState<boolean>(false);
+
+  // API로 가져온 장소 목록과 상세정보
+  const [placesData, setPlacesData] = useState<{
+    placeId: number;
+    latitude: number;
+    longitude: number;
+  }[]>([]);
+  const [placesInfoData, setPlacesInfoData] = useState<{
+    placeName: string;
+    star: number;
+    pinCount: number;
+    placeAddress: string;
+    placeCategories: string[];
+  }[]>([]);
+
+  // API로부터 장소 데이터 가져오기
   useEffect(() => {
-    const fetchLocation = () => {
-      if (navigator.geolocation) {
+    console.log(selectedCategory);
+    
+    const fetchPlacesData = async () => {
+      const locationToUse = !showMyLocationMarker && searchLocation.lat && searchLocation.lng 
+        ? searchLocation 
+        : currentLocation;
 
-        // 내 현재 위치의 위도, 경도 계산
-        navigator.geolocation.getCurrentPosition(
-          // Success
-          ({ coords }) => {
-            const { latitude: lat, longitude: lng } = coords;
-            setMapCenter({ lat, lng });
-            setCurrentLocation({ lat, lng });
-            setSearchLocation({ lat, lng });
-            console.log("현재 좌표:", lat, lng);
+      if (!locationToUse.lat || !locationToUse.lng) return;
+      
+      setIsDataLoading(true);
+      try {
+        let placeCategoryIds;
 
-            // 현재 위치의 주소명 가져오기
-            const geocoder = new window.kakao.maps.services.Geocoder();
-            geocoder.coord2Address(lng, lat, (result, status) => {
-              if (status === window.kakao.maps.services.Status.OK) {
-                if (result[0].road_address) {
-                  setCurrentLocationName(result[0].road_address.building_name);
-                  console.log("현재 위치:", result[0].road_address.building_name, result);
-                } else {
-                  setCurrentLocationName(result[0].address.address_name);
-                  console.log("현재 위치:", result[0].address.address_name, result);
-                }
-              }
-            });
-          },
-          // Error
-          (error) => {
-            console.error("위치 정보를 가져오는데 실패했습니다:", error);
-          },
-          // Options
-          {
-            enableHighAccuracy: true,
-            maximumAge: 60000,
-          }
-        );
+        if (!selectedCategory || selectedCategory === "ALL") {
+          placeCategoryIds = "1,2,3,4,5,6,7,8,9,10";
+        } else {
+          const categoryIndex = PIN_CATEGORIES.indexOf(selectedCategory);
+          placeCategoryIds = categoryIndex !== -1 ? categoryIndex.toString() : "0";
+        }
 
-        // 현재 위치 실시간 추적
-        const watchId = navigator.geolocation.watchPosition(
-          ({ coords }) => {
-            const { latitude: lat, longitude: lng } = coords;
-            setCurrentLocation({ lat, lng });
-            setSearchLocation({ lat, lng });
-          }
-        );
-      } else {
-        console.error("이 브라우저에서는 Geolocation이 지원되지 않습니다.");
+        console.log("선택된 카테고리 ID:", placeCategoryIds);
+        
+        const placesResult = await getPlaces({
+          placeCategoryIds: placeCategoryIds,
+          latitude: locationToUse.lat,
+          longitude: locationToUse.lng
+        });
+        
+        if (placesResult && placesResult.data) {
+          const places = placesResult.data.map(place => ({
+            placeId: place.placeId,
+            latitude: place.latitude,
+            longitude: place.longitude
+          }));
+          
+          setPlacesData(places);
+          
+          // 각 장소의 상세 정보 가져오기
+          const placesInfoPromises = places.map(place => 
+            getPlacesInfo({ placeId: place.placeId })
+          );
+          
+          const placesInfoResults = await Promise.all(placesInfoPromises);
+          
+          const placesInfo = placesInfoResults.map(result => {
+            if (result && result.data) {
+              return {
+                placeName: result.data.placeName || "",
+                star: result.data.star || 0,
+                pinCount: result.data.pinCount || 0,
+                placeAddress: result.data.placeAddress || "",
+                placeCategories: result.data.placeCategories || []
+              };
+            }
+            return null;
+          }).filter((item): item is {
+            placeName: string;
+            star: number;
+            pinCount: number;
+            placeAddress: string;
+            placeCategories: string[];
+          } => item !== null);
+          
+          setPlacesInfoData(placesInfo);
+        }
+      } catch (error) {
+        console.error("장소 데이터를 불러오는 중 오류가 발생했습니다:", error);
+      } finally {
+        setIsDataLoading(false);
       }
     };
 
-    if (!staticMap) {
-      fetchLocation();
-    };
+    fetchPlacesData();
+  }, [currentLocation.lat, currentLocation.lng, selectedCategory]);
 
-    if (searchKeyword) {
-      const ps = new window.kakao.maps.services.Places();
-      ps.keywordSearch(searchKeyword, (data, status) => {
-        if (status === window.kakao.maps.services.Status.OK) {
-          const firstResult = data[0];
-          console.log("검색 위치1:", firstResult.place_name, data);
+  // 핀 좌표 가져오기
+  const { filteredCoordinates } = usePinnedPlaces({
+    places: PLACES_INFO,
+    selectedCategory
+  });
 
-          const newCenter = {
-            lat: Number(firstResult.y),
-            lng: Number(firstResult.x),
-          };
-          setMapCenter(newCenter);
-          setSearchLocation({ ...newCenter });
-        } else {
-          alert("검색 결과가 없습니다.");
-        }
-      });
+  // 주소가 변경되면 상위 컴포넌트에 전달
+  useEffect(() => {
+    if (address) {
+      setCurrentLocationName(address);
     }
-  }, [staticMap, searchKeyword]);
+  }, [address, setCurrentLocationName]);
 
-  // 검색 키워드로 지도 중심 이동
-  // useEffect(() => {
-  //   if (searchKeyword) {
-  //     const ps = new window.kakao.maps.services.Places();
-  //     ps.keywordSearch(searchKeyword, (data, status) => {
-  //       if (status === window.kakao.maps.services.Status.OK) {
-  //         const firstResult = data[0];
-  //         console.log("검색 위치1:", firstResult.place_name, data);
-
-  //         const newCenter = {
-  //           lat: Number(firstResult.y),
-  //           lng: Number(firstResult.x),
-  //         };
-  //         setMapCenter(newCenter);
-  //         setSearchLocation({ ...newCenter });
-  //       } else {
-  //         alert("검색 결과가 없습니다.");
-  //       }
-  //     });
-  //   }
-  // }, [searchKeyword]);
-
+  // 검색 결과나 현재 위치가 변경되면 지도 중심 업데이트
+  useEffect(() => {
+    if (searchKeyword && searchLocation.lat && searchLocation.lng) {
+      setMapCenter(searchLocation);
+      setShowMyLocationMarker(false);
+    } else if (!staticMap && currentLocation.lat && currentLocation.lng) {
+      setMapCenter(currentLocation);
+      setShowMyLocationMarker(true);
+    }
+  }, [currentLocation, searchLocation, searchKeyword, staticMap]);
 
   // 지도 이동 시 중심 위치 업데이트
-  // 다시 원래 센터로 맵 돌아오기 위함
   const updateCenter = useMemo(() =>
     debounce((map: kakao.maps.Map) => {
       setMapCenter({
@@ -188,64 +252,16 @@ export default function KakaoMap({
 
   // 원래 위치로 지도 중심 이동
   const setCenterToMyPosition = () => {
-    setMapCenter(currentLocation);
-    setSearchLocation(currentLocation);
+    if (currentLocation.lat && currentLocation.lng) {
+      setMapCenter(currentLocation);
+      setShowMyLocationMarker(true);
+    }
   };
 
-  //=========================================================
-
-  const [pinnedCoordinates, setPinnedCoordinates] = useState<Array<{
-    placeName: string;
-    lat: number;
-    lng: number;
-  }>>([]);
-
-  const [selectedPlace, setSelectedPlace] = useState<string | null>(null);
-
-  // 선택된 카테고리에 따라 필터링된 핀 목록 생성
-  const filteredPinnedCoordinates = useMemo(() => {
-    if (!selectedCategory || selectedCategory === "ALL") {
-      return pinnedCoordinates;
-    }
-    
-    return pinnedCoordinates.filter(coord => {
-      const place = PINNED_PLACES.find(p => p.placeName === coord.placeName);
-      return place?.placeCategories.includes(selectedCategory);
-    });
-  }, [pinnedCoordinates, selectedCategory]);
-
-  // PINNED_PLACE의 주소를 좌표로 변환
-  useEffect(() => {
-    const ps = new window.kakao.maps.services.Places();
-
-    const fetchCoordinates = async () => {
-      const coordinates = await Promise.all(
-        PINNED_PLACES.map((place) => {
-          return new Promise<{ placeName: string; lat: number; lng: number; } | null>((resolve) => {
-            ps.keywordSearch(place.placeName, (data, status) => {
-              if (status === window.kakao.maps.services.Status.OK) {
-                resolve({
-                  placeName: place.placeName,
-                  lat: Number(data[0].y),
-                  lng: Number(data[0].x),
-                })
-              } else {
-                resolve(null);
-              }
-            })
-          })
-        })
-      )
-      setPinnedCoordinates(coordinates.filter(coord => coord !== null));
-    }
-    fetchCoordinates();
-  }, []);
-  //=========================================================
-  
   // 인포윈도우 별 렌더링
   const renderStars = (starCount: number) => {
     const maxStars = 5;
-    const roundedStars = Math.round(starCount * 2) / 2; // 0.5 단위로 반올림
+    const roundedStars = Math.round(starCount * 2) / 2;
     const fullStars = Math.floor(roundedStars);
     const hasHalfStar = roundedStars % 1 !== 0;
     const stars: JSX.Element[] = [];
@@ -268,75 +284,116 @@ export default function KakaoMap({
 
     return stars;
   };
-  //=========================================================
 
   return (
     <Layout>
-      {/* 카카오맵 */}
+      {/* 로딩 상태 표시 */}
+      {(locationLoading || isDataLoading) && 
+        <LoadingOverlay>
+          {locationLoading ? '위치 정보를 가져오는 중...' : '주변 장소 정보를 불러오는 중...'}
+        </LoadingOverlay>
+      }
+
+      {/* 지도 */}
       <Map
         id="map"
         style={{ width: "100%", height: mapHeight }}
         level={4}
         isPanto={true}
         center={{
+          // 기본 서울시청 좌표, 실제 위치가 있으면 해당 위치 사용
           lat: mapCenter.lat ?? 37.5665,
           lng: mapCenter.lng ?? 126.9780
         }}
         onCenterChanged={updateCenter}
-        onClick={() => setSelectedPlace(null)}
+        onClick={(_, event) => {
+          // kakao.maps.event.MouseEvent를 DOM MouseEvent로 타입 변환
+          const domEvent = event as unknown as { target: HTMLElement };
+          const targetElement = domEvent.target;
+          const isInfoWindow = targetElement.closest('.info-window-container');
+          if (!isInfoWindow) {
+            setSelectedPlace(null);
+          }
+        }}
       >
         {/* 현재 위치 핀 */}
-        <MapMarker
-          position={{
-            lat: searchLocation.lat ?? 37.5665,
-            lng: searchLocation.lng ?? 126.9780
-          }}
-          image={{
-            src: MarkerBlue,
-            size: { width: 24, height: 35 },
-          }}
-        />
+        {showMyLocationMarker && currentLocation.lat && currentLocation.lng && (
+          <MapMarker
+            position={{
+              lat: currentLocation.lat,
+              lng: currentLocation.lng
+            }}
+            image={{
+              src: MarkerBlue,
+              size: { width: 24, height: 35 },
+            }}
+          />
+        )}
 
-        {/* 1km 반경 핀 */}
-        {filteredPinnedCoordinates.map((place, index) => (
-          <>
+        {/* 검색 위치 핀 */}
+        {searchLocation.lat && searchLocation.lng && !showMyLocationMarker && (
+          <MapMarker
+            position={{
+              lat: searchLocation.lat,
+              lng: searchLocation.lng
+            }}
+            image={{
+              src: MarkerBlue,
+              size: { width: 24, height: 35 },
+            }}
+          />
+        )}
+
+        {/* 1km 반경 핀 마커 */}
+        {placesData.map((place, index) => (
+          <React.Fragment key={place.placeId}>
             <MapMarker
               key={index}
-              position={{ lat: place.lat, lng: place.lng}}
+              position={{ lat: place.latitude, lng: place.longitude}}
               image={{
                 src: MarkerRed,
                 size: { width: 24, height: 35 },
               }}
               onClick={() => {
-                console.log("핀 클릭:", place.placeName);
-                setSelectedPlace(selectedPlace === place.placeName ? null : place.placeName);
-                setMapCenter({ lat: place.lat, lng: place.lng });
+                const placeInfo = placesInfoData[index];
+                if (placeInfo) {
+                  console.log("핀 클릭:", placeInfo.placeName);
+                  setSelectedPlace(selectedPlace === placeInfo.placeName ? null : placeInfo.placeName);
+                  setMapCenter({ lat: place.latitude, lng: place.longitude });
+                }
               }}
             />
 
             {/* 인포윈도우 */}
-            {selectedPlace === place.placeName && (
+            {placesInfoData[index] && selectedPlace === placesInfoData[index].placeName && (
               <CustomOverlayMap
-                position={{ lat: place.lat, lng: place.lng }}
+                position={{ lat: place.latitude, lng: place.longitude }}
                 xAnchor={0.3}
                 yAnchor={1.6}
               >
-                <InfoWindow>
+                <InfoWindow onClick={(e) => e.stopPropagation()}>
                   <div className="info_name_wrapper">
-                    <div className="info_name">{place.placeName}</div>
-                    <img src={GoToButton} alt="" />
+                    <div className="info_name">{placesInfoData[index].placeName}</div>
+                    <img 
+                      src={GoToButton} 
+                      alt="핀 상세 정보" 
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        navigateToPinInfo(place.placeId, placesInfoData[index].placeName);
+                      }}
+                    />
                   </div>
                   <div className="info_content">
                     <p className="info_stars">
-                      {(PINNED_PLACES.find(p => p.placeName === place.placeName)?.star || 0).toFixed(1)}
-                      <p>{renderStars(PINNED_PLACES.find(p => p.placeName === place.placeName)?.star || 0)}</p>
-                      ({PINNED_PLACES.find(p => p.placeName === place.placeName)?.pinCount || 0})
+                      {placesInfoData[index].star.toFixed(1)}
+                      <p>{renderStars(placesInfoData[index].star)}</p>
+                      ({placesInfoData[index].pinCount})
                     </p>
                     <div className="info_address">
-                      {PINNED_PLACES.find(p => p.placeName === place.placeName)?.placeAddress || 0}
+                      {placesInfoData[index].placeAddress}
                     </div>
-                    {PINNED_PLACES.find(p => p.placeName === place.placeName)?.placeCategories.slice(0, 2).map((category, index) => (
-                      <p key={index} className="info_category">{category}</p>
+                    {placesInfoData[index].placeCategories.slice(0, 2).map((category, idx) => (
+                      <p key={idx} className="info_category">{category}</p>
                     ))}
                   </div>
                 </InfoWindow>
@@ -353,6 +410,75 @@ export default function KakaoMap({
                 />
               </CustomOverlayMap>
             )}
+          </React.Fragment>
+        ))}
+
+        {/* 하드코딩 핀 마커 */}
+        {filteredCoordinates.map((place, index) => (
+          <>
+            <MapMarker
+              key={index}
+              position={{ lat: place.lat, lng: place.lng}}
+              image={{
+                src: MarkerRed,
+                size: { width: 24, height: 35 },
+              }}
+              onClick={() => {
+                console.log("핀 클릭:", place.placeName);
+                setSelectedPlace(selectedPlace === place.placeName ? null : place.placeName);
+                setMapCenter({ lat: place.lat, lng: place.lng });
+              }}
+            />
+            {selectedPlace === place.placeName && (
+              <CustomOverlayMap
+                position={{ lat: place.lat, lng: place.lng }}
+                xAnchor={0.3}
+                yAnchor={1.6}
+              >
+                <InfoWindow className="info-window-contaiener" onClick={(e) => e.stopPropagation()}>
+                  <div className="info_name_wrapper">
+                    <div className="info_name">{place.placeName}</div>
+                    <img 
+                      src={GoToButton} 
+                      alt=""
+                      onClick={(e) => {
+                        console.log("핀 상세 정보 클릭:", place.placeName);
+                        e.stopPropagation();
+                        const placeInfo = PLACES_INFO.find(p => p.placeName === place.placeName);
+                        if (placeInfo) {
+                          navigateToPinInfo(placeInfo.placeId, placeInfo.placeName);
+                        }
+                      }}
+                    />
+                  </div>
+                  <div className="info_content">
+                    <p className="info_stars">
+                      {(PLACES_INFO.find(p => p.placeName === place.placeName)?.star || 0).toFixed(1)}
+                      <p>{renderStars(PLACES_INFO.find(p => p.placeName === place.placeName)?.star || 0)}</p>
+                      ({PLACES_INFO.find(p => p.placeName === place.placeName)?.pinCount || 0})
+                    </p>
+                    <div className="info_address">
+                      {PLACES_INFO.find(p => p.placeName === place.placeName)?.placeAddress || 0}
+                    </div>
+                    {PLACES_INFO.find(p => p.placeName === place.placeName)?.placeCategories.slice(0, 2).map((category, index) => (
+                      <p key={index} className="info_category">{category}</p>
+                    ))}
+                  </div>
+                </InfoWindow>
+                <img 
+                  src={InfoWindowTail} 
+                  alt="tail" 
+                  style={{
+                    position: "absolute",
+                    top: "130%",
+                    left: "30%",
+                    transform: "translate(-50%, -100%)",
+                    zIndex: -1,
+                  }}
+                  onClick={(e) => e.stopPropagation()}
+                />
+              </CustomOverlayMap>
+            )}
           </>
         ))}
       </Map>
@@ -363,9 +489,37 @@ export default function KakaoMap({
           <img src={Scope} alt="scope icon" />
         </SetCenterButton>
       )}
+
+      {/* 에러 메시지 표시 */}
+      {locationError && <ErrorMessage>{locationError}</ErrorMessage>}
     </Layout>
   );
 }
+
+const LoadingOverlay = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.8);
+  padding: 16px;
+  border-radius: 8px;
+  z-index: 100;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+`;
+
+const ErrorMessage = styled.div`
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ff6b6b;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  z-index: 100;
+`;
 
 const Layout = styled.div`
   position: relative;
@@ -378,7 +532,6 @@ const SetCenterButton = styled.button`
   align-items: center;
   width: 30px;
   height: 30px;
-  background-color: gray;
   background-color: #ffffff;
   border: none;
   cursor: pointer;
@@ -400,6 +553,7 @@ const InfoWindow = styled.div`
   border-radius: 10px;
   font-size: 11px;
   z-index: 2;
+  pointer-events: auto;
   // margin-bottom: 130px;
 
   .info_name_wrapper {

@@ -19,7 +19,7 @@ import PlaceWrapper from "../PlaceWrapper/PlaceWrapper";
 import { PinInterface } from "../../../../../interface/Pin/Pin";
 interface PinPopupInterface {
   locationCart: PinInterface[];
-  setLocationCart: (locations: PlaceInterface[]) => void;
+  setLocationCart: (locations: PinInterface[]) => void;
   suggestedRegion: string;
   places: PlaceInterface[];
   setIsPinPopup: (state: boolean) => void;

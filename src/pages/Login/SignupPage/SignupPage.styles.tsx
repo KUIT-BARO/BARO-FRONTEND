@@ -24,7 +24,11 @@ export const SignupButton = styled.button`
   cursor: pointer;
   margin-bottom: 24px;
   transition: background-color 0.2s;
-
+  &:disabled {
+    background: gray;
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
   &:hover {
     background: #3561d8;
   }

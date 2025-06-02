@@ -2,11 +2,9 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-import { postReview } from "../../../apis/Place/postReview";
-
+import { postPin } from "../../../apis/places/postPin";
 
 import BackIcon from '../../../assets/icons/Search/backIcon_white.svg';
-
 
 interface ReviewHeaderProps {
   placeId: number;
@@ -14,6 +12,9 @@ interface ReviewHeaderProps {
   starCount: number;
   textValue: string;
   categories: number[];
+  placeAddress: string;
+  latitude: number;
+  longitude: number;
 }
 
 export default function AddPinHeader (props: ReviewHeaderProps) {
@@ -46,19 +47,28 @@ export default function AddPinHeader (props: ReviewHeaderProps) {
     }
 
     try {
-      const response = await postReview({
+      // postPin API 호출
+      const response = await postPin({
         placeId: props.placeId,
+        placeName: props.placeName,
+        placeAddress: props.placeAddress,
+        latitude: props.latitude,
+        longitude: props.longitude,
+        review: props.textValue,
         score: props.starCount,
-        note: props.textValue,
-        keywordIds: props.categories,
+        categoruIds: props.categories,
       });
-      if (response.status === 200) {
-        alert('리뷰 등록에 성공했습니다.');
-        console.log('리뷰 등록 성공:', response);
+
+      if (response && response.success) {
+        alert('핀 등록에 성공했습니다.');
+        console.log('핀 등록 성공:', response);
         navigate('/search');
+      } else {
+        alert('핀 등록에 실패했습니다.');
       }
     } catch (error) {
-      console.error('리뷰 등록 오류:', error);
+      console.error('핀 등록 오류:', error);
+      alert('핀 등록 중 오류가 발생했습니다.');
     }
   };
 

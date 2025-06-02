@@ -83,6 +83,8 @@ const useUsers = () => {
     fixuserProfile,
     fixPassword,
     withdrawUser,
+    signupUser,
+    getHomeInfo,
   };
 };
 export default useUsers;

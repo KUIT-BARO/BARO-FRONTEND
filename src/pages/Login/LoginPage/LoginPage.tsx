@@ -1,9 +1,11 @@
 import React, { useState, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
 import userIcon from "../../../assets/icons/Login/login_user.svg";
 import lockIcon from "../../../assets/icons/Login/login_password.svg";
 import Logo from "../../../assets/icons/Login/logo.svg";
 import { LoginInfo } from "../../../interface/api/auth/auth";
+import useAuth from "../../../hooks/useAuth/useAuth";
 import {
   LoginContainer,
   LogoWrapper,
@@ -30,8 +32,9 @@ const LoginPage = () => {
   const passwordRef = useRef<HTMLInputElement>(null);
   const [isEmailFocused, setIsEmailFocused] = useState(false);
   const [isPasswordFocused, setIsPasswordFocused] = useState(false);
-
-  const handleLogin = () => {
+  const { loginUser } = useAuth();
+  const navigate = useNavigate(); // 성공 시 리디렉션용
+  const handleLogin = async () => {
     if (!email) {
       emailRef.current?.focus();
       return;
@@ -44,6 +47,18 @@ const LoginPage = () => {
       email,
       password,
     };
+    try {
+      const response = await loginUser(loginData);
+      if (response?.status === 200 || response?.status === 201) {
+        alert("회원가입이 완료되었습니다!");
+        navigate("/main");
+      } else {
+        alert("회원가입에 실패했습니다. 다시 시도해주세요.");
+      }
+    } catch (error) {
+      alert("에러가 발생했습니다. 다시 시도해주세요.");
+      console.error("Signup error:", error);
+    }
   };
 
   return (
