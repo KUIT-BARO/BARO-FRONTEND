@@ -17,9 +17,9 @@ jobs:
 
       - name: Add remote-url
         run: |
-          git remote add forked-repo https://heesunee:${{ secrets.AUTO_ACTIONS }}@github.com/heesunee/36-COLLABORATION-WEB-TEMU
-          git config user.name heesunee
-          git config user.email phs1585@naver.com
+          git remote add forked-repo https://hamxxn:${{ secrets.AUTO_ACTIONS }}@github.com/hamxxn/BARO-FRONTEND.git
+          git config user.name hamxxn
+          git config user.email hamin031121@gmail.com
 
       - name: Push Changes to forked-repo
         run: |
