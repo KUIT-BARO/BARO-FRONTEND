@@ -1,7 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { lazy } from 'react';
-// import { ROUTES } from "@pages/constant/Routes";
-import { ROUTES } from "./constant/Routes";
+import { ROUTES } from '@routes/constant/Routes';
 
 const NotFound = lazy(() => import('@shared/components/notFound/NotFound'));
 
