@@ -4,6 +4,7 @@ import * as styles from './container.css';
 interface ContainerProps {
   children?: React.ReactNode;
 }
+
 const Container: React.FC<ContainerProps> = ({ children }) => {
   return <div className={styles.container}>{children}</div>;
 };
