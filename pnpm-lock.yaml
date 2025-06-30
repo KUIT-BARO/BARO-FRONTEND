@@ -30,6 +30,9 @@ importers:
       '@storybook/addon-docs':
         specifier: ^9.0.12
         version: 9.0.12(@types/react@19.1.8)(storybook@9.0.12(@testing-library/dom@10.4.0)(prettier@3.5.3))
+      '@storybook/addon-themes':
+        specifier: ^9.0.14
+        version: 9.0.14(storybook@9.0.12(@testing-library/dom@10.4.0)(prettier@3.5.3))
       '@storybook/addon-vitest':
         specifier: ^9.0.12
         version: 9.0.12(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(storybook@9.0.12(@testing-library/dom@10.4.0)(prettier@3.5.3))
@@ -585,6 +588,11 @@ packages:
     resolution: {integrity: sha512-bAuFy4BWGEBIC0EAS4N+V8mHj7NZiSdDnJUSr4Al3znEVzNHLpQAMRznkga2Ok8x+gwcyBG7W47dLbDXVqLZDg==}
     peerDependencies:
       storybook: ^9.0.12
+
+  '@storybook/addon-themes@9.0.14':
+    resolution: {integrity: sha512-/L42oKlbXWBg0QnG8IIntw0Utc1fXJoARiUt1kgonjgSTKc/Dgt9nH8ZD1BxUp/T3ZrAtNdQzhBtYRfT+DUyNQ==}
+    peerDependencies:
+      storybook: ^9.0.14
 
   '@storybook/addon-vitest@9.0.12':
     resolution: {integrity: sha512-f3JPzQ9c7V06VsTFCNWzNmFhGvMPvZePVxPprzacEwAACU5GmRJ8lBqIFPyQALCMGKvaxqv0zbUwWEAsex7FQA==}
@@ -2891,6 +2899,11 @@ snapshots:
       ts-dedent: 2.2.0
     transitivePeerDependencies:
       - '@types/react'
+
+  '@storybook/addon-themes@9.0.14(storybook@9.0.12(@testing-library/dom@10.4.0)(prettier@3.5.3))':
+    dependencies:
+      storybook: 9.0.12(@testing-library/dom@10.4.0)(prettier@3.5.3)
+      ts-dedent: 2.2.0
 
   '@storybook/addon-vitest@9.0.12(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(storybook@9.0.12(@testing-library/dom@10.4.0)(prettier@3.5.3))':
     dependencies:
