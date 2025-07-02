@@ -9,7 +9,6 @@ export const headerWrapper = recipe({
 
     width: '100%',
     height: '9.8rem',
-    border: '1px solid black',
   },
   variants: {
     background: {
