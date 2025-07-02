@@ -1,9 +1,9 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { lazy } from 'react';
-import { ROUTES } from '@routes/constant/Routes';
+import { ROUTES } from '@router/constant/Routes';
+import Layout from './Layout';
 
 const NotFound = lazy(() => import('@shared/components/notFound/NotFound'));
-
 const Home = lazy(() => import('@pages/home/Home'));
 const Login = lazy(() => import('@pages/logIn/LogIn'));
 const MyPage = lazy(() => import('@pages/myPage/MyPage'));
@@ -14,9 +14,9 @@ const PromiseSelect = lazy(() => import('@pages/promiseSelect/PromiseSelect'));
 const PromiseVote = lazy(() => import('@pages/promiseVote/PromiseVote'));
 const PromiseStatus = lazy(() => import('@pages/promiseStatus/PromiseStatus'));
 
-export const router = createBrowserRouter([
+const router = createBrowserRouter([
   {
-    element: <Home />, // Layout으로 수정 필요
+    element: <Layout />,
     children: [
       {
         path: ROUTES.HOME,
@@ -57,7 +57,9 @@ export const router = createBrowserRouter([
       {
         path: '*',
         element: <NotFound />,
-      }
-    ]
-  }
+      },
+    ],
+  },
 ]);
+
+export default router;
