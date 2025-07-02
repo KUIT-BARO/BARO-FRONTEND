@@ -1,5 +1,6 @@
 import { globalStyle } from '@vanilla-extract/css';
 import '@styles/reset.css';
+import '@styles/layer.css';
 
 globalStyle('html', {
   fontSize: '62.5%',
