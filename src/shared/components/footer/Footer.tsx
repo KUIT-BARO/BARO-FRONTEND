@@ -4,7 +4,7 @@ import Text from '@shared/components//text/Text';
 
 interface FooterProps {
   selectedMenu: string;
-  handleMenu: (id: string) => void;
+  handleMenu: (_id: string) => void;
 }
 
 function Footer({ selectedMenu, handleMenu }: FooterProps) {
