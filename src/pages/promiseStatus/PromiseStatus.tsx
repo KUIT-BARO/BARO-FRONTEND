@@ -1,5 +1,5 @@
-export default function PromiseStatus() {
-  return (
-    <div>Promise Status Page</div>
-  );
+function PromiseStatus() {
+  return <div></div>;
 }
+
+export default PromiseStatus;
