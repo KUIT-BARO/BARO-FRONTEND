@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import Header from './Header';
 import { IcLogo, IcNavArrow, IcNavX, IcSetting } from '@svg/index';
 
@@ -21,35 +21,39 @@ const meta: Meta<typeof Header> = {
 export default meta;
 type Story = StoryObj<typeof Header>;
 
-export const 기본헤더: Story = {
+export const DefaultHeader: Story = {
   args: {
     text: '홈',
   },
+  name: '기본 헤더',
 };
 
-export const 아이콘헤더: Story = {
+export const IconHeader: Story = {
   args: {
     text: '뒤로가기',
     leftIcon: IcNavArrow,
     rightIcon: IcSetting,
     leftIconType: 'icon',
   },
+  name: '아이콘 헤더',
 };
 
-export const 로고헤더: Story = {
+export const LogoHeader: Story = {
   args: {
     leftIcon: IcLogo,
     rightIcon: IcSetting,
     leftIconType: 'logo',
     background: 'baroblue',
   },
+  name: '로고 헤더',
 };
 
-export const 닫기버튼헤더: Story = {
+export const CloseButtonHeader: Story = {
   args: {
     text: '설정',
     leftIcon: IcNavArrow,
     rightIcon: IcNavX,
     leftIconType: 'icon',
   },
+  name: '닫기 버튼 헤더',
 };
