@@ -33,6 +33,8 @@ interface TextProps extends HTMLAttributes<HTMLParagraphElement> {
     | 'gray1'
     | 'gray2'
     | 'gray3'
+    | 'gray4'
+    | 'gray5'
     | 'blue0'
     | 'blue1'
     | 'blue2'
