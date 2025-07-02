@@ -53,5 +53,3 @@ export { default as IcVotingYellow } from '@svg/ic_voting_yellow.svg?react';
 export { default as IcWoman } from '@svg/ic_woman.svg?react';
 export { default as IcWriteBlue } from '@svg/ic_write_blue.svg?react';
 export { default as IcWriteGray } from '@svg/ic_write_gray.svg?react';
-export { default as IcNavArrow } from '@svg/ic_nav_arrow.svg?react';
-export { default as IcNavX } from '@svg/ic_nav_x.svg?react';
