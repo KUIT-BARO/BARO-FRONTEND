@@ -1,5 +1,6 @@
 /// <reference types="vitest/config" />
-import { defineConfig } from 'vitest/config'; // ← 여기!
+
+import { defineConfig } from 'vitest/config';
 import react from '@vitejs/plugin-react-swc';
 import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 import svgr from 'vite-plugin-svgr';
@@ -12,13 +13,16 @@ const dirname =
   typeof __dirname !== 'undefined' ? __dirname : path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
-  plugins: [react(), vanillaExtractPlugin({ identifiers: 'debug' }), svgr(), tsconfigPaths()],
+  plugins: [
+    react(),
+    vanillaExtractPlugin({ identifiers: 'debug' }),
+    svgr(),
+    tsconfigPaths(),
+    storybookTest({
+      configDir: path.join(dirname, '.storybook'),
+    }),
+  ],
   test: {
-    plugins: [
-      storybookTest({
-        configDir: path.join(dirname, '.storybook'),
-      }),
-    ],
     setupFiles: ['.storybook/vitest.setup.ts'],
     browser: {
       enabled: true,
