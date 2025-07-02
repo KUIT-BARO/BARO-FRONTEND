@@ -1,5 +1,5 @@
-export default function PromiseManage() {
-  return (
-    <div>Promise Manage Page</div>
-  );
+function PromiseManage() {
+  return <div></div>;
 }
+
+export default PromiseManage;
