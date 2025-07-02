@@ -30,12 +30,10 @@ export const buttonWrapper = recipe({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-
-    fontSize: vars.font.body_12.fontSize,
-
-    borderRadius: '0.6rem',
-    cursor: 'pointer',
     border: 'none',
+    borderRadius: '0.6rem',
+    fontSize: vars.font.body_12.fontSize,
+    cursor: 'pointer',
   },
 
   variants: {
