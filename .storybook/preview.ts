@@ -18,7 +18,7 @@ const preview: Preview = {
       // 'todo' - show a11y violations in the test UI only
       // 'error' - fail CI on a11y violations
       // 'off' - skip a11y checks entirely
-      test: 'todo',
+      // 미설정 - 기본 설정으로 검사 활성화, 경고는 UI에 표시, CI에서는 실패하지 않음
     },
 
     themes: {
@@ -28,6 +28,8 @@ const preview: Preview = {
         { name: 'dark', class: 'dark', color: '#000000' },
       ],
     },
+
+    tags: ["autodocs"],
   },
 };
 

@@ -23,6 +23,6 @@ const config: StorybookConfig = {
     reactDocgen: "react-docgen-typescript"
   },
   // 정적 리소스 디렉토리 (이미지, 폰트 등)
-  staticDirs: ['../public'],
+  staticDirs: ["../public"],
 };
 export default config;
