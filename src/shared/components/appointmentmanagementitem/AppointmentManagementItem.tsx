@@ -34,7 +34,7 @@ const AppointmentManagementItem: React.FC<AppointmentManagementItemProps> = (pro
         <VoteIcon className={styles.iconStyle}/>
         <Text
           tag="body_thin_14"
-          color="gray3"
+          color="black"
           className={clsx(styles.textStyle)}
         >{firstLine}</Text>
       </div>
@@ -42,7 +42,7 @@ const AppointmentManagementItem: React.FC<AppointmentManagementItemProps> = (pro
         <PinIcon className={styles.iconStyle}/>
         <Text
           tag="body_thin_14"
-          color="gray3"
+          color="black"
           className={clsx(styles.textStyle)}
         >{secondLine}</Text>
       </div>
@@ -50,7 +50,7 @@ const AppointmentManagementItem: React.FC<AppointmentManagementItemProps> = (pro
         <DateIcon className={styles.iconStyle}/>
         <Text
           tag="body_thin_14"
-          color="gray3"
+          color="black"
           className={clsx(styles.textStyle)}
         >{thirdLine}</Text>
       </div>
