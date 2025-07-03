@@ -1,10 +1,10 @@
 import AppointmentManagementItem from './AppointmentManagementItem';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
- const meta: Meta<typeof AppointmentManagementItem> = {
+const meta: Meta<typeof AppointmentManagementItem> = {
   title: 'Components/AppointmentManagementItem',
   component: AppointmentManagementItem,
-    tags: ['autodocs'], // ✅ 이거 꼭 필요
+  tags: ['autodocs'], // ✅ 이거 꼭 필요
 
 };
 
