@@ -1,7 +1,9 @@
 import React from 'react';
 import { StatusSet } from '@shared/components/appointmentmanagementitem/StatusSet';
 import * as styles from '@shared/components/appointmentmanagementitem/AppointmentManagementItem.css.ts';
-import type { AppointmentManagementItemProps } from '@shared/components/appointmentmanagementitem/appointmentmanagementitemtype/AppointmentManagementItem.type';
+import type { AppointmentManagementItemProps } from '@shared/components/appointmentmanagementbox/appointmentmanagementitemtype/AppointmentManagementItem.type';
+import Text from '@shared/components/text/Text';
+import clsx from 'clsx';
 
 const AppointmentManagementItem: React.FC<AppointmentManagementItemProps> = (props) => {
   const { vote: VoteIcon, pin: PinIcon, date: DateIcon } = StatusSet[props.status];
@@ -30,15 +32,27 @@ const AppointmentManagementItem: React.FC<AppointmentManagementItemProps> = (pro
     <div className={styles.container}>
       <div className={styles.itembox}>
         <VoteIcon className={styles.iconStyle}/>
-        <div className={styles.textStyle}>{firstLine}</div>
+        <Text
+          tag="body_thin_14"
+          color="gray3"
+          className={clsx(styles.textStyle)}
+        >{firstLine}</Text>
       </div>
       <div className={styles.itembox}>
         <PinIcon className={styles.iconStyle}/>
-        <div className={styles.textStyle}>{secondLine}</div>
+        <Text
+          tag="body_thin_14"
+          color="gray3"
+          className={clsx(styles.textStyle)}
+        >{secondLine}</Text>
       </div>
       <div className={styles.itembox}>
         <DateIcon className={styles.iconStyle}/>
-        <div className={styles.textStyle}>{thirdLine}</div>
+        <Text
+          tag="body_thin_14"
+          color="gray3"
+          className={clsx(styles.textStyle)}
+        >{thirdLine}</Text>
       </div>
     </div>
   );
