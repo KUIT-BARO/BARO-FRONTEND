@@ -42,9 +42,9 @@ interface TextProps extends HTMLAttributes<HTMLParagraphElement> {
 
 const Text = ({ tag = 'body_16', color = 'black', children, className, ...props }: TextProps) => {
   return (
-    <p className={clsx(className, textStyle({ tag, color }))} {...props}>
+    <span className={clsx(className, textStyle({ tag, color }))} {...props}>
       {children}
-    </p>
+    </span>
   );
 };
 
