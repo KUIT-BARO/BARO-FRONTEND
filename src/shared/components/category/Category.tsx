@@ -1,6 +1,6 @@
 import * as styles from '@shared/components/category/Category.css';
 import Text from '@shared/components/text/Text';
-import type { CategoryType } from '@shared/constant/categories.ts';
+import type { CategoryType } from '@shared/constant/category';
 
 interface CategoryProps {
   text: CategoryType;
