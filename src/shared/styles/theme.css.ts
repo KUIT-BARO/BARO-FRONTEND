@@ -5,10 +5,12 @@ export const vars = createGlobalTheme(':root', {
     white: '#FFFFFF',
     black: '#000000',
 
-    gray0: '#C1C1C1',
-    gray1: '#919191',
-    gray2: '#979797',
-    gray3: '#121212',
+    gray0: '#E2E2E2',
+    gray1: '#C0C0C0',
+    gray2: '#C1C1C1',
+    gray3: '#919191',
+    gray4: '#979797',
+    gray5: '#121212',
 
     blue0: '#F4F8FB',
     blue1: ' #7BB2FF',

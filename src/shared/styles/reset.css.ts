@@ -76,3 +76,8 @@ globalStyle(':where(dialog:modal)', {
   all: 'revert',
   boxSizing: 'border-box',
 });
+
+globalStyle('*', {
+  margin: 0,
+  padding: 0,
+});
