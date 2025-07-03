@@ -24,6 +24,8 @@ export const menuWrapper = style({
   justifyContent: 'flex-start',
   gap: '0.3rem',
 
+  border: 'none',
+  background: 'inherit',
   cursor: 'pointer',
 });
 

@@ -4,7 +4,7 @@ const preview: Preview = {
   parameters: {
     actions: {
       // 액션 핸들러 감지
-      argTypesRegex: "^on[A-Z].*"
+      // argTypesRegex: "^on[A-Z].*"
     },
 
     controls: {
@@ -29,7 +29,7 @@ const preview: Preview = {
       ],
     },
 
-    tags: ["autodocs"],
+    tags: ['autodocs'],
   },
 };
 
