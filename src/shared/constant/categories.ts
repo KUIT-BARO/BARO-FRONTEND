@@ -5,11 +5,13 @@ export const CATEGORIES = [
   '비즈니스',
   '스터디',
   '커플',
-  '빈려동물',
+  '반려동물',
   '키즈존',
   '실버존',
   '아늑한',
   '북적이는',
   '독특한',
   '전통적인',
-];
+] as const;
+
+export type CategoryType = (typeof CATEGORIES)[number];
