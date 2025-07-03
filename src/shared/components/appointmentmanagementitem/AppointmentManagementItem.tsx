@@ -3,7 +3,7 @@ import { StatusSet } from '@shared/components/appointmentmanagementitem/StatusSe
 import * as styles from '@shared/components/appointmentmanagementitem/AppointmentManagementItem.css.ts';
 import type { AppointmentManagementItemProps } from '@shared/types/appointmentmanagementitemtype/AppointmentManagementItem.type';
 
-const AppointmentManagementItem: React.FC<AppointmentManagementItemProps> = props => {
+const AppointmentManagementItem: React.FC<AppointmentManagementItemProps> = (props) => {
   const { vote: VoteIcon, pin: PinIcon, date: DateIcon } = StatusSet[props.status];
   let firstLine = '';
   let secondLine = '';
@@ -29,16 +29,16 @@ const AppointmentManagementItem: React.FC<AppointmentManagementItemProps> = prop
   return (
     <div className={styles.container}>
       <div className={styles.itembox}>
-        <VoteIcon />
-        <span className={styles.textStyle}>{firstLine}</span>
+        <VoteIcon className={styles.iconStyle}/>
+        <div className={styles.textStyle}>{firstLine}</div>
       </div>
       <div className={styles.itembox}>
-        <PinIcon />
-        <span className={styles.textStyle}>{secondLine}</span>
+        <PinIcon className={styles.iconStyle}/>
+        <div className={styles.textStyle}>{secondLine}</div>
       </div>
       <div className={styles.itembox}>
-        <DateIcon />
-        <span className={styles.textStyle}>{thirdLine}</span>
+        <DateIcon className={styles.iconStyle}/>
+        <div className={styles.textStyle}>{thirdLine}</div>
       </div>
     </div>
   );
