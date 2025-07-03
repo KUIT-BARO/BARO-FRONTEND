@@ -24,4 +24,11 @@ export const textStyle = style({
   fontWeight: vars.font.body_thin_14.fontWeight,
   lineHeight: vars.font.body_thin_14.lineHeight,
   letterSpacing: '-0.35px',
+  whiteSpace: 'nowrap',
+});
+
+export const iconStyle = style({
+  width: '1.8rem',
+  height: '1.8rem',
+  flexShrink: 0,
 });
