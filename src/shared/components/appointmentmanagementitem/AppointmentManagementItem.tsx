@@ -1,7 +1,7 @@
 import React from 'react';
 import { StatusSet } from '@shared/components/appointmentmanagementitem/StatusSet';
 import * as styles from '@shared/components/appointmentmanagementitem/AppointmentManagementItem.css.ts';
-import type { AppointmentManagementItemProps } from '@shared/types/appointmentmanagementitemtype/AppointmentManagementItem.type';
+import type { AppointmentManagementItemProps } from '@shared/components/appointmentmanagementitem/appointmentmanagementitemtype/AppointmentManagementItem.type';
 
 const AppointmentManagementItem: React.FC<AppointmentManagementItemProps> = (props) => {
   const { vote: VoteIcon, pin: PinIcon, date: DateIcon } = StatusSet[props.status];
