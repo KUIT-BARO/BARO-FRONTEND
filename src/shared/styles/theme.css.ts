@@ -16,6 +16,7 @@ export const vars = createGlobalTheme(':root', {
     blue1: ' #7BB2FF',
     blue2: '#6699FF',
     blue3: '#708AFF',
+    blue4: '#EDF1FF',
     baroBlue: '#5175FF',
 
     red: '#FF6467',

@@ -17,8 +17,6 @@ export const itembox = style({
 
 export const textStyle = style({
   fontFamily: 'Pretendard',
-  fontFeatureSettings: "'liga' off, 'clig' off",
-  letterSpacing: '-0.35px',
   whiteSpace: 'nowrap',
 });
 
