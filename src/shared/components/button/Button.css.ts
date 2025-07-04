@@ -2,26 +2,40 @@ import { vars } from '@shared/styles/theme.css';
 import { recipe } from '@vanilla-extract/recipes';
 
 const buttonSizes = {
-  xsmall: {
-    width: '4.2rem',
-    height: '1.7rem',
-    fontSize: '0.7rem',
-    fontWeight: '600',
+  long: {
+    width: '100%',
+    // width: '36.2rem',
+    height: '5rem',
+    padding: '1.6rem 14.9rem',
   },
   short: {
-    width: '9.1rem',
-    height: '2.7rem',
-    padding: '0.3rem 0.6rem',
+    width: '50%',
+    // width: '17.1rem',
+    height: '5.6rem',
+    padding: '1.6rem 7.1rem',
   },
-  medium: {
-    width: '10.7rem',
-    height: '3.5rem',
-    padding: '0.5rem 0rem',
+  short_s: {
+    width: '14.6rem',
+    height: '4.4rem',
+    padding: '1.6rem 7.1rem',
   },
-  long: {
-    width: '22.6rem',
-    height: '3.1rem',
-    padding: '0.8rem 0rem',
+  xsmall: {
+    width: '6.8rem',
+    height: '2.8rem',
+    padding: '0.4rem 1.0rem',
+    fontSize: vars.font.body_12.fontSize,
+  },
+  category: {
+    width: '8.3rem',
+    height: '4.0rem',
+    fontSize: vars.font.body_12.fontSize,
+  },
+  cancel: {
+    width: '4.1rem',
+    height: '2.8rem',
+    padding: '0.4rem 1.0rem',
+    fontSize: vars.font.body_12.fontSize,
+    color: vars.color.baroBlue,
   },
 }
 
@@ -31,9 +45,10 @@ export const buttonWrapper = recipe({
     justifyContent: 'center',
     alignItems: 'center',
     border: 'none',
-    borderRadius: '0.6rem',
-    fontSize: vars.font.body_12.fontSize,
+    borderRadius: '1rem',
+    fontSize: vars.font.body_16.fontSize,
     cursor: 'pointer',
+    whiteSpace: 'nowrap',
   },
 
   variants: {
@@ -58,11 +73,13 @@ export const buttonWrapper = recipe({
     },
 
     size: {
-      xsmall: buttonSizes.xsmall,
-      short: buttonSizes.short,
-      medium: buttonSizes.medium,
       long: buttonSizes.long,
-    }
+      short: buttonSizes.short,
+      short_s: buttonSizes.short_s,
+      xsmall: buttonSizes.xsmall,
+      category: buttonSizes.category,
+      cancel: buttonSizes.cancel,
+    },
   },
 
   defaultVariants: {

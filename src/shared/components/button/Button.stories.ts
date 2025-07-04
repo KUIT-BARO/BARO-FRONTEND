@@ -1,17 +1,25 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import Button from './Button';
+import { vars } from '@shared/styles/theme.css';
+import { BUTTON_VARIANTS } from '@shared/constant/button';
 
 const meta: Meta<typeof Button> = {
-  title: 'Shared/Button',
+  title: 'components/Button',
   component: Button,
   tags: ['autodocs'],
   argTypes: {
     variant: {
       control: { type: 'radio' },
-      options: ['enabled', 'disabled', 'white', 'outlined'],
+      options: [
+        BUTTON_VARIANTS.ENABLED,
+        BUTTON_VARIANTS.DISABLED,
+        BUTTON_VARIANTS.WHITE,
+        BUTTON_VARIANTS.OUTLINED
+      ],
     },
     text: { control: 'text' },
     onClick: { action: 'clicked' },
+    backgroundColor: { control: 'color' },
   },
 };
 
@@ -51,39 +59,6 @@ export const LongButton4: Story = {
   name: 'Long Outlined Button',
 };
 
-export const MediumButton1: Story = {
-  args: {
-    variant: 'white',
-    size: 'medium',
-    text: '신촌',
-  },
-  name: 'Medium White Button',
-};
-export const MediumButton2: Story = {
-  args: {
-    variant: 'enabled',
-    size: 'medium',
-    text: '신촌',
-  },
-  name: 'Medium Enabled Button',
-};
-export const MediumButton3: Story = {
-  args: {
-    variant: 'disabled',
-    size: 'medium',
-    text: '신촌',
-  },
-  name: 'Medium Disabled Button',
-};
-export const MediumButton4: Story = {
-  args: {
-    variant: 'outlined',
-    size: 'medium',
-    text: '신촌',
-  },
-  name: 'Medium Outlined Button',
-};
-
 export const ShortButton1: Story = {
   args: {
     variant: 'white',
@@ -117,35 +92,95 @@ export const ShortButton4: Story = {
   name: 'Short Outlined Button',
 };
 
-export const SmallButton1: Story = {
+export const ShortSButton1: Story = {
+  args: {
+    variant: 'white',
+    size: 'short_s',
+    text: '신촌',
+  },
+  name: 'Short_S White Button',
+};
+export const ShortSButton2: Story = {
+  args: {
+    variant: 'enabled',
+    size: 'short_s',
+    text: '신촌',
+  },
+  name: 'Short_S Enabled Button',
+};
+export const ShortSButton3: Story = {
+  args: {
+    variant: 'disabled',
+    size: 'short_s',
+    text: '신촌',
+  },
+  name: 'Short_S Disabled Button',
+};
+export const ShortSButton4: Story = {
+  args: {
+    variant: 'outlined',
+    size: 'short_s',
+    text: '신촌',
+  },
+  name: 'Short_S Outlined Button',
+};
+
+export const XSmallButton1: Story = {
   args: {
     variant: 'white',
     size: 'xsmall',
     text: '전체 취소',
   },
-  name: 'Small White Button',
+  name: 'XSmall White Button',
 };
-export const SmallButton2: Story = {
+export const XSmallButton2: Story = {
   args: {
     variant: 'enabled',
     size: 'xsmall',
     text: '전체 취소',
   },
-  name: 'Small Enabled Button',
+  name: 'XSmall Enabled Button',
 };
-export const SmallButton3: Story = {
+export const XSmallButton3: Story = {
   args: {
     variant: 'disabled',
     size: 'xsmall',
     text: '전체 취소',
   },
-  name: 'Small Disabled Button',
+  name: 'XSmall Disabled Button',
 };
-export const SmallButton4: Story = {
+export const XSmallButton4: Story = {
   args: {
     variant: 'outlined',
     size: 'xsmall',
     text: '전체 취소',
   },
-  name: 'Small Outlined Button',
+  name: 'XSmall Outlined Button',
+};
+
+export const CategoryButton1: Story = {
+  args: {
+    variant: 'enabled',
+    size: 'category',
+    text: '비즈니스',
+  },
+  name: 'Category White Button',
+};
+export const CategoryButton2: Story = {
+  args: {
+    variant: 'outlined',
+    size: 'category',
+    text: '비즈니스',
+  },
+  name: 'Category Outlined Button',
+};
+
+export const CancelButton: Story = {
+  args: {
+    variant: 'enabled',
+    size: 'cancel',
+    text: '취소',
+    backgroundColor: vars.color.white,
+  },
+  name: 'Cancel Button ',
 };
