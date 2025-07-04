@@ -11,6 +11,7 @@ export const minibutton = recipe({
     position: 'absolute',
     right: '2.2rem',
     bottom: '2.2rem',
+
     width: '4.6rem',
     height: '2.4rem',
     padding: '0.2rem 1.1rem',
@@ -29,6 +30,7 @@ export const minibutton = recipe({
 export const container = style({
   display: 'flex',
   flexDirection: 'column',
+
   width: '36.2rem',
   height: '19.9rem',
   boxShadow: '0px 0px 4px 0px #D7DEF7',
@@ -39,6 +41,7 @@ export const topBox = recipe({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
+
     width: '100%',
     height: '6.4rem',
     padding: '1.8rem 2.6rem',
@@ -56,6 +59,7 @@ export const topBox = recipe({
 export const bottomBox = style({
   display: 'flex',
   position: 'relative',
+
   width: '100%',
   height: '13.5rem',
   padding: '2.6rem 2.8rem',
