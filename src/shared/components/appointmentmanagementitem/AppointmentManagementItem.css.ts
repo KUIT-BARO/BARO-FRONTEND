@@ -2,10 +2,10 @@ import { style } from '@vanilla-extract/css';
 
 export const container = style({
   display: 'flex',
-  width: '15rem',
   flexDirection: 'column',
   alignItems: 'flex-start',
   gap: '0.8rem',
+  width: '15rem',
 });
 
 export const itembox = style({
