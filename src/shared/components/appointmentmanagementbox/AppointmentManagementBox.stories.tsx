@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import AppointmentManagementBox from './AppointmentManagementBox';
+import AppointmentManagementBox from '@shared/components/appointmentmanagementbox/AppointmentManagementBox';
 
 const meta: Meta<typeof AppointmentManagementBox> = {
   title: 'Components/AppointmentManagementBox',
