@@ -18,6 +18,7 @@ interface StatusIconSet {
   pin: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
   date: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
 }
+
 export const StatusSet: Record<StatusType, StatusIconSet> = {
   suggestedPromises: {
     vote: IcVote,
