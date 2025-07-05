@@ -5,6 +5,12 @@ import type { AppointmentManagementItemProps } from '@shared/components/appointm
 import Text from '@shared/components/text/Text';
 import clsx from 'clsx';
 
+const APPOINTMENT_STATUS = {
+  SUGGESTED: 'suggestedPromises',
+  VOTING: 'votingPromises',
+  CONFIRMED: 'confirmedPromises',
+} as const;
+
 const AppointmentManagementItem: React.FC<AppointmentManagementItemProps> = (props) => {
   const { vote: VoteIcon, pin: PinIcon, date: DateIcon } = StatusSet[props.status];
   let firstLine = '';
@@ -12,17 +18,17 @@ const AppointmentManagementItem: React.FC<AppointmentManagementItemProps> = (pro
   let thirdLine = '';
 
   switch (props.status) {
-  case 'suggestedPromises':
-    firstLine = `${props.untilVoteDate}일`;
+  case APPOINTMENT_STATUS.SUGGESTED:
+    firstLine = `${props.untilVoteDate}`;
     secondLine = props.suggestedRegion;
     thirdLine = `${props.suggestedStartDate} ~ ${props.SuggestedEndDate}`;
     break;
-  case 'votingPromises':
-    firstLine = `${props.untilVoteEndDate}일`;
+  case APPOINTMENT_STATUS.VOTING:
+    firstLine = `${props.untilVoteEndDate}`;
     secondLine = props.suggestedRegion;
     thirdLine = `${props.suggestedStartDate} ~ ${props.SuggestedEndDate}`;
     break;
-  case 'confirmedPromises':
+  case APPOINTMENT_STATUS.CONFIRMED:
     firstLine = props.promiseMembersNames.join(', ');
     secondLine = props.placeName;
     thirdLine = props.fixedDate;
