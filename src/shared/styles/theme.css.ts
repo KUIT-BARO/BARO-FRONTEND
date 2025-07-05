@@ -20,6 +20,8 @@ export const vars = createGlobalTheme(':root', {
     baroBlue: '#5175FF',
 
     red0: '#FF6467',
+    borderline: '#D7DEF7',
+
     yellow1: '#FB0',
     yellow2: '#FFFBDE',
 
