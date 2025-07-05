@@ -72,5 +72,4 @@ export const bottomBox = style({
 export const imgStyle = style({
   width: '1rem',
   height: '1.9rem',
-  flexShrink: 0,
 });
