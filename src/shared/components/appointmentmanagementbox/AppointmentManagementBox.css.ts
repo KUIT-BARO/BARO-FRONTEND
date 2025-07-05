@@ -4,13 +4,13 @@ import { recipe } from '@vanilla-extract/recipes';
 
 export const minibutton = recipe({
   base: {
+    position: 'absolute',
+    right: '2.2rem',
+    bottom: '2.2rem',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     gap: '1rem',
-    position: 'absolute',
-    right: '2.2rem',
-    bottom: '2.2rem',
 
     width: '4.6rem',
     height: '2.4rem',
@@ -33,14 +33,17 @@ export const container = style({
 
   width: '36.2rem',
   height: '19.9rem',
-  boxShadow: '0px 0px 4px 0px #D7DEF7',
+
+  background: vars.color.white,
+  boxShadow: `0px 0px 4px 0px ${vars.color.borderline}`,
+  borderRadius: '10px',
 });
 
 export const topBox = recipe({
   base: {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'spa ce-between',
 
     width: '100%',
     height: '6.4rem',
