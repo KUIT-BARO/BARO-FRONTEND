@@ -10,7 +10,29 @@ const APPOINTMENT_STATUS = {
   VOTING: 'votingPromises',
   CONFIRMED: 'confirmedPromises',
 } as const;
+type StatusType = 'suggestedPromises' | 'votingPromises' | 'confirmedPromises';
+interface MinibuttonProps {
+  status: StatusType;
+}
 
+const Minibutton: React.FC<MinibuttonProps> = ({ status }) => {
+  const title =
+    status === 'suggestedPromises'
+      ? '미정'
+      : status === 'votingPromises'
+        ? '투표'
+        : status === 'confirmedPromises'
+          ? '확정'
+          : '?';
+
+  return (
+    <div className={styles.minibutton({ background: status })}>
+      <Text tag="body_bold_14" color="white">
+        {title}
+      </Text>
+    </div>
+  );
+};
 const AppointmentManagementItem: React.FC<AppointmentManagementItemProps> = (props) => {
   const { vote: VoteIcon, pin: PinIcon, date: DateIcon } = StatusSet[props.status];
   let firstLine = '';
@@ -52,14 +74,20 @@ const AppointmentManagementItem: React.FC<AppointmentManagementItemProps> = (pro
           className={clsx(styles.textStyle)}
         >{secondLine}</Text>
       </div>
-      <div className={styles.itembox}>
-        <DateIcon className={styles.iconStyle}/>
-        <Text
-          tag="body_thin_14"
-          color="black"
-          className={clsx(styles.textStyle)}
-        >{thirdLine}</Text>
+      <div className={styles.thirdStyle}>
+        <div className={styles.itembox}>
+          <DateIcon className={styles.iconStyle}/>
+          <Text
+            tag="body_thin_14"
+            color="black"
+            className={clsx(styles.textStyle)}
+          >{thirdLine}</Text>
+        </div>
+
+        {props.disabled&&<Minibutton status={props.status} />}
       </div>
+
+
     </div>
   );
 };
