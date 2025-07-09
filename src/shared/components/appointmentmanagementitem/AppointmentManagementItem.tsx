@@ -1,5 +1,5 @@
 import React from 'react';
-import { StatusSet } from '@shared/components/appointmentmanagementitem/StatusSet';
+import { StatusSet,formatDateWithDay } from '@shared/components/appointmentmanagementitem/StatusSet';
 import * as styles from '@shared/components/appointmentmanagementitem/AppointmentManagementItem.css.ts';
 import type { AppointmentManagementItemProps } from '@shared/components/appointmentmanagementbox/appointmentmanagementitemtype/AppointmentManagementItem.type';
 import Text from '@shared/components/text/Text';
@@ -19,19 +19,19 @@ const AppointmentManagementItem: React.FC<AppointmentManagementItemProps> = (pro
 
   switch (props.status) {
   case APPOINTMENT_STATUS.SUGGESTED:
-    firstLine = `${props.untilVoteDate}`;
+    firstLine = `${props.untilVoteDate}일`;
     secondLine = props.suggestedRegion;
-    thirdLine = `${props.suggestedStartDate} ~ ${props.SuggestedEndDate}`;
+    thirdLine = `${formatDateWithDay(props.suggestedStartDate)} ~ ${formatDateWithDay(props.SuggestedEndDate)}`;
     break;
   case APPOINTMENT_STATUS.VOTING:
-    firstLine = `${props.untilVoteEndDate}`;
+    firstLine = `${props.untilVoteEndDate}일`;
     secondLine = props.suggestedRegion;
-    thirdLine = `${props.suggestedStartDate} ~ ${props.SuggestedEndDate}`;
+    thirdLine = `${formatDateWithDay(props.suggestedStartDate)} ~ ${formatDateWithDay(props.SuggestedEndDate)}`;
     break;
   case APPOINTMENT_STATUS.CONFIRMED:
     firstLine = props.promiseMembersNames.join(', ');
     secondLine = props.placeName;
-    thirdLine = props.fixedDate;
+    thirdLine = formatDateWithDay(props.fixedDate);
     break;
   }
   return (
