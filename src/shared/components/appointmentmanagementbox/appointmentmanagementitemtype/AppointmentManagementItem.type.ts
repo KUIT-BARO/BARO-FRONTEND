@@ -9,6 +9,7 @@ export interface SuggestedAppointment extends BaseAppointment {
   suggestedRegion: string;
   suggestedStartDate: string;
   SuggestedEndDate: string;
+  disabled?: boolean;
 }
 
 export interface VotingAppointment extends BaseAppointment {
@@ -17,6 +18,7 @@ export interface VotingAppointment extends BaseAppointment {
   suggestedRegion: string;
   suggestedStartDate: string;
   SuggestedEndDate: string;
+  disabled?: boolean;
 }
 
 export interface ConfirmedAppointment extends BaseAppointment {
@@ -24,6 +26,7 @@ export interface ConfirmedAppointment extends BaseAppointment {
   fixedDate: string;
   placeName: string;
   promiseMembersNames: string[];
+  disabled?: boolean;
 }
 
 export type AppointmentManagementItemProps =
