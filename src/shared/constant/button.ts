@@ -8,8 +8,6 @@ export const BUTTON_VARIANTS = {
 export const BUTTON_SIZES = {
   LONG: 'long',
   SHORT: 'short',
-  SHORT_S: 'short_s',
-  XSMALL: 'xsmall',
   CATEGORY: 'category',
   CANCEL: 'cancel',
 } as const;

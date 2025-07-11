@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import Button from './Button';
 import { vars } from '@shared/styles/theme.css';
-import { BUTTON_VARIANTS } from '@shared/constant/button';
+import { BUTTON_VARIANTS, BUTTON_SIZES } from '@shared/constant/button';
 
 const meta: Meta<typeof Button> = {
   title: 'components/Button',
@@ -15,6 +15,15 @@ const meta: Meta<typeof Button> = {
         BUTTON_VARIANTS.DISABLED,
         BUTTON_VARIANTS.WHITE,
         BUTTON_VARIANTS.OUTLINED
+      ],
+    },
+    size: {
+      control: { type: 'radio' },
+      options: [
+        BUTTON_SIZES.LONG,
+        BUTTON_SIZES.SHORT,
+        BUTTON_SIZES.CATEGORY,
+        BUTTON_SIZES.CANCEL
       ],
     },
     text: { control: 'text' },
@@ -92,79 +101,13 @@ export const ShortButton4: Story = {
   name: 'Short Outlined Button',
 };
 
-export const ShortSButton1: Story = {
-  args: {
-    variant: 'white',
-    size: 'short_s',
-    text: '신촌',
-  },
-  name: 'Short_S White Button',
-};
-export const ShortSButton2: Story = {
-  args: {
-    variant: 'enabled',
-    size: 'short_s',
-    text: '신촌',
-  },
-  name: 'Short_S Enabled Button',
-};
-export const ShortSButton3: Story = {
-  args: {
-    variant: 'disabled',
-    size: 'short_s',
-    text: '신촌',
-  },
-  name: 'Short_S Disabled Button',
-};
-export const ShortSButton4: Story = {
-  args: {
-    variant: 'outlined',
-    size: 'short_s',
-    text: '신촌',
-  },
-  name: 'Short_S Outlined Button',
-};
-
-export const XSmallButton1: Story = {
-  args: {
-    variant: 'white',
-    size: 'xsmall',
-    text: '전체 취소',
-  },
-  name: 'XSmall White Button',
-};
-export const XSmallButton2: Story = {
-  args: {
-    variant: 'enabled',
-    size: 'xsmall',
-    text: '전체 취소',
-  },
-  name: 'XSmall Enabled Button',
-};
-export const XSmallButton3: Story = {
-  args: {
-    variant: 'disabled',
-    size: 'xsmall',
-    text: '전체 취소',
-  },
-  name: 'XSmall Disabled Button',
-};
-export const XSmallButton4: Story = {
-  args: {
-    variant: 'outlined',
-    size: 'xsmall',
-    text: '전체 취소',
-  },
-  name: 'XSmall Outlined Button',
-};
-
 export const CategoryButton1: Story = {
   args: {
     variant: 'enabled',
     size: 'category',
     text: '비즈니스',
   },
-  name: 'Category White Button',
+  name: 'Category Enabled Button',
 };
 export const CategoryButton2: Story = {
   args: {
@@ -172,7 +115,7 @@ export const CategoryButton2: Story = {
     size: 'category',
     text: '비즈니스',
   },
-  name: 'Category Outlined Button',
+  name: 'Category Disabled Button',
 };
 
 export const CancelButton: Story = {
