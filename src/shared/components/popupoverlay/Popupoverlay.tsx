@@ -1,4 +1,3 @@
-// Popupoverlay.tsx
 import React from 'react';
 import * as styles from '@shared/components/popupoverlay/Popupoverlay.css';
 import { IcArrowLeft } from '@svg/index';
