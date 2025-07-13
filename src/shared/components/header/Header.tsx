@@ -14,7 +14,7 @@ interface HeaderProps {
 
 type HeaderIconType = 'icon' | 'logo';
 
-const Header = ({
+export default function Header({
   background = 'blue0',
   leftIcon: LeftIcon,
   leftIconType = 'icon',
@@ -22,7 +22,7 @@ const Header = ({
   rightIcon: RightIcon,
   onClickLeftIcon,
   onClickRightIcon,
-}: HeaderProps) => {
+}: HeaderProps) {
   const leftIconSizeWidth = leftIconType === 'logo' ? '5rem' : '2.2rem';
   const leftIconSizeHeight = leftIconType === 'logo' ? '2.7rem' : '2.2rem';
 
@@ -43,6 +43,4 @@ const Header = ({
       </div>
     </div>
   );
-};
-
-export default Header;
+}

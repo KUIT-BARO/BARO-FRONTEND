@@ -1,5 +1,3 @@
-function PromiseStatus() {
+export default function PromiseStatus() {
   return <div></div>;
 }
-
-export default PromiseStatus;
