@@ -7,7 +7,7 @@ interface FooterProps {
   handleMenu: (_id: string) => void;
 }
 
-function Footer({ selectedMenu, handleMenu }: FooterProps) {
+export default function Footer({ selectedMenu, handleMenu }: FooterProps) {
   return (
     <div className={styles.footerWrapper}>
       {MENUS.map(menu => {
@@ -33,5 +33,3 @@ function Footer({ selectedMenu, handleMenu }: FooterProps) {
     </div>
   );
 }
-
-export default Footer;
