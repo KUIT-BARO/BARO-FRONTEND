@@ -1,5 +1,3 @@
-function PromiseVote() {
+export default function PromiseVote() {
   return <div></div>;
 }
-
-export default PromiseVote;
