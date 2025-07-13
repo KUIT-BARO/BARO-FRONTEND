@@ -1,5 +1,3 @@
-function LogIn() {
+export default function LogIn() {
   return <div></div>;
 }
-
-export default LogIn;

@@ -1,5 +1,3 @@
-function PromiseProposal() {
+export default function PromiseProposal() {
   return <div></div>;
 }
-
-export default PromiseProposal;
