@@ -50,8 +50,8 @@ export default function Text({
   ...props
 }: TextProps) {
   return (
-    <p className={clsx(className, textStyle({ tag, color }))} {...props}>
+    <span className={clsx(className, textStyle({ tag, color }))} {...props}>
       {children}
-    </p>
+    </span>
   );
 }
