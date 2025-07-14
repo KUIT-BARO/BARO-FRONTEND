@@ -1,15 +1,10 @@
 import React from 'react';
-import { StatusSet,formatDateWithDay } from '@shared/components/appointmentmanagementitem/StatusSet';
+import { StatusSet,getStatusLines} from '@shared/components/appointmentmanagementitem/StatusSet';
 import * as styles from '@shared/components/appointmentmanagementitem/AppointmentManagementItem.css.ts';
 import type { AppointmentManagementItemProps } from '@shared/components/appointmentmanagementbox/appointmentmanagementitemtype/AppointmentManagementItem.type';
 import Text from '@shared/components/text/Text';
 import clsx from 'clsx';
 
-const APPOINTMENT_STATUS = {
-  SUGGESTED: 'suggestedPromises',
-  VOTING: 'votingPromises',
-  CONFIRMED: 'confirmedPromises',
-} as const;
 type StatusType = 'suggestedPromises' | 'votingPromises' | 'confirmedPromises';
 interface MinibuttonProps {
   status: StatusType;
@@ -35,27 +30,9 @@ const Minibutton: React.FC<MinibuttonProps> = ({ status }) => {
 };
 const AppointmentManagementItem: React.FC<AppointmentManagementItemProps> = (props) => {
   const { vote: VoteIcon, pin: PinIcon, date: DateIcon } = StatusSet[props.status];
-  let firstLine = '';
-  let secondLine = '';
-  let thirdLine = '';
+  const { firstLine, secondLine, thirdLine } = getStatusLines(props);
 
-  switch (props.status) {
-  case APPOINTMENT_STATUS.SUGGESTED:
-    firstLine = `${props.untilVoteDate}일`;
-    secondLine = props.suggestedRegion;
-    thirdLine = `${formatDateWithDay(props.suggestedStartDate)} ~ ${formatDateWithDay(props.SuggestedEndDate)}`;
-    break;
-  case APPOINTMENT_STATUS.VOTING:
-    firstLine = `${props.untilVoteEndDate}일`;
-    secondLine = props.suggestedRegion;
-    thirdLine = `${formatDateWithDay(props.suggestedStartDate)} ~ ${formatDateWithDay(props.SuggestedEndDate)}`;
-    break;
-  case APPOINTMENT_STATUS.CONFIRMED:
-    firstLine = props.promiseMembersNames.join(', ');
-    secondLine = props.placeName;
-    thirdLine = formatDateWithDay(props.fixedDate);
-    break;
-  }
+
   return (
     <div className={styles.container}>
       <div className={styles.itembox}>
