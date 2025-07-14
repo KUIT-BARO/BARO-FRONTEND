@@ -1,5 +1,5 @@
 import {
-  IcVote,
+  IcVoteBlue,
   IcVotingRed,
   IcVotingYellow,
   IcPinLocBlue,
@@ -21,7 +21,7 @@ interface StatusIconSet {
 
 export const StatusSet: Record<StatusType, StatusIconSet> = {
   suggestedPromises: {
-    vote: IcVote,
+    vote: IcVoteBlue,
     pin: IcPinLocBlue,
     date: IcDateBlue,
   },
