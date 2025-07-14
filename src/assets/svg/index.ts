@@ -47,7 +47,7 @@ export { default as IcStarNon } from '@svg/ic_star_non.svg?react';
 export { default as IcSuggest } from '@svg/ic_suggest.svg?react';
 export { default as IcTrashcan } from '@svg/ic_trashcan.svg?react';
 export { default as IcUser } from '@svg/ic_user.svg?react';
-export { default as IcVote } from '@svg/ic_vote.svg?react';
+export { default as IcVoteBlue } from '@svg/ic_voting_blue.svg?react';
 export { default as IcVotingRed } from '@svg/ic_voting_red.svg?react';
 export { default as IcVotingYellow } from '@svg/ic_voting_yellow.svg?react';
 export { default as IcWoman } from '@svg/ic_woman.svg?react';
