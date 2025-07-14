@@ -10,6 +10,7 @@ import {
   IcDateRed,
 } from '@svg/index.ts';
 import React from 'react';
+import type { AppointmentManagementItemProps } from '@shared/components/appointmentmanagementbox/appointmentmanagementitemtype/AppointmentManagementItem.type';
 
 type StatusType = 'suggestedPromises' | 'votingPromises' | 'confirmedPromises';
 
@@ -47,4 +48,31 @@ export function formatDateWithDay(dateStr: string): string {
   const dayOfWeek = dayNames[date.getDay()];
 
   return `${month}/${day}(${dayOfWeek})`;
+}
+
+export function getStatusLines(props: AppointmentManagementItemProps): {
+  firstLine: string;
+  secondLine: string;
+  thirdLine: string;
+} {
+  switch (props.status) {
+  case 'suggestedPromises':
+    return {
+      firstLine: `${props.untilVoteDate}일`,
+      secondLine: props.suggestedRegion,
+      thirdLine: `${formatDateWithDay(props.suggestedStartDate)} ~ ${formatDateWithDay(props.SuggestedEndDate)}`
+    };
+  case 'votingPromises':
+    return {
+      firstLine: `${props.untilVoteEndDate}일`,
+      secondLine: props.suggestedRegion,
+      thirdLine: `${formatDateWithDay(props.suggestedStartDate)} ~ ${formatDateWithDay(props.SuggestedEndDate)}`
+    };
+  case 'confirmedPromises':
+    return {
+      firstLine: props.promiseMembersNames.join(', '),
+      secondLine: props.placeName,
+      thirdLine: formatDateWithDay(props.fixedDate)
+    };
+  }
 }
