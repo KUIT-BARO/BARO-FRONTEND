@@ -14,7 +14,7 @@ export const container = style({
   borderRadius: '10px',
 });
 
-export const topBox = recipe({
+export const headerSection = recipe({
   base: {
     display: 'flex',
     alignItems: 'center',
@@ -34,7 +34,7 @@ export const topBox = recipe({
   },
 });
 
-export const bottomBox = style({
+export const contentSection = style({
   display: 'flex',
 
   width: '100%',
