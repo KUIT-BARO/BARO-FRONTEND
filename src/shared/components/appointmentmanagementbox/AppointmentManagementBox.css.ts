@@ -18,7 +18,7 @@ export const topBox = recipe({
   base: {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'spa ce-between',
+    justifyContent: 'space-between',
 
     width: '100%',
     height: '6.4rem',
