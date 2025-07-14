@@ -8,11 +8,11 @@ import Text from '@shared/components/text/Text';
 export default function AppointmentManagementBox(props: AppointmentManagementItemProps) {
   return (
     <div className={styles.container}>
-      <div className={styles.topBox({ background: props.status })}>
+      <div className={styles.headerSection({ background: props.status })}>
         <Text tag="body_bold_20" color="black">{props.promiseName}</Text>
         <IcArrow className={styles.imgStyle}/>
       </div>
-      <div className={styles.bottomBox}>
+      <div className={styles.contentSection}>
         <AppointmentManagementItem {...props} />
       </div>
     </div>
