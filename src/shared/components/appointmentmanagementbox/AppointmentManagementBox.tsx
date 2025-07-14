@@ -5,7 +5,7 @@ import { IcArrow } from '@svg/index';
 import Text from '@shared/components/text/Text';
 
 
-function AppointmentManagementBox(props: AppointmentManagementItemProps) {
+export default function AppointmentManagementBox(props: AppointmentManagementItemProps) {
   return (
     <div className={styles.container}>
       <div className={styles.topBox({ background: props.status })}>
@@ -18,5 +18,3 @@ function AppointmentManagementBox(props: AppointmentManagementItemProps) {
     </div>
   )
 }
-
-export default AppointmentManagementBox
