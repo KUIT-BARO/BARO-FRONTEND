@@ -23,7 +23,7 @@ const meta: Meta<typeof Button> = {
         BUTTON_SIZES.LONG,
         BUTTON_SIZES.SHORT,
         BUTTON_SIZES.CATEGORY,
-        BUTTON_SIZES.CANCEL
+        BUTTON_SIZES.SMALL
       ],
     },
     text: { control: 'text' },
@@ -118,12 +118,22 @@ export const CategoryButton2: Story = {
   name: 'Category Outlined Button',
 };
 
-export const CancelButton: Story = {
+export const SmallButton1: Story = {
   args: {
     variant: 'enabled',
-    size: 'cancel',
+    size: 'small',
     text: '취소',
     backgroundColor: vars.color.white,
   },
   name: 'Cancel Button ',
+};
+
+export const SmallButton2: Story = {
+  args: {
+    variant: 'enabled',
+    size: 'small',
+    text: '등록',
+    backgroundColor: vars.color.baroBlue,
+  },
+  name: 'Registration Button ',
 };

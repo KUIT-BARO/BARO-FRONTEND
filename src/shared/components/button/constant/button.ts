@@ -9,7 +9,7 @@ export const BUTTON_SIZES = {
   LONG: 'long',
   SHORT: 'short',
   CATEGORY: 'category',
-  CANCEL: 'cancel',
+  SMALL: 'small',
 } as const;
 
 export type ButtonVariant = typeof BUTTON_VARIANTS[keyof typeof BUTTON_VARIANTS];

@@ -19,7 +19,7 @@ const buttonSizes = {
     height: '4.0rem',
     fontSize: vars.font.body_12.fontSize,
   },
-  cancel: {
+  small: {
     width: '4.1rem',
     height: '2.8rem',
     padding: '0.4rem 1.0rem',
@@ -65,7 +65,7 @@ export const buttonWrapper = recipe({
       long: buttonSizes.long,
       short: buttonSizes.short,
       category: buttonSizes.category,
-      cancel: buttonSizes.cancel,
+      small: buttonSizes.small,
     },
   },
 
