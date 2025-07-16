@@ -48,6 +48,7 @@ export const buttonWrapper = recipe({
       disabled: {
         backgroundColor: vars.color.gray0,
         color: vars.color.white,
+        cursor: 'not-allowed',
       },
       white: {
         backgroundColor: vars.color.white,
