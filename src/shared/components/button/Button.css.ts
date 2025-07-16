@@ -15,7 +15,7 @@ const buttonSizes = {
     fontSize: vars.font.body_16.fontSize,
   },
   category: {
-    width: '25%',
+    width: '8.3rem',
     height: '4.0rem',
     fontSize: vars.font.body_12.fontSize,
   },

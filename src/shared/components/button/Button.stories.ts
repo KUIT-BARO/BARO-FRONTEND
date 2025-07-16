@@ -115,7 +115,7 @@ export const CategoryButton2: Story = {
     size: 'category',
     text: '비즈니스',
   },
-  name: 'Category Disabled Button',
+  name: 'Category Outlined Button',
 };
 
 export const CancelButton: Story = {
