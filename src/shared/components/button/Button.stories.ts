@@ -43,6 +43,7 @@ export const LongButton1: Story = {
   },
   name: 'Long White Button',
 };
+
 export const LongButton2: Story = {
   args: {
     variant: 'enabled',
@@ -51,6 +52,7 @@ export const LongButton2: Story = {
   },
   name: 'Long Enabled Button',
 };
+
 export const LongButton3: Story = {
   args: {
     variant: 'disabled',
@@ -59,6 +61,7 @@ export const LongButton3: Story = {
   },
   name: 'Long Disabled Button',
 };
+
 export const LongButton4: Story = {
   args: {
     variant: 'outlined',
@@ -76,6 +79,7 @@ export const ShortButton1: Story = {
   },
   name: 'Short White Button',
 };
+
 export const ShortButton2: Story = {
   args: {
     variant: 'enabled',
@@ -84,6 +88,7 @@ export const ShortButton2: Story = {
   },
   name: 'Short Enabled Button',
 };
+
 export const ShortButton3: Story = {
   args: {
     variant: 'disabled',
@@ -92,6 +97,7 @@ export const ShortButton3: Story = {
   },
   name: 'Short Disabled Button',
 };
+
 export const ShortButton4: Story = {
   args: {
     variant: 'outlined',
@@ -109,6 +115,7 @@ export const CategoryButton1: Story = {
   },
   name: 'Category Enabled Button',
 };
+
 export const CategoryButton2: Story = {
   args: {
     variant: 'outlined',
