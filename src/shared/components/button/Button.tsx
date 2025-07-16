@@ -1,5 +1,5 @@
 import * as styles from '@shared/components/button/Button.css';
-import { type ButtonVariant, type ButtonSize, BUTTON_VARIANTS } from '@shared/constant/button';
+import { type ButtonVariant, type ButtonSize, BUTTON_VARIANTS } from '@shared/components/button/constant/button';
 
 interface ButtonProps {
   variant: ButtonVariant;
