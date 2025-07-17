@@ -8,7 +8,7 @@ interface CategoryTagProps {
   onTagSelected: (_category: ExtendedCategoryType) => void;
 }
 
-function CategoryTag({ onTagSelected }: CategoryTagProps) {
+export default function CategoryTag({ onTagSelected }: CategoryTagProps) {
   const [selected, setSelected] = React.useState<ExtendedCategoryType>('ALL');
 
   const handleCategorySelect = (category: ExtendedCategoryType) => {
@@ -38,5 +38,3 @@ function CategoryTag({ onTagSelected }: CategoryTagProps) {
     </div>
   );
 }
-
-export default CategoryTag;
