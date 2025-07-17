@@ -17,6 +17,7 @@ export const vars = createGlobalTheme(':root', {
     blue2: '#6699FF',
     blue3: '#708AFF',
     baroBlue: '#5175FF',
+    lightBlue: '#EDF1FF',
   },
 
   font: {
@@ -39,6 +40,7 @@ export const vars = createGlobalTheme(':root', {
     body_10: { fontSize: '1.0rem', fontWeight: '500', lineHeight: '140%' },
     body_12: { fontSize: '1.2rem', fontWeight: '500', lineHeight: '140%' },
     body_14: { fontSize: '1.4rem', fontWeight: '500', lineHeight: '140%' },
+    body_15: { fontSize: '1.5rem', fontWeight: '500', lineHeight: '140%' },
     body_16: { fontSize: '1.6rem', fontWeight: '500', lineHeight: '140%' },
     body_17: { fontSize: '1.7rem', fontWeight: '500', lineHeight: '140%' },
 
