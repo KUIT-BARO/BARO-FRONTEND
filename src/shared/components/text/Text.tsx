@@ -34,6 +34,8 @@ interface TextProps extends HTMLAttributes<HTMLParagraphElement> {
     | 'gray1'
     | 'gray2'
     | 'gray3'
+    | 'gray4'
+    | 'gray5'
     | 'blue0'
     | 'blue1'
     | 'blue2'
@@ -42,12 +44,16 @@ interface TextProps extends HTMLAttributes<HTMLParagraphElement> {
     | 'lightBlue';
 }
 
-const Text = ({ tag = 'body_16', color = 'black', children, className, ...props }: TextProps) => {
+export default function Text({
+  tag = 'body_16',
+  color = 'black',
+  children,
+  className,
+  ...props
+}: TextProps) {
   return (
     <p className={clsx(className, textStyle({ tag, color }))} {...props}>
       {children}
     </p>
   );
-};
-
-export default Text;
+}

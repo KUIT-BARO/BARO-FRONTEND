@@ -3,7 +3,7 @@ import Header from './Header';
 import { IcLogo, IcNavArrow, IcNavX, IcSetting } from '@svg/index';
 
 const meta: Meta<typeof Header> = {
-  title: 'Shared/Header',
+  title: 'components/Header',
   component: Header,
   tags: ['autodocs'],
   argTypes: {
@@ -19,6 +19,7 @@ const meta: Meta<typeof Header> = {
 };
 
 export default meta;
+
 type Story = StoryObj<typeof Header>;
 
 export const DefaultHeader: Story = {
