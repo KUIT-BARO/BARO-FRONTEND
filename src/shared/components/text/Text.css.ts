@@ -23,6 +23,7 @@ export const textStyle = recipe({
       body_10: vars.font.body_10,
       body_12: vars.font.body_12,
       body_14: vars.font.body_14,
+      body_15: vars.font.body_15,
       body_16: vars.font.body_16,
       body_17: vars.font.body_17,
 
@@ -44,6 +45,7 @@ export const textStyle = recipe({
       blue2: { color: vars.color.blue2 },
       blue3: { color: vars.color.blue3 },
       baroBlue: { color: vars.color.baroBlue },
+      lightBlue: { color: vars.color.lightBlue },
     },
   },
 });
