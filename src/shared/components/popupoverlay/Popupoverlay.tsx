@@ -1,9 +1,9 @@
 import React from 'react';
-import * as styles from '@shared/components/popupoverlay/Popupoverlay.css';
+import * as styles from '@shared/components/popupoverlay/PopupOverlay.css';
 import { IcArrowLeft } from '@svg/index';
 import Text from '@shared/components/text/Text';
 
-interface PopupoverlayProps {
+interface PopupOverlayProps {
   open?: boolean;
   top?: boolean;
   toptitle?:string;
@@ -12,7 +12,7 @@ interface PopupoverlayProps {
   children: React.ReactNode;
 }
 
-const Popupoverlay: React.FC<PopupoverlayProps> = ({ children,onClose,open ,position,top=false,toptitle}) => {
+const PopupOverlay: React.FC<PopupOverlayProps> = ({ children,onClose,open ,position,top=false,toptitle}) => {
   if (!open) {
     return null;
   }
@@ -24,9 +24,11 @@ const Popupoverlay: React.FC<PopupoverlayProps> = ({ children,onClose,open ,posi
           className={styles.title}>{toptitle}</Text>
         <div/>
       </div>}
-      <div className={styles.content({position})}>{children}</div>
+      <div className={styles.content({position})}
+        onClick={(e) => e.stopPropagation()}
+      >{children}</div>
     </div>
   );
 };
 
-export default Popupoverlay;
+export default PopupOverlay;
