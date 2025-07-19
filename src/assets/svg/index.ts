@@ -61,3 +61,5 @@ export { default as IcStarBigFill } from '@svg/ic_star_big_fill.svg?react';
 export { default as IcStarBigNone } from '@svg/ic_star_big_none.svg?react';
 export { default as IcStarSmallFill } from '@svg/ic_star_small_fill.svg?react';
 export { default as IcStarSmallNone } from '@svg/ic_star_small_none.svg?react';
+export { default as IcArrowBlueRight } from '@svg/ic_arrow_blue_right.svg?react';
+export { default as IcArrowBlueLeft } from '@svg/ic_arrow_blue_left.svg?react';

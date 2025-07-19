@@ -24,6 +24,17 @@ export const vars = createGlobalTheme(':root', {
 
     red1: '#FF6467',
     red2: '#F9D7D8',
+
+    calenderborder1: '#10182814',
+    calenderborder2: '#10182808',
+
+    dayText: '#BCCAD9',
+    calenderText: '#3949AB',
+
+    notMonth: '#90A4AE',
+    isMonth: '#546E7A',
+
+    isToday: '#BCCAD9',
   },
 
   font: {
@@ -52,5 +63,7 @@ export const vars = createGlobalTheme(':root', {
     body_thin_14: { fontSize: '1.4rem', fontWeight: '400', lineHeight: '140%' },
     body_thin_16: { fontSize: '1.6rem', fontWeight: '400', lineHeight: '140%' },
     body_thin_20: { fontSize: '2.0rem', fontWeight: '400', lineHeight: '140%' },
+
+    calendertext: { fontSize: '1.6rem', fontWeight: '400', lineHeight: '1' },
   },
 });

@@ -29,6 +29,7 @@ export const textStyle = recipe({
       body_thin_14: vars.font.body_thin_14,
       body_thin_16: vars.font.body_thin_16,
       body_thin_20: vars.font.body_thin_20,
+      calendertext: vars.font.calendertext,
     },
     color: {
       black: { color: vars.color.black },
@@ -52,6 +53,17 @@ export const textStyle = recipe({
 
       yellow1: { color: vars.color.yellow1 },
       yellow2: { color: vars.color.yellow2 },
+
+      calenderborder1: { color: vars.color.calenderborder1 },
+      calenderborder2: { color: vars.color.calenderborder2 },
+
+      dayText: { color: vars.color.dayText },
+      calenderText: { color: vars.color.calenderText },
+
+      notMonth: { color: vars.color.notMonth },
+      isMonth: { color: vars.color.isMonth },
+
+      isToday: { color: vars.color.isToday },
     },
   },
 });

@@ -25,7 +25,8 @@ interface TextProps extends HTMLAttributes<HTMLParagraphElement> {
     | 'body_17'
     | 'body_thin_14'
     | 'body_thin_16'
-    | 'body_thin_20';
+    | 'body_thin_20'
+    | 'calendertext';
   color?:
     | 'black'
     | 'white'
@@ -43,14 +44,21 @@ interface TextProps extends HTMLAttributes<HTMLParagraphElement> {
     | 'yellow1'
     | 'yellow2'
     | 'red1'
-    | 'red2';
+    | 'red2'
+    | 'calenderborder1'
+    | 'calenderborder2'
+    | 'dayText'
+    | 'calenderText'
+    | 'notMonth'
+    | 'isMonth'
+    | 'isToday';
 }
 
 const Text = ({ tag = 'body_16', color = 'black', children, className, ...props }: TextProps) => {
   return (
-    <p className={clsx(className, textStyle({ tag, color }))} {...props}>
+    <span className={clsx(className, textStyle({ tag, color }))} {...props}>
       {children}
-    </p>
+    </span>
   );
 };
 
