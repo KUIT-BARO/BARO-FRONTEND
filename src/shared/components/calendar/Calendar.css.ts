@@ -12,7 +12,7 @@ export const container = style({
 
   background: vars.color.white,
 
-  boxShadow: `0rem 1.2rem 1.6rem -0.4rem ${vars.color.calenderborder1}, 0rem 0.4rem 0.6rem -0.2rem ${vars.color.calenderborder2}`,
+  boxShadow: `0rem 1.2rem 1.6rem -0.4rem ${vars.color.calendarborder1}, 0rem 0.4rem 0.6rem -0.2rem ${vars.color.calendarborder2}`,
 });
 
 export const header = style({
@@ -78,7 +78,7 @@ export const dateItem = recipe({
     isSelected: {
       True: {
         borderRadius: '9.9rem',
-        background: vars.color.calenderText,
+        background: vars.color.calendarText,
       },
       default: {},
     },

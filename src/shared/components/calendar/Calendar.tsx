@@ -1,13 +1,13 @@
 import React ,{useState} from 'react';
-import * as styles from '@shared/components/calender/Calender.css';
+import * as styles from '@shared/components/calendar/Calendar.css';
 import Text from '@shared/components/text/Text';
 import clsx from 'clsx';
 import { IcArrowBlueLeft, IcArrowBlueRight } from '@svg/index';
-import { DateArray,type DateArrayAnswer } from '@shared/components/calender/DateArray';
+import { DateArray,type DateArrayAnswer } from '@shared/components/calendar/DateArray';
 import { format,addMonths,subMonths } from 'date-fns';
 
 
-const Calender: React.FC = () => {
+const Calendar: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const today = new Date();
   const todayMonth = format(selectedDate, 'MMM');
@@ -31,7 +31,7 @@ const Calender: React.FC = () => {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <Text tag='body_bold_16' color='calenderText'>
+        <Text tag='body_bold_16' color='calendarText'>
           {`${todayMonth}  ${selectedDate.getFullYear()}`}
         </Text>
         <div className={styles.monthMove}>
@@ -58,7 +58,7 @@ const Calender: React.FC = () => {
               onClick={() => setSelectedDate(day.date)
               }
             >
-              <Text tag='calendertext' color={getDayColor(day)}  className={clsx(styles.dayText)} >
+              <Text tag='calendartext' color={getDayColor(day)}  className={clsx(styles.dayText)} >
                 {day.day}
               </Text>
             </div>
@@ -70,4 +70,4 @@ const Calender: React.FC = () => {
   )
 }
 
-export default Calender;
+export default Calendar;
