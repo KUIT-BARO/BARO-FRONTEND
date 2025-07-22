@@ -8,12 +8,13 @@ interface StarsProps {
 }
 
 export const Stars: React.FC<StarsProps> = ({ score, size }) => {
+  const clampedScore = Math.max(0, Math.min(5, score));
   const { Fill, None } = SelectStars({ size });
   return (
     <div className={styles.container}>
       {Array.from({ length: 5 }, (_, index) => (
         <span key={index}>
-          {index < score ? Fill : None}
+          {index < clampedScore ? Fill : None}
         </span>
       ))}
     </div>
