@@ -41,7 +41,6 @@ export const placeNameContainer = style({
   textAlign: 'center',
   width: '70%',
   margin: '0',
-  lineHeight: '1.4',
   wordBreak: 'keep-all',
   overflowWrap: 'break-word',
 });

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import PlaceList from '@shared/components/placeList/placeList';
+import PlaceList from '@shared/components/placeList/PlaceList';
 
 const meta: Meta<typeof PlaceList> = {
   title: 'Components/PlaceList',

@@ -1,4 +1,4 @@
-import * as styles from '@shared/components/placeList/placeList.css';
+import * as styles from '@shared/components/placeList/PlaceList.css';
 import PlaceThumbnail from '@shared/components/placeThumbnail/PlaceThumbnail';
 import Text from '@shared/components/text/Text';
 
@@ -11,9 +11,9 @@ interface Place {
 }
 
 interface PlaceListProps {
-  category?: string;
-  description?: string;
-  places?: Place[];
+  category: string;
+  description: string;
+  places: Place[];
   thumbnailSize?: 'large' | 'small';
 }
 
