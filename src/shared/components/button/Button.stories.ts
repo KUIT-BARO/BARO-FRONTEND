@@ -73,38 +73,30 @@ export const LongButton4: Story = {
 
 export const ShortButton1: Story = {
   args: {
-    variant: 'white',
+    variant: 'disabled',
     size: 'short',
-    text: '신촌',
+    text: '취소',
   },
-  name: 'Short White Button',
+  name: 'Short Disabled Button',
 };
 
 export const ShortButton2: Story = {
   args: {
     variant: 'enabled',
     size: 'short',
-    text: '신촌',
+    text: '추가하기',
   },
   name: 'Short Enabled Button',
 };
 
 export const ShortButton3: Story = {
   args: {
-    variant: 'disabled',
+    variant: 'enabled',
     size: 'short',
-    text: '신촌',
+    text: '탈퇴하기',
+    backgroundColor: vars.color.red0,
   },
-  name: 'Short Disabled Button',
-};
-
-export const ShortButton4: Story = {
-  args: {
-    variant: 'outlined',
-    size: 'short',
-    text: '신촌',
-  },
-  name: 'Short Outlined Button',
+  name: 'Short Enabled Button',
 };
 
 export const CategoryButton1: Story = {
