@@ -24,7 +24,7 @@ export const tagButton = recipe({
   base: {
     paddingBottom: '0.4rem',
     border: 'none',
-    borderBottom: '0.4rem solid transparent',
+    borderBottom: '4px solid transparent',
     background: 'transparent',
     textAlign: 'center',
     fontSize: vars.font.body_15.fontSize,

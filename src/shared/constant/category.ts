@@ -1,4 +1,5 @@
 export const CATEGORIES = [
+  'ALL',
   '캠퍼스',
   '음식점',
   '대중교통',
