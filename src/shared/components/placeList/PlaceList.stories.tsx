@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { BrowserRouter } from 'react-router-dom';
 import PlaceList from '@shared/components/placeList/PlaceList';
 import { mockupPlaces } from '@shared/components/placeList/mockup';
 
@@ -28,6 +29,13 @@ const meta: Meta<typeof PlaceList> = {
       description: '표시할 장소들의 배열',
     },
   },
+  decorators: [
+    (Story) => (
+      <BrowserRouter>
+        <Story />
+      </BrowserRouter>
+    ),
+  ],
 };
 
 export default meta;
@@ -39,9 +47,6 @@ export const BestPlaces: Story = {
     description: '좋아요를 가장 많이 받은 명소',
     places: mockupPlaces,
     thumbnailSize: 'small',
-    onPlaceClick: (placeId) => {
-      alert(`Clicked place ID: ${placeId}`);
-    },
   },
 };
 

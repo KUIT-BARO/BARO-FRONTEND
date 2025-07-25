@@ -2,13 +2,13 @@ import * as styles from '@shared/components/placeList/PlaceList.css';
 import PlaceThumbnail from '@shared/components/placeThumbnail/PlaceThumbnail';
 import Text from '@shared/components/text/Text';
 import type { PlaceData } from '@shared/components/placeList/mockup';
+import { useNavigate } from 'react-router-dom';
 
 interface PlaceListProps {
   category: string;
   description: string;
   places: PlaceData[];
   thumbnailSize?: 'large' | 'small';
-  onPlaceClick: (_placeId: number) => void;
 }
 
 export default function PlaceList({
@@ -16,8 +16,13 @@ export default function PlaceList({
   description,
   places,
   thumbnailSize = 'large',
-  onPlaceClick,
 }: PlaceListProps) {
+  const navigate = useNavigate();
+
+  const handlePlaceClick = (placeId: number) => {
+    navigate(`/place/${placeId}/reviews`);
+  };
+
   return (
     <div className={styles.placeListContainer}>
       <div className={styles.placeListHeader}>
@@ -41,7 +46,7 @@ export default function PlaceList({
               placeRating={place.rating}
               placeSaveNum={place.saveNum}
               onClick={() => {
-                onPlaceClick?.(place.placeId);
+                handlePlaceClick(place.placeId);
               }}
             />
           </div>
