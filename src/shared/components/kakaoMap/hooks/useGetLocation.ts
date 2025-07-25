@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import type { LatLng } from '@shared/components/kakaoMap/types/latLng';
 
-function useGetlocation(center?: LatLng) {
+function useGetLocation(center?: LatLng) {
   const [currentCenter, setCurrentCenter] = useState<LatLng>({ lat: 33.450701, lng: 126.570667 });
   const [position, setPosition] = useState<LatLng>({ lat: 33.450701, lng: 126.570667 });
 
@@ -24,4 +24,4 @@ function useGetlocation(center?: LatLng) {
   return { currentCenter, position };
 }
 
-export default useGetlocation;
+export default useGetLocation;
