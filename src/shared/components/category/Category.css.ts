@@ -8,7 +8,7 @@ export const categoryWrapper = recipe({
     alignItems: 'center',
 
     padding: '0.4rem 1rem',
-    borderRadius: '1.5rem',
+    borderRadius: '1rem',
     boxSizing: 'border-box',
   },
   variants: {
