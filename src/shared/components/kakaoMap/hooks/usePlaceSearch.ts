@@ -11,8 +11,7 @@ function usePlaceSearch() {
 
       ps.keywordSearch(placeName, (result, status) => {
         if (status === window.kakao.maps.services.Status.OK) {
-          console.log(result);
-          const places = result.map((place: any) => ({
+          const places = result.map((place: { x: string; y: string }) => ({
             lng: parseFloat(place.x),
             lat: parseFloat(place.y),
           }));
