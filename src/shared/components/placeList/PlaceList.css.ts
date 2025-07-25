@@ -8,7 +8,6 @@ export const placeListContainer = style({
 });
 
 export const placeListHeader = style({
-  marginBottom: '2.7rem',
   padding: '0 2.0rem',
 });
 
