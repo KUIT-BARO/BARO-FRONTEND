@@ -39,7 +39,8 @@ interface TextProps extends HTMLAttributes<HTMLParagraphElement> {
     | 'blue1'
     | 'blue2'
     | 'blue3'
-    | 'baroBlue';
+    | 'baroBlue'
+    | 'red0';
 }
 
 export default function Text({
