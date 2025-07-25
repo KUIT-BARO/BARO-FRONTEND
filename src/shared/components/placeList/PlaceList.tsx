@@ -1,19 +1,12 @@
 import * as styles from '@shared/components/placeList/PlaceList.css';
 import PlaceThumbnail from '@shared/components/placeThumbnail/PlaceThumbnail';
 import Text from '@shared/components/text/Text';
-
-interface Place {
-  id: number;
-  imageUrl: string;
-  name: string;
-  rating: number;
-  saveNum: number;
-}
+import type { PlaceData } from '@shared/components/placeList/mockup';
 
 interface PlaceListProps {
   category: string;
   description: string;
-  places: Place[];
+  places: PlaceData[];
   thumbnailSize?: 'large' | 'small';
   onPlaceClick: (_placeId: number) => void;
 }
@@ -21,7 +14,7 @@ interface PlaceListProps {
 export default function PlaceList({
   category,
   description,
-  places = [],
+  places,
   thumbnailSize = 'large',
   onPlaceClick,
 }: PlaceListProps) {
@@ -40,15 +33,15 @@ export default function PlaceList({
 
       <div className={styles.placeListItems}>
         {places.map((place) => (
-          <div key={place.id}>
+          <div key={place.placeId}>
             <PlaceThumbnail
               size={thumbnailSize}
               placeImageUrl={place.imageUrl}
-              placeName={place.name}
+              placeName={place.placeName}
               placeRating={place.rating}
               placeSaveNum={place.saveNum}
               onClick={() => {
-                onPlaceClick?.(place.id);
+                onPlaceClick?.(place.placeId);
               }}
             />
           </div>
