@@ -15,6 +15,7 @@ interface PlaceListProps {
   description: string;
   places: Place[];
   thumbnailSize?: 'large' | 'small';
+  onPlaceClick: (_placeId: number) => void;
 }
 
 export default function PlaceList({
@@ -22,6 +23,7 @@ export default function PlaceList({
   description,
   places = [],
   thumbnailSize = 'large',
+  onPlaceClick,
 }: PlaceListProps) {
   return (
     <div className={styles.placeListContainer}>
@@ -48,7 +50,7 @@ export default function PlaceList({
               placeRating={place.rating}
               placeSaveNum={place.saveNum}
               onClick={() => {
-
+                onPlaceClick?.(place.id);
               }}
             />
           </div>

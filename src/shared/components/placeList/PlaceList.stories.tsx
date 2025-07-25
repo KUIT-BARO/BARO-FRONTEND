@@ -70,6 +70,9 @@ export const BestPlaces: Story = {
     description: '좋아요를 가장 많이 받은 명소',
     places: mockPlaces,
     thumbnailSize: 'small',
+    onPlaceClick: (placeId) => {
+      alert(`Clicked place ID: ${placeId}`);
+    },
   },
 };
 
