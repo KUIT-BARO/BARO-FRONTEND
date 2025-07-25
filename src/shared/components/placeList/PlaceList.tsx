@@ -32,11 +32,9 @@ export default function PlaceList({
           <Text className={styles.placeListTitle} tag='head_bold_22'>
             {category}
           </Text>
-          {description && (
-            <Text className={styles.placeListDescription} tag='body_14' color='gray4'>
-              {description}
-            </Text>
-          )}
+          <Text className={styles.placeListDescription} tag='body_14' color='gray4'>
+            {description}
+          </Text>
         </div>
       </div>
 
