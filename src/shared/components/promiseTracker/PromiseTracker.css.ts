@@ -17,7 +17,7 @@ export const avatarsWrapper = style({
   transition: 'all 0.3s ease',
 });
 
-export const userGroup = style({
+export const avatarGroup = style({
   display: 'flex',
   gap: '0.1rem',
   cursor: 'pointer',

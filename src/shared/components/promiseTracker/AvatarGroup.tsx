@@ -11,7 +11,7 @@ type UserAvatarProps = {
   zIndex: number;
 };
 
-type UserGroupProps = {
+type AvatarGroupProps = {
   users: User[];
   variant: PromiseType;
 };
@@ -46,7 +46,7 @@ function UserAvatar({ user, variant, isExpanded, zIndex }: UserAvatarProps) {
   );
 }
 
-export default function UserGroup({ users, variant }: UserGroupProps) {
+export default function AvatarGroup({ users, variant }: AvatarGroupProps) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   if (!users) {
@@ -55,7 +55,7 @@ export default function UserGroup({ users, variant }: UserGroupProps) {
 
   return (
     <div
-      className={styles.userGroup}
+      className={styles.avatarGroup}
       onClick={() => setIsExpanded(!isExpanded)}
     >
       {users.map((user, index) => (

@@ -1,5 +1,5 @@
 import * as styles from '@shared/components/promiseTracker/PromiseTracker.css';
-import UserGroup from '@shared/components/promiseTracker/UserGroup';
+import AvatarGroup from '@shared/components/promiseTracker/AvatarGroup';
 import ProgressBar from '@shared/components/promiseTracker/ProgressBar';
 import Counter from '@shared/components/promiseTracker/Counter';
 import type { PromiseTrackerProps } from '@shared/components/promiseTracker/types';
@@ -14,8 +14,8 @@ export default function PromiseTracker({ users, variant }: PromiseTrackerProps) 
   return (
     <div className={styles.trackerWrapper}>
       <div className={styles.avatarsWrapper}>
-        <UserGroup users={unselectUsers} variant={variant} />
-        <UserGroup users={selectUsers} variant={variant} />
+        <AvatarGroup users={unselectUsers} variant={variant} />
+        <AvatarGroup users={selectUsers} variant={variant} />
       </div>
       <ProgressBar selectedCount={selectedCount} total={total} variant={variant} />
       <Counter selectedCount={selectedCount} total={total} variant={variant} />
