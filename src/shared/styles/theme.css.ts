@@ -16,7 +16,16 @@ export const vars = createGlobalTheme(':root', {
     blue1: ' #7BB2FF',
     blue2: '#6699FF',
     blue3: '#708AFF',
+    blue4: '#EDF1FF',
     baroBlue: '#5175FF',
+
+    borderline: '#D7DEF7',
+
+    yellow1: '#FB0',
+    yellow2: '#FFFBDE',
+
+    red1: '#FF6467',
+    red2: '#F9D7D8',
   },
 
   font: {
