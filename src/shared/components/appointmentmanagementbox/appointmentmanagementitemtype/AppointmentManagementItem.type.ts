@@ -8,7 +8,7 @@ export interface SuggestedAppointment extends BaseAppointment {
   untilVoteDate: number;
   suggestedRegion: string;
   suggestedStartDate: string;
-  SuggestedEndDate: string;
+  suggestedEndDate: string;
   disabled?: boolean;
 }
 
@@ -17,7 +17,7 @@ export interface VotingAppointment extends BaseAppointment {
   untilVoteEndDate: number;
   suggestedRegion: string;
   suggestedStartDate: string;
-  SuggestedEndDate: string;
+  suggestedEndDate: string;
   disabled?: boolean;
 }
 

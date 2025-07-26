@@ -60,13 +60,13 @@ export function getStatusLines(props: AppointmentManagementItemProps): {
     return {
       firstLine: `${props.untilVoteDate}일`,
       secondLine: props.suggestedRegion,
-      thirdLine: `${formatDateWithDay(props.suggestedStartDate)} ~ ${formatDateWithDay(props.SuggestedEndDate)}`
+      thirdLine: `${formatDateWithDay(props.suggestedStartDate)} ~ ${formatDateWithDay(props.suggestedEndDate)}`
     };
   case 'votingPromises':
     return {
       firstLine: `${props.untilVoteEndDate}일`,
       secondLine: props.suggestedRegion,
-      thirdLine: `${formatDateWithDay(props.suggestedStartDate)} ~ ${formatDateWithDay(props.SuggestedEndDate)}`
+      thirdLine: `${formatDateWithDay(props.suggestedStartDate)} ~ ${formatDateWithDay(props.suggestedEndDate)}`
     };
   case 'confirmedPromises':
     return {
