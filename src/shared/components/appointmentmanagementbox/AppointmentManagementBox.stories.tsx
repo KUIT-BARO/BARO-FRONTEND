@@ -16,7 +16,7 @@ export const Suggested: Story = {
     untilVoteDate: 3,
     suggestedRegion: '건대입구 주변',
     suggestedStartDate: '2025-01-01',
-    SuggestedEndDate: '2025-01-02',
+    suggestedEndDate: '2025-01-02',
     promiseName: '친구들 모임',
   },
 };
@@ -27,7 +27,7 @@ export const Voting: Story = {
     untilVoteEndDate: 5,
     suggestedRegion: '잠실 주변',
     suggestedStartDate: '2025-02-01',
-    SuggestedEndDate: '2025-02-02',
+    suggestedEndDate: '2025-02-02',
     promiseName: '가족 외식',
   },
 };
