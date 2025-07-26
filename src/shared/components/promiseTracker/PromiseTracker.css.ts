@@ -15,6 +15,12 @@ export const avatarsWrapper = style({
   justifyContent: 'space-between',
   marginBottom: '0.3rem',
   transition: 'all 0.3s ease',
+  position: 'relative',
+});
+
+export const avatarGroupPositioned = style({
+  position: 'absolute',
+  transition: 'all 0.3s ease',
 });
 
 export const avatarGroup = style({
