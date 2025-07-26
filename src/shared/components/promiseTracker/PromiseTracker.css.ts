@@ -82,10 +82,10 @@ export const progressContainer = recipe({
   },
   variants: {
     variant: {
-      pending: {
+      PENDING: {
         backgroundColor: vars.color.blue4,
       },
-      voting: {
+      VOTING: {
         backgroundColor: vars.color.yellow1,
       },
     },
@@ -100,10 +100,10 @@ export const progressBar = recipe({
   },
   variants: {
     variant: {
-      pending: {
+      PENDING: {
         backgroundColor: vars.color.baroBlue,
       },
-      voting: {
+      VOTING: {
         backgroundColor: vars.color.yellow0,
       },
     },
@@ -120,10 +120,10 @@ export const counterContainer = style({
 export const selected = recipe({
   variants: {
     variant: {
-      pending: {
+      PENDING: {
         color: vars.color.baroBlue,
       },
-      voting: {
+      VOTING: {
         color: vars.color.yellow0,
       },
     },

@@ -27,23 +27,23 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     users: [
-      { userId: 1, avatarType: 'dog', isHost: true, hasSelected: true },
-      { userId: 2, avatarType: 'man', isHost: false, hasSelected: false },
-      { userId: 3, avatarType: 'woman', isHost: false, hasSelected: true },
+      { userId: 1, avatarType: 'DOG', isHost: true, hasSelected: true },
+      { userId: 2, avatarType: 'MAN', isHost: false, hasSelected: false },
+      { userId: 3, avatarType: 'WOMAN', isHost: false, hasSelected: true },
     ],
-    variant: 'pending',
+    variant: 'PENDING',
   },
 };
 
 export const Pending: Story = {
   args: {
     users: [
-      { userId: 1, avatarType: 'man', isHost: true, hasSelected: true },
-      { userId: 2, avatarType: 'woman', isHost: false, hasSelected: false },
-      { userId: 3, avatarType: 'dog', isHost: false, hasSelected: true },
-      { userId: 4, avatarType: 'user', isHost: false, hasSelected: false },
+      { userId: 1, avatarType: 'MAN', isHost: true, hasSelected: true },
+      { userId: 2, avatarType: 'WOMAN', isHost: false, hasSelected: false },
+      { userId: 3, avatarType: 'DOG', isHost: false, hasSelected: true },
+      { userId: 4, avatarType: 'USER', isHost: false, hasSelected: false },
     ],
-    variant: 'pending',
+    variant: 'PENDING',
   },
   name: '약속 현황 (미정)',
 };
@@ -51,12 +51,12 @@ export const Pending: Story = {
 export const Voting: Story = {
   args: {
     users: [
-      { userId: 1, avatarType: 'man', isHost: true, hasSelected: true },
-      { userId: 2, avatarType: 'woman', isHost: false, hasSelected: true },
-      { userId: 3, avatarType: 'dog', isHost: false, hasSelected: true },
-      { userId: 4, avatarType: 'user', isHost: false, hasSelected: false },
+      { userId: 1, avatarType: 'MAN', isHost: true, hasSelected: true },
+      { userId: 2, avatarType: 'WOMAN', isHost: false, hasSelected: true },
+      { userId: 3, avatarType: 'DOG', isHost: false, hasSelected: true },
+      { userId: 4, avatarType: 'USER', isHost: false, hasSelected: false },
     ],
-    variant: 'voting',
+    variant: 'VOTING',
   },
   name: '약속 현황 (투표)',
 };

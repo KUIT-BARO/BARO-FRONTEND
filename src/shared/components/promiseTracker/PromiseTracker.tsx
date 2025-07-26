@@ -17,9 +17,7 @@ export default function PromiseTracker({ users, variant }: PromiseTrackerProps) 
         <UserGroup users={unselectUsers} variant={variant} />
         <UserGroup users={selectUsers} variant={variant} />
       </div>
-
       <ProgressBar selectedCount={selectedCount} total={total} variant={variant} />
-
       <Counter selectedCount={selectedCount} total={total} variant={variant} />
     </div>
   );

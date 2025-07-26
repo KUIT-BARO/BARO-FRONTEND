@@ -1,35 +1,36 @@
 import { useState } from 'react';
 import * as styles from '@shared/components/promiseTracker/PromiseTracker.css';
 import { IcDog, IcMan, IcWoman, IcUser, IcCrownBlue, IcCrownGold, IcPinCheck } from '@svg/index';
-import type { User, VariantType, AvatarType } from '@shared/components/promiseTracker/types';
+import { AVATAR_TYPE, PROMISE_TYPE, type AvatarType, type PromiseType } from '@shared/constant/promise';
+import type { User } from '@shared/components/promiseTracker/types';
 
 type UserAvatarProps = {
   user: User;
-  variant: VariantType;
+  variant: PromiseType;
   isExpanded: boolean;
   zIndex: number;
 };
 
 type UserGroupProps = {
   users: User[];
-  variant: VariantType;
+  variant: PromiseType;
 };
 
 const renderAvatar = (avatarType: AvatarType) => {
   switch (avatarType) {
-  case 'dog':
+  case AVATAR_TYPE.DOG:
     return <IcDog className={styles.avatar} />;
-  case 'man':
+  case AVATAR_TYPE.MAN:
     return <IcMan className={styles.avatar} />;
-  case 'woman':
+  case AVATAR_TYPE.WOMAN:
     return <IcWoman className={styles.avatar} />;
   default:
     return <IcUser className={styles.avatar} />;
   }
 };
 
-const renderCrown = (variant: VariantType) => {
-  return variant === 'pending' ? <IcCrownBlue className={styles.crown} /> : <IcCrownGold className={styles.crown} />;
+const renderCrown = (variant: PromiseType) => {
+  return variant === PROMISE_TYPE.PENDING ? <IcCrownBlue className={styles.crown} /> : <IcCrownGold className={styles.crown} />;
 };
 
 function UserAvatar({ user, variant, isExpanded, zIndex }: UserAvatarProps) {
@@ -48,7 +49,7 @@ function UserAvatar({ user, variant, isExpanded, zIndex }: UserAvatarProps) {
 export default function UserGroup({ users, variant }: UserGroupProps) {
   const [isExpanded, setIsExpanded] = useState(false);
 
-  if (users.length === 0) {
+  if (!users) {
     return null;
   }
 

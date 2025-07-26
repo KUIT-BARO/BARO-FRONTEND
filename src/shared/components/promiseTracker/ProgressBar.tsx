@@ -1,10 +1,10 @@
 import * as styles from '@shared/components/promiseTracker/PromiseTracker.css';
-import type { VariantType } from './types';
+import type { PromiseType } from '@shared/constant/promise';
 
 type ProgressBarProps = {
   selectedCount: number;
   total: number;
-  variant: VariantType;
+  variant: PromiseType;
 };
 
 export default function ProgressBar({ selectedCount, total, variant }: ProgressBarProps) {

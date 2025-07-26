@@ -1,5 +1,4 @@
-export type AvatarType = 'dog' | 'man' | 'woman' | 'user';
-export type VariantType = 'pending' | 'voting';
+import type { AvatarType, PromiseType } from '@shared/constant/promise';
 
 export type User = {
   userId: number;
@@ -10,5 +9,5 @@ export type User = {
 
 export type PromiseTrackerProps = {
   users: User[];
-  variant: VariantType;
+  variant: PromiseType;
 };
