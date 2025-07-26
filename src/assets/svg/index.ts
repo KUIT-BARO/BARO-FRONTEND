@@ -55,12 +55,9 @@ export { default as IcWriteBlue } from '@svg/ic_write_blue.svg?react';
 export { default as IcWriteGray } from '@svg/ic_write_gray.svg?react';
 export { default as IcNavArrow } from '@svg/ic_nav_arrow.svg?react';
 export { default as IcNavX } from '@svg/ic_nav_x.svg?react';
-<<<<<<< HEAD
 export { default as IcPlusBlue } from '@svg/ic_plus_blue.svg?react';
 export { default as IcHomeBlack } from '@svg/ic_home_black.svg?react';
 export { default as IcSearchBlack } from '@svg/ic_search_black.svg?react';
 export { default as IcPersonBlack } from '@svg/ic_person_black.svg?react';
 export { default as IcClockBlack } from '@svg/ic_clock_black.svg?react';
-=======
 export { default as IcArrow } from '@svg/ic_arrow.svg?react';
->>>>>>> 4c27767 ([feat] 화살표 추가)
