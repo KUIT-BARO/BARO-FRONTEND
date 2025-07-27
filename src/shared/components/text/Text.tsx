@@ -21,6 +21,7 @@ interface TextProps extends HTMLAttributes<HTMLParagraphElement> {
     | 'body_10'
     | 'body_12'
     | 'body_14'
+    | 'body_15'
     | 'body_16'
     | 'body_17'
     | 'body_thin_14'
