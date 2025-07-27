@@ -30,6 +30,8 @@ export const textStyle = recipe({
       body_thin_14: vars.font.body_thin_14,
       body_thin_16: vars.font.body_thin_16,
       body_thin_20: vars.font.body_thin_20,
+
+      calendartext: vars.font.calendartext,
     },
     color: {
       black: { color: vars.color.black },
