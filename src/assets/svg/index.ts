@@ -63,3 +63,5 @@ export { default as IcClockBlack } from '@svg/ic_clock_black.svg?react';
 export { default as IcArrow } from '@svg/ic_arrow.svg?react';
 export { default as IcArrowLeft } from '@svg/ic_arrow_left.svg?react';
 export { default as IcStarHalf } from '@svg/ic_star_half.svg?react';
+export { default as IcArrowBlueRight } from '@svg/ic_arrow_blue_right.svg?react';
+export { default as IcArrowBlueLeft } from '@svg/ic_arrow_blue_left.svg?react';
