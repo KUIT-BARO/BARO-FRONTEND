@@ -3,6 +3,6 @@
   "references": [{ "path": "./tsconfig.app.json" }, { "path": "./tsconfig.node.json" }],
   "compilerOptions": {
     //TypeScript가 "vite-plugin-svgr"를 알아듣게 도와주는 설정
-    "types": ["vite-plugin-svgr/client"]
+    "types": ["vite-plugin-svgr/client", "kakao.maps.d.ts"]
   }
 }

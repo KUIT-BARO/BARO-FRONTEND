@@ -21,6 +21,8 @@ export const vars = createGlobalTheme(':root', {
 
     yellow0: '#FB0',
     yellow1: '#FFFBDE',
+
+    red0: '#FF6467',
   },
 
   font: {

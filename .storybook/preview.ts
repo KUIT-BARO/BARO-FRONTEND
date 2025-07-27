@@ -4,7 +4,6 @@ const preview: Preview = {
   parameters: {
     actions: {
       // 액션 핸들러 감지
-      // argTypesRegex: "^on[A-Z].*"
     },
 
     controls: {
