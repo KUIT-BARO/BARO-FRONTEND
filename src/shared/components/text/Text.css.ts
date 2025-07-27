@@ -30,6 +30,8 @@ export const textStyle = recipe({
       body_thin_14: vars.font.body_thin_14,
       body_thin_16: vars.font.body_thin_16,
       body_thin_20: vars.font.body_thin_20,
+
+      calendartext: vars.font.calendartext,
     },
     color: {
       black: { color: vars.color.black },
@@ -52,7 +54,6 @@ export const textStyle = recipe({
       blue6: { color: vars.color.blue6 },
       blue7: { color: vars.color.blue7 },
       baroBlue: { color: vars.color.baroBlue },
-      borderline: { color: vars.color.borderline },
 
       red0: { color: vars.color.red0 },
       red1: { color: vars.color.red1 },
