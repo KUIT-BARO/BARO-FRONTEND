@@ -4,7 +4,7 @@ import { SelectStars } from './SelectStars';
 
 interface StarsProps {
     score: number;
-    size: 'small' | 'big' | 'default';
+    size: 'SMALL' | 'BIG' | 'DEFAULT';
 }
 
 export const Stars: React.FC<StarsProps> = ({ score, size }) => {
