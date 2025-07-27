@@ -11,7 +11,7 @@ const meta: Meta<typeof Stars> = {
     },
     size: {
       control: { type: 'radio' },
-      options: ['small', 'default', 'big'],
+      options: ['SMALL', 'DEFAULT', 'BIG'],
       description: '별 아이콘 사이즈',
     },
   },
