@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import Button from '@shared/components/button/Button';
 import { vars } from '@shared/styles/theme.css';
-import { BUTTON_VARIANTS, BUTTON_SIZES } from '@shared/constant/button';
+import { BUTTON_VARIANTS, BUTTON_SIZES } from '@shared/components/button/constant/button';
 
 const meta: Meta<typeof Button> = {
   title: 'components/Button',
@@ -23,7 +23,7 @@ const meta: Meta<typeof Button> = {
         BUTTON_SIZES.LONG,
         BUTTON_SIZES.SHORT,
         BUTTON_SIZES.CATEGORY,
-        BUTTON_SIZES.CANCEL
+        BUTTON_SIZES.SMALL
       ],
     },
     text: { control: 'text' },
@@ -43,6 +43,7 @@ export const LongButton1: Story = {
   },
   name: 'Long White Button',
 };
+
 export const LongButton2: Story = {
   args: {
     variant: 'enabled',
@@ -51,6 +52,7 @@ export const LongButton2: Story = {
   },
   name: 'Long Enabled Button',
 };
+
 export const LongButton3: Story = {
   args: {
     variant: 'disabled',
@@ -59,6 +61,7 @@ export const LongButton3: Story = {
   },
   name: 'Long Disabled Button',
 };
+
 export const LongButton4: Story = {
   args: {
     variant: 'outlined',
@@ -70,35 +73,30 @@ export const LongButton4: Story = {
 
 export const ShortButton1: Story = {
   args: {
-    variant: 'white',
+    variant: 'disabled',
     size: 'short',
-    text: '신촌',
+    text: '취소',
   },
-  name: 'Short White Button',
+  name: 'Short Disabled Button',
 };
+
 export const ShortButton2: Story = {
   args: {
     variant: 'enabled',
     size: 'short',
-    text: '신촌',
+    text: '추가하기',
   },
   name: 'Short Enabled Button',
 };
+
 export const ShortButton3: Story = {
   args: {
-    variant: 'disabled',
+    variant: 'enabled',
     size: 'short',
-    text: '신촌',
+    text: '탈퇴하기',
+    backgroundColor: vars.color.red0,
   },
-  name: 'Short Disabled Button',
-};
-export const ShortButton4: Story = {
-  args: {
-    variant: 'outlined',
-    size: 'short',
-    text: '신촌',
-  },
-  name: 'Short Outlined Button',
+  name: 'Short Enabled Button',
 };
 
 export const CategoryButton1: Story = {
@@ -109,21 +107,32 @@ export const CategoryButton1: Story = {
   },
   name: 'Category Enabled Button',
 };
+
 export const CategoryButton2: Story = {
   args: {
     variant: 'outlined',
     size: 'category',
     text: '비즈니스',
   },
-  name: 'Category Disabled Button',
+  name: 'Category Outlined Button',
 };
 
-export const CancelButton: Story = {
+export const SmallButton1: Story = {
   args: {
     variant: 'enabled',
-    size: 'cancel',
+    size: 'small',
     text: '취소',
     backgroundColor: vars.color.white,
   },
   name: 'Cancel Button ',
+};
+
+export const SmallButton2: Story = {
+  args: {
+    variant: 'enabled',
+    size: 'small',
+    text: '등록',
+    backgroundColor: vars.color.baroBlue,
+  },
+  name: 'Registration Button ',
 };
