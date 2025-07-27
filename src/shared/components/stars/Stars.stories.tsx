@@ -23,20 +23,20 @@ type Story = StoryObj<typeof Stars>;
 export const Default: Story = {
   args: {
     score: 3,
-    size: 'default',
+    size: 'DEFAULT',
   },
 };
 
 export const Small: Story = {
   args: {
     score: 4,
-    size: 'small',
+    size: 'SMALL',
   },
 };
 
 export const Big: Story = {
   args: {
     score: 3.5,
-    size: 'big',
+    size: 'BIG',
   },
 };
