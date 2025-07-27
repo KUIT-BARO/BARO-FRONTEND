@@ -1,18 +1,18 @@
 import { IcStarFill, IcStarNone, IcStarHalf } from '@svg/index.ts'
 
 interface SelectStarsProps {
-    size: 'small' | 'big' | 'default';
+    size: 'SMALL' | 'BIG' | 'DEFAULT';
 }
 
 export function SelectStars({ size }: SelectStarsProps) {
   switch (size) {
-  case 'small':
+  case 'SMALL':
     return {
       Fill: <IcStarFill width={16} height={16}/>,
       Half: <IcStarHalf width={16} height={16} />,
       None: <IcStarNone width={16} height={16}/>,
     };
-  case 'big':
+  case 'BIG':
     return {
       Fill: <IcStarFill width={32} height={32} />,
       Half: <IcStarHalf width={32} height={32} />,
