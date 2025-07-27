@@ -43,7 +43,7 @@ export { default as IcSearch } from '@svg/ic_search.svg?react';
 export { default as IcSetting } from '@svg/ic_setting.svg?react';
 export { default as IcShare } from '@svg/ic_share.svg?react';
 export { default as IcStarFill } from '@svg/ic_star_fill.svg?react';
-export { default as IcStarNon } from '@svg/ic_star_non.svg?react';
+export { default as IcStarNone } from '@svg/ic_star_none.svg?react';
 export { default as IcSuggest } from '@svg/ic_suggest.svg?react';
 export { default as IcTrashcan } from '@svg/ic_trashcan.svg?react';
 export { default as IcUser } from '@svg/ic_user.svg?react';
