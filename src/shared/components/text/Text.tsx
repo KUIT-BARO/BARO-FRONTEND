@@ -25,7 +25,8 @@ interface TextProps extends HTMLAttributes<HTMLParagraphElement> {
     | 'body_17'
     | 'body_thin_14'
     | 'body_thin_16'
-    | 'body_thin_20';
+    | 'body_thin_20'
+    | 'calendartext';
   color?:
     | 'black'
     | 'white'
@@ -46,7 +47,14 @@ interface TextProps extends HTMLAttributes<HTMLParagraphElement> {
     | 'yellow1'
     | 'yellow2'
     | 'red1'
-    | 'red2';
+    | 'red2'
+    | 'calendarborder1'
+    | 'calendarborder2'
+    | 'dayText'
+    | 'calendarText'
+    | 'notMonth'
+    | 'isMonth'
+    | 'isToday';
 }
 
 export default function Text({
@@ -57,8 +65,8 @@ export default function Text({
   ...props
 }: TextProps) {
   return (
-    <p className={clsx(className, textStyle({ tag, color }))} {...props}>
+    <span className={clsx(className, textStyle({ tag, color }))} {...props}>
       {children}
-    </p>
+    </span>
   );
 }
