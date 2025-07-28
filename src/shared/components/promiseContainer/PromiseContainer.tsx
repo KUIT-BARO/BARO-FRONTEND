@@ -1,11 +1,11 @@
-import type { AppointmentManagementItemProps } from '@shared/components/appointmentmanagementbox/appointmentmanagementitemtype/PromiseContainer.type';
-import * as styles from '@shared/components/appointmentmanagementbox/AppointmentManagementBox.css';
-import AppointmentManagementItem from '@shared/components/promisisDetail/PromisisDetail';
+import type { PromisisDetailProps } from '@shared/components/promiseContainer/types/PromiseContainer.type';
+import * as styles from '@shared/components/promiseContainer/PromiseContainer.css';
+import PromisisDetail from '@shared/components/promisisDetail/PromisisDetail';
 import { IcArrow } from '@svg/index';
 import Text from '@shared/components/text/Text';
 
 
-export default function AppointmentManagementBox(props: AppointmentManagementItemProps) {
+export default function PromiseContainer (props: PromisisDetailProps) {
   return (
     <div className={styles.container}>
       <div className={styles.headerSection({ background: props.status })}>
@@ -13,7 +13,7 @@ export default function AppointmentManagementBox(props: AppointmentManagementIte
         <IcArrow className={styles.imgStyle}/>
       </div>
       <div className={styles.contentSection}>
-        <AppointmentManagementItem {...props} disabled={true} />
+        <PromisisDetail {...props} disabled={true} />
       </div>
     </div>
   )

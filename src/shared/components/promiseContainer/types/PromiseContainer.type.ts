@@ -1,12 +1,12 @@
-export type StatusType = 'suggestedPromises' | 'votingPromises' | 'confirmedPromises';
+export type StatusType = 'PENDING' | 'VOTING' | 'CONFIRMED';
 
-interface BaseAppointment {
+interface BasePromisis {
   promiseId: number;
   promiseName: string;
 }
 
-export interface SuggestedAppointment extends BaseAppointment {
-  status: 'suggestedPromises';
+export interface SuggestedAppointment extends BasePromisis {
+  status: 'PENDING';
   untilVoteDate: number;
   suggestedRegion: string;
   suggestedStartDate: string;
@@ -14,8 +14,8 @@ export interface SuggestedAppointment extends BaseAppointment {
   disabled?: boolean;
 }
 
-export interface VotingAppointment extends BaseAppointment {
-  status: 'votingPromises';
+export interface VotingAppointment extends BasePromisis {
+  status: 'VOTING';
   untilVoteEndDate: number;
   suggestedRegion: string;
   suggestedStartDate: string;
@@ -23,8 +23,8 @@ export interface VotingAppointment extends BaseAppointment {
   disabled?: boolean;
 }
 
-export interface ConfirmedAppointment extends BaseAppointment {
-  status: 'confirmedPromises';
+export interface ConfirmedAppointment extends BasePromisis {
+  status: 'CONFIRMED';
   fixedDate: string;
   placeName: string;
   promiseMembersNames: string[];

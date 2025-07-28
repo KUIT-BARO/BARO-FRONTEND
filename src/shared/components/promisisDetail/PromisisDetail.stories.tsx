@@ -1,17 +1,17 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import PromiseContainer from '@shared/components/promiseContainer/PromiseContainer';
+import PromisisDetail from '@shared/components/promisisDetail/PromisisDetail';
 
-const meta: Meta<typeof PromiseContainer> = {
-  title: 'Components/PromiseContainer',
-  component: PromiseContainer,
+const meta: Meta<typeof PromisisDetail> = {
+  title: 'Components/PromisisDetail',
+  component: PromisisDetail,
   tags: ['autodocs'],
 };
 
 export default meta;
 
-type Story = StoryObj<typeof PromiseContainer>;
+type Story = StoryObj<typeof PromisisDetail>;
 
-export const Suggested: Story = {
+export const Pending: Story = {
   args: {
     status: 'PENDING',
     untilVoteDate: 3,
