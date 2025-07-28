@@ -50,8 +50,8 @@ export const minibutton = recipe({
   variants: {
     background: {
       PENDING: { background: vars.color.baroBlue },
-      VOTING: { background: vars.color.yellow },
-      CONFIRMED: { background: vars.color.red },
+      VOTING: { background: vars.color.yellow1 },
+      CONFIRMED: { background: vars.color.red1 },
     },
   },
 });

@@ -1,4 +1,6 @@
-export type StatusType = 'PENDING' | 'VOTING' | 'CONFIRMED';
+import { PROMISE_STATUS, type PromiseStatusType } from '@shared/constant/promiseStatus';
+
+export type StatusType = PromiseStatusType;
 
 interface BasePromisis {
   promiseId: number;
@@ -6,7 +8,7 @@ interface BasePromisis {
 }
 
 export interface SuggestedAppointment extends BasePromisis {
-  status: 'PENDING';
+  status: typeof PROMISE_STATUS.PENDING;
   untilVoteDate: number;
   suggestedRegion: string;
   suggestedStartDate: string;
@@ -15,7 +17,7 @@ export interface SuggestedAppointment extends BasePromisis {
 }
 
 export interface VotingAppointment extends BasePromisis {
-  status: 'VOTING';
+  status: typeof PROMISE_STATUS.VOTING;
   untilVoteEndDate: number;
   suggestedRegion: string;
   suggestedStartDate: string;
@@ -24,7 +26,7 @@ export interface VotingAppointment extends BasePromisis {
 }
 
 export interface ConfirmedAppointment extends BasePromisis {
-  status: 'CONFIRMED';
+  status: typeof PROMISE_STATUS.CONFIRMED;
   fixedDate: string;
   placeName: string;
   promiseMembersNames: string[];

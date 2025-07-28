@@ -40,11 +40,12 @@ interface TextProps extends HTMLAttributes<HTMLParagraphElement> {
     | 'blue1'
     | 'blue2'
     | 'blue3'
+    | 'blue4'
+    | 'blue5'
     | 'baroBlue'
-    | 'borderBlue'
-    | 'red'
+    | 'red0'
     | 'red1'
-    | 'yellow'
+    | 'yellow0'
     | 'yellow1';
 }
 

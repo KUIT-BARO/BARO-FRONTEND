@@ -13,18 +13,18 @@ export const vars = createGlobalTheme(':root', {
     gray5: '#121212',
 
     blue0: '#F4F8FB',
-    blue1: ' #7BB2FF',
-    blue2: '#6699FF',
-    blue3: '#708AFF',
-    blue4: '#EDF1FF',
+    blue1: '#EDF1FF',
+    blue2: '#D7DEF7',
+    blue3: '#7BB2FF',
+    blue4: '#6699FF',
+    blue5: '#708AFF',
     baroBlue: '#5175FF',
-    borderBlue: '#D7DEF7',
 
-    red: '#FF6467',
-    red1: '#F9D7D8',
+    red0: '#F9D7D8',
+    red1: '#FF6467',
 
-    yellow: '#FFE864',
-    yellow1: '#FFFBDE',
+    yellow0: '#FFFBDE',
+    yellow1: '#FFE864',
   },
 
   font: {

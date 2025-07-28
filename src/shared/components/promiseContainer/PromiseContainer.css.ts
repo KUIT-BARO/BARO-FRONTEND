@@ -10,7 +10,7 @@ export const container = style({
   height: '19.9rem',
 
   background: vars.color.white,
-  boxShadow: `0px 0px 4px 0px ${vars.color.borderBlue}`,
+  boxShadow: `0px 0px 4px 0px ${vars.color.blue2}`,
   borderRadius: '10px',
 });
 
@@ -27,7 +27,7 @@ export const headerSection = recipe({
   },
   variants: {
     background: {
-      PENDING: { background: vars.color.blue4 },
+      PENDING: { background: vars.color.blue1 },
       VOTING: { background: vars.color.yellow1 },
       CONFIRMED: { background: vars.color.red1 },
     },

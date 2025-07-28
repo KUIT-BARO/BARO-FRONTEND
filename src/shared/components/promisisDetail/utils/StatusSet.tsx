@@ -10,8 +10,9 @@ import {
   IcDateRed,
 } from '@svg/index.ts';
 import React from 'react';
-import type { PromisisDetailProps,StatusType } from '@shared/components/promiseContainer/types/PromiseContainer.type';
+import type { PromisisDetailProps } from '@shared/components/promiseContainer/types/PromiseContainer.type';
 import { formatDateWithDay } from '@shared/utils/formatDateWithDay';
+import { PROMISE_STATUS, type PromiseStatusType } from '@shared/constant/promiseStatus';
 
 interface StatusIconSet {
   vote: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
@@ -19,18 +20,18 @@ interface StatusIconSet {
   date: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
 }
 
-export const StatusSet: Record<StatusType, StatusIconSet> = {
-  PENDING: {
+export const StatusSet: Record<PromiseStatusType, StatusIconSet> = {
+  [PROMISE_STATUS.PENDING]: {
     vote: IcVoteBlue,
     pin: IcPinLocBlue,
     date: IcDateBlue,
   },
-  VOTING: {
+  [PROMISE_STATUS.VOTING]: {
     vote: IcVotingYellow,
     pin: IcPinLocYellow,
     date: IcDateYellow,
   },
-  CONFIRMED: {
+  [PROMISE_STATUS.CONFIRMED]: {
     vote: IcVotingRed,
     pin: IcPinLocRed,
     date: IcDateRed,
@@ -43,23 +44,23 @@ export function getStatusLines(props: PromisisDetailProps): {
   thirdLine: string;
 } {
   switch (props.status) {
-  case 'PENDING':
-    return {
-      firstLine: `${props.untilVoteDate}일`,
-      secondLine: props.suggestedRegion,
-      thirdLine: `${formatDateWithDay(props.suggestedStartDate)} ~ ${formatDateWithDay(props.suggestedEndDate)}`
-    };
-  case 'VOTING':
-    return {
-      firstLine: `${props.untilVoteEndDate}일`,
-      secondLine: props.suggestedRegion,
-      thirdLine: `${formatDateWithDay(props.suggestedStartDate)} ~ ${formatDateWithDay(props.suggestedEndDate)}`
-    };
-  case 'CONFIRMED':
-    return {
-      firstLine: props.promiseMembersNames.join(', '),
-      secondLine: props.placeName,
-      thirdLine: formatDateWithDay(props.fixedDate)
-    };
+    case PROMISE_STATUS.PENDING:
+      return {
+        firstLine: `${props.untilVoteDate}일`,
+        secondLine: props.suggestedRegion,
+        thirdLine: `${formatDateWithDay(props.suggestedStartDate)} ~ ${formatDateWithDay(props.suggestedEndDate)}`,
+      };
+    case PROMISE_STATUS.VOTING:
+      return {
+        firstLine: `${props.untilVoteEndDate}일`,
+        secondLine: props.suggestedRegion,
+        thirdLine: `${formatDateWithDay(props.suggestedStartDate)} ~ ${formatDateWithDay(props.suggestedEndDate)}`,
+      };
+    case PROMISE_STATUS.CONFIRMED:
+      return {
+        firstLine: props.promiseMembersNames.join(', '),
+        secondLine: props.placeName,
+        thirdLine: formatDateWithDay(props.fixedDate),
+      };
   }
 }
