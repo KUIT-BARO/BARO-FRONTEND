@@ -48,7 +48,8 @@ export const textStyle = recipe({
       blue3: { color: vars.color.blue3 },
       baroBlue: { color: vars.color.baroBlue },
 
-      red0: { color: vars.color.red0 },
+      red: { color: vars.color.red },
+      yellow: { color: vars.color.yellow },
     },
   },
 });
