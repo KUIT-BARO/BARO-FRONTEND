@@ -6,7 +6,7 @@ interface StarsProps {
     size: 'SMALL' | 'BIG' | 'DEFAULT';
 }
 
-export function Stars({ score, size }: StarsProps) {
+export default function Stars({ score, size }: StarsProps) {
   const clampedScore = Math.max(0, Math.min(5, score));
   const { Fill, None , Half } = SelectStars({ size });
 
