@@ -1,4 +1,3 @@
-import React from 'react'
 import * as styles from '@shared/components/stars/Stars.css'
 import { SelectStars } from './SelectStars';
 
