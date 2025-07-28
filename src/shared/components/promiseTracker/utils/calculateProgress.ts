@@ -11,19 +11,16 @@ export function calculateProgress(
   if (total <= 0) return 0;
 
   if (variant === PROMISE_TYPE.PENDING) {
-    let totalProgress = 0;
-    users.forEach(user => {
+    const totalProgress = users.reduce((acc, user) => {
       switch (user.suggestionProgress) {
       case 'HALF':
-        totalProgress += 0.5;
-        break;
+        return acc + 0.5;
       case 'COMPLETE':
-        totalProgress += 1;
-        break;
+        return acc + 1;
       default:
-        totalProgress += 0;
+        return acc;
       }
-    });
+    }, 0);
     return Math.min((totalProgress / total) * 100, 100);
   } else {
     return Math.min((selectedCount / total) * 100, 100);
