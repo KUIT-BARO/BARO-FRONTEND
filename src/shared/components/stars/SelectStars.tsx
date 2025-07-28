@@ -4,7 +4,7 @@ interface SelectStarsProps {
     size: 'SMALL' | 'BIG' | 'DEFAULT';
 }
 
-export function SelectStars({ size }: SelectStarsProps) {
+const SelectStars = ({ size }: SelectStarsProps) => {
   switch (size) {
   case 'SMALL':
     return {
@@ -26,3 +26,5 @@ export function SelectStars({ size }: SelectStarsProps) {
     };
   }
 }
+
+export default SelectStars;
