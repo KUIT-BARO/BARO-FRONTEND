@@ -49,5 +49,5 @@ export const top = style({
 });
 
 export const title = style({
-  padding: '0 16px',
+  padding: '0 1.6rem',
 });
