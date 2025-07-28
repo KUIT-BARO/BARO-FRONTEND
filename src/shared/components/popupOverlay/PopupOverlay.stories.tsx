@@ -1,10 +1,10 @@
 import  { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import Popupoverlay from '@shared/components/popup-overlay/PopupOverlay';
+import { PopupOverlay } from '@shared/components/popupOverlay/PopupOverlay';
 
-const meta: Meta<typeof Popupoverlay> = {
-  title: 'Shared/Popupoverlay',
-  component: Popupoverlay,
+const meta: Meta<typeof PopupOverlay> = {
+  title: 'components/PopupOverlay',
+  component: PopupOverlay,
   argTypes: {
     position: {
       control: { type: 'radio' },
@@ -19,23 +19,27 @@ const meta: Meta<typeof Popupoverlay> = {
   },
 };
 export default meta;
+
 interface PopupOverlayProps {
   open?: boolean;
   top?: boolean;
   toptitle?:string;
   position?: 'center' | 'bottom';
 }
-type Story = StoryObj<typeof Popupoverlay>;
+
+type Story = StoryObj<typeof PopupOverlay>;
 
 const Template = (args: PopupOverlayProps) => {
-  const [open, setOpen] = useState(false);
-
+  const [openPopup, setOpenPopup] = useState(false);
+  const handleClose = () => {
+    setOpenPopup(false);
+  }
   return (
     <>
-      <button onClick={() => setOpen(true)}>Open Popup</button>
-      <Popupoverlay
-        open={open}
-        onClose={() => setOpen(false)}
+      <button onClick={() => setOpenPopup(true)}>Open Popup</button>
+      <PopupOverlay
+        open={openPopup}
+        onClose={handleClose}
         position={args.position}
         top={args.top}
         toptitle={args.toptitle}
@@ -50,9 +54,9 @@ const Template = (args: PopupOverlayProps) => {
         >
           <h3>{args.position} Popup</h3>
           <p>This popup {args.top ? 'has' : 'does not have'} a top bar.</p>
-          <button onClick={() => setOpen(false)}>Close</button>
+          <button onClick={handleClose}>Close</button>
         </div>
-      </Popupoverlay>
+      </PopupOverlay>
     </>
   );
 };
