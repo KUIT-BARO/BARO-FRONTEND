@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { BrowserRouter } from 'react-router-dom';
-import PlaceList from '@shared/components/placeReview/PlaceReview';
-import { mockupPlaces } from '@shared/components/placeReview/mockup';
+import PlaceReviewList from './PlaceReview';
+import { mockupPlaces } from './mockup';
 
-const meta: Meta<typeof PlaceList> = {
-  title: 'Components/PlaceList',
-  component: PlaceList,
+const meta: Meta<typeof PlaceReviewList> = {
+  title: 'Components/PlaceReviewList',
+  component: PlaceReviewList,
   parameters: {
     layout: 'padded',
   },
