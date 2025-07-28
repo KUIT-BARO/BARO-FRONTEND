@@ -3,8 +3,9 @@ import * as styles from '@shared/components/calendar/Calendar.css';
 import Text from '@shared/components/text/Text';
 import clsx from 'clsx';
 import { IcArrowBlueLeft, IcArrowBlueRight } from '@svg/index';
-import { DateArray,type DateArrayAnswer,getDayColor,isInRange } from '@shared/components/calendar/DateArray';
-import { format,addMonths,subMonths } from 'date-fns';
+import { DateArray, getDayColor, isInRange } from '@shared/components/calendar/utils/DateArray';
+import type { DateArrayAnswer } from '@shared/components/calendar/types/Calendar.type';
+import { format, addMonths, subMonths } from 'date-fns';
 import { week } from '@shared/components/kakaoMap/constant/week';
 
 export function Calendar() {
@@ -42,12 +43,12 @@ export function Calendar() {
         ))}
       </div>
       {dayArray.map((week, index) => (
-        <div key={index} className={styles.dateRow}>
-          {week.map((day,index) => {
+        <div key={week[index].date.toDateString()} className={styles.dateRow}>
+          {week.map((day) => {
             const dayStr = day.date.toDateString();
             return (
               <div
-                key={index}
+                key={dayStr}
                 onMouseDown={() => {
                   setDragStart(day.date);
                   setDragEnd(day.date);
