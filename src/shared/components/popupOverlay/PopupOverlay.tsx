@@ -4,7 +4,7 @@ import { IcArrowLeft } from '@svg/index';
 import Text from '@shared/components/text/Text';
 
 interface PopupOverlayProps {
-  open?: boolean;
+  openPopup?: boolean;
   top?: boolean;
   toptitle?:string;
   onClose: () => void;
@@ -12,14 +12,14 @@ interface PopupOverlayProps {
   children: React.ReactNode;
 }
 
-export function PopupOverlay({ children,onClose,open ,position,top=false,toptitle}: PopupOverlayProps) {
-  if (!open) {
+export function PopupOverlay({ children,onClose,openPopup ,position,top=false,toptitle}: PopupOverlayProps) {
+  if (!openPopup) {
     return null;
   }
   return (
-    <div className={styles.container} onClick={onClose}>
+    <div className={styles.container}>
       {top && <div className={styles.top}>
-        <IcArrowLeft/>
+        <IcArrowLeft onClick={onClose}/>
         <Text tag="body_bold_19" color="white"
           className={styles.title}>{toptitle}</Text>
         <div/>

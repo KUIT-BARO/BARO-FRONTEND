@@ -21,7 +21,7 @@ const meta: Meta<typeof PopupOverlay> = {
 export default meta;
 
 interface PopupOverlayProps {
-  open?: boolean;
+  openPopup?: boolean;
   top?: boolean;
   toptitle?:string;
   position?: 'center' | 'bottom';
@@ -31,15 +31,15 @@ type Story = StoryObj<typeof PopupOverlay>;
 
 const Template = (args: PopupOverlayProps) => {
   const [openPopup, setOpenPopup] = useState(false);
-  const handleClose = () => {
-    setOpenPopup(false);
+  const handleopenPopup = () => {
+    setOpenPopup((prev) => !prev);
   }
   return (
     <>
-      <button onClick={() => setOpenPopup(true)}>Open Popup</button>
+      <button onClick={handleopenPopup}>Open Popup</button>
       <PopupOverlay
-        open={openPopup}
-        onClose={handleClose}
+        openPopup={openPopup}
+        onClose={handleopenPopup}
         position={args.position}
         top={args.top}
         toptitle={args.toptitle}
@@ -47,14 +47,14 @@ const Template = (args: PopupOverlayProps) => {
         <div
           style={{
             background: 'white',
-            padding: '20px',
+            padding: '2rem',
             borderRadius: '8px',
             textAlign: 'center',
           }}
         >
           <h3>{args.position} Popup</h3>
           <p>This popup {args.top ? 'has' : 'does not have'} a top bar.</p>
-          <button onClick={handleClose}>Close</button>
+          <button onClick={handleopenPopup}>Close</button>
         </div>
       </PopupOverlay>
     </>
