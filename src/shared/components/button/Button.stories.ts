@@ -89,7 +89,7 @@ export const ShortButton3: Story = {
     variant: 'enabled',
     size: 'short',
     text: '탈퇴하기',
-    backgroundColor: vars.color.red,
+    backgroundColor: vars.color.red0,
   },
   name: 'Short Enabled Button',
 };
