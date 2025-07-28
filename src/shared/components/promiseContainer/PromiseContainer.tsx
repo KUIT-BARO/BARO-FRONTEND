@@ -1,7 +1,7 @@
 import type { PromisisDetailProps } from '@shared/components/promiseContainer/types/PromiseContainer.type';
 import * as styles from '@shared/components/promiseContainer/PromiseContainer.css';
 import PromisisDetail from '@shared/components/promisisDetail/PromisisDetail';
-import { IcArrow } from '@svg/index';
+import { IcArrowRight } from '@svg/index';
 import Text from '@shared/components/text/Text';
 
 export default function PromiseContainer(props: PromisisDetailProps) {
@@ -11,7 +11,7 @@ export default function PromiseContainer(props: PromisisDetailProps) {
         <Text tag="body_bold_20" color="black">
           {props.promiseName}
         </Text>
-        <IcArrow className={styles.imgStyle} />
+        <IcArrowRight className={styles.imgStyle} />
       </div>
       <div className={styles.contentSection}>
         <PromisisDetail {...props} showStatusBadge={true} />
