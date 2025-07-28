@@ -1,4 +1,4 @@
-import { PROMISE_TYPE } from '@shared/constant/promise';
+import { PROMISE_TYPE, type PromiseType } from '@shared/constant/promise';
 import type { User } from '@shared/components/promiseTracker/types';
 
 export interface UserGroups {
@@ -7,7 +7,7 @@ export interface UserGroups {
   halfSelected: User[];
 }
 
-export function groupUsersByProgress(users: User[], variant: string): UserGroups {
+export function groupUsersByProgress(users: User[], variant: PromiseType): UserGroups {
   if (variant === PROMISE_TYPE.PENDING) {
     return {
       selected: users.filter(user => user.suggestionProgress === 'COMPLETE'),

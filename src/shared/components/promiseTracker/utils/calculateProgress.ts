@@ -1,9 +1,9 @@
-import { PROMISE_TYPE } from '@shared/constant/promise';
+import { PROMISE_TYPE, type PromiseType } from '@shared/constant/promise';
 import type { User } from '@shared/components/promiseTracker/types';
 
 export function calculateProgress(
   users: User[],
-  variant: string,
+  variant: PromiseType,
   selectedCount: number
 ): number {
   const total = users.length;
