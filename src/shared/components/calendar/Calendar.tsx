@@ -8,7 +8,7 @@ import type { DateArrayAnswer } from '@shared/components/calendar/types/Calendar
 import { format, addMonths, subMonths } from 'date-fns';
 import { week } from '@shared/components/kakaoMap/constant/week';
 
-export function Calendar() {
+export default function Calendar() {
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const todayRef = useRef(new Date());
   const today = todayRef.current;
