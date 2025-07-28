@@ -6,12 +6,12 @@ export const container = style({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'flex-start',
-  gap: '0.8rem',
-
-  width: '15rem',
+  gap: '0.4rem',
 });
 
 export const itembox = style({
+  padding: '0.4rem 0',
+
   display: 'flex',
   alignItems: 'center',
   gap: '1.2rem',
@@ -50,9 +50,9 @@ export const minibutton = recipe({
   },
   variants: {
     background: {
-      suggestedPromises: { background: vars.color.baroBlue },
-      votingPromises: { background: vars.color.yellow1 },
-      confirmedPromises: { background: vars.color.red1 },
+      PENDING: { background: vars.color.baroBlue },
+      VOTING: { background: vars.color.yellow },
+      CONFIRMED: { background: vars.color.red },
     },
   },
 });
