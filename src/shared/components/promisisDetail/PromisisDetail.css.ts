@@ -19,7 +19,6 @@ export const itembox = style({
 });
 
 export const textStyle = style({
-  fontFamily: 'Pretendard',
   whiteSpace: 'nowrap',
 });
 
