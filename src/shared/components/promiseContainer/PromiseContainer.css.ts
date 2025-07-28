@@ -8,10 +8,9 @@ export const container = style({
 
   width: '36.2rem',
   height: '19.9rem',
-
   background: vars.color.white,
-  boxShadow: `0px 0px 4px 0px ${vars.color.blue2}`,
   borderRadius: '10px',
+  boxShadow: `0px 0px 4px 0px ${vars.color.blue1}`,
 });
 
 export const headerSection = recipe({
@@ -23,6 +22,7 @@ export const headerSection = recipe({
     width: '100%',
     height: '6.4rem',
     padding: '1.8rem 2.6rem',
+    borderRadius: '10px 10px 0 0',
     boxSizing: 'border-box',
   },
   variants: {

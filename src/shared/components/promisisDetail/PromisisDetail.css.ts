@@ -1,6 +1,6 @@
 import { style } from '@vanilla-extract/css';
-import { vars } from '@shared/styles/theme.css';
 import { recipe } from '@vanilla-extract/recipes';
+import { PROMISE_STATUS_CONFIG } from '@shared/constant/promiseStatus';
 
 export const container = style({
   display: 'flex',
@@ -35,23 +35,21 @@ export const thirdStyle = style({
   justifyContent: 'space-between',
 });
 
-export const minibutton = recipe({
+export const statusBadge = recipe({
   base: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    gap: '1rem',
 
-    height: '2.4rem',
     padding: '0.2rem 1.1rem',
     flexShrink: 0,
     borderRadius: '10rem',
   },
   variants: {
     background: {
-      PENDING: { background: vars.color.baroBlue },
-      VOTING: { background: vars.color.yellow1 },
-      CONFIRMED: { background: vars.color.red1 },
+      PENDING: { background: PROMISE_STATUS_CONFIG.PENDING.color },
+      VOTING: { background: PROMISE_STATUS_CONFIG.VOTING.color },
+      CONFIRMED: { background: PROMISE_STATUS_CONFIG.CONFIRMED.color },
     },
   },
 });

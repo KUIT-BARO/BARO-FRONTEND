@@ -11,7 +11,7 @@ export default meta;
 
 type Story = StoryObj<typeof PromiseContainer>;
 
-export const Suggested: Story = {
+export const Pending: Story = {
   args: {
     status: 'PENDING',
     untilVoteDate: 3,

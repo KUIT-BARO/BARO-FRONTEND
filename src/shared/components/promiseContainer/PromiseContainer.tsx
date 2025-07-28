@@ -4,17 +4,18 @@ import PromisisDetail from '@shared/components/promisisDetail/PromisisDetail';
 import { IcArrow } from '@svg/index';
 import Text from '@shared/components/text/Text';
 
-
-export default function PromiseContainer (props: PromisisDetailProps) {
+export default function PromiseContainer(props: PromisisDetailProps) {
   return (
     <div className={styles.container}>
       <div className={styles.headerSection({ background: props.status })}>
-        <Text tag="body_bold_20" color="black">{props.promiseName}</Text>
-        <IcArrow className={styles.imgStyle}/>
+        <Text tag="body_bold_20" color="black">
+          {props.promiseName}
+        </Text>
+        <IcArrow className={styles.imgStyle} />
       </div>
       <div className={styles.contentSection}>
-        <PromisisDetail {...props} disabled={true} />
+        <PromisisDetail {...props} showStatusBadge={true} />
       </div>
     </div>
-  )
+  );
 }

@@ -1,36 +1,34 @@
-import { PROMISE_STATUS, type PromiseStatusType } from '@shared/constant/promiseStatus';
-
-export type StatusType = PromiseStatusType;
+import { PROMISE_STATUS } from '@shared/constant/promiseStatus';
 
 interface BasePromisis {
   promiseId: number;
   promiseName: string;
 }
 
-export interface SuggestedAppointment extends BasePromisis {
+export interface PendingPromise extends BasePromisis {
   status: typeof PROMISE_STATUS.PENDING;
   untilVoteDate: number;
   suggestedRegion: string;
   suggestedStartDate: string;
   suggestedEndDate: string;
-  disabled?: boolean;
+  showStatusBadge?: boolean;
 }
 
-export interface VotingAppointment extends BasePromisis {
+export interface VotingPromise extends BasePromisis {
   status: typeof PROMISE_STATUS.VOTING;
   untilVoteEndDate: number;
   suggestedRegion: string;
   suggestedStartDate: string;
   suggestedEndDate: string;
-  disabled?: boolean;
+  showStatusBadge?: boolean;
 }
 
-export interface ConfirmedAppointment extends BasePromisis {
+export interface ConfirmedPromise extends BasePromisis {
   status: typeof PROMISE_STATUS.CONFIRMED;
   fixedDate: string;
   placeName: string;
   promiseMembersNames: string[];
-  disabled?: boolean;
+  showStatusBadge?: boolean;
 }
 
-export type PromisisDetailProps = SuggestedAppointment | VotingAppointment | ConfirmedAppointment;
+export type PromisisDetailProps = PendingPromise | VotingPromise | ConfirmedPromise;
