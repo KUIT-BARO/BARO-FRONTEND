@@ -24,3 +24,7 @@ globalStyle('main', {
   minHeight: '70vh',
   flexGrow: 1,
 });
+
+globalStyle('*', {
+  boxSizing: 'border-box',
+});

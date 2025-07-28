@@ -5,7 +5,7 @@ import { vars } from '@shared/styles/theme.css';
 export const tagsWrapper = style({
   width: '100%',
   padding: '0 1.6rem',
-  background: vars.color.lightBlue,
+  background: vars.color.blue0,
   overflowX: 'auto',
   whiteSpace: 'nowrap',
   selectors: {
