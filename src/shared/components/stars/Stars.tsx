@@ -1,5 +1,5 @@
 import * as styles from '@shared/components/stars/Stars.css'
-import { SelectStars } from './SelectStars';
+import SelectStars from '@shared/components/stars/SelectStars';
 
 interface StarsProps {
     score: number;
