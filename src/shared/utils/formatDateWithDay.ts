@@ -1,4 +1,4 @@
-import { DAY_NAMES } from '@shared/components/promisisDetail/constant/DayNames';
+import { DAYS } from '@shared/components/promisisDetail/constant/Days';
 
 export function formatDateWithDay(dateStr: string): string {
   const date = new Date(dateStr);
@@ -6,7 +6,7 @@ export function formatDateWithDay(dateStr: string): string {
   const month = date.getMonth() + 1;
   const day = date.getDate();
 
-  const dayOfWeek = DAY_NAMES[date.getDay()];
+  const dayOfWeek = DAYS[date.getDay()];
 
   return `${month}/${day}(${dayOfWeek})`;
 }
