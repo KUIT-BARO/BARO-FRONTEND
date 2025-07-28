@@ -2,7 +2,32 @@ import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 import { vars } from '@shared/styles/theme.css';
 
-export const placeThumbnailWrapper = recipe({
+// PlaceReview 스타일
+export const placeReviewListContainer = style({
+  width: '100%',
+  padding: '1.5rem 0',
+  backgroundColor: vars.color.blue0,
+});
+
+export const placeReviewListHeader = style({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '0.5rem',
+  padding: '0 2.0rem',
+});
+
+export const placeReviewItems = style({
+  display: 'flex',
+  padding: '0 2.0rem',
+  gap: '0.8rem',
+  overflowX: 'auto',
+  '::-webkit-scrollbar': {
+    display: 'none',
+  },
+});
+
+// PlaceReview 스타일
+export const placeReviewWrapper = recipe({
   base: {
     borderRadius: '1.2rem',
     backgroundColor: vars.color.gray0,
@@ -13,11 +38,11 @@ export const placeThumbnailWrapper = recipe({
   },
   variants: {
     size: {
-      large: {
+      LARGE: {
         width: '34.0rem',
         height: '23.2rem',
       },
-      small: {
+      SMALL: {
         width: '16.8rem',
         height: '16.8rem',
       },
@@ -25,7 +50,7 @@ export const placeThumbnailWrapper = recipe({
   },
 });
 
-export const placeInfoWrapper = style({
+export const placeReviewDesc = style({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
@@ -33,40 +58,25 @@ export const placeInfoWrapper = style({
   width: '100%',
   height: '100%',
   background: 'rgba(0, 0, 0, 0.5)',
-  fontSize: vars.font.body_bold_16.fontSize,
-  color: vars.color.white,
 });
 
-export const placeNameContainer = style({
-  textAlign: 'center',
-  width: '70%',
-  margin: '0',
-  wordBreak: 'keep-all',
-  overflowWrap: 'break-word',
-});
-
-export const placeRatingContainer = style({
+export const placeReviewRatingContainer = style({
   display: 'flex',
   justifyContent: 'center',
   textAlign: 'center',
-  alignItems: 'center',
+
   width: '100%',
   padding: '0.4rem 0 1.3rem 0',
-  fontSize: vars.font.body_14.fontSize,
-  color: vars.color.gray4,
 });
 
-export const placeSaveNumContainer = style({
+export const placeReviewCountContainer = style({
   display: 'flex',
   justifyContent: 'center',
   textAlign: 'center',
   alignItems: 'center',
-  width: '100%',
-  fontSize: vars.font.body_14.fontSize,
-  color: vars.color.gray4,
 });
 
-export const placeSaveIcon = style({
+export const placeReviewCountIcon = style({
   alignContent: 'center',
   width: '1.6rem',
   height: '1.6rem',
