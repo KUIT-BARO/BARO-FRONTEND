@@ -26,5 +26,8 @@ export default function getStatusLines(props: PromisisDetailProps): {
       secondLine: props.placeName,
       thirdLine: formatDateWithDay(props.fixedDate),
     };
+  default:
+    throw new Error(`Unknown promise status`);
   }
+
 }
