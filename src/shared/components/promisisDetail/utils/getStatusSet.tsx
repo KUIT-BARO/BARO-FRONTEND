@@ -1,5 +1,5 @@
 import {
-  IcVoteBlue,
+  IcVotingBlue,
   IcVotingRed,
   IcVotingYellow,
   IcPinLocBlue,
@@ -21,7 +21,7 @@ interface StatusIconSet {
 export default function getStatusSet(): Record<PromiseStatusType, StatusIconSet> {
   return {
     [PROMISE_STATUS.PENDING]: {
-      vote: IcVoteBlue,
+      vote: IcVotingBlue,
       pin: IcPinLocBlue,
       date: IcDateBlue,
     },
