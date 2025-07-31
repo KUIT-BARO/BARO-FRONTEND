@@ -9,21 +9,32 @@ import { format, addMonths, subMonths } from 'date-fns';
 import { week } from '@shared/components/kakaoMap/constant/week';
 
 export default function Calendar() {
-  const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const todayRef = useRef(new Date());
   const today = todayRef.current;
-  const selectedMonthYear = format(selectedDate, 'yyyy MMM');
-  const dayArray: DateArrayAnswer[][] = DateArray({ date: selectedDate });
-  const [dragStart, setDragStart] = useState<Date | null>(null);
-  const [dragEnd, setDragEnd] = useState<Date | null>(null);
-  const [isDragging, setIsDragging] = useState(false);
+  const [clickStart, setClickStart] = useState<Date>(new Date());
+  const [clickEnd, setClickEnd] = useState<Date | null>(null);
+  const [isOneClicked, setIsOneClicked] = useState(false);
+  const selectedMonthYear = format(clickStart, 'yyyy MMM');
+  const dayArray: DateArrayAnswer[][] = DateArray({ date: clickStart });
 
   const onPrevMonth = () => {
-    setSelectedDate(subMonths(selectedDate, 1));
+    setClickStart(subMonths(clickStart, 1));
   };
   const onNextMonth = () => {
-    setSelectedDate(addMonths(selectedDate, 1));
+    setClickStart(addMonths(clickStart, 1));
   };
+
+  const handleClick = (date: Date) => {
+    if (!isOneClicked) {
+      setClickStart(date);
+      setIsOneClicked(true);
+      setClickEnd(null);
+    } else {
+      setClickEnd(date);
+      setIsOneClicked(false);
+    }
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -49,27 +60,15 @@ export default function Calendar() {
             return (
               <div
                 key={dayStr}
-                onMouseDown={() => {
-                  setDragStart(day.date);
-                  setDragEnd(day.date);
-                  setIsDragging(true);
-                  setSelectedDate(day.date);
-                }}
-                onMouseEnter={() => {
-                  if (isDragging) setDragEnd(day.date);
-                }}
-                onMouseUp={() => {
-                  setIsDragging(false);
-                }}
                 className={styles.dateItem({
                   isToday: dayStr === today.toDateString() ? 'True' : 'default',
-                  isSelected: dayStr === selectedDate.toDateString() ? 'True' : 'default',
-                  isInRange: dragStart && dragEnd && isInRange(day.date, dragStart, dragEnd) ? 'True' : 'default',
+                  isSelected: dayStr === clickStart.toDateString() ? 'True' : 'default',
+                  isInRange: clickStart && clickEnd && isInRange(day.date, clickStart, clickEnd) ? 'True' : 'default',
                 })}
-                onClick={() => setSelectedDate(day.date)
-                }
+                onClick={() => handleClick(day.date)}
+
               >
-                <Text tag='calendartext' color={getDayColor(day, today, selectedDate, dragStart, dragEnd)}  className={clsx(styles.dayText)} >
+                <Text tag='calendartext' color={getDayColor(day, today, clickStart, clickStart, clickEnd)}  className={clsx(styles.dayText)} >
                   {day.day}
                 </Text>
               </div>
