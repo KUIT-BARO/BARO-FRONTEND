@@ -32,6 +32,7 @@ export const monthMove = style({
 
 export const arrow = style({
   padding: '0.8rem',
+  cursor: 'pointer',
 });
 
 export const weekdayContainer = style({
