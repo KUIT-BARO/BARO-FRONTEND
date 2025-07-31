@@ -37,7 +37,10 @@ export function DateArray({ date }: DateArrayProps): DateArrayAnswer[][] {
   return weeks;
 }
 
-export function isInRange(day: Date, start: Date, end: Date) {
+export function isInRange(day: Date, start: Date, end: Date | null) {
+  if (!end) {
+    return start.toDateString() === day.toDateString();
+  }
   const [from, to] = isAfter(start, end) ? [end, start] : [start, end];
   return isWithinInterval(day, { start: from, end: to });
 }
@@ -45,15 +48,14 @@ export function isInRange(day: Date, start: Date, end: Date) {
 export function getDayColor(
   day: DateArrayAnswer,
   today: Date,
-  selectedDate: Date,
-  dragStart: Date | null,
-  dragEnd: Date | null
+  clickStart: Date,
+  clickEnd: Date | null
 ) {
   const dayDateString = day.date.toDateString();
-  if (dayDateString === today.toDateString() || dayDateString === selectedDate.toDateString()) {
+  if (dayDateString === today.toDateString() || dayDateString === clickStart.toDateString()) {
     return 'white';
   }
-  if (dragStart && dragEnd && isInRange(day.date, dragStart, dragEnd)) {
+  if (clickEnd && isInRange(day.date, clickStart, clickEnd)) {
     return 'white';
   }
   if (day.isCurrentMonth) {
