@@ -1,4 +1,3 @@
-import { PROMISE_TYPE, type PromiseType } from '@shared/constant/promise';
 import type { User } from '@shared/components/promiseTracker/types';
 
 export interface UserGroups {
@@ -7,18 +6,10 @@ export interface UserGroups {
   halfSelected: User[];
 }
 
-export function groupUsersByProgress(users: User[], variant: PromiseType): UserGroups {
-  if (variant === PROMISE_TYPE.PENDING) {
-    return {
-      selected: users.filter(user => user.suggestionProgress === 'COMPLETE'),
-      unselected: users.filter(user => user.suggestionProgress === 'NONE'),
-      halfSelected: users.filter(user => user.suggestionProgress === 'HALF'),
-    };
-  } else {
-    return {
-      selected: users.filter(user => user.hasVoted === true),
-      unselected: users.filter(user => user.hasVoted === false),
-      halfSelected: [],
-    };
-  }
+export function groupUsersByProgress(users: User[]): UserGroups {
+  return {
+    selected: users.filter(user => user.suggestionProgress === 'COMPLETE'),
+    unselected: users.filter(user => user.suggestionProgress === 'NONE'),
+    halfSelected: users.filter(user => user.suggestionProgress === 'HALF'),
+  };
 }

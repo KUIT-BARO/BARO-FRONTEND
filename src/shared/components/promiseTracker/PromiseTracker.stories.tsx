@@ -13,11 +13,6 @@ const meta: Meta<typeof PromiseTracker> = {
       control: 'object',
       description: '사용자 목록',
     },
-    variant: {
-      control: 'select',
-      options: ['PENDING', 'VOTING'],
-      description: '약속 상태 (미정/투표)',
-    },
   },
 };
 
@@ -31,7 +26,6 @@ export const Default: Story = {
       { userId: 2, avatarType: 'MAN', isHost: false, suggestionProgress: 'HALF' },
       { userId: 3, avatarType: 'WOMAN', isHost: false, suggestionProgress: 'NONE' },
     ],
-    variant: 'PENDING',
   },
 };
 
@@ -44,20 +38,6 @@ export const Pending: Story = {
       { userId: 4, avatarType: 'USER', isHost: false, suggestionProgress: 'NONE' },
       { userId: 5, avatarType: 'MAN', isHost: false, suggestionProgress: 'HALF' },
     ],
-    variant: 'PENDING',
   },
   name: '약속 현황 (미정)',
-};
-
-export const Voting: Story = {
-  args: {
-    users: [
-      { userId: 1, avatarType: 'MAN', isHost: true, hasVoted: true },
-      { userId: 2, avatarType: 'WOMAN', isHost: false, hasVoted: true },
-      { userId: 3, avatarType: 'DOG', isHost: false, hasVoted: true },
-      { userId: 4, avatarType: 'USER', isHost: false, hasVoted: false },
-    ],
-    variant: 'VOTING',
-  },
-  name: '약속 현황 (투표)',
 };

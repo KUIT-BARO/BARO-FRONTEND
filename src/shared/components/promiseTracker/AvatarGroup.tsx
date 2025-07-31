@@ -1,19 +1,17 @@
 import { useState } from 'react';
 import * as styles from '@shared/components/promiseTracker/PromiseTracker.css';
-import { IcDog, IcMan, IcWoman, IcUser, IcCrownBlue, IcCrownGold, IcPinCheck } from '@svg/index';
-import { AVATAR_TYPE, PROMISE_TYPE, type AvatarType, type PromiseType } from '@shared/constant/promise';
+import { IcDog, IcMan, IcWoman, IcUser, IcCrownBlue, IcPinCheck } from '@svg/index';
+import { AVATAR_TYPE, type AvatarType } from '@shared/constant/promise';
 import type { User } from '@shared/components/promiseTracker/types';
 
 type UserAvatarProps = {
   user: User;
-  variant: PromiseType;
   isExpanded: boolean;
   zIndex: number;
 };
 
 type AvatarGroupProps = {
   users: User[];
-  variant: PromiseType;
 };
 
 const renderAvatar = (avatarType: AvatarType) => {
@@ -29,24 +27,24 @@ const renderAvatar = (avatarType: AvatarType) => {
   }
 };
 
-const renderCrown = (variant: PromiseType) => {
-  return variant === PROMISE_TYPE.PENDING ? <IcCrownBlue className={styles.crown} /> : <IcCrownGold className={styles.crown} />;
+const renderCrown = () => {
+  return <IcCrownBlue className={styles.crown} />;
 };
 
-function UserAvatar({ user, variant, isExpanded, zIndex }: UserAvatarProps) {
+function UserAvatar({ user, isExpanded, zIndex }: UserAvatarProps) {
   return (
     <div
       className={styles.avatarContainer({ expanded: isExpanded })}
       style={{ zIndex }}
     >
-      {user.isHost && renderCrown(variant)}
+      {user.isHost && renderCrown()}
       <IcPinCheck className={styles.avatarBackground} />
       {renderAvatar(user.avatarType)}
     </div>
   );
 }
 
-export default function AvatarGroup({ users, variant }: AvatarGroupProps) {
+export default function AvatarGroup({ users }: AvatarGroupProps) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   if (!users) {
@@ -62,7 +60,6 @@ export default function AvatarGroup({ users, variant }: AvatarGroupProps) {
         <UserAvatar
           key={user.userId}
           user={user}
-          variant={variant}
           isExpanded={isExpanded}
           zIndex={isExpanded ? 1 : users.length - index}
         />
