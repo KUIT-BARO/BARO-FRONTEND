@@ -8,8 +8,8 @@ export interface UserGroups {
 
 export function groupUsersByProgress(users: User[]): UserGroups {
   return {
-    selected: users.filter(user => user.suggestionProgress === 'COMPLETE'),
-    unselected: users.filter(user => user.suggestionProgress === 'NONE'),
-    halfSelected: users.filter(user => user.suggestionProgress === 'HALF'),
+    selected: users.filter(user => user.suggestionProgress === 100),
+    unselected: users.filter(user => user.suggestionProgress === 0),
+    halfSelected: users.filter(user => user.suggestionProgress > 0 && user.suggestionProgress < 100),
   };
 }

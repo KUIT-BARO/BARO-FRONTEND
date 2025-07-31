@@ -22,9 +22,9 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     users: [
-      { userId: 1, avatarType: 'DOG', isHost: true, suggestionProgress: 'COMPLETE' },
-      { userId: 2, avatarType: 'MAN', isHost: false, suggestionProgress: 'HALF' },
-      { userId: 3, avatarType: 'WOMAN', isHost: false, suggestionProgress: 'NONE' },
+      { userId: 1, avatarType: 'DOG', isHost: true, suggestionProgress: 100 },
+      { userId: 2, avatarType: 'MAN', isHost: false, suggestionProgress: 50 },
+      { userId: 3, avatarType: 'WOMAN', isHost: false, suggestionProgress: 0 },
     ],
   },
 };
@@ -32,11 +32,11 @@ export const Default: Story = {
 export const Pending: Story = {
   args: {
     users: [
-      { userId: 1, avatarType: 'MAN', isHost: true, suggestionProgress: 'COMPLETE' },
-      { userId: 2, avatarType: 'WOMAN', isHost: false, suggestionProgress: 'HALF' },
-      { userId: 3, avatarType: 'DOG', isHost: false, suggestionProgress: 'COMPLETE' },
-      { userId: 4, avatarType: 'USER', isHost: false, suggestionProgress: 'NONE' },
-      { userId: 5, avatarType: 'MAN', isHost: false, suggestionProgress: 'HALF' },
+      { userId: 1, avatarType: 'MAN', isHost: true, suggestionProgress: 100 },
+      { userId: 2, avatarType: 'WOMAN', isHost: false, suggestionProgress: 50 },
+      { userId: 3, avatarType: 'DOG', isHost: false, suggestionProgress: 100 },
+      { userId: 4, avatarType: 'USER', isHost: false, suggestionProgress: 0 },
+      { userId: 5, avatarType: 'MAN', isHost: false, suggestionProgress: 50 },
     ],
   },
   name: '약속 현황 (미정)',
