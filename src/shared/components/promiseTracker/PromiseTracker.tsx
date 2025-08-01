@@ -2,7 +2,6 @@ import { useMemo } from 'react';
 import * as styles from '@shared/components/promiseTracker/PromiseTracker.css';
 import AvatarGroup from '@shared/components/promiseTracker/AvatarGroup';
 import ProgressBar from '@shared/components/promiseTracker/ProgressBar';
-import Counter from '@shared/components/promiseTracker/Counter';
 import { groupUsersByProgress } from '@shared/components/promiseTracker/utils/groupUsers';
 import type { User } from '@shared/components/promiseTracker/types/user';
 
@@ -40,7 +39,11 @@ export default function PromiseTracker({ users }: PromiseTrackerProps) {
         })}
       </div>
       <ProgressBar users={users} />
-      <Counter selectedCount={selectedCount} total={users.length} />
+      <div className={styles.counterContainer}>
+        <span className={styles.selected}>{selectedCount}</span>
+        <span>/</span>
+        <span>{users.length}</span>
+      </div>
     </div>
   );
 }
