@@ -1,84 +1,71 @@
-import { useState, useRef } from 'react';
 import * as styles from '@shared/components/calendar/Calendar.css';
 import Text from '@shared/components/text/Text';
 import clsx from 'clsx';
 import { IcArrowBlueLeft, IcArrowBlueRight } from '@svg/index';
-import { DateArray, getDayColor, isInRange } from '@shared/components/calendar/utils/DateArray';
+import {
+  DateArray,
+  getDateStatus,
+  getDateStyles,
+} from '@shared/components/calendar/utils/CalendarUtils';
 import type { DateArrayAnswer } from '@shared/components/calendar/types/Calendar.type';
-import { format, addMonths, subMonths, isBefore, startOfDay } from 'date-fns';
+import { format, addMonths, subMonths } from 'date-fns';
 import { week } from '@shared/components/kakaoMap/constant/week';
+import { useDateSelection } from '@shared/components/calendar/hooks/useDateSelection';
 
 export default function Calendar() {
-  const todayRef = useRef(new Date());
-  const today = todayRef.current;
-  const [baseDate, setBaseDate] = useState<Date>(today);
-  const [clickStart, setClickStart] = useState<Date>(new Date());
-  const [clickEnd, setClickEnd] = useState<Date | null>(null);
-  const [isOneClicked, setIsOneClicked] = useState(false);
-  const selectedMonthYear = format(baseDate, 'yyyy MMM');
-  const dayArray: DateArrayAnswer[][] = DateArray({ date: baseDate });
+  const { todayDate, currentDate, setCurrentDate, handleDateClick, getSelectedDates } =
+    useDateSelection();
 
-  const onPrevMonth = () => {
-    setBaseDate(subMonths(baseDate, 1));
+  const selectedMonthYear = format(currentDate, 'yyyy MMM');
+  const dayArray: DateArrayAnswer[][] = DateArray({ date: currentDate });
+
+  const handleClickPrevMonth = () => {
+    setCurrentDate(subMonths(currentDate, 1));
   };
-  const onNextMonth = () => {
-    setBaseDate(addMonths(baseDate, 1));
+  const handleClickNextMonth = () => {
+    setCurrentDate(addMonths(currentDate, 1));
   };
 
-  const handleClick = (date: Date) => {
-    if (isBefore(date, startOfDay(today))) {
-      return;
-    }
-    if (!isOneClicked) {
-      setClickStart(date);
-      setIsOneClicked(true);
-      setClickEnd(null);
-    } else {
-      setClickEnd(date);
-      setIsOneClicked(false);
-    }
-  };
+  const { startDate: clickStart, endDate: clickEnd } = getSelectedDates();
 
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <Text tag='body_bold_16' color='calendarText' className={clsx(styles.calendarTexts)}>
+        <Text tag="body_bold_16" color="black">
           {selectedMonthYear}
         </Text>
         <div className={styles.monthMove}>
-          <IcArrowBlueLeft className={styles.arrow} onClick={onPrevMonth} />
-          <IcArrowBlueRight className={styles.arrow} onClick={onNextMonth} />
+          <IcArrowBlueLeft className={styles.arrow} onClick={handleClickPrevMonth} />
+          <IcArrowBlueRight className={styles.arrow} onClick={handleClickNextMonth} />
         </div>
       </div>
       <div className={styles.weekdayContainer}>
-        {week.map((day) => (
-          <Text key={day} tag='body_bold_14' color='dayText' className={clsx(styles.weekdayItem)}>
+        {week.map(day => (
+          <Text key={day} tag="body_bold_14" color="gray0" className={clsx(styles.weekdayItem)}>
             {day}
           </Text>
         ))}
       </div>
       {dayArray.map((week, index) => (
         <div key={week[index].date.toDateString()} className={styles.dateRow}>
-          {week.map((day) => {
-            const dayStr = day.date.toDateString();
+          {week.map(day => {
+            const dateStatus = getDateStatus(day, todayDate, clickStart, clickEnd);
+            const { dateItemClass, textColor } = getDateStyles(dateStatus);
+
             return (
               <div
-                key={dayStr}
-                className={styles.dateItem({
-                  isToday: dayStr === today.toDateString() ? 'True' : 'default',
-                  isInRange: isInRange(day.date, clickStart, clickEnd) ? 'True' : 'default',
-                })}
-                onClick={() => handleClick(day.date)}
+                key={day.date.toDateString()}
+                className={dateItemClass}
+                onClick={() => handleDateClick(day.date)}
               >
-                <Text tag='calendartext' color={getDayColor(day, today, clickStart, clickEnd)}  className={clsx(styles.dayText)} >
+                <Text tag="calendar_16" color={textColor} className={clsx(styles.dayText)}>
                   {day.day}
                 </Text>
               </div>
-            )
+            );
           })}
         </div>
       ))}
-
     </div>
-  )
+  );
 }

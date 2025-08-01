@@ -1,6 +1,6 @@
 import { style } from '@vanilla-extract/css';
-import { vars } from '@shared/styles/theme.css';
 import { recipe } from '@vanilla-extract/recipes';
+import { vars } from '@shared/styles/theme.css';
 
 export const container = style({
   display: 'inline-flex',
@@ -11,8 +11,8 @@ export const container = style({
   borderRadius: '15px',
 
   background: vars.color.white,
-
-  boxShadow: `0px 12px 16px -4px ${vars.color.calendarborder1}, 0px 4px 6px -2px ${vars.color.calendarborder2}`,
+  fontFamily: 'Roboto',
+  boxShadow: `0px 12px 16px -4px ${vars.color.gray0}, 0px 4px 6px -2px ${vars.color.gray0}`,
 });
 
 export const header = style({
@@ -31,8 +31,20 @@ export const monthMove = style({
 });
 
 export const arrow = style({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+
   padding: '0.8rem',
   cursor: 'pointer',
+  width: '24px',
+  height: '24px',
+
+  borderRadius: '50%',
+  transition: 'background-color 0.2s',
+  ':hover': {
+    backgroundColor: vars.color.blue0,
+  },
 });
 
 export const weekdayContainer = style({
@@ -41,13 +53,7 @@ export const weekdayContainer = style({
   gap: '1.2rem',
 });
 
-export const calendarTexts = style({
-  fontFamily: 'Roboto',
-});
-
 export const weekdayItem = style({
-  fontFamily: 'Roboto',
-
   textAlign: 'center',
   width: '3.2rem',
 });
@@ -76,27 +82,35 @@ export const dateItem = recipe({
     isToday: {
       True: {
         borderRadius: '99px',
-        background: vars.color.isToday,
+        background: vars.color.gray2,
       },
       default: {},
     },
-    isSelected: {
+    isHighlighted: {
       True: {
         borderRadius: '99px',
-        background: vars.color.calendarText,
-      },
-      default: {},
-    },
-    isInRange: {
-      True: {
-        borderRadius: '99px',
-        background: vars.color.calendarText,
+        background: vars.color.baroBlue,
       },
       default: {},
     },
   },
 });
 
-export const dayText = style({
-  transform: 'translateY(1px)',
+export const dayText = recipe({
+  base: {
+    transform: 'translateY(1px)',
+  },
+  variants: {
+    color: {
+      white: {
+        color: vars.color.white,
+      },
+      isMonth: {
+        color: vars.color.gray4,
+      },
+      notMonth: {
+        color: vars.color.gray1,
+      },
+    },
+  },
 });
