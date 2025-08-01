@@ -6,6 +6,7 @@ import {
   endOfWeek,
   isAfter,
   isWithinInterval,
+  isSameDay,
 } from 'date-fns';
 import type {
   DateArrayProps,
@@ -57,6 +58,7 @@ export function getDateStatus(
   const isSelected = dayDateString === clickStart.toDateString();
   const isInRangeSelected = clickEnd && isInRange(day.date, clickStart, clickEnd);
   const isHighlighted = isToday || isSelected || isInRangeSelected;
+  const isLasted = !isAfter(day.date, today) && !isSameDay(day.date, today);
 
   return {
     isToday,
@@ -64,6 +66,7 @@ export function getDateStatus(
     isInRangeSelected,
     isHighlighted,
     isCurrentMonth: day.isCurrentMonth,
+    isLasted,
   };
 }
 
@@ -74,6 +77,7 @@ export function getDateStyles(dateStatus: ReturnType<typeof getDateStatus>) {
 
   return {
     dateItemClass: styles.dateItem({
+      isLasted: dateStatus.isLasted ? 'True' : 'default',
       isToday: dateStatus.isToday ? 'True' : 'default',
       isHighlighted: isHighlighted ? 'True' : 'default',
     }),
