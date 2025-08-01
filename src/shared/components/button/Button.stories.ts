@@ -14,17 +14,12 @@ const meta: Meta<typeof Button> = {
         BUTTON_VARIANTS.ENABLED,
         BUTTON_VARIANTS.DISABLED,
         BUTTON_VARIANTS.WHITE,
-        BUTTON_VARIANTS.OUTLINED
+        BUTTON_VARIANTS.OUTLINED,
       ],
     },
     size: {
       control: { type: 'radio' },
-      options: [
-        BUTTON_SIZES.LONG,
-        BUTTON_SIZES.SHORT,
-        BUTTON_SIZES.CATEGORY,
-        BUTTON_SIZES.SMALL
-      ],
+      options: [BUTTON_SIZES.LONG, BUTTON_SIZES.SHORT, BUTTON_SIZES.CATEGORY, BUTTON_SIZES.SMALL],
     },
     text: { control: 'text' },
     onClick: { action: 'clicked' },
@@ -94,7 +89,7 @@ export const ShortButton3: Story = {
     variant: 'enabled',
     size: 'short',
     text: '탈퇴하기',
-    backgroundColor: vars.color.red0,
+    backgroundColor: vars.color.red,
   },
   name: 'Short Enabled Button',
 };

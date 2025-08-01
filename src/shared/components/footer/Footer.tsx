@@ -8,6 +8,10 @@ interface FooterProps {
 }
 
 export default function Footer({ selectedMenu, handleMenu }: FooterProps) {
+  const handleMenuClick = (id: string) => {
+    handleMenu(id);
+  };
+
   return (
     <div className={styles.footerWrapper}>
       {MENUS.map(menu => {
@@ -18,7 +22,7 @@ export default function Footer({ selectedMenu, handleMenu }: FooterProps) {
           <button
             key={menu.id}
             type="button"
-            onClick={() => handleMenu(menu.id)}
+            onClick={() => handleMenuClick(menu.id)}
             className={styles.menuWrapper}
           >
             {iconToRender}

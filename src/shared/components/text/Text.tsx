@@ -21,6 +21,7 @@ interface TextProps extends HTMLAttributes<HTMLParagraphElement> {
     | 'body_10'
     | 'body_12'
     | 'body_14'
+    | 'body_15'
     | 'body_16'
     | 'body_17'
     | 'body_thin_14'
@@ -41,8 +42,8 @@ interface TextProps extends HTMLAttributes<HTMLParagraphElement> {
     | 'blue3'
     | 'blue4'
     | 'baroBlue'
-    | 'yellow0'
-    | 'yellow1';
+    | 'red'
+    | 'yellow';
 }
 
 export default function Text({
@@ -53,8 +54,8 @@ export default function Text({
   ...props
 }: TextProps) {
   return (
-    <p className={clsx(className, textStyle({ tag, color }))} {...props}>
+    <span className={clsx(className, textStyle({ tag, color }))} {...props}>
       {children}
-    </p>
+    </span>
   );
 }

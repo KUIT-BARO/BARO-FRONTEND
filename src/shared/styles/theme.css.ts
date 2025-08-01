@@ -19,10 +19,8 @@ export const vars = createGlobalTheme(':root', {
     blue4: '#D6E6FA',
     baroBlue: '#5175FF',
 
-    yellow0: '#FB0',
-    yellow1: '#FFFBDE',
-
-    red0: '#FF6467',
+    red: '#FF6467',
+    yellow: '#FFE864',
   },
 
   font: {
@@ -45,6 +43,7 @@ export const vars = createGlobalTheme(':root', {
     body_10: { fontSize: '1.0rem', fontWeight: '500', lineHeight: '140%' },
     body_12: { fontSize: '1.2rem', fontWeight: '500', lineHeight: '140%' },
     body_14: { fontSize: '1.4rem', fontWeight: '500', lineHeight: '140%' },
+    body_15: { fontSize: '1.5rem', fontWeight: '500', lineHeight: '140%' },
     body_16: { fontSize: '1.6rem', fontWeight: '500', lineHeight: '140%' },
     body_17: { fontSize: '1.7rem', fontWeight: '500', lineHeight: '140%' },
 
