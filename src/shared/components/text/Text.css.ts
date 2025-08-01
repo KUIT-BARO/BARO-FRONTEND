@@ -1,5 +1,5 @@
 import { recipe } from '@vanilla-extract/recipes';
-import { vars } from '@styles/theme.css';
+import { vars } from '@shared/styles/theme.css';
 
 export const textStyle = recipe({
   variants: {
@@ -31,7 +31,7 @@ export const textStyle = recipe({
       body_thin_16: vars.font.body_thin_16,
       body_thin_20: vars.font.body_thin_20,
 
-      calendartext: vars.font.calendartext,
+      calendar_16: vars.font.calendar_16,
     },
     color: {
       black: { color: vars.color.black },
