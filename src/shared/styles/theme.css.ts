@@ -13,31 +13,19 @@ export const vars = createGlobalTheme(':root', {
     gray5: '#121212',
 
     blue0: '#F4F8FB',
-    blue1: ' #7BB2FF',
+    blue1: '#7BB2FF',
     blue2: '#6699FF',
     blue3: '#708AFF',
     blue4: '#EDF1FF',
+    blue5: '#D7DEF7',
     baroBlue: '#5175FF',
 
-    red0: '#FF6467',
-    borderline: '#D7DEF7',
-
+    yellow0: '#FFFBDE',
     yellow1: '#FB0',
-    yellow2: '#FFFBDE',
 
+    red0: '#FF6467',
     red1: '#FF6467',
     red2: '#F9D7D8',
-
-    calendarborder1: '#10182814',
-    calendarborder2: '#10182808',
-
-    dayText: '#BCCAD9',
-    calendarText: '#3949AB',
-
-    notMonth: '#90A4AE',
-    isMonth: '#546E7A',
-
-    isToday: '#BCCAD9',
   },
 
   font: {
@@ -67,6 +55,6 @@ export const vars = createGlobalTheme(':root', {
     body_thin_16: { fontSize: '1.6rem', fontWeight: '400', lineHeight: '140%' },
     body_thin_20: { fontSize: '2.0rem', fontWeight: '400', lineHeight: '140%' },
 
-    calendartext: { fontSize: '1.6rem', fontWeight: '400', lineHeight: '1' },
+    calendar_16: { fontSize: '1.6rem', fontWeight: '400', lineHeight: '100%' },
   },
 });

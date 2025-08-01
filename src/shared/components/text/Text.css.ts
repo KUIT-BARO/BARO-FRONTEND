@@ -1,5 +1,5 @@
 import { recipe } from '@vanilla-extract/recipes';
-import { vars } from '@styles/theme.css';
+import { vars } from '@shared/styles/theme.css';
 
 export const textStyle = recipe({
   variants: {
@@ -30,7 +30,7 @@ export const textStyle = recipe({
       body_thin_16: vars.font.body_thin_16,
       body_thin_20: vars.font.body_thin_20,
 
-      calendartext: vars.font.calendartext,
+      calendar_16: vars.font.calendar_16,
     },
     color: {
       black: { color: vars.color.black },
@@ -49,25 +49,14 @@ export const textStyle = recipe({
       blue3: { color: vars.color.blue3 },
       blue4: { color: vars.color.blue4 },
       baroBlue: { color: vars.color.baroBlue },
-      borderline: { color: vars.color.borderline },
+      blue5: { color: vars.color.blue5 },
 
       red0: { color: vars.color.red0 },
       red1: { color: vars.color.red1 },
       red2: { color: vars.color.red2 },
 
+      yellow0: { color: vars.color.yellow0 },
       yellow1: { color: vars.color.yellow1 },
-      yellow2: { color: vars.color.yellow2 },
-
-      calendarborder1: { color: vars.color.calendarborder1 },
-      calendarborder2: { color: vars.color.calendarborder2 },
-
-      dayText: { color: vars.color.dayText },
-      calendarText: { color: vars.color.calendarText },
-
-      notMonth: { color: vars.color.notMonth },
-      isMonth: { color: vars.color.isMonth },
-
-      isToday: { color: vars.color.isToday },
     },
   },
 });

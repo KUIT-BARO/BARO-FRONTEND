@@ -26,7 +26,7 @@ interface TextProps extends HTMLAttributes<HTMLParagraphElement> {
     | 'body_thin_14'
     | 'body_thin_16'
     | 'body_thin_20'
-    | 'calendartext';
+    | 'calendar_16';
   color?:
     | 'black'
     | 'white'
@@ -40,21 +40,14 @@ interface TextProps extends HTMLAttributes<HTMLParagraphElement> {
     | 'blue1'
     | 'blue2'
     | 'blue3'
-    | 'baroBlue'
-    | 'red0'
     | 'blue4'
-    | 'borderline'
+    | 'blue5'
+    | 'baroBlue'
+    | 'yellow0'
     | 'yellow1'
-    | 'yellow2'
+    | 'red0'
     | 'red1'
-    | 'red2'
-    | 'calendarborder1'
-    | 'calendarborder2'
-    | 'dayText'
-    | 'calendarText'
-    | 'notMonth'
-    | 'isMonth'
-    | 'isToday';
+    | 'red2';
 }
 
 export default function Text({
