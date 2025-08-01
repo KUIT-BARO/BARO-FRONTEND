@@ -11,6 +11,7 @@ import type {
   DateArrayProps,
   DateArrayAnswer,
 } from '@shared/components/calendar/types/Calendar.type';
+import * as styles from '@shared/components/calendar/Calendar.css';
 
 export function DateArray({ date }: DateArrayProps): DateArrayAnswer[][] {
   const startMonth = startOfMonth(date);
@@ -63,5 +64,19 @@ export function getDateStatus(
     isInRangeSelected,
     isHighlighted,
     isCurrentMonth: day.isCurrentMonth,
+  };
+}
+
+export function getDateStyles(dateStatus: ReturnType<typeof getDateStatus>) {
+  const isHighlighted = dateStatus.isSelected || dateStatus.isInRangeSelected;
+  const textColor: 'white' | 'gray4' | 'gray1' =
+    isHighlighted || dateStatus.isToday ? 'white' : dateStatus.isCurrentMonth ? 'gray4' : 'gray1';
+
+  return {
+    dateItemClass: styles.dateItem({
+      isToday: dateStatus.isToday ? 'True' : 'default',
+      isHighlighted: isHighlighted ? 'True' : 'default',
+    }),
+    textColor,
   };
 }
