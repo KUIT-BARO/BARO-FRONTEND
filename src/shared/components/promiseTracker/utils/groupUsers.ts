@@ -1,15 +1,20 @@
-import type { User } from '@shared/components/promiseTracker/types';
+import type { User } from '@shared/components/promiseTracker/types/user';
 
-export interface UserGroups {
-  selected: User[];
-  unselected: User[];
-  halfSelected: User[];
+export interface UserGroup {
+  progress: number;
+  users: User[];
 }
 
-export function groupUsersByProgress(users: User[]): UserGroups {
-  return {
-    selected: users.filter(user => user.suggestionProgress === 100),
-    unselected: users.filter(user => user.suggestionProgress === 0),
-    halfSelected: users.filter(user => user.suggestionProgress > 0 && user.suggestionProgress < 100),
-  };
+export function groupUsersByProgress(users: User[]): UserGroup[] {
+  const groupMap = new Map<number, User[]>();
+
+  for (const user of users) {
+    const progress = user.suggestionProgress;
+    const currentUsers = groupMap.get(progress) ?? [];
+    groupMap.set(progress, [...currentUsers, user]);
+  }
+
+  return Array.from(groupMap.entries())
+    .map(([progress, users]) => ({ progress, users }))
+    .sort((a, b) => a.progress - b.progress);
 }

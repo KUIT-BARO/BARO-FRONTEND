@@ -24,20 +24,10 @@ export const Default: Story = {
     users: [
       { userId: 1, avatarType: 'DOG', isHost: true, suggestionProgress: 100 },
       { userId: 2, avatarType: 'MAN', isHost: false, suggestionProgress: 50 },
-      { userId: 3, avatarType: 'WOMAN', isHost: false, suggestionProgress: 0 },
+      { userId: 3, avatarType: 'MAN', isHost: false, suggestionProgress: 50 },
+      { userId: 4, avatarType: 'MAN', isHost: false, suggestionProgress: 0 },
+      { userId: 5, avatarType: 'USER', isHost: false, suggestionProgress: 100 },
+      { userId: 6, avatarType: 'WOMAN', isHost: false, suggestionProgress: 50 },
     ],
   },
-};
-
-export const Pending: Story = {
-  args: {
-    users: [
-      { userId: 1, avatarType: 'MAN', isHost: true, suggestionProgress: 100 },
-      { userId: 2, avatarType: 'WOMAN', isHost: false, suggestionProgress: 50 },
-      { userId: 3, avatarType: 'DOG', isHost: false, suggestionProgress: 100 },
-      { userId: 4, avatarType: 'USER', isHost: false, suggestionProgress: 0 },
-      { userId: 5, avatarType: 'MAN', isHost: false, suggestionProgress: 50 },
-    ],
-  },
-  name: '약속 현황 (미정)',
 };

@@ -6,7 +6,3 @@ export type User = {
   isHost: boolean;
   suggestionProgress: number;
 };
-
-export type PromiseTrackerProps = {
-  users: User[];
-};

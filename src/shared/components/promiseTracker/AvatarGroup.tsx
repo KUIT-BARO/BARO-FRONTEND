@@ -2,7 +2,7 @@ import { useState } from 'react';
 import * as styles from '@shared/components/promiseTracker/PromiseTracker.css';
 import { IcDog, IcMan, IcWoman, IcUser, IcCrownBlue, IcPinCheck } from '@svg/index';
 import { AVATAR_TYPE, type AvatarType } from '@shared/constant/promise';
-import type { User } from '@shared/components/promiseTracker/types';
+import type { User } from '@shared/components/promiseTracker/types/user';
 
 type UserAvatarProps = {
   user: User;
@@ -27,17 +27,13 @@ const renderAvatar = (avatarType: AvatarType) => {
   }
 };
 
-const renderCrown = () => {
-  return <IcCrownBlue className={styles.crown} />;
-};
-
 function UserAvatar({ user, isExpanded, zIndex }: UserAvatarProps) {
   return (
     <div
       className={styles.avatarContainer({ expanded: isExpanded })}
       style={{ zIndex }}
     >
-      {user.isHost && renderCrown()}
+      {user.isHost && <IcCrownBlue className={styles.crown} />}
       <IcPinCheck className={styles.avatarBackground} />
       {renderAvatar(user.avatarType)}
     </div>

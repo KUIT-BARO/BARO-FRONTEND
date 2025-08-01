@@ -12,10 +12,11 @@ export const trackerWrapper = style({
 
 export const avatarsWrapper = style({
   display: 'flex',
+  position: 'relative',
   justifyContent: 'space-between',
+  minHeight: '4.622rem',
   marginBottom: '0.3rem',
   transition: 'all 0.3s ease',
-  position: 'relative',
 });
 
 export const avatarGroupPositioned = style({
@@ -25,7 +26,6 @@ export const avatarGroupPositioned = style({
 
 export const avatarGroup = style({
   display: 'flex',
-  gap: '0.1rem',
   cursor: 'pointer',
   transition: 'all 0.3s ease',
 });
@@ -79,35 +79,19 @@ export const avatarBackground = style({
   zIndex: 1,
 });
 
-export const progressContainer = recipe({
-  base: {
-    width: '100%',
-    height: '1.4rem',
-    marginBottom: '0.8rem',
-    borderRadius: '24px',
-  },
-  variants: {
-    variant: {
-      PENDING: {
-        backgroundColor: vars.color.blue4,
-      },
-    },
-  },
+export const progressContainer = style({
+  width: '100%',
+  height: '1.4rem',
+  marginBottom: '0.8rem',
+  borderRadius: '24px',
+  backgroundColor: vars.color.blue4,
 });
 
-export const progressBar = recipe({
-  base: {
-    height: '100%',
-    borderRadius: '24px',
-    transition: 'width 0.4s ease',
-  },
-  variants: {
-    variant: {
-      PENDING: {
-        backgroundColor: vars.color.baroBlue,
-      },
-    },
-  },
+export const progressBar = style({
+  height: '100%',
+  borderRadius: '24px',
+  transition: 'width 0.4s ease',
+  backgroundColor: vars.color.baroBlue,
 });
 
 export const counterContainer = style({
@@ -117,12 +101,6 @@ export const counterContainer = style({
   color: vars.color.gray4,
 });
 
-export const selected = recipe({
-  variants: {
-    variant: {
-      PENDING: {
-        color: vars.color.baroBlue,
-      },
-    },
-  },
+export const selected = style({
+  color: vars.color.baroBlue,
 });

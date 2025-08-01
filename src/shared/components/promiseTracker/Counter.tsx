@@ -8,7 +8,7 @@ type CounterProps = {
 export default function Counter({ selectedCount, total }: CounterProps) {
   return (
     <div className={styles.counterContainer}>
-      <span className={styles.selected({ variant: 'PENDING' })}>{selectedCount}</span>
+      <span className={styles.selected}>{selectedCount}</span>
       <span>/</span>
       <span>{total}</span>
     </div>

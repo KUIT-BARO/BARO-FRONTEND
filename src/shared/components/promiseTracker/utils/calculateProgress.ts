@@ -1,4 +1,4 @@
-import type { User } from '@shared/components/promiseTracker/types';
+import type { User } from '@shared/components/promiseTracker/types/user';
 
 export function calculateProgress(users: User[]): number {
   const total = users.length;
