@@ -8,7 +8,7 @@ import {
   getDateStyles,
 } from '@shared/components/calendar/utils/CalendarUtils';
 import type { DateArrayAnswer } from '@shared/components/calendar/types/Calendar.type';
-import { format, addMonths, subMonths } from 'date-fns';
+import { format, addMonths, subMonths} from 'date-fns';
 import { week } from '@shared/components/kakaoMap/constant/week';
 import { useDateSelection } from '@shared/components/calendar/hooks/useDateSelection';
 
