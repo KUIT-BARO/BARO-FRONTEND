@@ -45,22 +45,23 @@ export function isInRange(day: Date, start: Date, end: Date | null) {
   return isWithinInterval(day, { start: from, end: to });
 }
 
-export function getDayColor(
+export function getDateStatus(
   day: DateArrayAnswer,
   today: Date,
   clickStart: Date,
   clickEnd: Date | null
 ) {
   const dayDateString = day.date.toDateString();
-  if (dayDateString === today.toDateString() || dayDateString === clickStart.toDateString()) {
-    return 'white';
-  }
-  if (clickEnd && isInRange(day.date, clickStart, clickEnd)) {
-    return 'white';
-  }
-  if (day.isCurrentMonth) {
-    return 'isMonth';
-  }
+  const isToday = dayDateString === today.toDateString();
+  const isSelected = dayDateString === clickStart.toDateString();
+  const isInRangeSelected = clickEnd && isInRange(day.date, clickStart, clickEnd);
+  const isHighlighted = isToday || isSelected || isInRangeSelected;
 
-  return 'notMonth';
+  return {
+    isToday,
+    isSelected,
+    isInRangeSelected,
+    isHighlighted,
+    isCurrentMonth: day.isCurrentMonth,
+  };
 }
