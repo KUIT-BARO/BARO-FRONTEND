@@ -3,7 +3,7 @@ export const ROUTES = {
   LOGIN: '/login',
   MYPAGE: '/mypage',
   SEARCH: '/search',
-  PROMISE_MANAGE: '/promise-manage',
+  PROMISE: '/promise',
   PROMISE_PROPOSAL: '/promise-proposal',
   PROMISE_SELECT: '/promise-select',
   PROMISE_VOTE: '/promise-vote',
