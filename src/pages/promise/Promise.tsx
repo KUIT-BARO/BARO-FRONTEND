@@ -1,34 +1,55 @@
-import Container from '@shared/components/container/container';
+import Container from '@shared/components/container/Container';
 import Header from '@shared/components/header/Header';
 import { IcNavArrow, IcNavX } from '@svg/index';
-import { useNavigate, useParams } from 'react-router-dom';
-import Step1 from './components/Step1';
-import Step2 from './components/Step2';
-import Step3 from './components/Step3';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useState } from 'react';
+import Step1 from './step/Step1';
+import Step2 from './step/Step2';
+import Step3 from './step/Step3';
 import * as styles from './Promise.css';
+import Progress from './components/Progress';
 
 export default function PromiseManage() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const step = searchParams.get('step') || 'PROMISE_NAME';
 
-  const { step } = useParams<{ step: string }>();
+  const [promiseName, setPromiseName] = useState('');
+
+  const STEP_CONFIG = {
+    step1: {
+      name: 'PROMISE_NAME',
+      progress: 33,
+      component: (
+        <Step1 navigate={navigate} promiseName={promiseName} onPromiseNameChange={setPromiseName} />
+      ),
+    },
+    step2: {
+      name: 'PROMISE_DETAIL',
+      progress: 66,
+      component: <Step2 navigate={navigate} />,
+    },
+    step3: {
+      name: 'PROMISE_DEADLINE',
+      progress: 100,
+      component: <Step3 navigate={navigate} />,
+    },
+  };
+
+  const getProgressValue = () => {
+    const currentStep = Object.values(STEP_CONFIG).find(config => config.name === step);
+    return currentStep?.progress || STEP_CONFIG.step1.progress;
+  };
 
   const renderStepContent = () => {
-    switch (step) {
-      case 'PROMISE_NAME':
-        return <Step1 />;
-      case 'PROMISE_DETAIL':
-        return <Step2 />;
-      case 'PROMISE_DEADLINE':
-        return <Step3 />;
-      default:
-        return <Step1 />;
-    }
+    const currentStep = Object.values(STEP_CONFIG).find(config => config.name === step);
+    return currentStep?.component || STEP_CONFIG.step1.component;
   };
 
-  const onClickLeftIcon = () => {
+  const handleClickLeftIcon = () => {
     navigate(-1);
   };
-  const onClickRightIcon = () => {
+  const handleClickRightIcon = () => {
     navigate('/');
   };
 
@@ -37,10 +58,14 @@ export default function PromiseManage() {
       <Header
         leftIcon={IcNavArrow}
         rightIcon={IcNavX}
-        onClickLeftIcon={onClickLeftIcon}
-        onClickRightIcon={onClickRightIcon}
+        onClickLeftIcon={handleClickLeftIcon}
+        onClickRightIcon={handleClickRightIcon}
       />
-      <Container>{renderStepContent()}</Container>
+
+      <Container>
+        <Progress progress={getProgressValue()} />
+        {renderStepContent()}
+      </Container>
     </div>
   );
 }
