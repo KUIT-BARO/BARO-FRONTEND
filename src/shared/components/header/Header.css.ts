@@ -5,8 +5,7 @@ export const headerWrapper = recipe({
   base: {
     display: 'flex',
     justifyContent: 'space-between',
-    alignItems: 'flex-end',
-
+    alignItems: 'center',
     width: '100%',
     height: '9.8rem',
   },
