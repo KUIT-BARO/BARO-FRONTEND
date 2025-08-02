@@ -5,4 +5,5 @@ export const container = style({
   maxWidth: '27rem',
   padding: '0 1.25rem',
   margin: '0 auto',
+  background: 'inherit',
 });
