@@ -5,6 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import Step1 from './components/Step1';
 import Step2 from './components/Step2';
 import Step3 from './components/Step3';
+import * as styles from './Promise.css';
 
 export default function PromiseManage() {
   const navigate = useNavigate();
@@ -13,11 +14,11 @@ export default function PromiseManage() {
 
   const renderStepContent = () => {
     switch (step) {
-      case 'step1':
+      case 'PROMISE_NAME':
         return <Step1 />;
-      case 'step2':
+      case 'PROMISE_DETAIL':
         return <Step2 />;
-      case 'step3':
+      case 'PROMISE_DEADLINE':
         return <Step3 />;
       default:
         return <Step1 />;
@@ -32,7 +33,7 @@ export default function PromiseManage() {
   };
 
   return (
-    <>
+    <div className={styles.promiseWrapper}>
       <Header
         leftIcon={IcNavArrow}
         rightIcon={IcNavX}
@@ -40,6 +41,6 @@ export default function PromiseManage() {
         onClickRightIcon={onClickRightIcon}
       />
       <Container>{renderStepContent()}</Container>
-    </>
+    </div>
   );
 }
