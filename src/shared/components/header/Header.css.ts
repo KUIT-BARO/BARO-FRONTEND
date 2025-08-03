@@ -6,6 +6,7 @@ export const headerWrapper = recipe({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
+
     width: '100%',
     height: '9.8rem',
   },
