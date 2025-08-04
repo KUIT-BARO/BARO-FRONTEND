@@ -2,7 +2,7 @@ import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 import { vars } from '@shared/styles/theme.css';
 
-export const searchBarWrapper = recipe({
+export const inputBarWrapper = recipe({
   base: {
     display: 'flex',
     alignItems: 'center',
@@ -32,13 +32,13 @@ export const searchBarWrapper = recipe({
   },
 });
 
-export const searchIcon = style({
+export const leftIcon = style({
   width: '2.4rem',
   height: '2.4rem',
   marginRight: '1.2rem',
 });
 
-export const searchInput = recipe({
+export const textInput = recipe({
   base: {
     width: '100%',
     border: 'none',

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import * as styles from '@shared/components/inputBar/InputBar.css';
 import { IcSearch, IcScope, IcPinLocGray, IcPersonWhite, IcLockWhite } from '@svg/index';
 
-interface SearchBarProps {
+interface InputBarProps {
   leftIcon?: 'search' | 'scope' | 'location' | 'email' | 'password' | 'none';
   placeholder?: string;
   hasBackground?: boolean;
@@ -20,7 +20,7 @@ export default function InputBar({
   showMaxLength = false,
   maxLength,
   onSearch,
-}: SearchBarProps ) {
+}: InputBarProps) {
   const [inputValue, setInputValue] = useState('');
 
   const iconMap = {
@@ -49,14 +49,14 @@ export default function InputBar({
   };
 
   const getWrapperClass = () => {
-    return styles.searchBarWrapper({
+    return styles.inputBarWrapper({
       hasBackground,
       backgroundColor: hasBackground ? backgroundColor : undefined,
     });
   };
 
   const getInputClass = () => {
-    return styles.searchInput({
+    return styles.textInput({
       hasBackground,
       backgroundColor: hasBackground ? backgroundColor : undefined,
     });
@@ -64,8 +64,8 @@ export default function InputBar({
 
   const renderIcon = () => {
     if (leftIcon === 'none') return null;
-    const IconComponent = iconMap[leftIcon];
-    return IconComponent ? <IconComponent className={styles.searchIcon} /> : null;
+    const Icon = iconMap[leftIcon];
+    return Icon ? <Icon className={styles.leftIcon} /> : null;
   };
 
   return (
