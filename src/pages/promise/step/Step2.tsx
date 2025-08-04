@@ -2,12 +2,9 @@ import Text from '@shared/components/text/Text';
 import * as styles from './Step.css';
 import Button from '@shared/components/button/Button';
 import { vars } from '@shared/styles/theme.css';
+import type { StepProps } from '../types/Step';
 
-interface Step2Props {
-  navigate: (path: string) => void;
-}
-
-export default function Step2({ navigate }: Step2Props) {
+export default function Step2({ navigate, formData, handleChange, error, isValid }: StepProps) {
   const handleNextBtn = () => {
     navigate('/promise?step=PROMISE_DEADLINE');
   };
@@ -20,6 +17,12 @@ export default function Step2({ navigate }: Step2Props) {
             조정 가능한 날짜 범위를 지정해주세요
           </Text>
         </div>
+        <input
+          type="date"
+          name="suggestedStartDate"
+          value={formData.suggestedStartDate}
+          onChange={handleChange}
+        />
       </section>
       <section>
         <div className={styles.textWrapper}>
@@ -28,6 +31,12 @@ export default function Step2({ navigate }: Step2Props) {
             친구들과 함께 할 장소를 제안해보세요
           </Text>
         </div>
+        <input
+          type="date"
+          name="suggestedEndDate"
+          value={formData.suggestedEndDate}
+          onChange={handleChange}
+        />
       </section>
       <div className={styles.buttonWrapper}>
         <Button

@@ -1,10 +1,8 @@
 import Text from '@shared/components/text/Text';
 import * as styles from './Step.css';
+import type { StepProps } from '../types/Step';
 
-interface Step3Props {
-  navigate: (path: string) => void;
-}
-export default function Step3({ navigate }: Step3Props) {
+export default function Step3({ navigate, formData, handleChange, error, isValid }: StepProps) {
   return (
     <div className={styles.stepWrapper}>
       <section className={styles.stepSectionWrapper}>
@@ -14,6 +12,12 @@ export default function Step3({ navigate }: Step3Props) {
             약속 마감일을 설정해주세요.
           </Text>
         </div>
+        <input
+          type="date"
+          name="promiseDeadline"
+          value={formData.promiseDeadline}
+          onChange={handleChange}
+        />
       </section>
     </div>
   );

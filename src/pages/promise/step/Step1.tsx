@@ -2,17 +2,9 @@ import Text from '@shared/components/text/Text';
 import * as styles from './Step.css';
 import Button from '@shared/components/button/Button';
 import { vars } from '@shared/styles/theme.css';
+import type { StepProps } from '../types/Step';
 
-interface Step1Props {
-  promiseName: string;
-  onPromiseNameChange: (name: string) => void;
-  navigate: (path: string) => void;
-}
-
-export default function Step1({ promiseName, onPromiseNameChange, navigate }: Step1Props) {
-  console.log(promiseName);
-  console.log(onPromiseNameChange);
-
+export default function Step1({ navigate, formData, handleChange, error, isValid }: StepProps) {
   const handleNextBtn = () => {
     navigate('/promise?step=PROMISE_DETAIL');
   };
@@ -25,10 +17,30 @@ export default function Step1({ promiseName, onPromiseNameChange, navigate }: St
             약속 이름을 입력해주세요.
           </Text>
         </div>
+        <input
+          type="text"
+          placeholder="약속 이름을 입력해주세요."
+          name="promiseName"
+          value={formData.promiseName}
+          onChange={handleChange}
+          style={{
+            width: '100%',
+            padding: '12px 16px',
+            border: '1px solid #e0e0e0',
+            borderRadius: '8px',
+            fontSize: '16px',
+            outline: 'none',
+          }}
+        />
+        {error && (
+          <Text tag="body_bold_13" color="red1">
+            {error}
+          </Text>
+        )}
       </section>
       <div className={styles.buttonWrapper}>
         <Button
-          variant={'enabled'}
+          variant={isValid ? 'enabled' : 'disabled'}
           size="long"
           text="다음"
           onClick={handleNextBtn}
