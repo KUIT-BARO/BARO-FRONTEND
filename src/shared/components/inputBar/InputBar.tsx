@@ -80,7 +80,7 @@ export default function InputBar({
         onChange={handleInputChange}
         onKeyDown={handleKeyDown}
       />
-      {showMaxLength && (
+      {maxLength && showMaxLength && (
         <span className={styles.characterCount}>
           {inputValue.length}/{maxLength}
         </span>
