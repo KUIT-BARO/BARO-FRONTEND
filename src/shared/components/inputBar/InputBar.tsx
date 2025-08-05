@@ -10,7 +10,7 @@ interface InputBarProps {
   showMaxLength?: boolean;
   maxLength?: number;
   value?: string;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (_e: React.ChangeEvent<HTMLInputElement>) => void;
   props?: React.InputHTMLAttributes<HTMLInputElement>;
 }
 
