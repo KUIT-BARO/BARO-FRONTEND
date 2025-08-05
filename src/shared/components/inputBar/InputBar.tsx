@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import * as styles from '@shared/components/inputBar/InputBar.css';
 import { IcSearch, IcScope, IcPinLocGray, IcPersonWhite, IcLockWhite } from '@svg/index';
 
@@ -9,7 +9,8 @@ interface InputBarProps {
   backgroundColor?: 'gray6' | 'blue6';
   showMaxLength?: boolean;
   maxLength?: number;
-  onSearch?: (_query: string) => void;
+  value?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   props?: React.InputHTMLAttributes<HTMLInputElement>;
 }
 
@@ -20,11 +21,10 @@ export default function InputBar({
   backgroundColor = 'gray6',
   showMaxLength = false,
   maxLength,
-  onSearch,
+  value = '',
+  onChange,
   props,
 }: InputBarProps) {
-  const [inputValue, setInputValue] = useState('');
-
   const iconMap = {
     search: IcSearch,
     scope: IcScope,
@@ -32,25 +32,6 @@ export default function InputBar({
     email: IcPersonWhite,
     password: IcLockWhite,
   } as const;
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      const target = e.target as HTMLInputElement;
-      if (onSearch) {
-        onSearch(target.value);
-      }
-      target.value = '';
-      setInputValue('');
-    }
-  };
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    if (maxLength && value.length > maxLength) {
-      return;
-    }
-    setInputValue(value);
-  };
 
   const getWrapperClass = () => {
     return styles.inputBarWrapper({
@@ -80,14 +61,13 @@ export default function InputBar({
         type="text"
         placeholder={placeholder}
         maxLength={maxLength}
-        value={inputValue}
-        onChange={handleInputChange}
-        onKeyDown={handleKeyDown}
+        value={value}
+        onChange={onChange}
         {...props}
       />
       {maxLength && showMaxLength && (
         <span className={styles.characterCount}>
-          {inputValue.length}/{maxLength}
+          {value.length}/{maxLength}
         </span>
       )}
     </div>
