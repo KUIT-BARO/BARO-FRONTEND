@@ -1,7 +1,7 @@
-import type { LatLng } from '@shared/components/kakaoMap/types/latLng';
+import type { Place } from '@shared/components/kakaoMap/types/latLng';
 
 function usePlaceSearch() {
-  const searchPlace = (placeName: string): Promise<LatLng[]> => {
+  const searchPlace = (placeName: string): Promise<Place[]> => {
     return new Promise((resolve, reject) => {
       if (!window.kakao || !window.kakao.maps) {
         return reject(new Error('Kakao Maps is not loaded'));
@@ -11,13 +11,16 @@ function usePlaceSearch() {
 
       ps.keywordSearch(placeName, (result, status) => {
         if (status === window.kakao.maps.services.Status.OK) {
-          const places = result.map((place: { x: string; y: string }) => ({
+          console.log('검색 결과:', result);
+          const places = result.map((place: any) => ({
+            place_name: place.place_name,
+            address_name: place.address_name,
             lng: parseFloat(place.x),
             lat: parseFloat(place.y),
           }));
           resolve(places);
         } else {
-          reject(new Error('Place not found'));
+          resolve([]);
         }
       });
     });
