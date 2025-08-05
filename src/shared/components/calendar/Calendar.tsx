@@ -46,8 +46,8 @@ export default function Calendar() {
           </Text>
         ))}
       </div>
-      {dayArray.map((week, index) => (
-        <div key={week[index].date.toDateString()} className={styles.dateRow}>
+      {dayArray.map((week) => (
+        <div key={week[0].date.toDateString()} className={styles.dateRow}>
           {week.map(day => {
             const dateStatus = getDateStatus(day, todayDate, clickStart, clickEnd);
             const { dateItemClass, textColor } = getDateStyles(dateStatus);
