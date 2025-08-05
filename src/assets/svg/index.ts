@@ -61,3 +61,4 @@ export { default as IcSearchBlack } from '@svg/ic_search_black.svg?react';
 export { default as IcPersonBlack } from '@svg/ic_person_black.svg?react';
 export { default as IcClockBlack } from '@svg/ic_clock_black.svg?react';
 export { default as IcArrowRight } from '@svg/ic_arrow_right.svg?react';
+export { default as IcScope } from '@svg/ic_scope.svg?react';
