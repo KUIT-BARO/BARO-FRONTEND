@@ -10,6 +10,7 @@ interface InputBarProps {
   showMaxLength?: boolean;
   maxLength?: number;
   onSearch?: (_query: string) => void;
+  props?: React.InputHTMLAttributes<HTMLInputElement>;
 }
 
 export default function InputBar({
@@ -20,6 +21,7 @@ export default function InputBar({
   showMaxLength = false,
   maxLength,
   onSearch,
+  props,
 }: InputBarProps) {
   const [inputValue, setInputValue] = useState('');
 
@@ -34,7 +36,9 @@ export default function InputBar({
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       const target = e.target as HTMLInputElement;
-      if (onSearch) { onSearch(target.value); }
+      if (onSearch) {
+        onSearch(target.value);
+      }
       target.value = '';
       setInputValue('');
     }
@@ -79,6 +83,7 @@ export default function InputBar({
         value={inputValue}
         onChange={handleInputChange}
         onKeyDown={handleKeyDown}
+        {...props}
       />
       {maxLength && showMaxLength && (
         <span className={styles.characterCount}>
@@ -86,5 +91,5 @@ export default function InputBar({
         </span>
       )}
     </div>
-  )
+  );
 }
