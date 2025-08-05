@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Stars } from './Stars';
+import  Stars from '@shared/components/stars/Stars';
 
 const meta: Meta<typeof Stars> = {
   title: 'Components/Stars',
