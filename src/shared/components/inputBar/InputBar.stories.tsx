@@ -32,9 +32,13 @@ const meta: Meta<typeof InputBar> = {
       control: 'boolean',
       description: '입력 최대 길이 표시 여부',
     },
-    onSearch: {
-      action: 'search',
-      description: '',
+    value: {
+      control: 'text',
+      description: '입력값',
+    },
+    onChange: {
+      action: 'changed',
+      description: '입력값 변경 핸들러',
     },
   },
 };
@@ -49,7 +53,7 @@ export const Default: Story = {
     hasBackground: true,
     backgroundColor: 'gray6',
     showMaxLength: false,
-    onSearch: (_query) => alert(_query),
+    value: '',
   },
 };
 
@@ -59,7 +63,7 @@ export const EmailInput: Story = {
     placeholder: '이메일 입력',
     hasBackground: true,
     backgroundColor: 'blue6',
-    onSearch: (_query) => alert(`Email: ${_query}`),
+    value: '',
   },
 };
 
@@ -69,7 +73,7 @@ export const PasswordInput: Story = {
     placeholder: '비밀번호 입력',
     hasBackground: true,
     backgroundColor: 'blue6',
-    onSearch: (_query) => alert(`PW: ${_query}`),
+    value: '',
   },
 };
 
@@ -79,6 +83,5 @@ export const PromiseNameInput: Story = {
     hasBackground: false,
     showMaxLength: true,
     maxLength: 25,
-    onSearch: (_query) => alert(_query),
   },
 };

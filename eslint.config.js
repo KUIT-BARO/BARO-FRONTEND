@@ -1,5 +1,5 @@
 // For more info, see https://github.com/storybookjs/eslint-plugin-storybook#configuration-flat-config-format
-import storybook from "eslint-plugin-storybook";
+import storybook from 'eslint-plugin-storybook';
 
 import js from '@eslint/js';
 import globals from 'globals';
@@ -7,6 +7,7 @@ import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
 import tseslint from 'typescript-eslint';
 import importPlugin from 'eslint-plugin-import';
+import tanstackQuery from '@tanstack/eslint-plugin-query';
 
 const { browser: browserGlobals, node: nodeGlobals } = globals;
 
@@ -29,6 +30,7 @@ export default tseslint.config(
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
       import: importPlugin,
+      '@tanstack/query': tanstackQuery,
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
@@ -52,7 +54,9 @@ export default tseslint.config(
       // 쓸데없는 공백 없애기
       'no-trailing-spaces': 'error',
       'import/newline-after-import': ['error', { count: 1 }],
+      // TanStack Query rules
+      ...tanstackQuery.configs.recommended.rules,
     },
   },
-  storybook.configs["flat/recommended"]
+  storybook.configs['flat/recommended']
 );

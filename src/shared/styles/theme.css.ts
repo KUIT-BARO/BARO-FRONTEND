@@ -57,5 +57,7 @@ export const vars = createGlobalTheme(':root', {
     body_thin_14: { fontSize: '1.4rem', fontWeight: '400', lineHeight: '140%' },
     body_thin_16: { fontSize: '1.6rem', fontWeight: '400', lineHeight: '140%' },
     body_thin_20: { fontSize: '2.0rem', fontWeight: '400', lineHeight: '140%' },
+
+    calendar_16: { fontSize: '1.6rem', fontWeight: '400', lineHeight: '100%' },
   },
 });
