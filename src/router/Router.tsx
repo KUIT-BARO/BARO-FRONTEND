@@ -9,9 +9,6 @@ const Login = lazy(() => import('@pages/logIn/LogIn'));
 const MyPage = lazy(() => import('@pages/myPage/MyPage'));
 const Search = lazy(() => import('@pages/search/Search'));
 const Promise = lazy(() => import('@pages/promise/Promise'));
-const PromiseProposal = lazy(() => import('@pages/promiseProposal/PromiseProposal'));
-const PromiseSelect = lazy(() => import('@pages/promiseSelect/PromiseSelect'));
-const PromiseVote = lazy(() => import('@pages/promiseVote/PromiseVote'));
 const PromiseStatus = lazy(() => import('@pages/promiseStatus/PromiseStatus'));
 
 const router = createBrowserRouter([
@@ -37,18 +34,6 @@ const router = createBrowserRouter([
       {
         path: ROUTES.PROMISE,
         element: <Promise />,
-      },
-      {
-        path: ROUTES.PROMISE_PROPOSAL,
-        element: <PromiseProposal />,
-      },
-      {
-        path: ROUTES.PROMISE_SELECT,
-        element: <PromiseSelect />,
-      },
-      {
-        path: ROUTES.PROMISE_VOTE,
-        element: <PromiseVote />,
       },
       {
         path: ROUTES.PROMISE_STATUS,
