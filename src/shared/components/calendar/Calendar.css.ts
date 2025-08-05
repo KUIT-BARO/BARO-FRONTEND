@@ -79,12 +79,6 @@ export const dateItem = recipe({
     cursor: 'pointer',
   },
   variants: {
-    isLasted: {
-      True: {
-        cursor: 'not-allowed',
-      },
-      default: {},
-    },
     isToday: {
       True: {
         borderRadius: '99px',
