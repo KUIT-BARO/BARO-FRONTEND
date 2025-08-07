@@ -6,4 +6,5 @@ export interface LatLng {
 export interface Place extends LatLng {
   place_name: string;
   address_name: string;
+  isSelected?: boolean;
 }

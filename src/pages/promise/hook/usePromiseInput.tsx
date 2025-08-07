@@ -1,61 +1,47 @@
-import { z } from 'zod';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-
-const dateFormatRegex = z.string().regex(/^\d{4}-\d{2}-\d{2}$/, '날짜를 선택해주세요.');
-
-const promiseSchema = z.object({
-  promiseName: z
-    .string()
-    .min(1, '약속 이름을 입력해주세요')
-    .max(10, '약속 이름은 10자 이하여야 합니다'),
-  suggestedStartDate: dateFormatRegex,
-  suggestedEndDate: dateFormatRegex,
-  suggestedRegion: z.array(z.string()).min(1, '지역을 선택해주세요'),
-  promiseDeadline: dateFormatRegex,
-});
-
-export type PromiseData = z.infer<typeof promiseSchema>;
+import { useDateSelection } from '@shared/components/calendar/hooks/useDateSelection';
+import type { Place } from '@shared/components/kakaoMap/types/latLng';
+import { useState } from 'react';
 
 export default function usePromiseInput() {
-  const {
-    handleSubmit,
-    setValue,
-    trigger,
-    formState: { errors },
-    watch,
-  } = useForm<PromiseData>({
-    resolver: zodResolver(promiseSchema),
-    defaultValues: {
-      promiseName: '',
-      suggestedStartDate: '',
-      suggestedEndDate: '',
-      suggestedRegion: [],
-      promiseDeadline: '',
-    },
-    mode: 'onChange',
-  });
+  const [promiseName, setPromiseName] = useState('');
+  const { dateSelection, handleDateClick } = useDateSelection();
+  const [suggestedRegion, setSuggestedRegion] = useState<Place[]>([]);
+  const [promiseDeadline, setPromiseDeadline] = useState('');
 
-  const formData = watch();
-
-  const onSubmit = (data: PromiseData) => {
-    console.log(data);
+  const onSubmit = () => {
+    console.log('약속 생성 완료:', {
+      promiseName,
+      dateSelection,
+      suggestedRegion,
+      promiseDeadline,
+    });
   };
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    console.log(name, value);
-    setValue(name as keyof PromiseData, value);
-    trigger(name as keyof PromiseData);
+  const handlePlaceNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.value.length > 15) {
+      return;
+    }
+    setPromiseName(event.target.value);
+  };
+
+  const handleDeadlineChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    setPromiseDeadline(value);
+  };
+
+  const handleRegionChange = (places: Place[]) => {
+    setSuggestedRegion(places);
   };
 
   return {
-    formData,
-    errors,
-    setValue,
-    handleChange,
-    handleSubmit,
+    promiseName,
+    dateSelection,
+    suggestedRegion,
+    promiseDeadline,
+    handlePlaceNameChange,
+    handleDeadlineChange,
+    handleRegionChange,
+    handleDateClick,
     onSubmit,
-    trigger,
   };
 }

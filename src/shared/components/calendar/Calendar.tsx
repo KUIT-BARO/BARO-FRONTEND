@@ -8,13 +8,20 @@ import {
   getDateStyles,
 } from '@shared/components/calendar/utils/CalendarUtils';
 import type { DateArrayAnswer } from '@shared/components/calendar/types/Calendar.type';
-import { format, addMonths, subMonths} from 'date-fns';
+import { format, addMonths, subMonths } from 'date-fns';
 import { week } from '@shared/components/kakaoMap/constant/week';
 import { useDateSelection } from '@shared/components/calendar/hooks/useDateSelection';
 
-export default function Calendar() {
-  const { todayDate, currentDate, setCurrentDate, handleDateClick, getSelectedDates } =
-    useDateSelection();
+interface CalendarProps {
+  dateSelection: {
+    suggestedStartDate: string;
+    suggestedEndDate: string | null;
+  };
+  handleDateClick: (date: Date) => void;
+}
+
+export default function Calendar({ dateSelection, handleDateClick }: CalendarProps) {
+  const { todayDate, currentDate, setCurrentDate } = useDateSelection();
 
   const selectedMonthYear = format(currentDate, 'yyyy MMM');
   const dayArray: DateArrayAnswer[][] = DateArray({ date: currentDate });
@@ -25,8 +32,6 @@ export default function Calendar() {
   const handleClickNextMonth = () => {
     setCurrentDate(addMonths(currentDate, 1));
   };
-
-  const { startDate: clickStart, endDate: clickEnd } = getSelectedDates();
 
   return (
     <div className={styles.container}>
@@ -46,9 +51,15 @@ export default function Calendar() {
           </Text>
         ))}
       </div>
-      {dayArray.map((week) => (
+      {dayArray.map(week => (
         <div key={week[0].date.toDateString()} className={styles.dateRow}>
           {week.map(day => {
+            const clickStart = dateSelection.suggestedStartDate
+              ? new Date(dateSelection.suggestedStartDate)
+              : todayDate;
+            const clickEnd = dateSelection.suggestedEndDate
+              ? new Date(dateSelection.suggestedEndDate)
+              : null;
             const dateStatus = getDateStatus(day, todayDate, clickStart, clickEnd);
             const { dateItemClass, textColor } = getDateStyles(dateStatus);
 

@@ -2,12 +2,18 @@ import Text from '@shared/components/text/Text';
 import * as styles from './Step.css';
 import Button from '@shared/components/button/Button';
 import { vars } from '@shared/styles/theme.css';
-import type { StepProps } from '../types/Step';
+import type { Step1Props } from '../types/Step';
+import InputBar from '@shared/components/inputBar/InputBar';
 
-export default function Step1({ navigate, formData, handleChange, error, isValid }: StepProps) {
+export default function Step1({ promiseName, handleChange, navigate }: Step1Props) {
   const handleNextBtn = () => {
     navigate('/promise?step=PROMISE_DETAIL');
   };
+
+  const isFormValid = () => {
+    return promiseName.length > 0 && promiseName.length <= 15;
+  };
+
   return (
     <div className={styles.stepWrapper}>
       <section className={styles.stepSectionWrapper}>
@@ -17,30 +23,23 @@ export default function Step1({ navigate, formData, handleChange, error, isValid
             약속 이름을 입력해주세요.
           </Text>
         </div>
-        <input
-          type="text"
+        <InputBar
           placeholder="약속 이름을 입력해주세요."
-          name="promiseName"
-          value={formData.promiseName}
+          value={promiseName}
           onChange={handleChange}
-          style={{
-            width: '100%',
-            padding: '12px 16px',
-            border: '1px solid #e0e0e0',
-            borderRadius: '8px',
-            fontSize: '16px',
-            outline: 'none',
-          }}
+          hasBackground={false}
+          maxLength={15}
+          showMaxLength={true}
         />
-        {error && (
+        {promiseName.length >= 15 && (
           <Text tag="body_bold_13" color="red1">
-            {error}
+            약속 이름은 15자 이하로 입력해주세요.
           </Text>
         )}
       </section>
       <div className={styles.buttonWrapper}>
         <Button
-          variant={isValid ? 'enabled' : 'disabled'}
+          variant={isFormValid() ? 'enabled' : 'disabled'}
           size="long"
           text="다음"
           onClick={handleNextBtn}
