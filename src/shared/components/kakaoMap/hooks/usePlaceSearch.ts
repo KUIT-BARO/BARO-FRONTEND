@@ -20,8 +20,10 @@ function usePlaceSearch() {
             })
           );
           resolve(places);
-        } else {
+        } else if (status === window.kakao.maps.services.Status.ZERO_RESULT) {
           resolve([]);
+        } else {
+          reject(new Error('Failed to search place'));
         }
       });
     });

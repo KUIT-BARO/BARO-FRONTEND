@@ -39,7 +39,7 @@ export default function PromiseManage() {
         />
       ),
     },
-    [STEP.PROMISE_DETAIL]: {
+    [STEP.PROMISE_DATE]: {
       progress: 50,
       component: (
         <Step2

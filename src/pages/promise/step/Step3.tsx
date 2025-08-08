@@ -26,11 +26,10 @@ const PlaceList = ({ title, places, handlePlaceSelection, errorMessage }: PlaceL
       </Text>
 
       <div className={styles.placeList}>
-        {places.map((place: Place, index) => (
+        {places.map((place: Place) => (
           <div
-            key={index}
+            key={`${place.place_name}-${place.lat}-${place.lng}`}
             className={styles.placeWrapper({ isSelected: place.isSelected || false })}
-            onClick={() => handlePlaceSelection(place)}
           >
             <div className={styles.placeNameWrapper}>
               <Text tag="body_14" color={place.isSelected ? 'blue0' : 'black'}>
@@ -81,6 +80,8 @@ export default function Step3({ navigate, suggestedRegion, handleRegionChange }:
     }));
     setSearchResults(resultsWithSelection);
   };
+  const center =
+    searchResults.length > 0 ? { lat: searchResults[0].lat, lng: searchResults[0].lng } : undefined;
 
   const handlePlaceSelection = (place: Place) => {
     const isAlreadySelected = suggestedRegion.some(p => isSamePlace(p, place));
@@ -122,13 +123,7 @@ export default function Step3({ navigate, suggestedRegion, handleRegionChange }:
                 onKeyDown: handleSearchKeyDown,
               }}
             />
-            <KakaoMap
-              center={
-                searchResults.length > 0
-                  ? { lat: searchResults[0].lat, lng: searchResults[0].lng }
-                  : undefined
-              }
-            />
+            <KakaoMap center={center} />
           </div>
 
           <PlaceList

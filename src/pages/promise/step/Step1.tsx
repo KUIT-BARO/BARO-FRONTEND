@@ -8,11 +8,14 @@ import { STEP } from '../constant/step';
 
 export default function Step1({ promiseName, handlePlaceNameChange, navigate }: Step1Props) {
   const handleNextBtn = () => {
-    navigate(`/promise?step=${STEP.PROMISE_DETAIL}`);
+    if (isFormValid()) {
+      navigate(`/promise?step=${STEP.PROMISE_DATE}`);
+    }
+    return;
   };
 
   const isFormValid = () => {
-    return promiseName.length > 0 && promiseName.length <= 15;
+    return promiseName.trim().length > 0 && promiseName.trim().length <= 15;
   };
 
   return (
