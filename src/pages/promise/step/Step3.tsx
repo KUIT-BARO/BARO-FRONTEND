@@ -125,10 +125,7 @@ export default function Step3({ navigate, suggestedRegion, handleRegionChange }:
             <KakaoMap
               center={
                 searchResults.length > 0
-                  ? {
-                      lat: searchResults[0].lat,
-                      lng: searchResults[0].lng,
-                    }
+                  ? { lat: searchResults[0].lat, lng: searchResults[0].lng }
                   : undefined
               }
             />
