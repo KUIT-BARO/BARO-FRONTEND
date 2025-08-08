@@ -32,7 +32,11 @@ export default function PromiseManage() {
     [STEP.PROMISE_NAME]: {
       progress: 25,
       component: (
-        <Step1 promiseName={promiseName} handleChange={handlePlaceNameChange} navigate={navigate} />
+        <Step1
+          promiseName={promiseName}
+          handlePlaceNameChange={handlePlaceNameChange}
+          navigate={navigate}
+        />
       ),
     },
     [STEP.PROMISE_DETAIL]: {

@@ -28,9 +28,9 @@ const Button = ({ variant, size, text, onClick, backgroundColor }: ButtonProps) 
   const customStyle =
     backgroundColor && variant === BUTTON_VARIANTS.ENABLED
       ? {
-          backgroundColor,
-          ...(textColor && { color: textColor }),
-        }
+        backgroundColor,
+        ...(textColor && { color: textColor }),
+      }
       : {};
 
   return (

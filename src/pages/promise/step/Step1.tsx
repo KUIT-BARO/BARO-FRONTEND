@@ -6,7 +6,7 @@ import type { Step1Props } from '../types/Step';
 import InputBar from '@shared/components/inputBar/InputBar';
 import { STEP } from '../constant/step';
 
-export default function Step1({ promiseName, handleChange, navigate }: Step1Props) {
+export default function Step1({ promiseName, handlePlaceNameChange, navigate }: Step1Props) {
   const handleNextBtn = () => {
     navigate(`/promise?step=${STEP.PROMISE_DETAIL}`);
   };
@@ -27,7 +27,7 @@ export default function Step1({ promiseName, handleChange, navigate }: Step1Prop
         <InputBar
           placeholder="약속 이름을 입력해주세요."
           value={promiseName}
-          onChange={handleChange}
+          onChange={handlePlaceNameChange}
           hasBackground={false}
           maxLength={15}
           showMaxLength={true}

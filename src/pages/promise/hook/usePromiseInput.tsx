@@ -1,6 +1,6 @@
+import React, { useState } from 'react';
 import { useDateSelection } from '@shared/components/calendar/hooks/useDateSelection';
 import type { Place } from '@shared/components/kakaoMap/types/latLng';
-import { useState } from 'react';
 
 export default function usePromiseInput() {
   const [promiseName, setPromiseName] = useState('');

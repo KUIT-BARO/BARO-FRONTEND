@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import Text from '@shared/components/text/Text';
 import * as styles from './Step.css';
 import Button from '@shared/components/button/Button';
@@ -6,14 +7,13 @@ import type { Step3Props } from '../types/Step';
 import InputBar from '@shared/components/inputBar/InputBar';
 import KakaoMap from '@shared/components/kakaoMap/KakaoMap';
 import usePlaceSearch from '@shared/components/kakaoMap/hooks/usePlaceSearch';
-import { useState } from 'react';
 import type { Place } from '@shared/components/kakaoMap/types/latLng';
 import { isSamePlace, updatePlaceSelection } from './utils/placeUtils';
 
 interface PlaceListProps {
   title: string;
   places: Place[];
-  handlePlaceSelection: (place: Place) => void;
+  handlePlaceSelection: (_place: Place) => void;
   errorMessage?: string;
 }
 
@@ -74,16 +74,12 @@ export default function Step3({ navigate, suggestedRegion, handleRegionChange }:
   };
 
   const handleKakaoMapCenter = async (placeName: string) => {
-    try {
-      const results = await searchPlace(placeName).then(res => res.slice(0, 3));
-      const resultsWithSelection = results.map(place => ({
-        ...place,
-        isSelected: suggestedRegion.some(p => isSamePlace(p, place)),
-      }));
-      setSearchResults(resultsWithSelection);
-    } catch (error) {
-      throw error;
-    }
+    const results = await searchPlace(placeName).then(res => res.slice(0, 3));
+    const resultsWithSelection = results.map(place => ({
+      ...place,
+      isSelected: suggestedRegion.some(p => isSamePlace(p, place)),
+    }));
+    setSearchResults(resultsWithSelection);
   };
 
   const handlePlaceSelection = (place: Place) => {

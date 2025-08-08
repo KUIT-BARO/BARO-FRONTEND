@@ -11,13 +11,14 @@ function usePlaceSearch() {
 
       ps.keywordSearch(placeName, (result, status) => {
         if (status === window.kakao.maps.services.Status.OK) {
-          console.log('검색 결과:', result);
-          const places = result.map((place: any) => ({
-            place_name: place.place_name,
-            address_name: place.address_name,
-            lng: parseFloat(place.x),
-            lat: parseFloat(place.y),
-          }));
+          const places = result.map(
+            (place: { place_name: string; address_name: string; x: string; y: string }) => ({
+              place_name: place.place_name,
+              address_name: place.address_name,
+              lng: parseFloat(place.x),
+              lat: parseFloat(place.y),
+            })
+          );
           resolve(places);
         } else {
           resolve([]);

@@ -17,7 +17,7 @@ interface CalendarProps {
     suggestedStartDate: string;
     suggestedEndDate: string | null;
   };
-  handleDateClick: (date: Date) => void;
+  handleDateClick: (_date: Date) => void;
 }
 
 export default function Calendar({ dateSelection, handleDateClick }: CalendarProps) {
