@@ -1,15 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import PromisisDetail from '@shared/components/promisisDetail/PromisisDetail';
+import PromisesDetail from '@shared/components/promisesDetail/PromisesDetail';
 
-const meta: Meta<typeof PromisisDetail> = {
-  title: 'Components/PromisisDetail',
-  component: PromisisDetail,
+const meta: Meta<typeof PromisesDetail> = {
+  title: 'Components/PromisesDetail',
+  component: PromisesDetail,
   tags: ['autodocs'],
 };
 
 export default meta;
 
-type Story = StoryObj<typeof PromisisDetail>;
+type Story = StoryObj<typeof PromisesDetail>;
 
 export const Pending: Story = {
   args: {

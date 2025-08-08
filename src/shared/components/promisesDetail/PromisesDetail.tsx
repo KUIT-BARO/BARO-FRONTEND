@@ -1,11 +1,11 @@
-import * as styles from '@shared/components/promisisDetail/PromisisDetail.css';
-import type { PromisisDetailProps } from '@shared/components/promiseContainer/types/PromiseContainer.type';
-import getStatusSet from '@shared/components/promisisDetail/utils/getStatusSet';
-import getStatusLines from '@shared/components/promisisDetail/utils/getStatusLines';
+import * as styles from '@shared/components/promisesDetail/PromisesDetail.css';
+import type { PromisesDetailProps } from '@shared/components/promiseContainer/types/PromiseContainer.type';
+import getStatusSet from '@shared/components/promisesDetail/utils/getStatusSet';
+import getStatusLines from '@shared/components/promisesDetail/utils/getStatusLines';
 import { PROMISE_STATUS_CONFIG } from '@shared/constant/promiseStatus';
 import Text from '@shared/components/text/Text';
 
-export default function PromisisDetail(props: PromisisDetailProps) {
+export default function PromisesDetail(props: PromisesDetailProps) {
   const { vote: VoteIcon, pin: PinIcon, date: DateIcon } = getStatusSet()[props.status];
   const { firstLine, secondLine, thirdLine } = getStatusLines(props);
 

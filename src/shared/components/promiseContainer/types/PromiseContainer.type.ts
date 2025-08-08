@@ -1,11 +1,11 @@
 import { PROMISE_STATUS } from '@shared/constant/promiseStatus';
 
-interface BasePromisis {
+interface BasePromises {
   promiseId: number;
   promiseName: string;
 }
 
-export interface PendingPromise extends BasePromisis {
+export interface PendingPromise extends BasePromises {
   status: typeof PROMISE_STATUS.PENDING;
   untilVoteDate: number;
   suggestedRegion: string;
@@ -14,7 +14,7 @@ export interface PendingPromise extends BasePromisis {
   showStatusBadge?: boolean;
 }
 
-export interface VotingPromise extends BasePromisis {
+export interface VotingPromise extends BasePromises {
   status: typeof PROMISE_STATUS.VOTING;
   untilVoteEndDate: number;
   suggestedRegion: string;
@@ -23,7 +23,7 @@ export interface VotingPromise extends BasePromisis {
   showStatusBadge?: boolean;
 }
 
-export interface ConfirmedPromise extends BasePromisis {
+export interface ConfirmedPromise extends BasePromises {
   status: typeof PROMISE_STATUS.CONFIRMED;
   fixedDate: string;
   placeName: string;
@@ -31,4 +31,4 @@ export interface ConfirmedPromise extends BasePromisis {
   showStatusBadge?: boolean;
 }
 
-export type PromisisDetailProps = PendingPromise | VotingPromise | ConfirmedPromise;
+export type PromisesDetailProps = PendingPromise | VotingPromise | ConfirmedPromise;
