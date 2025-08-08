@@ -1,10 +1,15 @@
 import React from 'react';
 import * as styles from '@shared/components/container/Container.css';
+import { clsx } from 'clsx';
 
-interface ContainerProps {
+interface ContainerProps extends React.HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode;
 }
 
-export default function Container({ children }: ContainerProps) {
-  return <div className={styles.container}>{children}</div>;
+export default function Container({ children, className, ...props }: ContainerProps) {
+  return (
+    <div className={clsx(styles.container, className)} {...props}>
+      {children}
+    </div>
+  );
 }
