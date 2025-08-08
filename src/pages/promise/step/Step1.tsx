@@ -4,10 +4,11 @@ import Button from '@shared/components/button/Button';
 import { vars } from '@shared/styles/theme.css';
 import type { Step1Props } from '../types/Step';
 import InputBar from '@shared/components/inputBar/InputBar';
+import { STEP } from '../constant/step';
 
 export default function Step1({ promiseName, handleChange, navigate }: Step1Props) {
   const handleNextBtn = () => {
-    navigate('/promise?step=PROMISE_DETAIL');
+    navigate(`/promise?step=${STEP.PROMISE_DETAIL}`);
   };
 
   const isFormValid = () => {

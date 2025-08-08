@@ -9,11 +9,12 @@ import Step4 from './step/Step4';
 import * as styles from './Promise.css';
 import Progress from './components/Progress';
 import usePromiseInput from './hook/usePromiseInput';
+import { STEP } from './constant/step';
 
 export default function PromiseManage() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const step = searchParams.get('step') || 'PROMISE_NAME';
+  const step = (searchParams.get('step') || STEP.PROMISE_NAME) as keyof typeof STEP;
 
   const {
     promiseName,
@@ -28,13 +29,13 @@ export default function PromiseManage() {
   } = usePromiseInput();
 
   const STEP_CONFIG = {
-    PROMISE_NAME: {
+    [STEP.PROMISE_NAME]: {
       progress: 25,
       component: (
         <Step1 promiseName={promiseName} handleChange={handlePlaceNameChange} navigate={navigate} />
       ),
     },
-    PROMISE_DETAIL: {
+    [STEP.PROMISE_DETAIL]: {
       progress: 50,
       component: (
         <Step2
@@ -44,7 +45,7 @@ export default function PromiseManage() {
         />
       ),
     },
-    PROMISE_LOCATION: {
+    [STEP.PROMISE_LOCATION]: {
       progress: 75,
       component: (
         <Step3
@@ -54,7 +55,7 @@ export default function PromiseManage() {
         />
       ),
     },
-    PROMISE_DEADLINE: {
+    [STEP.PROMISE_DEADLINE]: {
       progress: 100,
       component: (
         <Step4
@@ -69,15 +70,11 @@ export default function PromiseManage() {
   };
 
   const getProgressValue = () => {
-    return (
-      STEP_CONFIG[step as keyof typeof STEP_CONFIG]?.progress || STEP_CONFIG.PROMISE_NAME.progress
-    );
+    return STEP_CONFIG[step]?.progress || STEP_CONFIG[STEP.PROMISE_NAME].progress;
   };
 
   const renderStepContent = () => {
-    return (
-      STEP_CONFIG[step as keyof typeof STEP_CONFIG]?.component || STEP_CONFIG.PROMISE_NAME.component
-    );
+    return STEP_CONFIG[step]?.component || STEP_CONFIG[STEP.PROMISE_NAME].component;
   };
 
   const handleClickLeftIcon = () => {

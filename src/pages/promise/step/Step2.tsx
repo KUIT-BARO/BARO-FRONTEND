@@ -4,10 +4,11 @@ import Button from '@shared/components/button/Button';
 import { vars } from '@shared/styles/theme.css';
 import type { Step2Props } from '../types/Step';
 import Calendar from '@shared/components/calendar/Calendar';
+import { STEP } from '../constant/step';
 
 export default function Step2({ navigate, dateSelection, handleDateClick }: Step2Props) {
   const handleNextBtn = () => {
-    navigate('/promise?step=PROMISE_LOCATION');
+    navigate(`/promise?step=${STEP.PROMISE_LOCATION}`);
   };
 
   return (
