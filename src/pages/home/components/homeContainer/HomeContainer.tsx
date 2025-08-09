@@ -31,9 +31,9 @@ export default function HomeContainer({ homeData }: HomeContainerProps) {
     return (
       <Container className={styles.homeContainer}>
         {homeData.fastestDday && (
-          <span color='white' className={styles.fastestDdayText}>
+          <div className={styles.fastestDdayText}>
             D-{homeData.fastestDday}
-          </span>
+          </div>
         )}
         <div className={styles.promisesList}>
           {homeData.promiseDTOs.map((promise: HomePromiseDTO) => {
