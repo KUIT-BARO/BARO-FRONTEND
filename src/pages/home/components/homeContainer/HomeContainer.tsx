@@ -19,7 +19,7 @@ export default function HomeContainer({ homeData }: HomeContainerProps) {
         <Text tag='head_bold_24' color='white' className={styles.noPromisesText}>
           지금은 예정된 약속이 없어요
         </Text>
-        <img 
+        <img
           src='/icon/ic_note_pen.svg'
           alt='note image'
           className={styles.noPromisesImage}
@@ -30,7 +30,7 @@ export default function HomeContainer({ homeData }: HomeContainerProps) {
   } else {
     return (
       <Container className={styles.homeContainer}>
-        {homeData.fastestDday && (
+        {homeData.fastestDday != null && (
           <div className={styles.fastestDdayText}>
             D-{homeData.fastestDday}
           </div>
