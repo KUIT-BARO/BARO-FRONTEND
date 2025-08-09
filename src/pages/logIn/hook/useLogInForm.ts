@@ -16,8 +16,8 @@ const loginSchema = z.object({
 
 export type LoginFormValues = z.infer<typeof loginSchema>;
 
-export function useLoginForm() {
-  const methods = useForm<LoginFormValues>({
+export function useLogInForm() {
+  const { register, handleSubmit, formState, setFocus, watch } = useForm<LoginFormValues>({
     defaultValues: {
       email: '',
       password: '',
@@ -26,11 +26,30 @@ export function useLoginForm() {
     mode: 'onSubmit',
   });
 
+  const emailValue = watch('email');
+  const passwordValue = watch('password');
+  const { errors, isValid } = formState;
+
+  const onSubmit = (data: LoginFormValues) => {
+    console.log('Form submitted with data:', data);
+  };
+  const onSubmitError = () => {
+    if (errors.email) {
+      setFocus('email');
+      alert(errors.email.message);
+    } else if (errors.password) {
+      setFocus('password');
+      alert(errors.password.message);
+    }
+  };
   return {
-    register: methods.register,
-    handleSubmit: methods.handleSubmit,
-    formState: methods.formState,
-    setFocus: methods.setFocus,
-    watch: methods.watch,
+    register,
+    handleSubmit,
+    watch,
+    emailValue,
+    passwordValue,
+    onSubmit,
+    onSubmitError,
+    isValid,
   };
 }
