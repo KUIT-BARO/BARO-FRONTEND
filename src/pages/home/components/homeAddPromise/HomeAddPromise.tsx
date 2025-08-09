@@ -7,7 +7,6 @@ export default function HomeAddPromise() {
   const navigate = useNavigate();
 
   const handleCreatePromise = () => {
-    alert('약속 생성 페이지 이동');
     navigate('/promise');
   };
 

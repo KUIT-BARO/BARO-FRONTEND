@@ -11,7 +11,7 @@ const logoutButton = () => {
     <button
       type='button'
       className={styles.logoutButton}
-      onClick={() => alert('Logout')}
+      onClick={() => console.log('Logout')}
     >
       로그아웃
     </button>
@@ -22,7 +22,7 @@ export default function Home() {
   const [homeData, setHomeData] = useState<HomeResponseDTO | null>(null);
 
   const handleMenu = (_menu: string) => {
-    alert(_menu);
+    console.log(_menu);
   };
 
   useEffect(() => {
