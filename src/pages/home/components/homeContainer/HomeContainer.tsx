@@ -36,10 +36,10 @@ export default function HomeContainer({ homeData }: HomeContainerProps) {
           </div>
         )}
         <div className={styles.promisesList}>
-          {homeData.promiseDTOs.map((promise: HomePromiseDTO) => {
+          {homeData.promiseDTOs.map((promise: HomePromiseDTO, idx) => {
             return (
               <HomePromise
-                key={promise.promiseId}
+                key={promise.promiseId ?? idx}
                 placeName={promise.placeName || ''}
                 promiseName={promise.promiseName || ''}
                 promiseDate={promise.promiseDate || ''}
