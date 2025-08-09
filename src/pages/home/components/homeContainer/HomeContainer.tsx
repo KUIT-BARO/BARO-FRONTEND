@@ -3,10 +3,10 @@ import Text from '@shared/components/text/Text';
 import Container from '@shared/components/container/Container';
 import HomePromise from '@pages/home/components/homePromise/HomePromise';
 import HomeAddPromise from '@pages/home/components/homeAddPromise/HomeAddPromise';
-import { type HomePromiseDTO, type HomeResponseDTO } from '@pages/home/types/HomeData';
+import type { UserHomePageResponseDTO, UserHomePagePromiseDTO } from 'api/data-contracts';
 
 interface HomeContainerProps {
-  homeData: HomeResponseDTO | null;
+  homeData: UserHomePageResponseDTO | null;
 }
 
 export default function HomeContainer({ homeData }: HomeContainerProps) {
@@ -36,7 +36,7 @@ export default function HomeContainer({ homeData }: HomeContainerProps) {
           </div>
         )}
         <div className={styles.promisesList}>
-          {homeData.promiseDTOs.map((promise: HomePromiseDTO, idx) => {
+          {homeData.promiseDTOs.map((promise: UserHomePagePromiseDTO, idx) => {
             return (
               <HomePromise
                 key={promise.promiseId ?? idx}
