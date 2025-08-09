@@ -4,7 +4,7 @@ import Header from '@shared/components/header/Header';
 import Footer from '@shared/components/footer/Footer';
 import HomeContainer from '@pages/home/components/homeContainer/HomeContainer';
 import { IcLogo } from '@svg/index';
-import { type HomeResponseDTO } from '@pages/home/types/HomeData';
+import type { UserHomePageResponseDTO } from 'api/data-contracts';
 
 const LogoutButton = () => {
   return (
@@ -19,7 +19,7 @@ const LogoutButton = () => {
 };
 
 export default function Home() {
-  const [homeData, setHomeData] = useState<HomeResponseDTO | null>(null);
+  const [homeData, setHomeData] = useState<UserHomePageResponseDTO | null>(null);
 
   const handleMenu = (_menu: string) => {
     console.log(_menu);
