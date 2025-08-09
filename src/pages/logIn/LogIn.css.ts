@@ -10,7 +10,7 @@ export const container = style({
   gap: '2.4rem',
 
   width: '100%',
-  height: '87.5rem',
+  height: '100vh',
   padding: '12.4rem 2rem 0 2rem',
 
   background: `var(--Linear, linear-gradient(180deg, ${vars.color.baroBlue} 0%, ${vars.color.blue8} 100%))`,
