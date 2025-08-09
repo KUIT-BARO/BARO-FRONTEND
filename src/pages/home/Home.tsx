@@ -6,7 +6,7 @@ import HomeContainer from '@pages/home/components/homeContainer/HomeContainer';
 import { IcLogo } from '@svg/index';
 import { type HomeResponseDTO } from '@pages/home/types/HomeData';
 
-const logoutButton = () => {
+const LogoutButton = () => {
   return (
     <button
       type='button'
@@ -44,7 +44,7 @@ export default function Home() {
           background='baroblue'
           leftIcon={IcLogo}
           leftIconType='logo'
-          rightIcon={logoutButton}
+          rightIcon={LogoutButton}
         />
       </div>
       <HomeContainer homeData={homeData} />
