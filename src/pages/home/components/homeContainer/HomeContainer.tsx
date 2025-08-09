@@ -36,7 +36,7 @@ export default function HomeContainer({ homeData }: HomeContainerProps) {
           </div>
         )}
         <div className={styles.promisesList}>
-          {homeData.promiseDTOs.map((promise: UserHomePagePromiseDTO, idx) => {
+          {homeData.promiseDTOs.map((promise: UserHomePagePromiseDTO, idx: number) => {
             return (
               <HomePromise
                 key={promise.promiseId ?? idx}
