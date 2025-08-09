@@ -14,10 +14,10 @@ export const addPromiseButton = style({
   gap: '1.5rem',
   width: '100%',
   height: '12.1rem',
-  borderRadius: '10px',
   border: 'none',
-  boxShadow: `0 0 4px 0 ${vars.color.blue2}`,
+  borderRadius: '10px',
   // backgroundColor: vars.color.white,
   backgroundColor: 'rgba(255, 255, 255, 0.8)',
+  boxShadow: `0 0 4px 0 ${vars.color.blue2}`,
   cursor: 'pointer',
 });

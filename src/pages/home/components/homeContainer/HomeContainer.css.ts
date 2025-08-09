@@ -2,14 +2,14 @@ import { style } from '@vanilla-extract/css';
 import { vars } from '@shared/styles/theme.css';
 
 export const homeContainer = style({
-  width: '100%',
   flex: 1,
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
   justifyContent: 'center',
-  background: `linear-gradient(180deg, ${vars.color.baroBlue} 14.4%, ${vars.color.blue6} 38.9%, ${vars.color.white} 62.4%, ${vars.color.gray4} 120%) !important`,
+  width: '100%',
   border: 'none',
+  background: `linear-gradient(180deg, ${vars.color.baroBlue} 14.4%, ${vars.color.blue6} 38.9%, ${vars.color.white} 62.4%, ${vars.color.gray4} 120%) !important`,
 });
 
 export const noPromisesText = style({
@@ -23,10 +23,10 @@ export const noPromisesImage = style({
 });
 
 export const fastestDdayText = style({
+  marginBottom: '7.1rem',
   fontSize: '12.8rem',
   fontWeight: '700',
   color: vars.color.white,
-  marginBottom: '7.1rem',
 });
 
 export const promisesList = style({
