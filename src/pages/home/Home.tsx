@@ -6,18 +6,6 @@ import HomeContainer from '@pages/home/components/homeContainer/HomeContainer';
 import { IcLogo } from '@svg/index';
 import type { UserHomePageResponseDTO } from 'api/data-contracts';
 
-const LogoutButton = () => {
-  return (
-    <button
-      type='button'
-      className={styles.logoutButton}
-      onClick={() => console.log('Logout')}
-    >
-      로그아웃
-    </button>
-  );
-};
-
 export default function Home() {
   const [homeData, setHomeData] = useState<UserHomePageResponseDTO | null>(null);
 
@@ -44,7 +32,17 @@ export default function Home() {
           background='baroblue'
           leftIcon={IcLogo}
           leftIconType='logo'
-          rightIcon={LogoutButton}
+          rightIcon={() => {
+            return (
+              <button
+                type='button'
+                className={styles.logoutButton}
+                onClick={() => console.log('Logout')}
+              >
+                로그아웃
+              </button>
+            );
+          }}
         />
       </div>
       <HomeContainer homeData={homeData} />
