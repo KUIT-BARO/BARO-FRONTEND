@@ -2,7 +2,7 @@ import * as styles from '@pages/home/components/homeContainer/HomeContainer.css'
 import Text from '@shared/components/text/Text';
 import Container from '@shared/components/container/Container';
 import HomePromise from '@pages/home/components/homePromise/HomePromise';
-import HomeAddPromise from '@pages/home/components/homeAddPromise/HomeAddPromise';
+import AddPromise from '@pages/home/components/addPromiseSection/AddPromiseSection';
 import type { UserHomePageResponseDTO, UserHomePagePromiseDTO } from 'api/data-contracts';
 
 interface HomeContainerProps {
@@ -24,7 +24,7 @@ export default function HomeContainer({ homeData }: HomeContainerProps) {
           alt='note image'
           className={styles.noPromisesImage}
         />
-        <HomeAddPromise />
+        <AddPromise />
       </Container>
     );
   } else {

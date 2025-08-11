@@ -1,9 +1,9 @@
 import { useNavigate } from 'react-router-dom';
-import * as styles from '@pages/home/components/homeAddPromise/HomeAddPromise.css';
+import * as styles from '@pages/home/components/addPromiseSection/AddPromiseSection.css';
 import Text from '@shared/components/text/Text';
 import { IcPlusBlue } from '@svg/index';
 
-export default function HomeAddPromise() {
+export default function AddPromiseSection() {
   const navigate = useNavigate();
 
   const handleCreatePromise = () => {
