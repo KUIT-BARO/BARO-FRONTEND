@@ -7,7 +7,7 @@ import { IcLogo } from '@svg/index';
 import type { UserHomePageResponseDTO } from 'api/data-contracts';
 
 export default function Home() {
-  const [homeData, setHomeData] = useState<UserHomePageResponseDTO | null>(null);
+  const [promises, setPromises] = useState<UserHomePageResponseDTO | null>(null);
 
   const handleMenu = (_menu: string) => {
     console.log(_menu);
@@ -16,7 +16,7 @@ export default function Home() {
   useEffect(() => {
     const fetchHomeData = async () => {
       try {
-        setHomeData({});
+        setPromises({});
         console.log('홈 데이터 조회 성공');
       } catch (err) {
         console.error('홈 데이터 조회 실패:', err);
@@ -45,7 +45,7 @@ export default function Home() {
           }}
         />
       </div>
-      <HomeContainer homeData={homeData} />
+      <HomeContainer homeData={promises} />
       <div style={{ position: 'fixed', bottom: 0, width: '100%' }}>
         <Footer
           selectedMenu='HOME'
