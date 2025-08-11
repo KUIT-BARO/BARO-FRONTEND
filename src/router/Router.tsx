@@ -7,7 +7,7 @@ const NotFound = lazy(() => import('@shared/components/notFound/NotFound'));
 const Home = lazy(() => import('@pages/home/Home'));
 const Login = lazy(() => import('@pages/logIn/LogIn'));
 const MyPage = lazy(() => import('@pages/myPage/MyPage'));
-const Search = lazy(() => import('@pages/search/Search'));
+const Explore = lazy(() => import('@pages/explore/Explore'));
 const PromiseManage = lazy(() => import('@pages/promiseManage/PromiseManage'));
 const PromiseProposal = lazy(() => import('@pages/promiseProposal/PromiseProposal'));
 const PromiseSelect = lazy(() => import('@pages/promiseSelect/PromiseSelect'));
@@ -31,8 +31,8 @@ const router = createBrowserRouter([
         element: <MyPage />,
       },
       {
-        path: ROUTES.SEARCH,
-        element: <Search />,
+        path: ROUTES.EXPLORE,
+        element: <Explore />,
       },
       {
         path: ROUTES.PROMISE_MANAGE,
