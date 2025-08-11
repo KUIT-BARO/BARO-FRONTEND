@@ -43,7 +43,7 @@ export default function Home() {
           );
         }}
       />
-    <HomeContainer homeData={promises} />
+      <HomeContainer homeData={promises} />
       <Footer
         selectedMenu='HOME'
         handleMenu={handleMenu}
