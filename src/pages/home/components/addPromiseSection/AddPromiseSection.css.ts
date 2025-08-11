@@ -16,7 +16,6 @@ export const addPromiseButton = style({
   height: '12.1rem',
   border: 'none',
   borderRadius: '10px',
-  // backgroundColor: vars.color.white,
   backgroundColor: 'rgba(255, 255, 255, 0.8)',
   boxShadow: `0 0 4px 0 ${vars.color.blue2}`,
   cursor: 'pointer',

@@ -7,7 +7,6 @@ export const promiseWrapper = style({
   width: '100%',
   padding: '1.7rem 4.1rem',
   borderRadius: '16px',
-  // backgroundColor: vars.color.white,
   backgroundColor: 'rgba(255, 255, 255, 0.5)',
 });
 
