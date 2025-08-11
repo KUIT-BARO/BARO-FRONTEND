@@ -27,31 +27,27 @@ export default function Home() {
 
   return (
     <div className={styles.homeWrapper}>
-      <div style={{ position: 'fixed', width: '100%' }}>
-        <Header
-          background='baroblue'
-          leftIcon={IcLogo}
-          leftIconType='logo'
-          rightIcon={() => {
-            return (
-              <button
-                type='button'
-                className={styles.logoutButton}
-                onClick={() => console.log('Logout')}
-              >
-                로그아웃
-              </button>
-            );
-          }}
-        />
-      </div>
-      <HomeContainer homeData={promises} />
-      <div style={{ position: 'fixed', bottom: 0, width: '100%' }}>
-        <Footer
-          selectedMenu='HOME'
-          handleMenu={handleMenu}
-        />
-      </div>
+      <Header
+        background='baroblue'
+        leftIcon={IcLogo}
+        leftIconType='logo'
+        rightIcon={() => {
+          return (
+            <button
+              type='button'
+              className={styles.logoutButton}
+              onClick={() => console.log('Logout')}
+            >
+              로그아웃
+            </button>
+          );
+        }}
+      />
+    <HomeContainer homeData={promises} />
+      <Footer
+        selectedMenu='HOME'
+        handleMenu={handleMenu}
+      />
     </div>
   );
 }
