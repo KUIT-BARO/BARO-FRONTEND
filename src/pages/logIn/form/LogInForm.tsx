@@ -6,10 +6,10 @@ import { useState } from 'react';
 import Button from '@shared/components/button/Button';
 
 export default function LoginForm() {
-  const { register, handleSubmit, onSubmit, onSubmitError, emailValue, passwordValue, isValid } = useLogInForm();
+  const { register, handleSubmit, onSubmit, onSubmitError, emailValue, passwordValue, isValid, errors } = useLogInForm();
   const [checked, setChecked] = useState(false);
-
-
+  const EMAIL_ERROR = <Text color='red1'>{errors.email?.message}</Text>;
+  const PASSWORD_ERROR = <Text color='red1'>{errors.password?.message}</Text>;
   return (
     <form onSubmit={handleSubmit(onSubmit, onSubmitError)} className={styles.inputContainer}>
       <InputBar
@@ -19,6 +19,7 @@ export default function LoginForm() {
         value={emailValue}
         props={register('email')}
       />
+      {EMAIL_ERROR}
       <InputBar
         leftIcon="password"
         placeholder="비밀번호 입력"
@@ -28,7 +29,7 @@ export default function LoginForm() {
           ...register('password'),
           type: 'password',
         }} />
-
+      {PASSWORD_ERROR}
       <div className={styles.autoBox}>
         <input
           type="checkbox"
