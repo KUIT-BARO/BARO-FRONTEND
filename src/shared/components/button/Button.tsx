@@ -13,17 +13,24 @@ interface ButtonProps {
   text: string;
   onClick?: () => void;
   backgroundColor?: string;
+  type?: 'button' | 'submit' | 'reset';
 }
 
-const Button = ({ variant, size, text, onClick, backgroundColor }: ButtonProps) => {
-  const textColor =
-    size === BUTTON_SIZES.SMALL && backgroundColor
-      ? backgroundColor === vars.color.white
-        ? vars.color.baroBlue
-        : backgroundColor === vars.color.baroBlue
-          ? vars.color.white
-          : undefined
-      : undefined;
+const Button = ({
+  variant,
+  size,
+  text,
+  onClick,
+  backgroundColor,
+  type = 'button',
+}: ButtonProps) => {
+  const textColor = size === BUTTON_SIZES.SMALL && backgroundColor
+    ? backgroundColor === vars.color.white
+      ? vars.color.baroBlue
+      : backgroundColor === vars.color.baroBlue
+        ? vars.color.white
+        : undefined
+    : undefined;
 
   const customStyle =
     backgroundColor && variant === BUTTON_VARIANTS.ENABLED
@@ -38,6 +45,7 @@ const Button = ({ variant, size, text, onClick, backgroundColor }: ButtonProps) 
       className={styles.buttonWrapper({ variant, size })}
       style={customStyle}
       onClick={onClick}
+      type={type}
     >
       {text}
     </button>
