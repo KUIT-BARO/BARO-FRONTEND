@@ -1,4 +1,4 @@
-import type { AvatarType } from '@shared/constant/promise';
+import type { AvatarType } from '@shared/constant/avatar';
 
 export type User = {
   userId?: number;
