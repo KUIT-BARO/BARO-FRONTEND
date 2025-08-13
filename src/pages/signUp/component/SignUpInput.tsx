@@ -15,11 +15,12 @@ interface SignUpInputProps {
 }
 
 export default function SignUpInput({ title, buttonText='', button = true, placeholder='', value='', onChange, onClick }: SignUpInputProps) {
+
   return (
     <div className={styles.container}>
       <Text color="white" tag="body_bold_19">{title}</Text>
       <div className={styles.content}>
-        <InputBar leftIcon="none" hasBackground={false} placeholder={placeholder} value={value} onChange={onChange} />
+        <InputBar leftIcon="none" hasBackground={false} placeholder={placeholder} value={value} onChange={onChange} props={{...(title==="비밀번호"?{type:'password'}:{})}} />
         {button ? <Button variant="enabled" size="category" text={buttonText} onClick={onClick} /> : <div className={styles.dummy} />}
       </div>
     </div>
