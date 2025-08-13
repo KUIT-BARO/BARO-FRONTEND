@@ -2,6 +2,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import { lazy } from 'react';
 import { ROUTES } from '@router/constant/Routes';
 import Layout from './Layout';
+import SignUp from '@pages/signUp/SignUp';
 
 const NotFound = lazy(() => import('@shared/components/notFound/NotFound'));
 const Home = lazy(() => import('@pages/home/Home'));
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
       {
         path: ROUTES.PROMISE_STATUS,
         element: <PromiseStatus />,
+      },
+      {
+        path: ROUTES.SIGN_UP,
+        element: <SignUp />,
       },
       {
         path: '*',
