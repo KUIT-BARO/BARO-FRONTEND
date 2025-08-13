@@ -8,7 +8,7 @@ import * as styles from './Pending.css';
 import Button from '@shared/components/button/Button';
 import { useState } from 'react';
 
-import TimePopUp from './popUp/timePopUp';
+import TimePopUp from './popUp/TimePopUp';
 
 interface PendingProps {
   promiseId: string;
