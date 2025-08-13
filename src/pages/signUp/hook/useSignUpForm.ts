@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form';
+import { useForm, type FieldErrors } from 'react-hook-form';
 import { z } from 'zod';
 import React from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -7,12 +7,10 @@ const signUpSchema = z.object({
   email: z.string().nonempty('이메일을 입력해주세요').email('이메일 형식이 올바르지 않습니다.'),
   password: z
     .string()
-    .min(8, { message: '비밀번호는 8자 이상이어야 합니다.' })
-    .max(20, { message: '비밀번호는 20자 이하여야 합니다.' })
-    .refine(val => val === '' || /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,20}$/.test(val), {
+    .min(1, { message: '비밀번호를 입력해주세요.' })
+    .regex(/^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,20}$/, {
       message: '문자와 특수문자, 숫자가 혼합된 8~20자리의 비밀번호를 입력해주세요.',
-    })
-    .nonempty({ message: '비밀번호를 입력해주세요.' }),
+    }),
   name: z
     .string()
     .nonempty({ message: '이름을 입력해주세요.' })
@@ -21,18 +19,22 @@ const signUpSchema = z.object({
 export type SignUpFormValues = z.infer<typeof signUpSchema>;
 
 export function useSignUpForm() {
-  const { handleSubmit, formState, setFocus, watch, setValue, trigger } = useForm<SignUpFormValues>(
-    {
-      defaultValues: {
-        email: '',
-        password: '',
-        name: '',
-      },
-      resolver: zodResolver(signUpSchema),
-      mode: 'onSubmit',
-    }
-  );
-  const { errors } = formState;
+  const {
+    handleSubmit,
+    setFocus,
+    watch,
+    setValue,
+    trigger,
+    formState: { errors },
+  } = useForm<SignUpFormValues>({
+    defaultValues: {
+      email: '',
+      password: '',
+      name: '',
+    },
+    resolver: zodResolver(signUpSchema),
+    mode: 'onSubmit',
+  });
 
   const emailValue = watch('email');
   const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -40,7 +42,7 @@ export function useSignUpForm() {
   };
   const passwordValue = watch('password');
   const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue('password', e.target.value.trim(), { shouldValidate: true, shouldDirty: true });
+    setValue('password', e.target.value, { shouldValidate: true, shouldDirty: true });
   };
   const nameValue = watch('name');
   const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -49,12 +51,12 @@ export function useSignUpForm() {
   const onSubmit = (data: SignUpFormValues) => {
     console.log('Form submitted:', data);
   };
-  const onSubmitError = () => {
-    if (errors.email) {
+  const onSubmitError = (formErrors: FieldErrors) => {
+    if (formErrors.email) {
       setFocus('email');
-    } else if (errors.password) {
+    } else if (formErrors.password) {
       setFocus('password');
-    } else if (errors.name) {
+    } else if (formErrors.name) {
       setFocus('name');
     }
   };
@@ -69,7 +71,7 @@ export function useSignUpForm() {
     onChangePassword,
     onChangeName,
     onSubmit,
-    onSubmitError,
     trigger,
+    onSubmitError,
   };
 }
