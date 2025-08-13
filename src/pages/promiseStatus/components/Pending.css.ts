@@ -4,6 +4,17 @@ import { style } from '@vanilla-extract/css';
 export const pendingWrapper = style({
   display: 'flex',
   flexDirection: 'column',
+  alignItems: 'center',
+  gap: '40px',
+  background: vars.color.blue0,
+  height: 'calc(100vh - 9.8rem)',
+  position: 'relative',
+});
+
+export const pendingText = style({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
   gap: '10px',
 });
 
@@ -20,11 +31,19 @@ export const buttonWrapper = style({
   gap: '10px',
   width: '17.8rem',
   height: '32.6rem',
-  flexShrink: 0,
+  cursor: 'pointer',
   borderRadius: '1rem',
   background: vars.color.white,
 });
 
 export const buttonImage = style({
-  width: '10.6rem',
+  height: '15.6rem',
+});
+
+export const votingButton = style({
+  position: 'fixed',
+  bottom: '0',
+  width: '100%',
+  padding: '  1.6rem ',
+  background: vars.color.blue0,
 });
