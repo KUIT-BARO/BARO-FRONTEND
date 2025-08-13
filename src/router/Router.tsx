@@ -2,7 +2,6 @@ import { createBrowserRouter } from 'react-router-dom';
 import { lazy } from 'react';
 import { ROUTES } from '@router/constant/Routes';
 import Layout from './Layout';
-import SignUp from '@pages/signUp/SignUp';
 
 const NotFound = lazy(() => import('@shared/components/notFound/NotFound'));
 const Home = lazy(() => import('@pages/home/Home'));
@@ -11,7 +10,7 @@ const MyPage = lazy(() => import('@pages/myPage/MyPage'));
 const Search = lazy(() => import('@pages/search/Search'));
 const Promise = lazy(() => import('@pages/promise/Promise'));
 const PromiseStatus = lazy(() => import('@pages/promiseStatus/PromiseStatus'));
-
+const SignUp = lazy(() => import('@pages/signUp/SignUp'));
 const router = createBrowserRouter([
   {
     element: <Layout />,
