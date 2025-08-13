@@ -2,13 +2,21 @@ import { vars } from '@shared/styles/theme.css';
 import { style } from '@vanilla-extract/css';
 
 export const pendingWrapper = style({
+  position: 'relative',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  background: vars.color.blue0,
+  height: '100vh',
+});
+
+export const containerStyle = style({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
   gap: '40px',
-  background: vars.color.blue0,
   height: 'calc(100vh - 9.8rem)',
-  position: 'relative',
+  background: vars.color.blue0,
 });
 
 export const pendingText = style({
@@ -41,9 +49,10 @@ export const buttonImage = style({
 });
 
 export const votingButton = style({
-  position: 'fixed',
+  position: 'absolute',
   bottom: '0',
-  width: '100%',
-  padding: '  1.6rem ',
+  left: '0',
+  right: '0',
+  padding: '1.6rem',
   background: vars.color.blue0,
 });

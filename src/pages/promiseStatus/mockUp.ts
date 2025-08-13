@@ -29,15 +29,15 @@ export const mockUpTime = {
       profileImage: 'image',
     },
     {
-      userId: 1,
+      userId: 2,
       profileImage: 'DOG',
     },
     {
-      userId: 1,
+      userId: 3,
       profileImage: 'MAN',
     },
     {
-      userId: 1,
+      userId: 4,
       profileImage: 'WOMAN',
     },
   ],

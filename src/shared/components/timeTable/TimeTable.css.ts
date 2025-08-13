@@ -14,7 +14,7 @@ export const slotWrapper = recipe({
   variants: {
     isSelected: {
       true: {
-        backgroundColor: vars.color.blue2,
+        backgroundColor: vars.color.baroBlue,
       },
     },
     default: {

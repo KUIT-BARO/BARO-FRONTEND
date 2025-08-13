@@ -1,7 +1,6 @@
 import TimeTable from '@shared/components/timeTable/TimeTable';
 import { useState } from 'react';
 import type { TimeDTO } from 'api/data-contracts';
-
 import Header from '@shared/components/header/Header';
 import { IcNavX } from '@svg/index';
 import * as styles from './timePopUp.css';
@@ -9,6 +8,7 @@ import Text from '@shared/components/text/Text';
 import Container from '@shared/components/container/Container';
 import renderAvatar from '@shared/utils/renderAvator';
 import type { AvatarType } from '@shared/constant/avatar';
+
 interface TimePopUpProps {
   suggestedStartDate: string;
   suggestedEndDate: string;
@@ -26,9 +26,31 @@ export default function TimePopUp({
   onClose,
 }: TimePopUpProps) {
   const [selectedSlot, setSelectedSlot] = useState<TimeDTO[]>([]);
+
   const handleSelectSlot = (slot: TimeDTO) => {
-    console.log('Slot clicked:', slot);
-    setSelectedSlot([...selectedSlot, slot]);
+    const isAlreadySelected = selectedSlot.some(
+      selected =>
+        selected.date === slot.date &&
+        selected.startTime?.hour === slot.startTime?.hour &&
+        selected.startTime?.minute === slot.startTime?.minute
+    );
+
+    if (isAlreadySelected) {
+      // 이미 선택된 슬롯이면 제거
+      setSelectedSlot(
+        selectedSlot.filter(
+          selected =>
+            !(
+              selected.date === slot.date &&
+              selected.startTime?.hour === slot.startTime?.hour &&
+              selected.startTime?.minute === slot.startTime?.minute
+            )
+        )
+      );
+    } else {
+      // 선택되지 않은 슬롯이면 추가
+      setSelectedSlot([...selectedSlot, slot]);
+    }
   };
 
   return (
@@ -54,6 +76,7 @@ export default function TimePopUp({
           suggestedStartDate={suggestedStartDate}
           suggestedEndDate={suggestedEndDate}
           handleSelectSlot={handleSelectSlot}
+          selectedSlots={selectedSlot}
         />
       </Container>
     </>
