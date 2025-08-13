@@ -17,16 +17,23 @@ export const inputBarWrapper = recipe({
       false: {
         padding: '0.8rem 0',
         borderRadius: '0',
-        borderBottom: `2px solid ${vars.color.gray2}`,
         backgroundColor: 'transparent',
       },
     },
     backgroundColor: {
-      gray6: {
+      gray: {
         backgroundColor: vars.color.gray6,
       },
-      blue6: {
+      blue: {
         backgroundColor: vars.color.blue6,
+      },
+    },
+    borderColor: {
+      gray: {
+        borderBottom: `2px solid ${vars.color.gray6}`,
+      },
+      white: {
+        borderBottom: `1px solid ${vars.color.white}`,
       },
     },
   },
@@ -58,7 +65,7 @@ export const textInput = recipe({
       },
     },
     backgroundColor: {
-      gray6: {
+      gray: {
         backgroundColor: vars.color.gray6,
         selectors: {
           '&::placeholder': {
@@ -66,12 +73,30 @@ export const textInput = recipe({
           },
         },
       },
-      blue6: {
+      blue: {
         backgroundColor: vars.color.blue6,
         color: vars.color.blue7,
         selectors: {
           '&::placeholder': {
             color: vars.color.blue7,
+          },
+        },
+      },
+    },
+    borderColor: {
+      gray: {
+        color: vars.color.gray6,
+        selectors: {
+          '&::placeholder': {
+            color: vars.color.gray2,
+          },
+        },
+      },
+      white: {
+        color: vars.color.blue8,
+        selectors: {
+          '&::placeholder': {
+            color: vars.color.blue8,
           },
         },
       },
