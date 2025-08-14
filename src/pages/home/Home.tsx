@@ -6,11 +6,11 @@ import { IcLogo } from '@svg/index';
 
 export default function Home() {
   const handleMenu = (_menu: string) => {
-    console.log(_menu);
+    console.info(_menu);
   };
 
   const handleLogout = () => {
-    console.log('Logout');
+    console.info('Logout');
   };
 
   return (
@@ -29,7 +29,7 @@ export default function Home() {
           </button>
         )}
       />
-      <HomeContainer homeData={{}} />
+      <HomeContainer homeData={null} />
       <Footer
         selectedMenu='HOME'
         handleMenu={handleMenu}
