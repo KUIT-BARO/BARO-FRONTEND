@@ -31,7 +31,7 @@ export default function HomeContainer({ homeData }: HomeContainerProps) {
 
   return (
     <Container className={styles.homeContainer}>
-      {homeData.fastestDday != null && (
+      {homeData.fastestDday && (
         <div className={styles.fastestDdayText}>
           D-{homeData.fastestDday}
         </div>
