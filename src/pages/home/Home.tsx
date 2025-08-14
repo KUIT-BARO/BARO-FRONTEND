@@ -1,14 +1,10 @@
-import { useState } from 'react';
 import * as styles from '@pages/home/Home.css';
 import Header from '@shared/components/header/Header';
 import Footer from '@shared/components/footer/Footer';
 import HomeContainer from '@pages/home/components/homeContainer/HomeContainer';
 import { IcLogo } from '@svg/index';
-import type { UserHomePageResponseDTO } from 'api/data-contracts';
 
 export default function Home() {
-  const [promises, setPromises] = useState<UserHomePageResponseDTO | null>(null);
-
   const handleMenu = (_menu: string) => {
     console.log(_menu);
   };
@@ -33,7 +29,7 @@ export default function Home() {
           </button>
         )}
       />
-      <HomeContainer homeData={promises} />
+      <HomeContainer homeData={{}} />
       <Footer
         selectedMenu='HOME'
         handleMenu={handleMenu}
