@@ -6,7 +6,8 @@ interface InputBarProps {
   leftIcon?: 'search' | 'scope' | 'location' | 'email' | 'password' | 'none';
   placeholder?: string;
   hasBackground?: boolean;
-  backgroundColor?: 'gray6' | 'blue6';
+  backgroundColor?: 'gray' | 'blue';
+  borderColor?: 'gray' | 'white';
   showMaxLength?: boolean;
   maxLength?: number;
   value?: string;
@@ -18,7 +19,8 @@ export default function InputBar({
   leftIcon = 'none',
   placeholder,
   hasBackground = true,
-  backgroundColor = 'gray6',
+  backgroundColor = 'gray',
+  borderColor = 'gray',
   showMaxLength = false,
   maxLength,
   value = '',
@@ -37,6 +39,7 @@ export default function InputBar({
     return styles.inputBarWrapper({
       hasBackground,
       backgroundColor: hasBackground ? backgroundColor : undefined,
+      borderColor: hasBackground ? undefined : borderColor,
     });
   };
 
@@ -44,6 +47,7 @@ export default function InputBar({
     return styles.textInput({
       hasBackground,
       backgroundColor: hasBackground ? backgroundColor : undefined,
+      borderColor: hasBackground ? undefined : borderColor,
     });
   };
 

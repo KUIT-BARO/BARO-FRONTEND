@@ -21,8 +21,13 @@ const meta: Meta<typeof InputBar> = {
     },
     backgroundColor: {
       control: { type: 'radio' },
-      options: ['gray6', 'blue6'],
+      options: ['gray', 'blue'],
       description: '배경 색상',
+    },
+    borderColor: {
+      control: { type: 'radio' },
+      options: ['gray', 'white'],
+      description: '하단 테두리 색상',
     },
     maxLength: {
       control: 'number',
@@ -51,7 +56,7 @@ export const Default: Story = {
     leftIcon: 'search',
     placeholder: '원하는 장소를 검색하세요',
     hasBackground: true,
-    backgroundColor: 'gray6',
+    backgroundColor: 'gray',
     showMaxLength: false,
     value: '',
   },
@@ -62,7 +67,7 @@ export const EmailInput: Story = {
     leftIcon: 'email',
     placeholder: '이메일 입력',
     hasBackground: true,
-    backgroundColor: 'blue6',
+    backgroundColor: 'blue',
     value: '',
   },
 };
@@ -72,7 +77,7 @@ export const PasswordInput: Story = {
     leftIcon: 'password',
     placeholder: '비밀번호 입력',
     hasBackground: true,
-    backgroundColor: 'blue6',
+    backgroundColor: 'blue',
     value: '',
   },
 };

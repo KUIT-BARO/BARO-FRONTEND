@@ -2,7 +2,6 @@ import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 import { vars } from '@shared/styles/theme.css';
 
-// PlaceReview 스타일
 export const placeReviewListContainer = style({
   width: '100%',
   padding: '1.5rem 0',
@@ -11,9 +10,10 @@ export const placeReviewListContainer = style({
 
 export const placeReviewListHeader = style({
   display: 'flex',
-  alignItems: 'center',
+  flexDirection: 'column',
   gap: '0.5rem',
   padding: '0 2.0rem',
+  marginBottom: '2.7rem',
 });
 
 export const placeReviewItems = style({
@@ -26,7 +26,6 @@ export const placeReviewItems = style({
   },
 });
 
-// PlaceReview 스타일
 export const placeReviewWrapper = recipe({
   base: {
     borderRadius: '1.2rem',
