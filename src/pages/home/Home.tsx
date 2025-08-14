@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import * as styles from '@pages/home/Home.css';
 import Header from '@shared/components/header/Header';
 import Footer from '@shared/components/footer/Footer';
@@ -16,18 +16,6 @@ export default function Home() {
   const handleLogout = () => {
     console.log('Logout');
   };
-
-  useEffect(() => {
-    const fetchHomeData = async () => {
-      try {
-        setPromises({});
-        console.log('홈 데이터 조회 성공');
-      } catch (err) {
-        console.error('홈 데이터 조회 실패:', err);
-      }
-    };
-    fetchHomeData();
-  }, []);
 
   return (
     <div className={styles.homeWrapper}>
