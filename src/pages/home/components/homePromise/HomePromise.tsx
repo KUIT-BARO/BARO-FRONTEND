@@ -2,15 +2,7 @@ import * as styles from '@pages/home/components/homePromise/HomePromise.css';
 import Text from '@shared/components/text/Text';
 import { IcPinLocGray, IcPersonGray } from '@svg/index';
 import { formatDateWithDay } from '@shared/utils/formatDateWithDay';
-
-interface HomePromiseProps {
-  placeName?: string;
-  promiseName?: string;
-  promiseDate?: string;
-  promiseDay?: string;
-  promiseMember?: string;
-  promiseDday?: number;
-}
+import type { UserHomePagePromiseDTO } from 'api/data-contracts';
 
 export default function HomePromise({
   placeName,
@@ -19,7 +11,7 @@ export default function HomePromise({
   promiseDay,
   promiseMember,
   promiseDday
-}: HomePromiseProps) {
+}: UserHomePagePromiseDTO) {
   return (
     <div className={styles.promiseWrapper}>
       <div className={styles.placeNameContainer}>
