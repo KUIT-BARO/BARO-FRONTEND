@@ -34,7 +34,7 @@ export default function HomePromise({
           </Text>
         </div>
         <Text tag='body_14' color='white' className={styles.ddayText}>
-          D-{promiseDday}
+          {Number.isFinite(promiseDday) ? `D-${promiseDday}` : ''}
         </Text>
       </div>
     </div>
