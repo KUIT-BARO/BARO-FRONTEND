@@ -41,12 +41,12 @@ export default function HomeContainer({ homeData }: HomeContainerProps) {
           return (
             <HomePromise
               key={promise.promiseId ?? idx}
-              placeName={promise.placeName || ''}
-              promiseName={promise.promiseName || ''}
-              promiseDate={promise.promiseDate || ''}
-              promiseDay={promise.promiseDay || ''}
-              promiseMember={promise.promiseMember || ''}
-              promiseDday={promise.promiseDday || 0}
+              placeName={promise.placeName}
+              promiseName={promise.promiseName}
+              promiseDate={promise.promiseDate}
+              promiseDay={promise.promiseDay}
+              promiseMember={promise.promiseMember}
+              promiseDday={promise.promiseDday}
             />
           );
         })}
