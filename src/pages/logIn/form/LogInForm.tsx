@@ -6,12 +6,10 @@ import { useState } from 'react';
 import Button from '@shared/components/button/Button';
 
 export default function LoginForm() {
-  const { register, handleSubmit, onSubmit, onSubmitError, emailValue, passwordValue, isValid, errors } = useLogInForm();
+  const { register, handleSubmit, onSubmit, emailValue, passwordValue, isValid, errors } = useLogInForm();
   const [checked, setChecked] = useState(false);
-  const EMAIL_ERROR = <Text color='red1'>{errors.email?.message}</Text>;
-  const PASSWORD_ERROR = <Text color='red1'>{errors.password?.message}</Text>;
   return (
-    <form onSubmit={handleSubmit(onSubmit, onSubmitError)} className={styles.inputContainer}>
+    <form onSubmit={handleSubmit(onSubmit)} className={styles.inputContainer}>
       <InputBar
         leftIcon="email"
         placeholder="이메일 입력"
@@ -19,7 +17,8 @@ export default function LoginForm() {
         value={emailValue}
         props={register('email')}
       />
-      {EMAIL_ERROR}
+      <Text color='red1'>{errors.email?.message}</Text>;
+
       <InputBar
         leftIcon="password"
         placeholder="비밀번호 입력"
@@ -29,7 +28,7 @@ export default function LoginForm() {
           ...register('password'),
           type: 'password',
         }} />
-      {PASSWORD_ERROR}
+      <Text color='red1'>{errors.password?.message}</Text>;
       <div className={styles.autoBox}>
         <input
           type="checkbox"
@@ -39,7 +38,7 @@ export default function LoginForm() {
         <Text tag="body_14" color="blue1">자동 로그인 설정</Text>
       </div>
       <div className={styles.buttonContainer}>
-        <Button text="로그인" size='long' variant={isValid ? 'enabled' : 'disabled'} onClick={handleSubmit(onSubmit, onSubmitError)}/>
+        <Button text="로그인" size='long' variant={isValid ? 'enabled' : 'disabled'} onClick={handleSubmit(onSubmit)}/>
         <div className={styles.signUpButton}>
           <div className={styles.line}/>
           <Text tag="body_14" color="blue1">회원가입</Text>

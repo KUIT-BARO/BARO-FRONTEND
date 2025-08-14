@@ -17,7 +17,7 @@ const loginSchema = z.object({
 export type LoginFormValues = z.infer<typeof loginSchema>;
 
 export function useLogInForm() {
-  const { register, handleSubmit, formState, setFocus, watch } = useForm<LoginFormValues>({
+  const { register, handleSubmit, formState, watch } = useForm<LoginFormValues>({
     defaultValues: {
       email: '',
       password: '',
@@ -30,15 +30,7 @@ export function useLogInForm() {
   const passwordValue = watch('password');
   const { errors, isValid } = formState;
   const onSubmit = (data: LoginFormValues) => {
-    console.log('Form submitted with data:', data);
-  };
-
-  const onSubmitError = () => {
-    if (errors.email) {
-      setFocus('email');
-    } else if (errors.password) {
-      setFocus('password');
-    }
+    //TODO: api 연동
   };
 
   return {
@@ -47,7 +39,6 @@ export function useLogInForm() {
     emailValue,
     passwordValue,
     onSubmit,
-    onSubmitError,
     isValid,
     errors,
   };
