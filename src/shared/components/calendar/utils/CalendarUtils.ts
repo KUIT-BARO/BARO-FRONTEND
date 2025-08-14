@@ -77,7 +77,6 @@ export function getDateStyles(dateStatus: ReturnType<typeof getDateStatus>) {
 
   return {
     dateItemClass: styles.dateItem({
-      isLasted: dateStatus.isLasted ? 'True' : 'default',
       isToday: dateStatus.isToday ? 'True' : 'default',
       isHighlighted: isHighlighted ? 'True' : 'default',
     }),
