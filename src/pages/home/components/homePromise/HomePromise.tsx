@@ -4,12 +4,12 @@ import { IcPinLocGray, IcPersonGray } from '@svg/index';
 import { formatDateWithDay } from '@shared/utils/formatDateWithDay';
 
 interface HomePromiseProps {
-  placeName: string;
-  promiseName: string;
-  promiseDate: string;
-  promiseDay: string;
-  promiseMember: string;
-  promiseDday: number;
+  placeName?: string;
+  promiseName?: string;
+  promiseDate?: string;
+  promiseDay?: string;
+  promiseMember?: string;
+  promiseDday?: number;
 }
 
 export default function HomePromise({
@@ -32,7 +32,7 @@ export default function HomePromise({
         {promiseName}
       </Text>
       <Text tag='head_bold_24' color='black' className={styles.promiseDateText}>
-        {formatDateWithDay(promiseDate).slice(0, -3)} ({promiseDay})
+        {promiseDate ? formatDateWithDay(promiseDate).slice(0, -3) : ''} ({promiseDay})
       </Text>
       <div className={styles.memberDdayContainer}>
         <div className={styles.promiseMemberInfo}>
