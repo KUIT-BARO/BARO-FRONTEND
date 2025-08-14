@@ -1,10 +1,11 @@
-import { useForm, type FieldErrors } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import React from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 const signUpSchema = z.object({
   email: z.string().nonempty('이메일을 입력해주세요').email('이메일 형식이 올바르지 않습니다.'),
+  emailAuthCode: z.string().nonempty('이메일 인증 코드를 입력해주세요.'),
   password: z
     .string()
     .min(1, { message: '비밀번호를 입력해주세요.' })
@@ -21,7 +22,6 @@ export type SignUpFormValues = z.infer<typeof signUpSchema>;
 export function useSignUpForm() {
   const {
     handleSubmit,
-    setFocus,
     watch,
     setValue,
     trigger,
@@ -40,6 +40,10 @@ export function useSignUpForm() {
   const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue('email', e.target.value.trim(), { shouldValidate: true, shouldDirty: true });
   };
+  const emailAuthCode = watch('emailAuthCode');
+  const onChangeEmailAuthCode = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue('emailAuthCode', e.target.value.trim(), { shouldValidate: true, shouldDirty: true });
+  };
   const passwordValue = watch('password');
   const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue('password', e.target.value, { shouldValidate: true, shouldDirty: true });
@@ -48,16 +52,21 @@ export function useSignUpForm() {
   const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue('name', e.target.value.trim(), { shouldValidate: true, shouldDirty: true });
   };
-  const onSubmit = (data: SignUpFormValues) => {
-    console.log('Form submitted:', data);
-  };
-  const onSubmitError = (formErrors: FieldErrors) => {
-    if (formErrors.email) {
-      setFocus('email');
-    } else if (formErrors.password) {
-      setFocus('password');
-    } else if (formErrors.name) {
-      setFocus('name');
+  const handleSubmitWithoutEmailAuth = async () => {
+    const isValid = await trigger(['email', 'password', 'name']);
+    const onSubmit = (data: Pick<SignUpFormValues, 'email' | 'password' | 'name'>) => {
+      //TODO: api 연동
+    };
+    if (isValid) {
+      // 해당 필드들만 추려서 form value 꺼내기
+      const values = {
+        email: emailValue,
+        password: passwordValue,
+        name: nameValue,
+      };
+      onSubmit(values); // 타입 단언 필요
+    } else {
+      //오류 처리
     }
   };
 
@@ -67,11 +76,12 @@ export function useSignUpForm() {
     emailValue,
     passwordValue,
     nameValue,
+    emailAuthCode,
     onChangeEmail,
     onChangePassword,
     onChangeName,
-    onSubmit,
+    onChangeEmailAuthCode,
+    handleSubmitWithoutEmailAuth,
     trigger,
-    onSubmitError,
   };
 }
