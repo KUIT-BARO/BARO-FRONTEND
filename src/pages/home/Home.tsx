@@ -23,17 +23,15 @@ export default function Home() {
         background='baroblue'
         leftIcon={IcLogo}
         leftIconType='logo'
-        rightIcon={() => {
-          return (
-            <button
-              type='button'
-              className={styles.logoutButton}
-              onClick={handleLogout}
-            >
-              로그아웃
-            </button>
-          );
-        }}
+        rightIcon={() => (
+          <button
+            type='button'
+            className={styles.logoutButton}
+            onClick={handleLogout}
+          >
+            로그아웃
+          </button>
+        )}
       />
       <HomeContainer homeData={promises} />
       <Footer
