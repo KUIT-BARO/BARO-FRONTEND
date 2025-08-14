@@ -13,6 +13,10 @@ export default function Home() {
     console.log(_menu);
   };
 
+  const handleLogout = () => {
+    console.log('Logout');
+  };
+
   useEffect(() => {
     const fetchHomeData = async () => {
       try {
@@ -36,7 +40,7 @@ export default function Home() {
             <button
               type='button'
               className={styles.logoutButton}
-              onClick={() => console.log('Logout')}
+              onClick={handleLogout}
             >
               로그아웃
             </button>
