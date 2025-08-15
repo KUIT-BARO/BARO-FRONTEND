@@ -15,8 +15,6 @@ export default function Setting() {
       <div className={styles.line} />
       <SettingOption color="red">탈퇴하기</SettingOption>
       <div className={styles.line} />
-
-
     </div>
   )
 }
