@@ -29,7 +29,7 @@ export function useLogInForm() {
   const emailValue = watch('email');
   const passwordValue = watch('password');
   const { errors, isValid } = formState;
-  const onSubmit = (data: LoginFormValues) => {
+  const onSubmit = (_data: LoginFormValues) => {
     //TODO: api 연동
   };
 
