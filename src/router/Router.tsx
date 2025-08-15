@@ -11,6 +11,7 @@ const Search = lazy(() => import('@pages/search/Search'));
 const Promise = lazy(() => import('@pages/promise/Promise'));
 const PromiseStatus = lazy(() => import('@pages/promiseStatus/PromiseStatus'));
 const Setting = lazy(() => import('@pages/setting/Setting'));
+const Profile = lazy(() => import('@pages/profile/Profile'));
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
       {
         path: ROUTES.SETTING,
         element: <Setting />,
+      },
+      {
+        path: ROUTES.PROFILE,
+        element: <Profile />,
       },
       {
         path: ROUTES.PROMISE_STATUS,

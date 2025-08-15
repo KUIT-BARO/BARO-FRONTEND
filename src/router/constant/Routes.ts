@@ -6,4 +6,5 @@ export const ROUTES = {
   PROMISE: '/promise',
   PROMISE_STATUS: '/promise-status',
   SETTING: '/setting',
+  PROFILE: '/profile',
 };
