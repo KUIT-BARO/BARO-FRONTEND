@@ -26,7 +26,13 @@ export default function SignUp() {
 
   return (
     <Container className={styles.container}>
-      <form className={styles.formContainer} onSubmit={handleSubmit(handleSubmitWithoutEmailAuth)}>
+      <form className={styles.formContainer}  onSubmit={(e) => {
+        if (!check) {
+          e.preventDefault();
+          return;
+        }
+        return handleSubmit(handleSubmitWithoutEmailAuth)(e);
+      }}>
         <SignUpInput title = "이메일" placeholder="이메일을 입력해주세요" button buttonText="인증" onClick={handleCheckEmail} value={emailValue} onChange={onChangeEmail} />
         {errors.email ? <Text color="red1">{errors.email.message}</Text> : null}
         {isEmailValid && <SignUpInput title = "이메일 인증" placeholder="인증번호를 입력해주세요" button buttonText="확인" value={emailAuthCode} onChange={onChangeEmailAuthCode} onClick={handleEmailAuthCodeSubmit}/>}
