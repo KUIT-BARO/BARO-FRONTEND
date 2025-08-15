@@ -56,6 +56,7 @@ export function useSignUpForm() {
     const isValid = await trigger(['email', 'password', 'name']);
     const onSubmit = (data: Pick<SignUpFormValues, 'email' | 'password' | 'name'>) => {
       //TODO: api 연동
+      console.log('회원가입 데이터:', data);
     };
     if (isValid) {
       // 해당 필드들만 추려서 form value 꺼내기
