@@ -31,6 +31,7 @@ export function useLogInForm() {
   const { errors, isValid } = formState;
   const onSubmit = (_data: LoginFormValues) => {
     //TODO: api 연동
+    console.log('로그인 시도:', _data);
   };
 
   return {
