@@ -6,7 +6,7 @@ import type { TimeDTO } from 'api/data-contracts';
 interface TimeTableProps {
   suggestedStartDate: string;
   suggestedEndDate: string;
-  handleSelectSlot: (slot: TimeDTO) => void;
+  handleSelectSlot: (_slot: TimeDTO) => void;
   selectedSlots?: TimeDTO[];
 }
 
@@ -29,7 +29,7 @@ export default function TimeTable({
       <SlotTitle />
       <div className={styles.columnWrapper}>
         {dateArray.map((date, index) => {
-          const columnSelectedSlots = selectedSlots.filter(slot => slot.date === date);
+          const columnSelectedSlots = selectedSlots.filter(_slot => _slot.date === date);
 
           return (
             <Column

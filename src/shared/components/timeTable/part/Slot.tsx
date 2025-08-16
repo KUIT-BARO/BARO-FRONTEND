@@ -4,7 +4,7 @@ import type { TimeDTO } from 'api/data-contracts';
 interface SlotProps {
   isSelected: boolean;
   timeSlot?: TimeDTO;
-  onSlotClick?: (slot: TimeDTO) => void;
+  onSlotClick?: (_slot: TimeDTO) => void;
 }
 
 export default function Slot({ isSelected, timeSlot, onSlotClick }: SlotProps) {

@@ -1,7 +1,8 @@
 import type { TimeDTO } from 'api/data-contracts';
 import { useState } from 'react';
 
-export const useTime = (_promiseId: string) => {
+export const useTime = (promiseId: string) => {
+  console.log(promiseId);
   const [isTimePopUp, setIsTimePopUp] = useState(false);
   const [selectedSlot, setSelectedSlot] = useState<TimeDTO[]>([]);
   const handleSelectSlot = (slot: TimeDTO) => {

@@ -6,12 +6,12 @@ import { DAY } from '@shared/constant/day';
 
 interface ColumnProps {
   date: string;
-  handleSelectSlot: (slot: TimeDTO) => void;
+  handleSelectSlot: (_slot: TimeDTO) => void;
   selectedSlots?: TimeDTO[];
 }
 
 export default function Column({ date, handleSelectSlot, selectedSlots = [] }: ColumnProps) {
-  const timeSlots: TimeDTO[] = Array.from({ length: 34 }, (_, index) => {
+  const timeSlots: TimeDTO[] = Array.from({ length: 34 }, (_slot, index) => {
     const totalMinutes = index * 30 + 7 * 60;
     const hour = Math.floor(totalMinutes / 60);
     const minute = totalMinutes % 60;

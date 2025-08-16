@@ -16,7 +16,7 @@ interface TimePopUpProps {
     profileImage: string;
   }[];
   onClose: () => void;
-  handleSelectSlot: (slot: TimeDTO) => void;
+  handleSelectSlot: (_slot: TimeDTO) => void;
   selectedSlot: TimeDTO[];
 }
 

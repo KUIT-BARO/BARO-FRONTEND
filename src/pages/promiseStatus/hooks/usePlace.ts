@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import type { PromisePlace } from '@shared/types/promisePlace';
 
-export const usePlace = (_promiseId: string) => {
+export const usePlace = (promiseId: string) => {
+  console.log(promiseId);
   const [selectedPlace, setSelectedPlace] = useState<PromisePlace[]>([]);
   const [isPlacePopUp, setIsPlacePopUp] = useState(false);
 

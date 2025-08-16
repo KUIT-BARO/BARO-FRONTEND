@@ -4,9 +4,8 @@ import Text from '@shared/components/text/Text';
 import { IcNavX } from '@svg/index';
 import * as styles from './PlacePopUp.css';
 import Button from '@shared/components/button/Button';
+import type { PromisePlace } from '@shared/types/promisePlace';
 import { BUTTON_VARIANTS } from '@shared/components/button/constant/button';
-import { useState } from 'react';
-import type { PromisePlace } from '../Pending';
 
 interface PlacePopUpProps {
   onClose: () => void;
@@ -14,7 +13,7 @@ interface PlacePopUpProps {
     placeName: string;
     placeAddress: string;
   }[];
-  handleSelectPlace: (place: PromisePlace) => void;
+  handleSelectPlace: (_place: PromisePlace) => void;
   selectedPlace: PromisePlace[];
 }
 
