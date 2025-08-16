@@ -8,7 +8,7 @@ import { useState } from 'react';
 import Button from '@shared/components/button/Button';
 
 export default function LogIn() {
-  const { handleSubmit, onSubmit, emailValue, passwordValue, isValid, errors, onChangeEmail, onChangePassword } = useLogInForm();
+  const { handleSubmit, onSubmit, formData, isValid, errors, onChangeEmail, onChangePassword } = useLogInForm();
   const [checked, setChecked] = useState(false);
   return (
     <Container className={styles.container}>
@@ -19,7 +19,7 @@ export default function LogIn() {
           leftIcon="email"
           placeholder="이메일 입력"
           backgroundColor="blue6"
-          value={emailValue}
+          value={formData.email}
           onChange={onChangeEmail}
         />
         <Text color='red1'>{errors.email?.message}</Text>
@@ -28,7 +28,7 @@ export default function LogIn() {
           leftIcon="password"
           placeholder="비밀번호 입력"
           backgroundColor="blue6"
-          value={passwordValue}
+          value={formData.password}
           onChange={onChangePassword}
           props={{
             type: 'password',
