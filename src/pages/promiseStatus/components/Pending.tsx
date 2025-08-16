@@ -1,14 +1,19 @@
 import Container from '@shared/components/container/Container';
 import Header from '@shared/components/header/Header';
-import { mockUp, mockUpTime } from '../mockUp';
+import { mockUp, mockUpTime, mockUpPlace } from '../mockUp';
 import Text from '@shared/components/text/Text';
 import PromiseTracker from '@shared/components/promiseTracker/PromiseTracker';
 import type { AvatarType } from '@shared/constant/avatar';
 import * as styles from './Pending.css';
 import Button from '@shared/components/button/Button';
-import { useState } from 'react';
 
 import TimePopUp from './popUp/TimePopUp';
+import PlacePopUp from './popUp/PlacePopUp';
+import { BUTTON_VARIANTS } from '@shared/components/button/constant/button';
+
+import { useTime } from '../hooks/useTime';
+import { usePlace } from '../hooks/usePlace';
+import { useNavigate } from 'react-router-dom';
 
 interface PendingProps {
   promiseId: string;
@@ -22,28 +27,44 @@ const mappingProgress = {
 
 export default function Pending({ promiseId, isHost }: PendingProps) {
   const { promiseName, isVotingReady, promiseMemberSuggestStates } = mockUp;
+  const { suggestedStartDate, suggestedEndDate, promiseMembers } = mockUpTime;
+  const { promisePlace } = mockUpPlace;
   const isVoting = !isHost && isVotingReady;
-  const [isPlacePopUp, setIsPlacePopUp] = useState(false);
-  const [isTimePopUp, setIsTimePopUp] = useState(false);
-  const handleClickPlace = () => {
-    setIsPlacePopUp(true);
-    console.log('장소');
-  };
-  const handleClickTime = () => {
-    setIsTimePopUp(true);
-    console.log('시간');
+
+  const { isTimePopUp, handleClickTime, handleCloseTimePopUp, handleSelectSlot, selectedSlot } =
+    useTime(promiseId);
+  const {
+    isPlacePopUp,
+    handleClickPlace,
+    handleClosePlacePopUp,
+    handleSelectPlace,
+    selectedPlace,
+  } = usePlace(promiseId);
+  const navigate = useNavigate();
+  const handleVoting = () => {
+    navigate('/');
   };
   return (
     <>
       {isTimePopUp && (
         <TimePopUp
-          suggestedStartDate={mockUpTime.suggestedStartDate}
-          suggestedEndDate={mockUpTime.suggestedEndDate}
-          promiseMembers={mockUpTime.promiseMembers}
-          onClose={() => setIsTimePopUp(false)}
+          suggestedStartDate={suggestedStartDate}
+          suggestedEndDate={suggestedEndDate}
+          promiseMembers={promiseMembers}
+          onClose={handleCloseTimePopUp}
+          handleSelectSlot={handleSelectSlot}
+          selectedSlot={selectedSlot}
         />
       )}
-      {!isTimePopUp && (
+      {isPlacePopUp && (
+        <PlacePopUp
+          promisePlace={promisePlace}
+          onClose={handleClosePlacePopUp}
+          handleSelectPlace={handleSelectPlace}
+          selectedPlace={selectedPlace}
+        />
+      )}
+      {!isTimePopUp && !isPlacePopUp && (
         <div className={styles.pendingWrapper}>
           <Header text={promiseName} />
           <Container className={styles.containerStyle}>
@@ -82,8 +103,8 @@ export default function Pending({ promiseId, isHost }: PendingProps) {
             <Button
               text="투표하기"
               size="long"
-              variant={isVoting ? 'enabled' : 'disabled'}
-              onClick={() => {}}
+              variant={isVoting ? BUTTON_VARIANTS.ENABLED : BUTTON_VARIANTS.DISABLED}
+              onClick={handleVoting}
             />
           </div>
         </div>

@@ -5,14 +5,14 @@ export const timePopUpText = style({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'flex-start',
-  gap: '10px',
+  gap: '1rem',
 });
 
 export const timePopUpContainer = style({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'flex-start',
-  gap: '10px',
+  gap: '1rem',
   backgroundColor: vars.color.blue0,
   overflow: 'hidden',
 });
@@ -26,5 +26,5 @@ export const avatarGroup = style({
   display: 'flex',
   flexDirection: 'row',
   alignItems: 'center',
-  gap: '5px',
+  gap: '0.5rem',
 });
