@@ -5,20 +5,18 @@ import React from 'react';
 
 const loginSchema = z.object({
   email: z.string().nonempty('이메일을 입력해주세요').email('이메일 형식이 올바르지 않습니다.'),
-  password: z
-    .string()
-    .min(8, { message: '비밀번호는 8자 이상이어야 합니다.' })
-    .max(20, { message: '비밀번호는 20자 이하여야 합니다.' })
-    .refine(val => val === '' || /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,20}$/.test(val), {
-      message: '문자와 특수문자, 숫자가 혼합된 8~20자리의 비밀번호를 입력해주세요.',
-    })
-    .nonempty({ message: '비밀번호를 입력해주세요.' }),
+  password: z.string().nonempty({ message: '비밀번호를 입력해주세요.' }),
 });
 
 export type LoginFormValues = z.infer<typeof loginSchema>;
 
 export function useLogInForm() {
-  const { handleSubmit, formState, watch, setValue } = useForm<LoginFormValues>({
+  const {
+    handleSubmit,
+    formState: { errors, isValid },
+    watch,
+    setValue,
+  } = useForm<LoginFormValues>({
     defaultValues: {
       email: '',
       password: '',
@@ -26,16 +24,13 @@ export function useLogInForm() {
     resolver: zodResolver(loginSchema),
     mode: 'onChange',
   });
-
-  const emailValue = watch('email');
+  const formData = watch();
   const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue('email', e.target.value.trim(), { shouldValidate: true, shouldDirty: true });
+    setValue('email', e.target.value.trim());
   };
-  const passwordValue = watch('password');
   const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue('password', e.target.value.trim(), { shouldValidate: true, shouldDirty: true });
+    setValue('password', e.target.value.trim());
   };
-  const { errors, isValid } = formState;
   const onSubmit = (_data: LoginFormValues) => {
     //TODO: api 연동
     console.log('로그인 시도:', _data);
@@ -43,8 +38,7 @@ export function useLogInForm() {
 
   return {
     handleSubmit,
-    emailValue,
-    passwordValue,
+    formData,
     onChangeEmail,
     onChangePassword,
     onSubmit,
