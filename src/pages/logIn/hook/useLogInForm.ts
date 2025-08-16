@@ -26,10 +26,10 @@ export function useLogInForm() {
   });
   const formData = watch();
   const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue('email', e.target.value.trim());
+    setValue('email', e.target.value.trim(), { shouldDirty: true, shouldValidate: true });
   };
   const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue('password', e.target.value.trim());
+    setValue('password', e.target.value, { shouldDirty: true, shouldValidate: true });
   };
   const onSubmit = (_data: LoginFormValues) => {
     //TODO: api 연동
