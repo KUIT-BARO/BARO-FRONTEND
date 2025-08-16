@@ -20,7 +20,7 @@ export default function Profile() {
   return (
     <div className={styles.container}>
       <form onSubmit={handleProfileSubmitForm}>
-        <Header text="설정" leftIcon={IcNavArrow} />
+        <Header text="프로필 수정" leftIcon={IcNavArrow} />
         <div className={styles.profileImageEdit}>
           <div className={styles.profileImage}>
             <PROFILE_ICON className={styles.profileImageIcon} />
