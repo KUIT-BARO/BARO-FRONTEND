@@ -44,7 +44,7 @@ export const autoBox = style({
 });
 
 export const square = recipe({
-  base: style({
+  base: {
     position: 'relative',
 
     width: '1.6rem',
@@ -54,10 +54,10 @@ export const square = recipe({
     border: 'white 1px solid',
 
     cursor: 'pointer',
-  }),
+  },
   variants: {
     checked: {
-      true: style({
+      true: {
         backgroundColor: vars.color.white,
 
         '::after': {
@@ -70,10 +70,10 @@ export const square = recipe({
           color: vars.color.baroBlue,
           fontSize: '1.5rem',
         },
-      }),
-      false: style({
+      },
+      false: {
         backgroundColor: 'transparent',
-      }),
+      },
     },
   },
 });
