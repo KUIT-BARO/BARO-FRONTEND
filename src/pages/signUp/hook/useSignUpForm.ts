@@ -8,7 +8,7 @@ const signUpSchema = z.object({
   emailAuthCode: z.string().nonempty('이메일 인증 코드를 입력해주세요.'),
   password: z
     .string()
-    .min(1, { message: '비밀번호를 입력해주세요.' })
+    .nonempty({ message: '비밀번호를 입력해주세요.' })
     .regex(/^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,20}$/, {
       message: '문자와 특수문자, 숫자가 혼합된 8~20자리의 비밀번호를 입력해주세요.',
     }),
@@ -36,21 +36,18 @@ export function useSignUpForm() {
     mode: 'onSubmit',
   });
 
-  const emailValue = watch('email');
+  const formData = watch();
   const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue('email', e.target.value.trim(), { shouldValidate: true, shouldDirty: true });
+    setValue('email', e.target.value.trim());
   };
-  const emailAuthCode = watch('emailAuthCode');
   const onChangeEmailAuthCode = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue('emailAuthCode', e.target.value.trim(), { shouldValidate: true, shouldDirty: true });
+    setValue('emailAuthCode', e.target.value.trim());
   };
-  const passwordValue = watch('password');
   const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue('password', e.target.value, { shouldValidate: true, shouldDirty: true });
+    setValue('password', e.target.value);
   };
-  const nameValue = watch('name');
   const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue('name', e.target.value.trim(), { shouldValidate: true, shouldDirty: true });
+    setValue('name', e.target.value.trim());
   };
   const handleSubmitWithoutEmailAuth = async () => {
     const isValid = await trigger(['email', 'password', 'name']);
@@ -59,25 +56,21 @@ export function useSignUpForm() {
       console.log('회원가입 데이터:', data);
     };
     if (isValid) {
-      // 해당 필드들만 추려서 form value 꺼내기
       const values = {
-        email: emailValue,
-        password: passwordValue,
-        name: nameValue,
+        email: formData.email,
+        password: formData.password,
+        name: formData.name,
       };
-      onSubmit(values); // 타입 단언 필요
+      onSubmit(values);
     } else {
-      //오류 처리
+      //TODO: 오류 처리
     }
   };
 
   return {
     handleSubmit,
     errors,
-    emailValue,
-    passwordValue,
-    nameValue,
-    emailAuthCode,
+    formData,
     onChangeEmail,
     onChangePassword,
     onChangeName,
