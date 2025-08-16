@@ -28,7 +28,7 @@ export function useProfileForm() {
   };
   const profileImageValue = watch('profileImage');
   const onChangeProfileImage = (value: 'man' | 'woman' | 'dog' | 'user') => {
-    setValue('profileImage', value);
+    setValue('profileImage', value, { shouldValidate: true, shouldDirty: true });
   };
   const handleProfileSubmitForm = handleSubmit((data: UserProfileResponseDTO) => {
     console.log(data);
