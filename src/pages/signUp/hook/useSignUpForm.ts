@@ -29,6 +29,7 @@ export function useSignUpForm() {
   } = useForm<SignUpFormValues>({
     defaultValues: {
       email: '',
+      emailAuthCode: '',
       password: '',
       name: '',
     },
