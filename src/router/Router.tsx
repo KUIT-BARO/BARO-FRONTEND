@@ -8,6 +8,7 @@ const Home = lazy(() => import('@pages/home/Home'));
 const Login = lazy(() => import('@pages/logIn/LogIn'));
 const MyPage = lazy(() => import('@pages/myPage/MyPage'));
 const Explore = lazy(() => import('@pages/explore/Explore'));
+const PinAdd = lazy(() => import('@pages/pinAdd/PinAdd'));
 const PromiseManage = lazy(() => import('@pages/promiseManage/PromiseManage'));
 const PromiseProposal = lazy(() => import('@pages/promiseProposal/PromiseProposal'));
 const PromiseSelect = lazy(() => import('@pages/promiseSelect/PromiseSelect'));
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
       {
         path: ROUTES.EXPLORE,
         element: <Explore />,
+      },
+      {
+        path: ROUTES.PIN_ADD,
+        element: <PinAdd />,
       },
       {
         path: ROUTES.PROMISE_MANAGE,

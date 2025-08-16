@@ -3,6 +3,7 @@ export const ROUTES = {
   LOGIN: '/login',
   MYPAGE: '/mypage',
   EXPLORE: '/explore',
+  PIN_ADD: '/pin/add',
   PROMISE_MANAGE: '/promise-manage',
   PROMISE_PROPOSAL: '/promise-proposal',
   PROMISE_SELECT: '/promise-select',
