@@ -2,9 +2,9 @@ import { style } from '@vanilla-extract/css';
 import { vars } from '@shared/styles/theme.css';
 
 export const homeContainer = style({
-  flex: 1,
   display: 'flex',
   flexDirection: 'column',
+  flex: 1,
   alignItems: 'center',
   justifyContent: 'center',
   width: '100%',
@@ -13,13 +13,13 @@ export const homeContainer = style({
 });
 
 export const noPromisesText = style({
-  margin: '1.6rem 0 3.6rem 0',
+  marginTop: '1.6rem',
 });
 
 export const noPromisesImage = style({
   width: '14.8rem',
   height: '15.4rem',
-  marginBottom: '6.6rem',
+  margin: '3.6rem 0 6.6rem 0',
 });
 
 export const fastestDdayText = style({
