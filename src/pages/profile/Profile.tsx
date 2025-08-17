@@ -5,17 +5,18 @@ import Text from '@shared/components/text/Text';
 import InputBar from '@shared/components/inputBar/InputBar';
 import type { UserProfileResponseDTO } from '@/../api/data-contracts';
 import { useProfileForm } from '@pages/profile/hook/useProfileForm';
-import { getProfileIconByName } from '@pages/profile/constant/Profile';
+import renderAvatar from '@pages/profile/constant/ProfileAvatar';
 import { vars } from '@shared/styles/theme.css';
+import type { AvatarType } from '@shared/constant/promise';
 
 export default function Profile() {
   const userProfile: UserProfileResponseDTO = {
-    name: 'John Doe',
-    profileImage: 'dog',
+    name: '규운',
+    profileImage: 'DOG',
   };
-
-  const { nameValue, onChangeName, handleProfileSubmitForm } = useProfileForm();
-  const PROFILE_ICON = getProfileIconByName(userProfile.profileImage ?? 'user');
+  const safeName = userProfile.name ?? '';
+  const safeProfileImage = (userProfile.profileImage ?? 'USER') as AvatarType;
+  const { nameValue, onChangeName, handleProfileSubmitForm } = useProfileForm({ name: safeName, profileImage: safeProfileImage });
 
   return (
     <div className={styles.container}>
@@ -23,7 +24,7 @@ export default function Profile() {
         <Header text="프로필 수정" leftIcon={IcNavArrow} />
         <div className={styles.profileImageEdit}>
           <div className={styles.profileImage}>
-            <PROFILE_ICON className={styles.profileImageIcon} />
+            {renderAvatar(safeProfileImage)}
             <IcWriteBlue className={styles.editIcon} />
           </div>
         </div>
