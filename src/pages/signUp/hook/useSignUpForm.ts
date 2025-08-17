@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import React from 'react';
+import React, { useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 const signUpSchema = z.object({
@@ -37,18 +37,27 @@ export function useSignUpForm() {
     mode: 'onSubmit',
   });
 
+  const [isEmailValid, setIsEmailValid] = useState(false);
+  const [check, setCheck] = useState(false);
+  const handleCheckEmail = async () => {
+    const isValid = await trigger('email');
+    setIsEmailValid(isValid);
+  };
+  const handleEmailAuthCodeSubmit = () => {
+    if (formData.emailAuthCode.trim() === '') {
+      return;
+    } else if (formData.emailAuthCode.trim() !== 'expectedCode') {
+      //TODO: api 연동
+      return;
+    }
+    setCheck(true);
+  };
   const formData = watch();
-  const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue('email', e.target.value.trim());
-  };
-  const onChangeEmailAuthCode = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue('emailAuthCode', e.target.value.trim());
-  };
-  const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue('password', e.target.value);
-  };
-  const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue('name', e.target.value.trim());
+  const handleFormChange = (field: 'email' | 'password' | 'name' | 'emailAuthCode') => {
+    return function (e: React.ChangeEvent<HTMLInputElement>) {
+      const value = field === 'password' ? e.target.value : e.target.value.trim();
+      setValue(field, value, { shouldDirty: true, shouldValidate: true });
+    };
   };
   const handleSubmitWithoutEmailAuth = async () => {
     const isValid = await trigger(['email', 'password', 'name']);
@@ -72,11 +81,12 @@ export function useSignUpForm() {
     handleSubmit,
     errors,
     formData,
-    onChangeEmail,
-    onChangePassword,
-    onChangeName,
-    onChangeEmailAuthCode,
+    handleFormChange,
     handleSubmitWithoutEmailAuth,
     trigger,
+    check,
+    isEmailValid,
+    handleCheckEmail,
+    handleEmailAuthCodeSubmit,
   };
 }
