@@ -5,8 +5,3 @@ export const placeInputWrapper = style({
   gap: '1rem',
   width: '100%',
 });
-
-export const placeInputIcon = style({
-  width: '2rem',
-  height: '2rem',
-});

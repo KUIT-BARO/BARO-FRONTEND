@@ -2,9 +2,9 @@ import { style } from '@vanilla-extract/css';
 import { vars } from '@shared/styles/theme.css';
 
 export const placePinWrapper = style({
-  width: '100%',
   display: 'flex',
   flexDirection: 'column',
+  width: '100%',
   padding: '16px',
   backgroundColor: vars.color.white,
 });

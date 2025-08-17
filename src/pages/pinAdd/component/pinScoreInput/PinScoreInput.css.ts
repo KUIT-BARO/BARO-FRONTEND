@@ -4,8 +4,8 @@ import { vars } from '@styles/theme.css';
 export const scoreInputWrapper = style({
   display: 'flex',
   flexDirection: 'column',
-  backgroundColor: vars.color.blue0,
   padding: '2rem',
+  backgroundColor: vars.color.blue0,
 });
 
 export const scoreTitle = style({

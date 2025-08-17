@@ -2,18 +2,17 @@ import { style } from '@vanilla-extract/css';
 
 export const pinFooterWrapper = style({
   display: 'flex',
+  justifyContent: 'space-between',
   position: 'fixed',
   bottom: 0,
   width: '100%',
-  top: 'auto',
-  justifyContent: 'space-between',
   padding: '1.2rem 2rem 4.4rem 2rem',
 });
 
 export const userWrapper = style({
   display: 'flex',
-  alignItems: 'center',
   gap: '1.6rem',
+  alignItems: 'center',
 });
 
 export const userContainer = style({

@@ -5,24 +5,23 @@ export const pinDetailWrapper = style({
   display: 'flex',
   flexDirection: 'column',
   width: '100%',
-  minHeight: '100vh',
-  background: `var(--Linear, linear-gradient(180deg, #5175FF 0%, #CFDAE6 100%))`,
+  height: '100vh',
+  background: `var(--Linear, linear-gradient(180deg, ${vars.color.baroBlue} 0%, ${vars.color.blue8} 100%))`,
 });
 
 export const pinDetailContainer = style({
-  width: '100%',
-  flex: 1,
-  padding: '2rem',
   display: 'flex',
-  paddingTop: '9rem',
   flexDirection: 'column',
+  flex: 1,
   gap: '8.7rem',
+  width: '100%',
+  padding: '9rem 2rem 0 2rem',
 });
 
 export const pinPlaceImage = style({
   width: '100%',
   height: '22.8rem',
-  borderRadius: '10px',
   marginBottom: '1.6rem',
+  borderRadius: '10px',
   backgroundColor: vars.color.gray0,
 });

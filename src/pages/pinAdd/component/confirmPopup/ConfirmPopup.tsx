@@ -3,7 +3,7 @@ import * as styles from '@pages/pinAdd/component/confirmPopup/ConfirmPopup.css';
 import PopupOverlay from '@shared/components/popup-overlay/PopupOverlay';
 import Text from '@shared/components/text/Text';
 import Button from '@shared/components/button/Button';
-import { IcStarFill, IcStarNone } from '@svg/index';
+import Stars from '@shared/components/stars/Stars';
 import { CATEGORIES } from '@shared/constant/category';
 
 interface ConfirmPopupProps {
@@ -36,14 +36,8 @@ const ConfirmPopup: React.FC<ConfirmPopupProps> = ({
           <Text tag='body_17' color='baroBlue'>
             별점을 남겨보세요
           </Text>
-          <div className={styles.scoreContainer}>
-            {Array.from({ length: 5 }, (_, index) => (
-              index < score
-                ? <IcStarFill width={32} height={32} />
-                : <IcStarNone width={32} height={32} />
-            ))}
-          </div>
-          <div className={styles.categoriesWrapper}>
+          <Stars score={score} size='BIG' />
+          <div className={styles.categoriesContainer}>
             <Text tag='body_17' color='baroBlue'>
               카테고리로 장소를 설명해주세요
             </Text>

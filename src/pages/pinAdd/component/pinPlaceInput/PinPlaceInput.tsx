@@ -16,7 +16,7 @@ export default function PinPlaceInput() {
       onClick={handlePlaceInputClick}
       className={styles.placeInputWrapper}
     >
-      <IcPinLocWhite className={styles.placeInputIcon} />
+      <IcPinLocWhite />
       <Text tag='body_17' color='blue6'>현 위치</Text>
     </button>
   );

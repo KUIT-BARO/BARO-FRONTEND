@@ -11,7 +11,7 @@ export const placePinsWrapper = style({
 });
 
 export const placePinsContainer = style({
-  width: '100%',
   flex: 1,
+  width: '100%',
   overflow: 'auto',
 });

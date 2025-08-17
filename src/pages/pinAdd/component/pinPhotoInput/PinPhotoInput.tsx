@@ -56,7 +56,7 @@ export default function PinPhotoInput() {
             className={styles.uploadPlaceholder}
             onClick={handlePhotoContainerClick}
           >
-            <Text className={styles.placeholderText}>
+            <Text tag='body_16' color='gray3'>
               클릭하여 장소 사진을 추가해주세요
             </Text>
           </div>
