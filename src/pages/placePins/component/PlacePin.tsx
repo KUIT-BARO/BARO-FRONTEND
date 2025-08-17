@@ -27,7 +27,7 @@ export default function PlacePin({ pin, categories, handlePinClick }: PlacePinPr
       </Text>
       <div className={styles.categoryWrapper}>
         {categories?.map((category) => (
-          <Category text={category} />
+          <Category key={category} text={category} />
         ))}
       </div>
     </div>
