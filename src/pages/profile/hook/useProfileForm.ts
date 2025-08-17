@@ -3,16 +3,19 @@ import { z } from 'zod';
 import React from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import type { UserProfileResponseDTO } from '@/../api/data-contracts';
+import { type AvatarType } from '@shared/constant/promise';
 
 const schema = z.object({
   name: z
     .string()
-    .min(2, { message: '이름은 2글자 이상으로 입력해주십시요' })
+    .min(2, { message: '이름은 2글자 이상으로 입력해야 합니다.' })
     .max(12, { message: '이름은 최대 12글자까지 입력할 수 있습니다.' }),
-  profileImage: z.enum(['man', 'woman', 'dog', 'user']),
+  profileImage: z.string(),
 });
 
-export function useProfileForm() {
+type FormSchema = z.infer<typeof schema>;
+
+export function useProfileForm({ name, profileImage }: FormSchema) {
   const {
     watch,
     setValue,
@@ -20,14 +23,18 @@ export function useProfileForm() {
     formState: { errors },
   } = useForm({
     resolver: zodResolver(schema),
-    mode: 'onSubmit',
+    mode: 'onChange',
+    defaultValues: {
+      name,
+      profileImage,
+    },
   });
   const nameValue = watch('name');
   const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue('name', e.target.value.trim(), { shouldValidate: true, shouldDirty: true });
   };
   const profileImageValue = watch('profileImage');
-  const onChangeProfileImage = (value: 'man' | 'woman' | 'dog' | 'user') => {
+  const onChangeProfileImage = (value: AvatarType) => {
     setValue('profileImage', value, { shouldValidate: true, shouldDirty: true });
   };
   const handleProfileSubmitForm = handleSubmit((data: UserProfileResponseDTO) => {
