@@ -1,9 +1,9 @@
+import { useNavigate } from 'react-router-dom';
 import * as styles from '@shared/components/placeReview/PlaceReview.css';
 import Text from '@shared/components/text/Text';
 import { IcSaveWhite } from '@svg/index';
 import type { PlaceData } from '@shared/components/placeReview/mockup';
 import type { placeReviewSize } from '@shared/components/placeReview/types/placeReviewSize';
-import { useNavigate } from 'react-router-dom';
 
 interface PlaceReviewProps {
   size?: placeReviewSize;
@@ -68,7 +68,8 @@ export default function PlaceReviewList({
   const navigate = useNavigate();
 
   const handlePlaceClick = (placeId: number, placeName: string) => {
-    navigate(`/place/${placeId}/pins?placeName=${placeName}`);
+    const search = new URLSearchParams({ placeName }).toString();
+    navigate(`/place/${placeId}/pins?${search}`);
   };
 
   return (
