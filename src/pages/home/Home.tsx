@@ -3,6 +3,7 @@ import Header from '@shared/components/header/Header';
 import Footer from '@shared/components/footer/Footer';
 import HomeContainer from '@pages/home/components/homeContainer/HomeContainer';
 import { IcLogo } from '@svg/index';
+import { homeData } from '@pages/home/mockup';
 
 export default function Home() {
   const handleMenu = (_menu: string) => {
@@ -29,7 +30,7 @@ export default function Home() {
           </button>
         )}
       />
-      <HomeContainer homeData={null} />
+      <HomeContainer homeData={homeData} />
       <Footer
         selectedMenu='HOME'
         handleMenu={handleMenu}
