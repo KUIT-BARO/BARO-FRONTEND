@@ -68,7 +68,7 @@ export default function PlaceReviewList({
   const navigate = useNavigate();
 
   const handlePlaceClick = (placeId: number) => {
-    navigate(`/place/${placeId}/reviews`);
+    navigate(`/place/${placeId}/pins`);
   };
 
   return (
