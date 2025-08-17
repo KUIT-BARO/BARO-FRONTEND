@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import * as styles from '@shared/components/placeReview/PlaceReview.css';
 import Text from '@shared/components/text/Text';
+import Stars from '@shared/components/stars/Stars';
 import { IcSaveWhite } from '@svg/index';
 import type { PlaceData } from '@shared/components/placeReview/mockup';
 import type { placeReviewSize } from '@shared/components/placeReview/types/placeReviewSize';
@@ -45,8 +46,7 @@ export const PlaceReview = ({
           <Text tag="body_14" color="gray4">
             {placeRating}
           </Text>
-
-          {/* TODO: Star 컴포넌트 추가 필요 */}
+          <Stars score={placeRating} size='SMALL' />
         </span>
         <span className={styles.placeReviewCountContainer}>
           <IcSaveWhite className={styles.placeReviewCountIcon} />
