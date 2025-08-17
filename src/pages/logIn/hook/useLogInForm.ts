@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import React from 'react';
+import React, { useState } from 'react';
 
 const loginSchema = z.object({
   email: z.string().nonempty('이메일을 입력해주세요').email('이메일 형식이 올바르지 않습니다.'),
@@ -24,23 +24,27 @@ export function useLogInForm() {
     resolver: zodResolver(loginSchema),
     mode: 'onChange',
   });
+
   const formData = watch();
-  const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue('email', e.target.value.trim(), { shouldDirty: true, shouldValidate: true });
-  };
-  const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue('password', e.target.value, { shouldDirty: true, shouldValidate: true });
-  };
+  const handleChangeField =
+    (field: 'email' | 'password') => (e: React.ChangeEvent<HTMLInputElement>) => {
+      const value = field === 'email' ? e.target.value.trim() : e.target.value;
+      setValue(field, value, { shouldDirty: true, shouldValidate: true });
+    };
   const onSubmit = (_data: LoginFormValues) => {
     //TODO: api 연동
     console.log('로그인 시도:', _data);
   };
-
+  const [checked, setChecked] = useState(false);
+  const handleCheckboxChange = () => {
+    setChecked(!checked);
+  };
   return {
     handleSubmit,
     formData,
-    onChangeEmail,
-    onChangePassword,
+    handleChangeField,
+    checked,
+    handleCheckboxChange,
     onSubmit,
     isValid,
     errors,
