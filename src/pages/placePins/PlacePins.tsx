@@ -18,7 +18,6 @@ export default function PlacePins() {
     const queryParams = new URLSearchParams({
       placeName: placeName,
       userName: item.pin.userName || '',
-      review: item.pin.review || '',
       score: item.pin.score?.toString() || '0',
       categories: item.categories.join(',')
     });
