@@ -1,13 +1,15 @@
 import { mockupPlaces, type PlaceData } from '@shared/components/placeReview/mockup';
+import { type PinResponseDTO, type PinListResponseDTO } from 'api/data-contracts';
+import { type CategoryType } from '@shared/constant/category';
 
-export interface ReviewCategory {
+interface ReviewCategory {
   reviewType: string;
   description: string;
   places: PlaceData[];
   placeReviewSize: 'SMALL' | 'LARGE';
 }
 
-export const mockupReviews: ReviewCategory[] = [
+export const reviewCategories: ReviewCategory[] = [
   {
     reviewType: 'BEST',
     description: '좋아요를 가장 많이 받은 명소',
@@ -25,5 +27,32 @@ export const mockupReviews: ReviewCategory[] = [
     description: '효율적인 공부를 위한 최적의 장소',
     places: mockupPlaces,
     placeReviewSize: 'LARGE',
+  },
+];
+
+export interface ExploreData {
+  pinId: PinListResponseDTO['pinId'];
+  pin: PinResponseDTO;
+  categories: CategoryType[];
+}
+
+export const mockupExplore: ExploreData[] = [
+  {
+    pinId: 1,
+    pin: {
+      userName: '이지환',
+      score: 3,
+      placeName: '서울 광진구 화양동 5-47',
+    },
+    categories: ['아늑한', '키즈존', '북적이는'],
+  },
+  {
+    pinId: 2,
+    pin: {
+      userName: '이지환',
+      score: 2,
+      placeName: '서울 광진구 화양동 5-47',
+    },
+    categories: ['아늑한', '키즈존', '북적이는'],
   },
 ];

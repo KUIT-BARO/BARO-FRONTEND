@@ -6,7 +6,7 @@ export const pinDetailWrapper = style({
   flexDirection: 'column',
   width: '100%',
   height: '100vh',
-  background: `var(--Linear, linear-gradient(180deg, ${vars.color.baroBlue} 0%, ${vars.color.blue8} 100%))`,
+  background: `var(--Linear, linear-gradient(180deg, ${vars.color.baroBlue} 10%, ${vars.color.blue8} 100%))`,
 });
 
 export const pinDetailContainer = style({

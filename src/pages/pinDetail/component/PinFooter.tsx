@@ -4,7 +4,15 @@ import Text from '@shared/components/text/Text';
 import Stars from '@shared/components/stars/Stars';
 import { IcMan, IcSaveNon, IcSaveWhite } from '@svg/index';
 
-export default function PinFooter() {
+interface PinFooterProps {
+  userName: string;
+  score: number;
+}
+
+export default function PinFooter({
+  userName,
+  score
+}: PinFooterProps) {
   const [isSaved, setIsSaved] = useState(false);
 
   const handleSaveClick = () => {
@@ -17,7 +25,7 @@ export default function PinFooter() {
         <IcMan />
         <div className={styles.userContainer}>
           <Text tag='body_14' color='white'>
-            이지환
+            {userName}
           </Text>
           <Text tag='body_12' color='white'>
             @Jiwhan_lee
@@ -26,9 +34,9 @@ export default function PinFooter() {
       </div>
       <div className={styles.scoreWrapper}>
         <Text tag='body_14' color='white' className={styles.scoreText}>
-          3
+          {score}
         </Text>
-        <Stars score={3} size='SMALL' />
+        <Stars score={score} size='SMALL' />
         <button
           type='button'
           onClick={handleSaveClick}
