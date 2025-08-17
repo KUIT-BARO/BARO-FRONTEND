@@ -41,6 +41,8 @@ export default function PinFooter({
           type='button'
           onClick={handleSaveClick}
           className={styles.saveButton}
+          aria-pressed={isSaved}
+          aria-label={isSaved ? '핀 저장 해제' : '핀 저장'}
         >
           {isSaved
             ? <IcSaveWhite width={'1.6rem'} height={'1.6rem'} />
