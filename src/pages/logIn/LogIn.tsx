@@ -16,7 +16,7 @@ export default function LogIn() {
         <InputBar
           leftIcon="email"
           placeholder="이메일 입력"
-          backgroundColor="blue6"
+          backgroundColor="blue"
           value={formData.email}
           onChange={handleChangeField('email')}
         />
@@ -25,7 +25,7 @@ export default function LogIn() {
         <InputBar
           leftIcon="password"
           placeholder="비밀번호 입력"
-          backgroundColor="blue6"
+          backgroundColor="blue"
           value={formData.password}
           onChange={handleChangeField('password')}
           props={{
