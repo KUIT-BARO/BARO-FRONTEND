@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import Text from '@shared/components/text/Text';
-import * as styles from './Step.css';
+import * as styles from '@/pages/promise/step/Step.css';
 import Button from '@shared/components/button/Button';
 import { vars } from '@shared/styles/theme.css';
-import type { Step3Props } from '../types/Step';
+import type { Step3Props } from '@/pages/promise/types/Step';
 import InputBar from '@shared/components/inputBar/InputBar';
 import KakaoMap from '@shared/components/kakaoMap/KakaoMap';
 import usePlaceSearch from '@shared/components/kakaoMap/hooks/usePlaceSearch';
 import type { Place } from '@shared/components/kakaoMap/types/latLng';
-import { isSamePlace, updatePlaceSelection } from './utils/placeUtils';
+import { isSamePlace, updatePlaceSelection } from '@/pages/promise/step/utils/placeUtils';
 
 interface PlaceListProps {
   title: string;

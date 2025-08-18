@@ -1,8 +1,8 @@
 import Text from '@shared/components/text/Text';
-import * as styles from './Step.css';
+import * as styles from '@/pages/promise/step/Step.css';
 import Button from '@shared/components/button/Button';
 import { vars } from '@shared/styles/theme.css';
-import type { Step4Props } from '../types/Step';
+import type { Step4Props } from '@/pages/promise/types/Step';
 
 export default function Step4({
   navigate,

@@ -1,10 +1,10 @@
 import Text from '@shared/components/text/Text';
-import * as styles from './Step.css';
+import * as styles from '@/pages/promise/step/Step.css';
 import Button from '@shared/components/button/Button';
 import { vars } from '@shared/styles/theme.css';
-import type { Step2Props } from '../types/Step';
+import type { Step2Props } from '@/pages/promise/types/Step';
 import Calendar from '@shared/components/calendar/Calendar';
-import { STEP } from '../constant/step';
+import { STEP } from '@/pages/promise/constant/step';
 
 export default function Step2({ navigate, dateSelection, handleDateClick }: Step2Props) {
   const handleNextBtn = () => {

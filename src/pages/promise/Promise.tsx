@@ -2,14 +2,14 @@ import Container from '@shared/components/container/Container';
 import Header from '@shared/components/header/Header';
 import { IcNavArrow, IcNavX } from '@svg/index';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import Step1 from './step/Step1';
-import Step2 from './step/Step2';
-import Step3 from './step/Step3';
-import Step4 from './step/Step4';
-import * as styles from './Promise.css';
-import Progress from './components/Progress';
-import usePromiseInput from './hook/usePromiseInput';
-import { STEP } from './constant/step';
+import Step1 from '@/pages/promise/step/Step1';
+import Step2 from '@/pages/promise/step/Step2';
+import Step3 from '@/pages/promise/step/Step3';
+import Step4 from '@/pages/promise/step/Step4';
+import * as styles from '@/pages/promise/Promise.css';
+import Progress from '@/pages/promise/components/Progress';
+import usePromiseInput from '@/pages/promise/hook/usePromiseInput';
+import { STEP } from '@/pages/promise/constant/step';
 
 export default function PromiseManage() {
   const navigate = useNavigate();

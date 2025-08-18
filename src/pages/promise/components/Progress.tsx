@@ -1,4 +1,4 @@
-import * as styles from './Progress.css';
+import * as styles from '@/pages/promise/components/Progress.css';
 
 export default function Progress({ progress }: { progress: number }) {
   return (
