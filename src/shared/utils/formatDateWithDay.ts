@@ -1,4 +1,4 @@
-import { DAYS } from '@shared/components/promisisDetail/constant/Days';
+import { DAYS } from '@shared/components/promiseDetail/constant/Days';
 
 export function formatDateWithDay(dateStr: string): string {
   const date = new Date(dateStr);
