@@ -19,11 +19,11 @@ export const container = style({
   backgroundColor: vars.color.black,
   opacity: '0.8',
 
-  zIndex: 9999,
+  zIndex: 999,
 });
 
 export const content = recipe({
-  base: { width: '100%' },
+  base: { width: '100%', opacity: '1', zIndex: '1000' },
   variants: {
     position: {
       center: {

@@ -24,7 +24,8 @@ export default function PopupOverlay({
     return null;
   }
   return (
-    <div className={styles.container} onClick={onClose}>
+    <>
+      <div className={styles.container} onClick={onClose}></div>
       {top && (
         <div className={styles.top}>
           <IcArrowLeft />
@@ -37,6 +38,6 @@ export default function PopupOverlay({
       <div className={styles.content({ position })} onClick={e => e.stopPropagation()}>
         {children}
       </div>
-    </div>
+    </>
   );
 }

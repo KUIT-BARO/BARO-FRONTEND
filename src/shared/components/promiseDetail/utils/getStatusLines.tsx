@@ -8,26 +8,25 @@ export default function getStatusLines(props: PromisisDetailProps): {
   thirdLine: string;
 } {
   switch (props.status) {
-  case PROMISE_STATUS.PENDING:
-    return {
-      firstLine: `${props.untilVoteDate}일`,
-      secondLine: props.suggestedRegion,
-      thirdLine: `${formatDateWithDay(props.suggestedStartDate)} ~ ${formatDateWithDay(props.suggestedEndDate)}`,
-    };
-  case PROMISE_STATUS.VOTING:
-    return {
-      firstLine: `${props.untilVoteEndDate}일`,
-      secondLine: props.suggestedRegion,
-      thirdLine: `${formatDateWithDay(props.suggestedStartDate)} ~ ${formatDateWithDay(props.suggestedEndDate)}`,
-    };
-  case PROMISE_STATUS.CONFIRMED:
-    return {
-      firstLine: props.promiseMembersNames.join(', '),
-      secondLine: props.placeName,
-      thirdLine: formatDateWithDay(props.fixedDate),
-    };
-  default:
-    throw new Error(`Unknown promise status`);
+    case PROMISE_STATUS.PENDING:
+      return {
+        firstLine: `투표까지 ${props.untilVoteDate}일`,
+        secondLine: props.suggestedRegion,
+        thirdLine: `${formatDateWithDay(props.suggestedStartDate)} ~ ${formatDateWithDay(props.suggestedEndDate)}`,
+      };
+    case PROMISE_STATUS.VOTING:
+      return {
+        firstLine: `${props.untilVoteEndDate}일`,
+        secondLine: props.suggestedRegion,
+        thirdLine: `${formatDateWithDay(props.suggestedStartDate)} ~ ${formatDateWithDay(props.suggestedEndDate)}`,
+      };
+    case PROMISE_STATUS.CONFIRMED:
+      return {
+        firstLine: props.promiseMembersNames.join(', '),
+        secondLine: props.placeName,
+        thirdLine: formatDateWithDay(props.fixedDate),
+      };
+    default:
+      throw new Error(`Unknown promise status`);
   }
-
 }
