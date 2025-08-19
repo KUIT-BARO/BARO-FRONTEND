@@ -63,6 +63,9 @@ export default function PromiseManage() {
       progress: 100,
       component: (
         <Step4
+          promiseName={promiseName}
+          dateSelection={dateSelection}
+          suggestedRegion={suggestedRegion}
           navigate={navigate}
           promiseDeadline={promiseDeadline}
           handleDeadlineChange={handleDeadlineChange}

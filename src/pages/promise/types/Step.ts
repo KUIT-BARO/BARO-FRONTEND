@@ -25,6 +25,12 @@ export interface Step3Props extends StepProps {
 }
 
 export interface Step4Props extends StepProps {
+  promiseName: string;
+  dateSelection: {
+    suggestedStartDate: string;
+    suggestedEndDate: string | null;
+  };
+  suggestedRegion: Place[];
   promiseDeadline: string;
   handleDeadlineChange: (_event: React.ChangeEvent<HTMLInputElement>) => void;
   onSubmit: () => void;

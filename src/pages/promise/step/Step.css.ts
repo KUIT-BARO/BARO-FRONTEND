@@ -102,3 +102,27 @@ export const placeNameWrapper = style({
   justifyContent: 'space-between',
   alignItems: 'center',
 });
+
+export const confirmContainer = style({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '1.6rem',
+  backgroundColor: 'white',
+  borderRadius: '1rem',
+  padding: '3.2rem 2rem',
+});
+
+export const confirmDetailWrapper = style({
+  display: 'flex',
+  backgroundColor: vars.color.blue0,
+  borderRadius: '1rem',
+  padding: '3.2rem 1.6rem',
+});
+
+export const confirmButtonWrapper = style({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '1.6rem',
+  backgroundColor: 'white',
+  zIndex: '1000',
+});
