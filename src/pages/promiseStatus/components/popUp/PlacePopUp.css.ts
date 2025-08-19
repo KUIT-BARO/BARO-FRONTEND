@@ -9,6 +9,8 @@ export const placePopUpText = style({
 });
 
 export const placePopUpContainer = style({
+  width: '100%',
+  height: 'calc(100vh - 9.8rem)',
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'flex-start',
