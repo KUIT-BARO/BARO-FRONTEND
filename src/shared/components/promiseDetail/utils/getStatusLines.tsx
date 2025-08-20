@@ -1,8 +1,8 @@
-import type { PromisisDetailProps } from '@shared/components/promiseContainer/types/PromiseContainer.type';
+import type { PromisesDetailProps } from '@shared/components/promiseContainer/types/PromiseContainer.type';
 import { formatDateWithDay } from '@shared/utils/formatDateWithDay';
 import { PROMISE_STATUS } from '@shared/constant/promiseStatus';
 
-export default function getStatusLines(props: PromisisDetailProps): {
+export default function getStatusLines(props: PromisesDetailProps): {
   firstLine: string;
   secondLine: string;
   thirdLine: string;

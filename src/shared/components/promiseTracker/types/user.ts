@@ -1,7 +1,7 @@
-import type { AvatarType } from '@shared/constant/promise';
+import type { AvatarType } from '@shared/constant/avatar';
 
 export type User = {
-  userId: number;
+  userId?: number;
   avatarType: AvatarType;
   isHost: boolean;
   suggestionProgress: number;
