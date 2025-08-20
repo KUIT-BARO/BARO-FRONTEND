@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import PromisesDetail from '@shared/components/promisesDetail/PromisesDetail';
+import PromisesDetail from '@shared/components/promiseDetail/PromisesDetail';
 
 const meta: Meta<typeof PromisesDetail> = {
   title: 'Components/PromisesDetail',

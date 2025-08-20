@@ -93,6 +93,12 @@ export const dateItem = recipe({
       },
       default: {},
     },
+    isLasted: {
+      True: {
+        borderRadius: '99px',
+      },
+      default: {},
+    },
   },
 });
 

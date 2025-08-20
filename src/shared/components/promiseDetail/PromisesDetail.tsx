@@ -1,7 +1,7 @@
-import * as styles from '@shared/components/promisesDetail/PromisesDetail.css';
+import * as styles from '@shared/components/promiseDetail/PromisesDetail.css';
 import type { PromisesDetailProps } from '@shared/components/promiseContainer/types/PromiseContainer.type';
-import getStatusSet from '@shared/components/promisesDetail/utils/getStatusSet';
-import getStatusLines from '@shared/components/promisesDetail/utils/getStatusLines';
+import getStatusSet from '@shared/components/promiseDetail/utils/getStatusSet';
+import getStatusLines from '@shared/components/promiseDetail/utils/getStatusLines';
 import { PROMISE_STATUS_CONFIG } from '@shared/constant/promiseStatus';
 import Text from '@shared/components/text/Text';
 
