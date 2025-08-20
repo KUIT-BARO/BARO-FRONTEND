@@ -2,7 +2,7 @@ import Text from '@shared/components/text/Text';
 import Slot from './Slot';
 import type { TimeDTO } from 'api/data-contracts';
 import * as styles from '../TimeTable.css';
-import { DAY } from '@shared/constant/day';
+import { DAYS } from '@shared/constant/Days';
 
 interface ColumnProps {
   date: string;
@@ -31,7 +31,7 @@ export default function Column({ date, handleSelectSlot, selectedSlots = [] }: C
   const renderTitle = () => {
     const dateObj = new Date(date);
     const weekday = dateObj.getDay();
-    return `${dateObj.getMonth() + 1}/${dateObj.getDate()} (${DAY[weekday]})`;
+    return `${dateObj.getMonth() + 1}/${dateObj.getDate()} (${DAYS[weekday]})`;
   };
 
   return (
