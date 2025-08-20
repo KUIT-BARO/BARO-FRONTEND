@@ -1,10 +1,10 @@
-import type { PromisesDetailProps } from '@shared/components/promiseContainer/types/PromiseContainer.type';
+import type { PromiseDetailProps } from '@shared/components/promiseContainer/types/PromiseContainer.type';
 import * as styles from '@shared/components/promiseContainer/PromiseContainer.css';
-import PromisesDetail from '@shared/components/promisesDetail/PromisesDetail';
+import PromisesDetail from '@shared/components/promiseDetail/PromiseDetail';
 import { IcArrowRight } from '@svg/index';
 import Text from '@shared/components/text/Text';
 
-export default function PromiseContainer(props: PromisesDetailProps) {
+export default function PromiseContainer(props: PromiseDetailProps) {
   return (
     <div className={styles.container}>
       <div className={styles.headerSection({ background: props.status })}>

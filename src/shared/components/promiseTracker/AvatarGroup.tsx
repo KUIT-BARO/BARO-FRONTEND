@@ -1,44 +1,12 @@
 import { useState } from 'react';
 import * as styles from '@shared/components/promiseTracker/PromiseTracker.css';
-import { IcDog, IcMan, IcWoman, IcUser, IcCrownBlue, IcPinCheck } from '@svg/index';
-import { AVATAR_TYPE, type AvatarType } from '@shared/constant/promise';
+import { IcCrownBlue, IcPinCheck } from '@svg/index';
 import type { User } from '@shared/components/promiseTracker/types/user';
-
-type UserAvatarProps = {
-  user: User;
-  isExpanded: boolean;
-  zIndex: number;
-};
+import renderAvatar from '@shared/utils/renderAvator';
 
 type AvatarGroupProps = {
   users: User[];
 };
-
-const renderAvatar = (avatarType: AvatarType) => {
-  switch (avatarType) {
-  case AVATAR_TYPE.DOG:
-    return <IcDog className={styles.avatar} />;
-  case AVATAR_TYPE.MAN:
-    return <IcMan className={styles.avatar} />;
-  case AVATAR_TYPE.WOMAN:
-    return <IcWoman className={styles.avatar} />;
-  default:
-    return <IcUser className={styles.avatar} />;
-  }
-};
-
-function UserAvatar({ user, isExpanded, zIndex }: UserAvatarProps) {
-  return (
-    <div
-      className={styles.avatarContainer({ expanded: isExpanded })}
-      style={{ zIndex }}
-    >
-      {user.isHost && <IcCrownBlue className={styles.crown} />}
-      <IcPinCheck className={styles.avatarBackground} />
-      {renderAvatar(user.avatarType)}
-    </div>
-  );
-}
 
 export default function AvatarGroup({ users }: AvatarGroupProps) {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -48,17 +16,19 @@ export default function AvatarGroup({ users }: AvatarGroupProps) {
   }
 
   return (
-    <div
-      className={styles.avatarGroup}
-      onClick={() => setIsExpanded(!isExpanded)}
-    >
+    <div className={styles.avatarGroup} onClick={() => setIsExpanded(!isExpanded)}>
       {users.map((user, index) => (
-        <UserAvatar
+        <div
           key={user.userId}
-          user={user}
-          isExpanded={isExpanded}
-          zIndex={isExpanded ? 1 : users.length - index}
-        />
+          className={styles.avatarContainer({
+            expanded: isExpanded,
+          })}
+          style={{ zIndex: isExpanded ? 1 : users.length - index }}
+        >
+          {user.isHost && <IcCrownBlue className={styles.crown} />}
+          <IcPinCheck className={styles.avatarBackground} />
+          {renderAvatar(user.avatarType, styles.avatar)}
+        </div>
       ))}
     </div>
   );
