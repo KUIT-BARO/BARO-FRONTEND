@@ -36,7 +36,11 @@ export default function Step4({
 }: Step4Props) {
   const [confirmPopup, setConfirmPopup] = useState(false);
   const isFormValid = () => {
-    return promiseDeadline.length > 0 && promiseDeadline <= suggestStartDate;
+    return (
+      promiseDeadline <= suggestStartDate &&
+      promiseDeadline >= new Date().toISOString().split('T')[0] &&
+      promiseDeadline !== ''
+    );
   };
   const handleNextBtn = () => {
     if (!isFormValid()) {
@@ -72,7 +76,7 @@ export default function Step4({
             value={promiseDeadline}
             onChange={handleDeadlineChange}
           />
-          {promiseDeadline > suggestStartDate && (
+          {!isFormValid() && (
             <Text tag="body_14" color="red1">
               약속 마감일은 약속 시작일 이전여야 합니다.
             </Text>

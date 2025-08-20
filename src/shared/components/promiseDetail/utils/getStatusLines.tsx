@@ -10,7 +10,7 @@ export default function getStatusLines(props: PromiseDetailProps): {
   switch (props.status) {
     case PROMISE_STATUS.PENDING:
       return {
-        firstLine: `투표까지 ${props.untilVoteDate}일`,
+        firstLine: `투표까지 D-${props.untilVoteDate > 0 ? props.untilVoteDate : 'DAY'}`,
         secondLine: props.suggestedRegion,
         thirdLine: `${formatDateWithDay(props.suggestedStartDate)} ~ ${formatDateWithDay(props.suggestedEndDate)}`,
       };
