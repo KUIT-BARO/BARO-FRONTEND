@@ -31,4 +31,4 @@ export interface ConfirmedPromise extends BasePromises {
   showStatusBadge?: boolean;
 }
 
-export type PromisesDetailProps = PendingPromise | VotingPromise | ConfirmedPromise;
+export type PromiseDetailProps = PendingPromise | VotingPromise | ConfirmedPromise;

@@ -6,9 +6,6 @@ export const ROUTES = {
   PIN_ADD: '/pin/add',
   PIN_DETAIL: '/pin/:pinId',
   PLACE_PINS: '/place/:placeId/pins',
-  PROMISE_MANAGE: '/promise-manage',
-  PROMISE_PROPOSAL: '/promise-proposal',
-  PROMISE_SELECT: '/promise-select',
-  PROMISE_VOTE: '/promise-vote',
+  PROMISE: '/promise',
   PROMISE_STATUS: '/promise-status',
 };

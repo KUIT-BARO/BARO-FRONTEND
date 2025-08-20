@@ -11,10 +11,7 @@ const Explore = lazy(() => import('@pages/explore/Explore'));
 const PinAdd = lazy(() => import('@pages/pinAdd/PinAdd'));
 const PinDetail = lazy(() => import('@pages/pinDetail/PinDetail'));
 const PlacePins = lazy(() => import('@pages/placePins/PlacePins'));
-const PromiseManage = lazy(() => import('@pages/promiseManage/PromiseManage'));
-const PromiseProposal = lazy(() => import('@pages/promiseProposal/PromiseProposal'));
-const PromiseSelect = lazy(() => import('@pages/promiseSelect/PromiseSelect'));
-const PromiseVote = lazy(() => import('@pages/promiseVote/PromiseVote'));
+const Promise = lazy(() => import('@pages/promise/Promise'));
 const PromiseStatus = lazy(() => import('@pages/promiseStatus/PromiseStatus'));
 
 const router = createBrowserRouter([
@@ -50,20 +47,8 @@ const router = createBrowserRouter([
         element: <PlacePins />,
       },
       {
-        path: ROUTES.PROMISE_MANAGE,
-        element: <PromiseManage />,
-      },
-      {
-        path: ROUTES.PROMISE_PROPOSAL,
-        element: <PromiseProposal />,
-      },
-      {
-        path: ROUTES.PROMISE_SELECT,
-        element: <PromiseSelect />,
-      },
-      {
-        path: ROUTES.PROMISE_VOTE,
-        element: <PromiseVote />,
+        path: ROUTES.PROMISE,
+        element: <Promise />,
       },
       {
         path: ROUTES.PROMISE_STATUS,
