@@ -1,20 +1,12 @@
-<<<<<<<< HEAD:src/shared/components/promiseDetail/PromisisDetail.tsx
-import * as styles from '@shared/components/promiseDetail/PromisisDetail.css';
-import type { PromisisDetailProps } from '@shared/components/promiseContainer/types/PromiseContainer.type';
-========
-import * as styles from '@shared/components/promiseDetail/PromisesDetail.css';
-import type { PromisesDetailProps } from '@shared/components/promiseContainer/types/PromiseContainer.type';
->>>>>>>> develop:src/shared/components/promiseDetail/PromisesDetail.tsx
+import type { PromiseDetailProps } from '@shared/components/promiseContainer/types/PromiseContainer.type';
+
+import * as styles from '@shared/components/promiseDetail/PromiseDetail.css';
 import getStatusSet from '@shared/components/promiseDetail/utils/getStatusSet';
 import getStatusLines from '@shared/components/promiseDetail/utils/getStatusLines';
 import { PROMISE_STATUS_CONFIG } from '@shared/constant/promiseStatus';
 import Text from '@shared/components/text/Text';
 
-<<<<<<<< HEAD:src/shared/components/promiseDetail/PromisisDetail.tsx
-export default function PromiseDetail(props: PromisisDetailProps) {
-========
-export default function PromisesDetail(props: PromisesDetailProps) {
->>>>>>>> develop:src/shared/components/promiseDetail/PromisesDetail.tsx
+export default function PromiseDetail(props: PromiseDetailProps) {
   const { vote: VoteIcon, pin: PinIcon, date: DateIcon } = getStatusSet()[props.status];
   const { firstLine, secondLine, thirdLine } = getStatusLines(props);
 

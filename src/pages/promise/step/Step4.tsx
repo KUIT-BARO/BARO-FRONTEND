@@ -6,7 +6,7 @@ import type { Step4Props } from '@/pages/promise/types/Step';
 import { useState } from 'react';
 import PopupOverlay from '@shared/components/popupOverlay/PopupOverlay';
 import { PROMISE_STATUS } from '@shared/constant/promiseStatus';
-import PromiseDetail from '@shared/components/promiseDetail/PromisisDetail';
+import PromiseDetail from '@shared/components/promiseDetail/PromiseDetail';
 import type { Place } from '@shared/components/kakaoMap/types/latLng';
 import type { NavigateFunction } from 'react-router-dom';
 
