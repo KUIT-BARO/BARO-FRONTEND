@@ -31,7 +31,7 @@ export const buttonWrapper = style({
   right: '0',
 
   paddingBottom: '1.25rem',
-  background: 'blue0',
+  background: vars.color.blue0,
 });
 
 export const calendarWrapper = style({

@@ -18,7 +18,7 @@ interface ConfirmPopupProps {
   };
   suggestedRegion: Place[];
   navigate: NavigateFunction;
-  setConfirmPopup: (value: boolean) => void;
+  setConfirmPopup: (_value: boolean) => void;
   promiseDeadline: string;
   onSubmit: () => void;
   suggestStartDate: string;
@@ -39,6 +39,9 @@ export default function Step4({
     return promiseDeadline.length > 0 && promiseDeadline <= suggestStartDate;
   };
   const handleNextBtn = () => {
+    if (!isFormValid()) {
+      return;
+    }
     setConfirmPopup(true);
   };
   return (

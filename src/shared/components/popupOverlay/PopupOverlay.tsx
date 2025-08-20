@@ -28,7 +28,7 @@ export default function PopupOverlay({
       <div className={styles.container} onClick={onClose}></div>
       {top && (
         <div className={styles.top}>
-          <IcArrowLeft />
+          <IcArrowLeft onClick={onClose} />
           <Text tag="body_bold_19" color="white" className={styles.title}>
             {toptitle}
           </Text>
