@@ -1,6 +1,6 @@
 import type { PromisesDetailProps } from '@shared/components/promiseContainer/types/PromiseContainer.type';
 import * as styles from '@shared/components/promiseContainer/PromiseContainer.css';
-import PromisesDetail from '@shared/components/promisesDetail/PromisesDetail';
+import PromisesDetail from '@shared/components/promiseDetail/PromisesDetail';
 import { IcArrowRight } from '@svg/index';
 import Text from '@shared/components/text/Text';
 
