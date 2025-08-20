@@ -104,11 +104,12 @@ export const placeNameWrapper = style({
 });
 
 export const confirmContainer = style({
+  width: '100%',
   display: 'flex',
   flexDirection: 'column',
   gap: '1.6rem',
   backgroundColor: 'white',
-  borderRadius: '1rem',
+  borderRadius: '1rem 1rem 0 0',
   padding: '3.2rem 2rem',
 });
 
