@@ -1,6 +1,6 @@
-import  { useState } from 'react';
+import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import Popupoverlay from '@shared/components/popup-overlay/PopupOverlay';
+import Popupoverlay from '@shared/components/popupOverlay/PopupOverlay';
 
 const meta: Meta<typeof Popupoverlay> = {
   title: 'Shared/Popupoverlay',
@@ -22,7 +22,7 @@ export default meta;
 interface PopupOverlayProps {
   open?: boolean;
   top?: boolean;
-  toptitle?:string;
+  toptitle?: string;
   position?: 'center' | 'bottom';
 }
 type Story = StoryObj<typeof Popupoverlay>;
@@ -58,15 +58,12 @@ const Template = (args: PopupOverlayProps) => {
 };
 
 export const CenteredWithTop: Story = {
-  render: () =>
-    <Template position="center" top={true} toptitle="Topbar Title!" />,
+  render: () => <Template position="center" top={true} toptitle="Topbar Title!" />,
 };
 export const CenteredWithoutTop: Story = {
-  render: () =>
-    <Template position="center" top={false}  />,
+  render: () => <Template position="center" top={false} />,
 };
 
 export const BottomWithoutTop: Story = {
-  render: () =>
-    <Template position="bottom" top={false} />,
+  render: () => <Template position="bottom" top={false} />,
 };

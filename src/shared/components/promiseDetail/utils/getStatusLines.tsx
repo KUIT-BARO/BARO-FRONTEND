@@ -1,8 +1,8 @@
-import type { PromisesDetailProps } from '@shared/components/promiseContainer/types/PromiseContainer.type';
+import type { PromiseDetailProps } from '@shared/components/promiseContainer/types/PromiseContainer.type';
 import { formatDateWithDay } from '@shared/utils/formatDateWithDay';
 import { PROMISE_STATUS } from '@shared/constant/promiseStatus';
 
-export default function getStatusLines(props: PromisesDetailProps): {
+export default function getStatusLines(props: PromiseDetailProps): {
   firstLine: string;
   secondLine: string;
   thirdLine: string;
@@ -10,7 +10,7 @@ export default function getStatusLines(props: PromisesDetailProps): {
   switch (props.status) {
   case PROMISE_STATUS.PENDING:
     return {
-      firstLine: `${props.untilVoteDate}일`,
+      firstLine: `투표까지 D-${props.untilVoteDate > 0 ? props.untilVoteDate : 'DAY'}`,
       secondLine: props.suggestedRegion,
       thirdLine: `${formatDateWithDay(props.suggestedStartDate)} ~ ${formatDateWithDay(props.suggestedEndDate)}`,
     };
@@ -29,5 +29,4 @@ export default function getStatusLines(props: PromisesDetailProps): {
   default:
     throw new Error(`Unknown promise status`);
   }
-
 }
