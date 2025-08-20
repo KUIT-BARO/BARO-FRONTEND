@@ -14,7 +14,7 @@ export default function PromiseStatus() {
     <>
       {status === PROMISE_STATUS.PENDING && <Pending promiseId={promiseId} isHost={isHost} />}
       {status === PROMISE_STATUS.VOTING && <Voting promiseId={promiseId} isHost={true} />}
-      {status === PROMISE_STATUS.CONFIRMED && <Confirmed promiseId={promiseId} isHost={isHost} />}
+      {status === PROMISE_STATUS.CONFIRMED && <Confirmed promiseId={promiseId} />}
     </>
   );
 }

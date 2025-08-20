@@ -59,7 +59,7 @@ export default function Voting({ promiseId, isHost }: VotingProps) {
     console.log(selectedPlace, selectedTime);
     handleClose();
   };
-  å;
+
   const isFormValid = !isHost && selectedPlace.length > 0 && selectedTime.length > 0;
 
   return (
