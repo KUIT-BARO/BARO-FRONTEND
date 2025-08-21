@@ -76,3 +76,63 @@ export const mockUpPlace = {
     },
   ],
 };
+
+export const mockUpVoting = {
+  promiseName: 'KUIT BARO 2차 회의',
+  promisePlace: [
+    {
+      placeName: '강남역 스타벅스',
+      placeAddress: '서울특별시 강남구 역삼동 123-123',
+    },
+    {
+      placeName: '건국대학교 중앙도서관',
+      placeAddress: '서울특별시 강남구 역삼동 123-123',
+    },
+
+    {
+      placeName: '강남역 투썸플레이스',
+      placeAddress: '서울특별시 강남구 역삼동 123-123',
+    },
+    {
+      placeName: '건국대학교 신공학관',
+      placeAddress: '서울특별시 강남구 역삼동 123-123',
+    },
+  ],
+  promiseAvailableTimes: [
+    {
+      date: '2025-04-03',
+      startTime: '12:00:00',
+      endTime: '12:30:00',
+    },
+    {
+      date: '2025-04-03',
+      startTime: '12:00:00',
+      endTime: '12:30:00',
+    },
+    {
+      date: '2025-04-03',
+      startTime: '12:00:00',
+      endTime: '12:30:00',
+    },
+    {
+      date: '2025-04-03',
+      startTime: '12:00:00',
+      endTime: '12:30:00',
+    },
+  ],
+};
+
+export const mockUpConfirmed = {
+  promiseName: 'KUIT BARO 2차 회의',
+  promisePlace: {
+    placeName: '강남역 스타벅스',
+    placeAddress: '서울특별시 강남구 역삼동 123-123',
+  },
+
+  promiseAvailableTimes: {
+    date: '2025-04-03',
+    startTime: '12:00:00',
+    endTime: '12:30:00',
+  },
+  promiseMembersNames: ['John Doe', 'Jane Doe', 'John Smith', 'Jane Smith'],
+};
