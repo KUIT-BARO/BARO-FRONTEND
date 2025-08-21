@@ -15,14 +15,14 @@ interface ConfirmPopupProps {
   categories: string[];
 }
 
-const ConfirmPopup: React.FC<ConfirmPopupProps> = ({
+export default function ConfirmPopup({
   open,
   onClose,
   onConfirm,
   score,
   max,
   categories,
-}) => {
+}: ConfirmPopupProps): React.JSX.Element | null {
   if (!open) return null;
 
   return (
@@ -74,5 +74,3 @@ const ConfirmPopup: React.FC<ConfirmPopupProps> = ({
     </PopupOverlay>
   );
 };
-
-export default ConfirmPopup;
