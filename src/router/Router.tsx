@@ -10,7 +10,7 @@ const MyPage = lazy(() => import('@pages/myPage/MyPage'));
 const Search = lazy(() => import('@pages/search/Search'));
 const Promise = lazy(() => import('@pages/promise/Promise'));
 const PromiseStatus = lazy(() => import('@pages/promiseStatus/PromiseStatus'));
-
+const SignUp = lazy(() => import('@pages/signUp/SignUp'));
 const router = createBrowserRouter([
   {
     element: <Layout />,
@@ -38,6 +38,10 @@ const router = createBrowserRouter([
       {
         path: ROUTES.PROMISE_STATUS,
         element: <PromiseStatus />,
+      },
+      {
+        path: ROUTES.SIGN_UP,
+        element: <SignUp />,
       },
       {
         path: '*',
