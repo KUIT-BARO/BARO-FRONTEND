@@ -1,15 +1,16 @@
-import type { UseFormReturn } from 'react-hook-form';
+import type { UseFormSetValue, UseFormWatch, FormState } from 'react-hook-form';
 import * as styles from '@pages/pinAdd/component/pinScoreInput/PinScoreInput.css';
 import Text from '@shared/components/text/Text';
 import { IcStarFill, IcStarNone } from '@svg/index';
 import type { PinAddFormData } from '@pages/pinAdd/hook/usePinAddValidation';
 
 interface PinScoreInputProps {
-  form: UseFormReturn<PinAddFormData>;
+  setValue: UseFormSetValue<PinAddFormData>;
+  watch: UseFormWatch<PinAddFormData>;
+  errors: FormState<PinAddFormData>['errors'];
 }
 
-export default function PinScoreInput({ form }: PinScoreInputProps) {
-  const { setValue, watch, formState: { errors } } = form;
+export default function PinScoreInput({ setValue, watch, errors }: PinScoreInputProps) {
   const score = watch('score');
 
   const handleStarClick = (starIndex: number) => {

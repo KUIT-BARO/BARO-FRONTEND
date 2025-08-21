@@ -1,15 +1,17 @@
 import React from 'react';
-import type { UseFormReturn } from 'react-hook-form';
+import type { UseFormRegister, UseFormWatch, FormState, UseFormSetValue } from 'react-hook-form';
 import * as styles from '@pages/pinAdd/component/pinReviewInput/PinReviewInput.css';
 import type { PinAddFormData } from '@pages/pinAdd/hook/usePinAddValidation';
 import Text from '@shared/components/text/Text';
 
 interface PinReviewInputProps {
-  form: UseFormReturn<PinAddFormData>;
+  register: UseFormRegister<PinAddFormData>;
+  watch: UseFormWatch<PinAddFormData>;
+  errors: FormState<PinAddFormData>['errors'];
+  setValue: UseFormSetValue<PinAddFormData>;
 }
 
-export default function PinReviewInput({ form }: PinReviewInputProps) {
-  const { register, watch, formState: { errors }, setValue } = form;
+export default function PinReviewInput({ register, watch, errors, setValue }: PinReviewInputProps) {
   const reviewValue = watch('review');
   const maxLength = 150;
 

@@ -1,4 +1,4 @@
-import type { UseFormReturn } from 'react-hook-form';
+import type { UseFormSetValue, UseFormWatch, FormState } from 'react-hook-form';
 import * as styles from '@pages/pinAdd/component/pinCategoriesInput/PinCategoriesInput.css';
 import { CATEGORIES } from '@shared/constant/category';
 import Text from '@shared/components/text/Text';
@@ -6,11 +6,12 @@ import Button from '@shared/components/button/Button';
 import type { PinAddFormData } from '@pages/pinAdd/hook/usePinAddValidation';
 
 interface PinCategoriesInputProps {
-  form: UseFormReturn<PinAddFormData>;
+  setValue: UseFormSetValue<PinAddFormData>;
+  watch: UseFormWatch<PinAddFormData>;
+  errors: FormState<PinAddFormData>['errors'];
 }
 
-export default function PinCategoriesInput({ form }: PinCategoriesInputProps) {
-  const { setValue, watch, formState: { errors } } = form;
+export default function PinCategoriesInput({ setValue, watch, errors }: PinCategoriesInputProps) {
   const selectedCategories = watch('categories');
   const MAX = 5;
 

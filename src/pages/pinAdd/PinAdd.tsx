@@ -17,8 +17,7 @@ import {
 
 export default function PinAdd() {
   const navigate = useNavigate();
-  const form = usePinAddValidation();
-  const { handleSubmit, watch } = form;
+  const { register, watch, formState: { errors }, setValue, handleSubmit } = usePinAddValidation();
   const [showConfirmPopup, setShowConfirmPopup] = useState(false);
 
   const watchedValues = watch();
@@ -65,10 +64,11 @@ export default function PinAdd() {
       <Container className={styles.pinReviewContainer}>
         <PinPlaceInput />
         <PinPhotoInput />
-        <PinReviewInput form={form} />
+        <PinReviewInput register={register} watch={watch} errors={errors} setValue={setValue}
+        />
       </Container>
-      <PinScoreInput form={form} />
-      <PinCategoriesInput form={form} />
+      <PinScoreInput setValue={setValue} watch={watch} errors={errors} />
+      <PinCategoriesInput setValue={setValue} watch={watch} errors={errors} />
 
       <ConfirmPopup
         open={showConfirmPopup}

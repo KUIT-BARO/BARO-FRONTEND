@@ -49,5 +49,7 @@ export const usePinAddValidation = () => {
     mode: 'onChange',
   });
 
-  return form;
+  const { register, watch, formState: { errors }, setValue, handleSubmit } = form;
+
+  return { register, watch, formState: { errors }, setValue, handleSubmit };
 };
