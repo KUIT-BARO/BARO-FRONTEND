@@ -1,6 +1,6 @@
 import React from 'react';
 import * as styles from '@pages/pinAdd/component/confirmPopup/ConfirmPopup.css';
-import PopupOverlay from '@shared/components/popup-overlay/PopupOverlay';
+import PopupOverlay from '@shared/components/popupOverlay/PopupOverlay';
 import Text from '@shared/components/text/Text';
 import Button from '@shared/components/button/Button';
 import Stars from '@shared/components/stars/Stars';
