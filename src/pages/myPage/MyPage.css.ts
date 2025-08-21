@@ -21,3 +21,7 @@ export const optionBox = style({
 export const optionSvg = style({
   cursor: 'pointer',
 });
+
+export const scheduleWrapper = style({
+  padding: '0 2rem',
+});

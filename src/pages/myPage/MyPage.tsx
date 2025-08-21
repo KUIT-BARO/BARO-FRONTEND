@@ -3,6 +3,7 @@ import Header from "@shared/components/header/Header";
 import { IcSetting, IcPlusBlack, IcShareBlack } from "@svg/index";
 import Text from "@shared/components/text/Text";
 import * as styles from "@pages/myPage/MyPage.css";
+import Schedule from "@shared/components/schedule/Schedule";
 
 export default function MyPage() {
   return <div className={styles.container}>
@@ -15,6 +16,8 @@ export default function MyPage() {
         <IcShareBlack className={styles.optionSvg} />
       </div>
     </div>
-    {/* 여기에 일정표 컴포넌트 추가 예정 */}
+    <div className={styles.scheduleWrapper}>
+      <Schedule />
+    </div>
   </div>;
 }
