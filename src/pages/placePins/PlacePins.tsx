@@ -8,7 +8,7 @@ import { mockupExplore } from '@pages/explore/mockup';
 export default function PlacePins() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const placeName = searchParams.get('placeName') || '핀 목록';
+  const placeName = searchParams.get('placeName');
 
   const handleBackClick = () => {
     navigate(-1);
@@ -16,7 +16,7 @@ export default function PlacePins() {
 
   const handlePinClick = (item: typeof mockupExplore[0]) => {
     const queryParams = new URLSearchParams({
-      placeName: placeName,
+      placeName: placeName || '',
       userName: item.pin.userName || '',
       score: item.pin.score?.toString() || '0',
       categories: item.categories.join(',')
@@ -29,7 +29,7 @@ export default function PlacePins() {
       <Header
         background='blue0'
         leftIcon={() => <IcArrowBlueLeft onClick={handleBackClick} />}
-        text={placeName}
+        text={placeName || ''}
       />
       <div className={styles.placePinsContainer}>
         {mockupExplore.map((item, index) => (
