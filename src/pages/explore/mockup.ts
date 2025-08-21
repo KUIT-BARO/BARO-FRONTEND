@@ -1,6 +1,5 @@
 import { mockupPlaces, type PlaceData } from '@shared/components/placeReview/mockup';
-import { type PinResponseDTO, type PinListResponseDTO } from 'api/data-contracts';
-import { type CategoryType } from '@shared/constant/category';
+import type { PinListData } from '@pages/placePins/types/Pins';
 
 interface ReviewCategory {
   reviewType: string;
@@ -30,13 +29,7 @@ export const reviewCategories: ReviewCategory[] = [
   },
 ];
 
-export interface ExploreData {
-  pinId: PinListResponseDTO['pinId'];
-  pin: PinResponseDTO;
-  categories: CategoryType[];
-}
-
-export const mockupExplore: ExploreData[] = [
+export const mockupExplore: PinListData[] = [
   {
     pinId: 1,
     pin: {
