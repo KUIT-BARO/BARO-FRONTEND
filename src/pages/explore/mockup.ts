@@ -41,6 +41,9 @@ export const mockupExplore: ExploreData[] = [
     pinId: 1,
     pin: {
       userName: '이지환',
+      userEmail: 'hong@example.com',
+      profileImage: 'https://example.com/profile.jpg',
+      review: '아주 좋은 장소였습니다.',
       score: 3,
       placeName: '서울 광진구 화양동 5-47',
     },
@@ -50,6 +53,9 @@ export const mockupExplore: ExploreData[] = [
     pinId: 2,
     pin: {
       userName: '이지환',
+      userEmail: 'hong@example.com',
+      profileImage: 'https://example.com/profile.jpg',
+      review: '아주 좋은 장소였습니다.',
       score: 2,
       placeName: '서울 광진구 화양동 5-47',
     },

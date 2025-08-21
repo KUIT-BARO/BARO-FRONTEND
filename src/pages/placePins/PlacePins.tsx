@@ -4,6 +4,7 @@ import Header from '@shared/components/header/Header';
 import PlacePin from '@pages/placePins/component/PlacePin';
 import { IcArrowBlueLeft } from '@svg/index';
 import { mockupExplore } from '@pages/explore/mockup';
+import type { PinListData } from '@pages/placePins/types/Pins';
 
 export default function PlacePins() {
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ export default function PlacePins() {
     navigate(-1);
   };
 
-  const handlePinClick = (item: typeof mockupExplore[0]) => {
+  const handlePinClick = (item: PinListData) => {
     const queryParams = new URLSearchParams({
       placeName: placeName || '',
       userName: item.pin.userName || '',
