@@ -29,7 +29,7 @@ export default function PinScoreInput({ form }: PinScoreInputProps) {
         )}
       </div>
       <div className={styles.starsContainer}>
-        {[1, 2, 3, 4, 5].map((starIndex) => (
+        {Array.from({ length: 5 }, (_, index) => index + 1).map((starIndex) => (
           <button
             key={starIndex}
             type="button"
