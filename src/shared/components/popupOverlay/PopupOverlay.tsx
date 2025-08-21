@@ -12,32 +12,25 @@ interface PopupOverlayProps {
   children: React.ReactNode;
 }
 
-export default function PopupOverlay({
-  children,
-  onClose,
-  open = true,
-  position,
-  top = false,
-  toptitle,
-}: PopupOverlayProps) {
-  if (!open) {
-    return null;
-  }
-  return (
-    <>
-      <div className={styles.container} onClick={onClose}></div>
-      {top && (
-        <div className={styles.top}>
-          <IcArrowLeft onClick={onClose} />
-          <Text tag="body_bold_19" color="white" className={styles.title}>
-            {toptitle}
-          </Text>
-          <div />
-        </div>
-      )}
-      <div className={styles.content({ position })} onClick={e => e.stopPropagation()}>
-        {children}
+const PopupOverlay: React.FC<PopupOverlayProps> =
+  ({ children,onClose,open ,position,top=false,toptitle}) => {
+    if (!open) {
+      return null;
+    }
+    return (
+      <div className={styles.container} onClick={onClose}>
+        <div className={styles.dim} />
+        {top && <div className={styles.top}>
+          <IcArrowLeft/>
+          <Text tag="body_bold_19" color="white"
+            className={styles.title}>{toptitle}</Text>
+          <div/>
+        </div>}
+        <div className={styles.content({position})}
+          onClick={(e) => e.stopPropagation()}
+        >{children}</div>
       </div>
-    </>
-  );
-}
+    );
+  };
+
+export default PopupOverlay;
