@@ -6,7 +6,7 @@ import { CATEGORIES } from '@shared/constant/category';
 export const pinAddSchema = z.object({
   review: z.string()
     .min(1, '리뷰를 작성해주세요')
-    .max(150, '리뷰는 150자 이하로 작성해주세요'),
+    .max(149, '리뷰는 150자 이하로 작성해주세요'),
   score: z.number()
     .min(1, '별점을 선택해주세요')
     .max(5, '별점은 최대 5점입니다'),

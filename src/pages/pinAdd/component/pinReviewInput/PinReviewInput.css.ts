@@ -23,7 +23,7 @@ export const reviewTextarea = style({
 
 export const characterCount = style({
   position: 'absolute',
-  bottom: '-1rem',
+  bottom: '-2rem',
   right: '1rem',
   padding: '0.2rem 0.4rem',
   fontSize: vars.font.body_12.fontSize,
@@ -32,7 +32,7 @@ export const characterCount = style({
 
 export const errorMessage = style({
   position: 'absolute',
-  bottom: '-1rem',
+  bottom: '-2rem',
   left: '1rem',
   padding: '0.2rem 0.4rem',
 });
