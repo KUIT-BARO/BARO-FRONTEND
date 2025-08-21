@@ -5,7 +5,7 @@ export const placePinWrapper = style({
   display: 'flex',
   flexDirection: 'column',
   width: '100%',
-  padding: '16px',
+  padding: '1.6rem',
   backgroundColor: vars.color.white,
 });
 
