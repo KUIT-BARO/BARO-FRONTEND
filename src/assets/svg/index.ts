@@ -69,3 +69,4 @@ export { default as IcArrowBlueLeft } from '@svg/ic_arrow_blue_left.svg?react';
 export { default as IcPinCheck } from '@svg/ic_pin_check.svg?react';
 export { default as IcPlusBlack } from '@svg/ic_plus_black.svg?react';
 export { default as IcShareBlack } from '@svg/ic_share_black.svg?react';
+export { default as IcNavXGray } from '@svg/ic_nav_x_gray.svg?react';
