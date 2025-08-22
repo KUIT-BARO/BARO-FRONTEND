@@ -9,8 +9,7 @@ import ScheduleSlots from '../constant/ScheduleSlots';
 interface ColumnProps {
   schedules: SchedulesDTO[];
   dayOfWeek: '0' | '1' | '2' | '3' | '4' | '5' | '6';
-    handleFixSchedule: (_schedule: SchedulesDTO) => void;
-
+  handleFixSchedule: (_schedule: SchedulesDTO) => void;
 }
 export default function Column({ schedules, dayOfWeek, handleFixSchedule }: ColumnProps) {
   const DAYTITLE = ORIGINAL_DAYS[Number(dayOfWeek)];

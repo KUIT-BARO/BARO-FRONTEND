@@ -12,7 +12,6 @@ interface ScheduleSelectFieldProps {
 }
 
 export default function ScheduleSelectField({ label, value, onChange, type }: ScheduleSelectFieldProps) {
-
   return (
     <div className={styles.selectField}>
       <Text tag='body_bold_19'>{label}</Text>

@@ -48,8 +48,8 @@ export function useScheduleForm({
       setValue(field, e.target.value, { shouldDirty: true, shouldValidate: true });
     };
   }
-  const onSubmit = (data: ScheduleFormValues) => {
-    console.log(data);
+  const onSubmit = (_data: ScheduleFormValues) => {
+    console.log(_data);
   };
   return {
     handleSubmit,

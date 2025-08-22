@@ -4,11 +4,13 @@ import { recipe } from '@vanilla-extract/recipes';
 
 export const scheduleWrapper = style({
   display: 'flex',
+  width: '100%',
   overflow: 'auto',
+
+  gap: '1rem',
+
   scrollbarWidth: 'thin',
   scrollbarColor: `${vars.color.gray0} transparent`,
-  width: '100%',
-  gap: '1rem',
 });
 
 export const columnWrapper = style({
@@ -19,11 +21,13 @@ export const slotWrapper = recipe({
   base: {
     display: 'flex',
     flexDirection: 'column',
-    overflow: 'visible',
-    gap: '1rem',
+
     width: '6.7rem',
     height: '3rem',
     padding: '0.7rem 0.7rem 0 0.7rem',
+
+    gap: '1rem',
+    overflow: 'visible',
   },
   variants: {
     backgroundColor: {
@@ -59,6 +63,7 @@ export const column = style({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
+
   gap: '1rem',
 });
 
