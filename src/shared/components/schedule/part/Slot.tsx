@@ -9,13 +9,14 @@ interface SlotProps {
   startTime: Time;
   schedule?: SchedulesDTO;
   slotIndex?: number;
+  handleFixSchedule: (_schedule: SchedulesDTO) => void;
 }
 
-export default function Slot({ slotIndex, startTime, schedule }: SlotProps) {
+export default function Slot({ slotIndex, startTime, schedule, handleFixSchedule }: SlotProps) {
   const colorIndex = GetRandomColor(schedule, slotIndex);
   const isTitleSlot = IsTitleSlot({ schedule, startTime });
   return (
-    <div className={styles.slotWrapper({ backgroundColor: colorIndex, isTitleSlot })}>
+    <div className={styles.slotWrapper({ backgroundColor: colorIndex, isTitleSlot })} onClick={() => handleFixSchedule(schedule ?? {})}>
       {isTitleSlot && <Text color="white" tag="body_bold_11">{schedule?.scheduleName}</Text>}
     </div>
   );

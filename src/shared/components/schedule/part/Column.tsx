@@ -9,8 +9,10 @@ import ScheduleSlots from '../constant/ScheduleSlots';
 interface ColumnProps {
   schedules: SchedulesDTO[];
   dayOfWeek: '0' | '1' | '2' | '3' | '4' | '5' | '6';
+    handleFixSchedule: (_schedule: SchedulesDTO) => void;
+
 }
-export default function Column({ schedules, dayOfWeek }: ColumnProps) {
+export default function Column({ schedules, dayOfWeek, handleFixSchedule }: ColumnProps) {
   const DAYTITLE = ORIGINAL_DAYS[Number(dayOfWeek)];
   const SCHEDULESLOTS = ScheduleSlots();
   return (
@@ -21,6 +23,7 @@ export default function Column({ schedules, dayOfWeek }: ColumnProps) {
           const { isInSlot, slotIndex } = isScheduled({ schedules: schedules ?? [], slotStart: scheduleSlot.startTime, slotEnd: scheduleSlot.endTime });
           return (
             <Slot
+              handleFixSchedule={handleFixSchedule}
               key={index}
               startTime={scheduleSlot.startTime}
               slotIndex={isInSlot ? slotIndex : undefined}
