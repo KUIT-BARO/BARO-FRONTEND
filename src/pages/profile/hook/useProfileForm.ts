@@ -3,7 +3,7 @@ import { z } from 'zod';
 import React from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import type { UserProfileResponseDTO } from '@/../api/data-contracts';
-import { type AvatarType } from '@shared/constant/promise';
+import { type AvatarType } from '@shared/constant/avatar';
 
 const schema = z.object({
   name: z
@@ -29,12 +29,12 @@ export function useProfileForm({ name, profileImage }: FormSchema) {
       profileImage,
     },
   });
-  const nameValue = watch('name');
-  const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const formData = watch();
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue('name', e.target.value.trim(), { shouldValidate: true, shouldDirty: true });
   };
-  const profileImageValue = watch('profileImage');
-  const onChangeProfileImage = (value: AvatarType) => {
+
+  const handleProfileImageChange = (value: AvatarType) => {
     setValue('profileImage', value, { shouldValidate: true, shouldDirty: true });
   };
   const handleProfileSubmitForm = handleSubmit((data: UserProfileResponseDTO) => {
@@ -42,10 +42,9 @@ export function useProfileForm({ name, profileImage }: FormSchema) {
   });
 
   return {
-    nameValue,
-    profileImageValue,
-    onChangeName,
-    onChangeProfileImage,
+    formData,
+    handleNameChange,
+    handleProfileImageChange,
     errors,
     handleProfileSubmitForm,
   };
