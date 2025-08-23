@@ -7,22 +7,21 @@ import Schedule from "@shared/components/schedule/Schedule";
 import { useState } from "react";
 import ScheduleModal from "@shared/components/scheduleModal/ScheduleModal";
 import type { SchedulesDTO } from "api/data-contracts";
+import { DEFAULT_SCHEDULE } from "@pages/myPage/constant/DefaultSchedule";
 
 export default function MyPage() {
   const [openSchedule, setOpenSchedule] = useState(false);
-  const [modalSchedule, setModalSchedule] = useState<SchedulesDTO>({
-    scheduleId: 0,
-    dayOfWeek: '0',
-    startTime: { hour: 7, minute: 0 },
-    endTime: { hour: 24, minute: 0 },
-    scheduleName: '',
-  });
-  const handleAddSchedule = () => {
+  const [modalSchedule, setModalSchedule] = useState<SchedulesDTO>({});
+  const handleModal = () => {
     setOpenSchedule(!openSchedule);
+  }
+  const handleAddSchedule = () => {
+    setModalSchedule(DEFAULT_SCHEDULE);
+    handleModal();
   };
-  const handleFixSchedule = (schedule: SchedulesDTO) => {
-    setModalSchedule(schedule);
-    handleAddSchedule();
+  const handleFixSchedule = (_schedule: SchedulesDTO) => {
+    setModalSchedule(_schedule);
+    handleModal();
   };
   return <div className={styles.container}>
     <Header text="마이페이지" rightIcon={IcSetting} />
@@ -37,6 +36,6 @@ export default function MyPage() {
     <div className={styles.scheduleWrapper}>
       <Schedule handleFixSchedule={handleFixSchedule}/>
     </div>
-    {openSchedule && <ScheduleModal onClose={handleAddSchedule} schedule={modalSchedule} />}
+    {openSchedule && <ScheduleModal onClose={handleModal} schedule={modalSchedule} />}
   </div>;
 }

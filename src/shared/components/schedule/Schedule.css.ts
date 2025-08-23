@@ -49,6 +49,7 @@ export const slotWrapper = recipe({
       default: {
         backgroundColor: 'transparent',
         border: `0.675px solid ${vars.color.gray2}`,
+        pointerEvents: 'none',
       },
     },
     isTitleSlot: {
