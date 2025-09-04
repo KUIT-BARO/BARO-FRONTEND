@@ -7,16 +7,28 @@ import type { UserProfileResponseDTO } from '@/../api/data-contracts';
 import { useProfileForm } from '@pages/profile/hook/useProfileForm';
 import renderAvatar from '@shared/utils/renderAvator';
 import { vars } from '@shared/styles/theme.css';
-import type { AvatarType } from '@shared/constant/avatar';
+import { type AvatarType, AVATAR_TYPE } from '@shared/constant/avatar';
+import { useState } from 'react';
+import PopupOverlay from '@shared/components/popupOverlay/PopupOverlay';
 
 export default function Profile() {
   const userProfile: UserProfileResponseDTO = {
     name: '규운',
     profileImage: 'DOG',
   };
+  const [fixModal, setFixModal] = useState(false);
+  const handleFixModal = () => {
+    setFixModal((prev) => !prev);
+  }
   const safeName = userProfile.name ?? '';
-  const safeProfileImage = (userProfile.profileImage ?? 'USER') as AvatarType;
-  const { formData, handleNameChange, handleProfileSubmitForm } = useProfileForm({ name: safeName, profileImage: safeProfileImage });
+  const [safeProfileImage, setSafeProfileImage] = useState<AvatarType>((userProfile.profileImage ?? 'USER') as AvatarType);
+
+  const handleSelectProfileImage = (type: AvatarType) => {
+    setSafeProfileImage(type);
+    handleProfileImageChange(type);
+    handleFixModal();
+  }
+  const { formData, handleNameChange, handleProfileSubmitForm, handleProfileImageChange } = useProfileForm({ name: safeName, profileImage: safeProfileImage });
 
   return (
     <div className={styles.container}>
@@ -25,7 +37,7 @@ export default function Profile() {
         <div className={styles.profileImageEdit}>
           <div className={styles.profileImage}>
             {renderAvatar(safeProfileImage, styles.profileImageIcon)}
-            <IcWriteBlue className={styles.editIcon} />
+            <IcWriteBlue className={styles.editIcon} onClick={handleFixModal}/>
           </div>
         </div>
         <div className={styles.profileNameEdit}>
@@ -33,6 +45,18 @@ export default function Profile() {
           <InputBar hasBackground={false} maxLength={12} showMaxLength={true} value={formData.name} onChange={handleNameChange} props={{style: {color: vars.color.black}}}/>
         </div>
       </form>
+      {fixModal && <PopupOverlay open={fixModal} onClose={handleFixModal} top={true} toptitle='사진 선택'>
+        <div className={styles.fixProfileContainer}>
+          <div className={styles.ProfileImages}>
+            {Object.values(AVATAR_TYPE).map((type) => (
+              <div key={type} onClick={() => handleSelectProfileImage(type)} >
+                {renderAvatar(type, styles.profileImageIcon)}
+              </div>
+            ))}
+          </div>
+          <Text tag='body_14' color='white'>원하는 사진으로 프로필을 변경해주세요</Text>
+        </div>
+      </PopupOverlay>}
     </div>
   )
 }

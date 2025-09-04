@@ -38,3 +38,16 @@ export const profileNameEdit = style({
 export const profileNameText = style({
   whiteSpace: 'nowrap',
 });
+
+export const fixProfileContainer = style({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+
+  gap: '4rem',
+});
+
+export const ProfileImages = style({
+  display: 'flex',
+  padding: '0 2rem',
+});
