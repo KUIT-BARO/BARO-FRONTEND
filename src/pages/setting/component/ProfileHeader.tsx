@@ -1,7 +1,7 @@
 import Text from "@shared/components/text/Text";
 import * as styles from "@pages/setting/component/ProfileHeader.css";
 import { IcMan,IcWriteGray } from "@svg/index";
-import type { UserProfileSettingResponseDTO } from "@/../api/data-contracts";
+import type { UserProfileSettingResponseDTO } from "api/data-contracts";
 
 interface ProfileHeaderProps {
   isSetting: boolean;
