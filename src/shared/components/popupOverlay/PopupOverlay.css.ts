@@ -4,10 +4,7 @@ import { recipe } from '@vanilla-extract/recipes';
 
 export const container = style({
   position: 'fixed',
-  top: '0',
-  left: '0',
-  right: '0',
-  bottom: '0',
+  inset: '0',
 
   width: '100%',
   height: '100%',
@@ -16,10 +13,7 @@ export const container = style({
   justifyContent: 'center',
   alignItems: 'center',
 
-  backgroundColor: vars.color.black,
-  opacity: '0.8',
-
-  zIndex: 999,
+  zIndex: 9999,
 });
 
 export const content = recipe({
@@ -39,6 +33,14 @@ export const content = recipe({
       },
     },
   },
+});
+
+export const dim = style({
+  position: 'absolute',
+  inset: '0',
+
+  backgroundColor: vars.color.black,
+  opacity: '0.8',
 });
 
 export const top = style({

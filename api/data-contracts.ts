@@ -438,14 +438,7 @@ export interface SchedulesDTO {
    * 요일
    * @example "1"
    */
-  dayOfWeek?:
-    | "MONDAY"
-    | "TUESDAY"
-    | "WEDNESDAY"
-    | "THURSDAY"
-    | "FRIDAY"
-    | "SATURDAY"
-    | "SUNDAY";
+  dayOfWeek?: '0' | '1' | '2' | '3' | '4' | '5' | '6';
   /** 종료 시간 */
   startTime?: LocalTime;
   /** 종료 시간 */
@@ -1158,8 +1151,7 @@ export type SuggestPromiseData = BaseResponseVoid;
 
 export type VoteData = BaseResponseVoid;
 
-export type GetPromiseAvailableTimeData =
-  BaseResponsePromiseAvailableTimeResponseDTO;
+export type GetPromiseAvailableTimeData = BaseResponsePromiseAvailableTimeResponseDTO;
 
 export type GetPromiseAvailableTimeError = BaseErrorResponse;
 
@@ -1205,8 +1197,7 @@ export type GetPromiseMemberSchedulesData = BaseResponseListSchedulesDTO;
 
 export type GetPromiseMemberSchedulesError = BaseErrorResponse;
 
-export type GetVotingPromiseData =
-  BaseResponsePromiseStatusVotingPromiseResponseDTO;
+export type GetVotingPromiseData = BaseResponsePromiseStatusVotingPromiseResponseDTO;
 
 export type GetHasVotedData = BaseResponseHasVotedResponseDTO;
 
@@ -1222,11 +1213,9 @@ export type GetPromiseStatusData = BaseResponsePromiseStatusResponseDTO;
 
 export type GetPendingPromiseData = BaseResponsePendingPromiseResponseDTO;
 
-export type GetConfirmedPromiseResponseData =
-  BaseResponsePromiseStatusConfirmedPromiseResponseDTO;
+export type GetConfirmedPromiseResponseData = BaseResponsePromiseStatusConfirmedPromiseResponseDTO;
 
-export type GetPromiseManagementPageData =
-  BaseResponsePromiseManagementResponseDTO;
+export type GetPromiseManagementPageData = BaseResponsePromiseManagementResponseDTO;
 
 export type GetCategoryPlacesData = BaseResponseListPlaceSearchResponseDTO;
 
