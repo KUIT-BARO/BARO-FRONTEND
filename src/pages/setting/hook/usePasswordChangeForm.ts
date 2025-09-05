@@ -7,11 +7,11 @@ const passwordChangeSchema = z
   .object({
     currentPassword: z.string().nonempty({ message: '현재 비밀번호를 입력해주세요.' }),
     newPassword: z.string().min(8, '새 비밀번호는 8자 이상이어야 합니다.'),
-    confirmNewPassword: z.string().nonempty({ message: '새 비밀번호 확인을 입력해주세요.' }),
+    confirmPassword: z.string().nonempty({ message: '새 비밀번호 확인을 입력해주세요.' }),
   })
-  .refine(data => data.newPassword === data.confirmNewPassword, {
+  .refine(data => data.newPassword === data.confirmPassword, {
     message: '새 비밀번호가 일치하지 않습니다.',
-    path: ['confirmNewPassword'],
+    path: ['confirmPassword'],
   });
 
 export type PasswordChangeFormValues = z.infer<typeof passwordChangeSchema>;
@@ -26,7 +26,7 @@ export function usePasswordChangeForm() {
     defaultValues: {
       currentPassword: '',
       newPassword: '',
-      confirmNewPassword: '',
+      confirmPassword: '',
     },
     resolver: zodResolver(passwordChangeSchema),
     mode: 'onChange',

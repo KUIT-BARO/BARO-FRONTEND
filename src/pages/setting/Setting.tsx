@@ -47,10 +47,10 @@ export default function Setting() {
             {errors.newPassword && <Text color='red1'>{errors.newPassword?.message}</Text>}
           </div>
           <div className={styles.inputContainer}>
-            <InputBar placeholder="새 비밀번호 확인" hasBackground={false} value={formData.confirmNewPassword} onChange={handleChangeField('confirmNewPassword')}  props={{
+            <InputBar placeholder="새 비밀번호 확인" hasBackground={false} value={formData.confirmPassword} onChange={handleChangeField('confirmPassword')}  props={{
               type: 'password',
             }}/>
-            {errors.confirmNewPassword && <Text color='red1'>{errors.confirmNewPassword?.message}</Text>}
+            {errors.confirmPassword && <Text color='red1'>{errors.confirmPassword?.message}</Text>}
           </div>
           <Button variant="enabled" size="long" text="변경하기" backgroundColor="baroBlue" onClick={handleSubmit(onSubmit)} />
         </div>
