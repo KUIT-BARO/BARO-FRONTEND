@@ -21,10 +21,10 @@ const PopupOverlay: React.FC<PopupOverlayProps> =
       <div className={styles.container} onClick={onClose}>
         <div className={styles.dim} />
         {top && <div className={styles.top}>
-          <IcArrowLeft/>
+          <IcArrowLeft className={styles.closeIcon}/>
           <Text tag="body_bold_19" color="white"
             className={styles.title}>{toptitle}</Text>
-          <div/>
+          <div className={styles.empty}/>
         </div>}
         <div className={styles.content({position})}
           onClick={(e) => e.stopPropagation()}
