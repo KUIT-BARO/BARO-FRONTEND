@@ -28,7 +28,8 @@ export default function PlacePins() {
     <div className={styles.placePinsWrapper}>
       <Header
         background='blue0'
-        leftIcon={() => <IcArrowBlueLeft onClick={handleBackClick} />}
+        leftIcon={IcArrowBlueLeft}
+        onClickLeftIcon={handleBackClick}
         text={placeName || ''}
       />
       <div className={styles.placePinsContainer}>
