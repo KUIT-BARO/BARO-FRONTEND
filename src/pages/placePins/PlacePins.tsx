@@ -16,14 +16,13 @@ export default function PlacePins() {
   };
 
   const handlePinClick = (item: PinListData) => {
-    const queryParams = new URLSearchParams({
-      placeName: placeName || '',
-      userName: item.pin.userName || '',
-      score: item.pin.score?.toString() || '0',
-      categories: item.categories.join(',')
-    });
+    const queryParams = new URLSearchParams();
+    if (placeName) queryParams.set('placeName', placeName);
+    if (item.pin.userName) queryParams.set('userName', item.pin.userName);
+    if (typeof item.pin.score === 'number') queryParams.set('score', String(item.pin.score));
+    item.categories.forEach((c) => queryParams.append('categories', c));
     navigate(`/pin/${item.pinId}?${queryParams.toString()}`);
-  }
+  };
 
   return (
     <div className={styles.placePinsWrapper}>
