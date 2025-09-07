@@ -1,5 +1,4 @@
-import React from 'react';
-import type { UseFormRegister, UseFormWatch, FormState, UseFormSetValue } from 'react-hook-form';
+import type { UseFormRegister, UseFormWatch, FormState } from 'react-hook-form';
 import * as styles from '@pages/pinAdd/component/pinReviewInput/PinReviewInput.css';
 import type { PinAddFormData } from '@pages/pinAdd/hook/usePinAddValidation';
 import Text from '@shared/components/text/Text';
@@ -8,21 +7,11 @@ interface PinReviewInputProps {
   register: UseFormRegister<PinAddFormData>;
   watch: UseFormWatch<PinAddFormData>;
   errors: FormState<PinAddFormData>['errors'];
-  setValue: UseFormSetValue<PinAddFormData>;
 }
 
-export default function PinReviewInput({ register, watch, errors, setValue }: PinReviewInputProps) {
+export default function PinReviewInput({ register, watch, errors }: PinReviewInputProps) {
   const reviewValue = watch('review');
   const maxLength = 150;
-
-  const handleInput = (e: React.FormEvent<HTMLTextAreaElement>) => {
-    const target = e.target as HTMLTextAreaElement;
-    if (target.value.length > maxLength) {
-      const truncatedValue = target.value.slice(0, maxLength);
-      target.value = truncatedValue;
-      setValue('review', truncatedValue);
-    }
-  };
 
   return (
     <div className={styles.reviewInputWrapper}>
@@ -30,8 +19,6 @@ export default function PinReviewInput({ register, watch, errors, setValue }: Pi
         {...register('review')}
         className={styles.reviewTextarea}
         placeholder='장소에 관한 리뷰를 작성해주세요...'
-        maxLength={maxLength}
-        onInput={handleInput}
         wrap='soft'
       />
       {errors.review && (
