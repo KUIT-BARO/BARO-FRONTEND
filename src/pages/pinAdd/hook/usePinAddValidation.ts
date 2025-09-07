@@ -43,7 +43,8 @@ export interface PinAddApiData {
 export const convertToIds = (categories: string[]): number[] => {
   return categories
     .map(category => (CATEGORIES as readonly string[]).indexOf(category))
-    .filter(index => index !== -1);
+    .filter(index => index !== -1)
+    .map(index => index - 1);
 };
 
 export const convertToApiData = (formData: PinAddFormData): PinAddApiData => {
