@@ -7,7 +7,10 @@ const NotFound = lazy(() => import('@shared/components/notFound/NotFound'));
 const Home = lazy(() => import('@pages/home/Home'));
 const Login = lazy(() => import('@pages/logIn/LogIn'));
 const MyPage = lazy(() => import('@pages/myPage/MyPage'));
-const Search = lazy(() => import('@pages/search/Search'));
+const Explore = lazy(() => import('@pages/explore/Explore'));
+const PinAdd = lazy(() => import('@pages/pinAdd/PinAdd'));
+const PinDetail = lazy(() => import('@pages/pinDetail/PinDetail'));
+const PlacePins = lazy(() => import('@pages/placePins/PlacePins'));
 const Promise = lazy(() => import('@pages/promise/Promise'));
 const PromiseStatus = lazy(() => import('@pages/promiseStatus/PromiseStatus'));
 
@@ -28,8 +31,20 @@ const router = createBrowserRouter([
         element: <MyPage />,
       },
       {
-        path: ROUTES.SEARCH,
-        element: <Search />,
+        path: ROUTES.EXPLORE,
+        element: <Explore />,
+      },
+      {
+        path: ROUTES.PIN_ADD,
+        element: <PinAdd />,
+      },
+      {
+        path: ROUTES.PIN_DETAIL,
+        element: <PinDetail />,
+      },
+      {
+        path: ROUTES.PLACE_PINS,
+        element: <PlacePins />,
       },
       {
         path: ROUTES.PROMISE,

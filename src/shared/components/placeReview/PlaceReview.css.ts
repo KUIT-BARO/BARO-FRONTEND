@@ -61,9 +61,9 @@ export const placeReviewDesc = style({
 
 export const placeReviewRatingContainer = style({
   display: 'flex',
+  gap: '0.4rem',
   justifyContent: 'center',
   textAlign: 'center',
-
   width: '100%',
   padding: '0.4rem 0 1.3rem 0',
 });

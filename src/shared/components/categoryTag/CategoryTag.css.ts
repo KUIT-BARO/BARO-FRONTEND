@@ -17,7 +17,7 @@ export const tagsWrapper = style({
 
 export const tagContainer = style({
   display: 'inline-flex',
-  gap: '0.5rem',
+  gap: '2rem',
 });
 
 export const tagButton = recipe({

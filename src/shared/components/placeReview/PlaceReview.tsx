@@ -1,9 +1,10 @@
+import { useNavigate } from 'react-router-dom';
 import * as styles from '@shared/components/placeReview/PlaceReview.css';
 import Text from '@shared/components/text/Text';
+import Stars from '@shared/components/stars/Stars';
 import { IcSaveWhite } from '@svg/index';
 import type { PlaceData } from '@shared/components/placeReview/mockup';
 import type { placeReviewSize } from '@shared/components/placeReview/types/placeReviewSize';
-import { useNavigate } from 'react-router-dom';
 
 interface PlaceReviewProps {
   size?: placeReviewSize;
@@ -45,8 +46,7 @@ export const PlaceReview = ({
           <Text tag="body_14" color="gray4">
             {placeRating}
           </Text>
-
-          {/* TODO: Star 컴포넌트 추가 필요 */}
+          <Stars score={placeRating} size='SMALL' />
         </span>
         <span className={styles.placeReviewCountContainer}>
           <IcSaveWhite className={styles.placeReviewCountIcon} />
@@ -67,8 +67,9 @@ export default function PlaceReviewList({
 }: PlaceReviewListProps) {
   const navigate = useNavigate();
 
-  const handlePlaceClick = (placeId: number) => {
-    navigate(`/place/${placeId}/reviews`);
+  const handlePlaceClick = (placeId: number, placeName: string) => {
+    const search = new URLSearchParams({ placeName }).toString();
+    navigate(`/place/${placeId}/pins?${search}`);
   };
 
   return (
@@ -92,7 +93,7 @@ export default function PlaceReviewList({
               placeRating={place.placeRating}
               placeReviewCount={place.placeReviewCount}
               onClick={() => {
-                handlePlaceClick(place.placeId);
+                handlePlaceClick(place.placeId, place.placeName);
               }}
             />
           </div>
