@@ -63,7 +63,7 @@ export default function PinAdd() {
       />
       <Container className={styles.pinReviewContainer}>
         <PinPlaceInput />
-        <PinPhotoInput />
+        <PinPhotoInput setValue={setValue} errors={errors} />
         <PinReviewInput register={register} watch={watch} errors={errors} setValue={setValue}
         />
       </Container>

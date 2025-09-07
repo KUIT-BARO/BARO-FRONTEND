@@ -3,6 +3,17 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { CATEGORIES } from '@shared/constant/category';
 
+const ALLOWED_IMAGE = ['jpg', 'jpeg', 'png', 'webp'] as const;
+
+const validateImageFile = (file: File | null | undefined): boolean => {
+  if (!file) return true;
+
+  const fileName = file.name.toLowerCase();
+  const extension = fileName.split('.').pop();
+
+  return extension ? (ALLOWED_IMAGE as readonly string[]).includes(extension) : false;
+};
+
 export const pinAddSchema = z.object({
   review: z.string()
     .min(1, '리뷰를 작성해주세요')
@@ -12,7 +23,12 @@ export const pinAddSchema = z.object({
     .max(5, '별점은 최대 5점입니다'),
   categories: z.array(z.string())
     .min(1, '카테고리를 최소 1개 선택해주세요')
-    .max(5, '카테고리는 최대 5개까지 선택 가능합니다')
+    .max(5, '카테고리는 최대 5개까지 선택 가능합니다'),
+  image: z.instanceof(File)
+    .optional()
+    .refine(validateImageFile, {
+      message: 'jpg, jpeg, png, webp 형식의 이미지 파일만 업로드 가능합니다.'
+    })
 });
 
 export type PinAddFormData = z.infer<typeof pinAddSchema>;
@@ -45,6 +61,7 @@ export const usePinAddValidation = () => {
       review: '',
       score: 0,
       categories: [],
+      image: undefined,
     },
     mode: 'onChange',
   });

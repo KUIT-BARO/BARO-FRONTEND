@@ -1,14 +1,43 @@
 import React, { useState, useRef } from 'react';
 import * as styles from '@pages/pinAdd/component/pinPhotoInput/PinPhotoInput.css';
 import Text from '@shared/components/text/Text';
+import type { UseFormSetValue, FieldErrors } from 'react-hook-form';
+import type { PinAddFormData } from '@pages/pinAdd/hook/usePinAddValidation';
 
-export default function PinPhotoInput() {
+interface PinPhotoInputProps {
+  setValue: UseFormSetValue<PinAddFormData>;
+  errors: FieldErrors<PinAddFormData>;
+}
+
+// 허용되는 이미지 파일 확장자
+const ALLOWED_IMAGE_EXTENSIONS = ['jpg', 'jpeg', 'png', 'webp'];
+
+// 파일 확장자 검증 함수
+const validateImageFile = (file: File): boolean => {
+  const fileName = file.name.toLowerCase();
+  const extension = fileName.split('.').pop();
+  return extension ? ALLOWED_IMAGE_EXTENSIONS.includes(extension) : false;
+};
+
+export default function PinPhotoInput({ setValue, errors }: PinPhotoInputProps) {
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
+
+    // 파일 확장자 검증
+    if (!validateImageFile(file)) {
+      alert('jpg, jpeg, png, webp 형식의 이미지 파일만 업로드 가능합니다.');
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
+      return;
+    }
+
+    // react-hook-form에 파일 설정
+    setValue('image', file);
 
     const reader = new FileReader();
     reader.onload = (e) => {
@@ -29,6 +58,7 @@ export default function PinPhotoInput() {
   const handleRemoveImage = (e: React.MouseEvent) => {
     e.stopPropagation();
     setUploadedImage(null);
+    setValue('image', undefined);
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
     }
@@ -40,7 +70,7 @@ export default function PinPhotoInput() {
         className={styles.hiddenInput}
         ref={fileInputRef}
         type='file'
-        accept='image/*'
+        accept='.jpg,.jpeg,.png,.webp'
         onChange={handleFileChange}
       />
       <div className={styles.photoContainer}>
@@ -62,6 +92,11 @@ export default function PinPhotoInput() {
           </div>
         )}
       </div>
+      {errors.image && (
+        <Text tag='body_14' color='red0'>
+          {errors.image.message}
+        </Text>
+      )}
     </div>
   );
 }
