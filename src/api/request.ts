@@ -49,7 +49,7 @@ export const request = async <T>(config: RequestConfig): Promise<T> => {
       const { status, data } = error.response;
       const message = data?.message;
 
-      const displayMessage = status + ' ' + message || '알 수 없는 오류가 발생했습니다.';
+      const displayMessage = status + ' ' + message;
 
       if (import.meta.env.DEV) {
         console.error(`[실패] ${url} : ${displayMessage}`);
