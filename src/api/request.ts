@@ -16,7 +16,7 @@ export interface RequestConfig {
   method: HTTPMethodType;
   url: string;
   query?: Record<string, string | number | boolean>;
-  body?: Record<string, unknown> | FormData;
+  body?: unknown | FormData;
   headers?: Record<string, string>;
 }
 
