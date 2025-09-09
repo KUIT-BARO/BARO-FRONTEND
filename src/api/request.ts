@@ -18,16 +18,18 @@ export interface RequestConfig {
   query?: Record<string, string | number | boolean>;
   body?: unknown | FormData;
   headers?: Record<string, string>;
+  withCredentials?: boolean;
 }
 
 export const request = async <T>(config: RequestConfig): Promise<T> => {
-  const { method, url, query, body, headers } = config;
+  const { method, url, query, body, headers, withCredentials } = config;
 
   const requestConfig: AxiosRequestConfig = {
     method,
     url,
     params: query,
     data: body,
+    withCredentials,
   };
 
   if (headers) {
